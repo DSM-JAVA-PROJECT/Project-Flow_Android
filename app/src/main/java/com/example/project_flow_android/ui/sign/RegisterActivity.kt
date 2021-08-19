@@ -1,4 +1,4 @@
-package com.example.project_flow_android.feature.register.ui
+package com.example.project_flow_android.ui.sign
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
