@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Project-Flow_Android</string>
+
+<!--  Chatting  -->
+    <string name="chat_manage_text">방 관리</string>
 </resources>
