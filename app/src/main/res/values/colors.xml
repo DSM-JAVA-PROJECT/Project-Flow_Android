@@ -12,4 +12,5 @@
     <color name="color_chat_et_tint">#D5DCF2</color>
     <color name="color_chat_item_other">#E9E9E9</color>
     <color name="color_chat_item_mine">#D5DCF2</color>
+    <color name="color_chat_more_tint">#D2D9F2</color>
 </resources>
