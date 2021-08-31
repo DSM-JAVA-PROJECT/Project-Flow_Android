@@ -32,7 +32,7 @@
     + ex) `intro_tv`, `submit_btn`
   
   ###### colors.xml
-    + color[What] 으로 작성하여 사용합니다.
+    + color_what 으로 작성하여 사용합니다.
 
 
 ### 	Git 관련  
