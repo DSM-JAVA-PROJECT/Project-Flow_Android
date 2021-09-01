@@ -3,22 +3,44 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="end">
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/chat_mine_profile_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/profile_radius"
+        android:elevation="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/chat_mine_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:text="안병헌"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/chat_mine_profile_iv"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:backgroundTint="@color/color_chat_item_mine"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/color_chat_item_other"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toEndOf="@+id/chat_mine_profile_iv"
+        app:layout_constraintTop_toBottomOf="@+id/chat_mine_name_tv">
 
         <TextView
-            android:id="@+id/chat_other_content_tv"
+            android:id="@+id/chat_mine_content_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -30,26 +52,26 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/chat_other_cnt_tv"
+        android:id="@+id/chat_mine_cnt_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
         android:text="5"
-        android:textSize="10sp"
         android:textColor="@color/color_flow"
-        app:layout_constraintBottom_toTopOf="@+id/chat_other_time_tv"
-        app:layout_constraintEnd_toStartOf="@+id/cardView"/>
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/chat_mine_time_tv"
+        app:layout_constraintStart_toEndOf="@+id/cardView" />
 
     <TextView
-        android:id="@+id/chat_other_time_tv"
+        android:id="@+id/chat_mine_time_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
         android:text="오전 7:56"
         android:textColor="@color/black"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/cardView" />
+        app:layout_constraintStart_toEndOf="@+id/cardView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
