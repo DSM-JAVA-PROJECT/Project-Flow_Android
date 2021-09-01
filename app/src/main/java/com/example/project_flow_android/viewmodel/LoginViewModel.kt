@@ -1,4 +1,6 @@
 package com.example.project_flow_android.viewmodel
 
-class LoginViewModel {
+import androidx.lifecycle.ViewModel
+
+class LoginViewModel():ViewModel(){
 }

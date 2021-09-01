@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.project_flow_android">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,8 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectFlow_Android">
-        <activity android:name=".ui.sign.RegisterActivity"></activity>
-        <activity android:name=".ui.sign.LoginActivity" />
+        <activity android:name=".ui.sign.ui.EditPasswordActivity"></activity>
+        <activity android:name=".ui.sign.ui.DashBoradActivity" />
+        <activity android:name=".ui.sign.ui.RegisterActivity" />
+        <activity android:name=".ui.sign.ui.LoginActivity" />
         <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
