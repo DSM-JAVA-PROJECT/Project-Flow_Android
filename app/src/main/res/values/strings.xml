@@ -7,6 +7,7 @@
     <string name="login">로그인</string>
     <string name="email">이메일</string>
     <string name="password">비밀번호</string>
+    <string name="re_password">비밀번호 확인</string>
     <string name="project_flow">프로젝트 플로우</string>
     <string name="keep_login">로그인 상태 유지</string>
     <string name="next">다음</string>
@@ -17,4 +18,8 @@
     <string name="phone_number">전화번호</string>
     <string name="check_user">이미 프플을 이용 중 이신가요?</string>
     <string name="already_used">이미 사용중인 이메일이에요</string>
+    <string name="final_word">마지막으로</string>
+    <string name="final_password">비밀번호를 입력해주세요</string>
+    <string name="speical_word">특수문자 포함 8~16자를 입력하세요</string>
+    <string name="check">확인</string>
 </resources>

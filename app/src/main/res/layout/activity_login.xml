@@ -3,13 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <data>
+        <variable
+            name="vm"
+            type="com.example.project_flow_android.viewmodel.LoginViewModel"
+            />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/LoginActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/signin_id_layout"
+            android:id="@+id/register_password_layout"
             android:layout_width="0dp"
             android:layout_height="66dp"
             android:layout_marginLeft="30dp"
@@ -22,19 +30,19 @@
             app:layout_constraintTop_toBottomOf="@+id/id_tv">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/signin_id_et"
+                android:id="@+id/register_password_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawablePadding="16dp"
                 android:inputType="textPersonName"
                 android:singleLine="true"
-                android:text="@={vm.userId}">
+                android:text="@={vm.userName}">
 
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/register_email_layout"
+            android:id="@+id/register_repassword_layout"
             android:layout_width="0dp"
             android:layout_height="66dp"
             android:layout_marginLeft="30dp"
@@ -67,7 +75,6 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginBottom="30dp"
-            android:onClick="@{()->vm.doLogin()}"
             android:text="@string/login"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +101,7 @@
             android:text="@string/password"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signin_id_layout" />
+            app:layout_constraintTop_toBottomOf="@+id/register_password_layout" />
 
         <CheckBox
             android:id="@+id/keep_login_cb"
@@ -103,7 +110,7 @@
             android:layout_marginStart="30dp"
             android:text="@string/keep_login"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/register_email_layout" />
+            app:layout_constraintTop_toBottomOf="@+id/register_repassword_layout" />
 
         <TextView
             android:id="@+id/title_tv"
