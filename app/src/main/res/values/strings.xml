@@ -1,10 +1,15 @@
 <resources>
     <string name="app_name">Project-Flow_Android</string>
 
-<!--  Chatting  -->
+    <!--  Chatting  -->
     <string name="chat_manage_text">방 관리</string>
     <string name="chat_input_text">메시지를 입력하세요</string>
     <string name="chat_photo">앨범</string>
     <string name="chat_view_schedule">일정 보기</string>
     <string name="chat_add_schedule">일정 추가</string>
+    <string name="manage_invite">추가</string>
+    <string name="manage_already_join">참가자</string>
+    <string name="manage_notify">알림 설정</string>\
+    <string name="manage_change_name">이름 변경</string>
+    <string name="manage_exit_room">방 나가기</string>
 </resources>
