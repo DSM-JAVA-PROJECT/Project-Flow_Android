@@ -97,7 +97,7 @@
     </LinearLayout>
 
     <Button
-        android:layout_width="370dp"
+        android:layout_width="380dp"
         android:layout_height="55dp"
         android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal"

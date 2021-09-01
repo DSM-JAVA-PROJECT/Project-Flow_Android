@@ -18,4 +18,6 @@
     <string name="chat_create_project">프로젝트</string>
     <string name="chat_create_user">참여원</string>
     <string name="chat_create_start">시작하기</string>
+    <string name="chat_invite_user">추가</string>
+    <string name="chat_invite_user2">추가하기</string>
 </resources>
