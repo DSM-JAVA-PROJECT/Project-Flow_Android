@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="80dp">
+
+    <ImageView
+        android:id="@+id/user_info_item_profile_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="25dp"
+        android:background="@drawable/profile_radius"
+        android:elevation="10dp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="100dp">
+
+        <TextView
+            android:id="@+id/user_info_item_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="프로젝트 플로우"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/user_info_term_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2021.03.24 ~ 2021.05.01"
+            android:textColor="@color/black"
+            android:textSize="12sp"/>
+
+    </LinearLayout>
+
+    <co.lujun.androidtagview.TagContainerLayout
+        android:id="@+id/user_info_tag"
+        android:layout_width="70dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="80dp"
+        android:padding="10dp"
+        android:layout_gravity="end|center_vertical"
+        app:container_enable_drag="false"
+        app:horizontal_interval="10dp"
+        app:vertical_interval="10dp"
+        app:tag_clickable="false"/>
+
+    <TextView
+        android:id="@+id/user_info_success_tv"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="25dp"
+        android:gravity="center"
+        android:layout_gravity="end|center_vertical"
+        android:text="@string/user_info_finish"
+        android:textColor="@color/white"
+        android:background="@drawable/user_info_success_radius"/>
+
+</androidx.cardview.widget.CardView>

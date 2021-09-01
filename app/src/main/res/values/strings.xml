@@ -12,4 +12,6 @@
     <string name="manage_notify">알림 설정</string>\
     <string name="manage_change_name">이름 변경</string>
     <string name="manage_exit_room">방 나가기</string>
+    <string name="user_info_attend_project">참여한 프로젝트</string>
+    <string name="user_info_finish">완료</string>
 </resources>

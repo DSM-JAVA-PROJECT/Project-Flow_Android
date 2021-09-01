@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="major_array">
+        <item>Android</item>
+        <item>Back-End</item>
+        <item>Front-End</item>
+        <item>iOS</item>
+        <item>AI</item>
+        <item>Embedded</item>
+        <item>Design</item>
+    </string-array>
+</resources>

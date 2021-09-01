@@ -22,7 +22,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="85dp"
         android:layout_gravity="center_vertical"
-        android:text="홍정똥"
         android:textColor="@color/black"
         android:textStyle="bold" />
 
