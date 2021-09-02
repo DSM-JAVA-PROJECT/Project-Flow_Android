@@ -12,7 +12,7 @@ object ApiProvider {
     fun getInstnace() : Retrofit {
         if(instance == null){
             instance = Retrofit.Builder()
-                .baseUrl("http://localhost:3000")
+                .baseUrl("http://172.17.112.1:8080")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         }
