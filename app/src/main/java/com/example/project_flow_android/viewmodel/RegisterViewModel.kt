@@ -3,7 +3,8 @@ package com.example.project_flow_android.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.project_flow_android.data.SharedPrefenceStorage
+import com.example.project_flow_android.data.SharedPreferenceStorage
+import com.example.project_flow_android.feature.CertificationRequest
 import com.example.project_flow_android.feature.RegisterRequest
 import retrofit2.Callback
 import com.example.project_flow_android.network.ApiProvider
@@ -11,7 +12,7 @@ import com.example.project_flow_android.network.ProjectFlowAPI
 import retrofit2.Call
 import retrofit2.Response
 
-class RegisterViewModel(private val sharedPrefenceStorage: SharedPrefenceStorage) : ViewModel() {
+class RegisterViewModel(private val sharedPrefenceStorage: SharedPreferenceStorage) : ViewModel() {
 
     val registerInterface = ApiProvider.getInstnace().create(ProjectFlowAPI::class.java)
 
@@ -20,6 +21,7 @@ class RegisterViewModel(private val sharedPrefenceStorage: SharedPrefenceStorage
     val userPhone = MutableLiveData<String>()
     val userPassword = MutableLiveData<String>()
     val userRePassword = MutableLiveData<String>()
+    val verifyCode = MutableLiveData<String>()
 
     val nextRegister = MutableLiveData<Boolean>(false)
     val goLogin = MutableLiveData<Boolean>(false)
@@ -31,8 +33,18 @@ class RegisterViewModel(private val sharedPrefenceStorage: SharedPrefenceStorage
     private val _changeComment_2 = MutableLiveData<String>()
     val changeComment2: LiveData<String> get() = _changeComment_2
 
+    private val _changeComment_3 = MutableLiveData<String>()
+    val changeComment3: LiveData<String> get() = _changeComment_3
+
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
+
+
+
+    fun doVerifyEmail(){
+        val verityCall = registerInterface.doCertification(CertificationRequest(verifyCode.value!!))
+        verityCall.enqueue()
+    }
 
 
     fun checkNull() {
@@ -76,6 +88,7 @@ class RegisterViewModel(private val sharedPrefenceStorage: SharedPrefenceStorage
                     override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                         while (response.isSuccessful) {
                             _toastMessage.value = "성공"
+                            livePassword()
                         }
                     }
                     override fun onFailure(call: Call<Unit>, t: Throwable) {
@@ -87,6 +100,7 @@ class RegisterViewModel(private val sharedPrefenceStorage: SharedPrefenceStorage
         }
         _toastMessage.value = "비밀번호는 8자~20자로 입력하세요"
     }
+
 
 
     fun goLogin() {
