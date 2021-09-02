@@ -22,4 +22,7 @@
     <string name="chat_invite_user2">추가하기</string>
     <string name="chat_modify_name">변경하기</string>
     <string name="chat_modify_name2">이름 변경</string>
+    <string name="schedule"> 일정</string>
+    <string name="schedule_exclude">일정 제외하기</string>
+    <string name="schedule_delete">일정 삭제하기</string>
 </resources>
