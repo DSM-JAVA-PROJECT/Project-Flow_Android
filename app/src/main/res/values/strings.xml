@@ -22,4 +22,6 @@
     <string name="final_password">비밀번호를 입력해주세요</string>
     <string name="speical_word">특수문자 포함 8~16자를 입력하세요</string>
     <string name="check">확인</string>
+    <string name="email_verify">이메일로 발송된</string>
+    <string name="certification_verify">인증번호를 입력해주세요</string>
 </resources>

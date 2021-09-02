@@ -21,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
+        android:fontFamily="@font/nanumgothic_bold"
         android:text="@string/start_project"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -32,6 +33,7 @@
         android:layout_height="wrap_content"
         android:text="@string/start_project_se"
         android:textSize="20sp"
+        android:fontFamily="@font/nanumgothic_bold"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/intro_tv" />
 
@@ -50,6 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/comment_1"
+        android:fontFamily="@font/nanumgothic_regular"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
@@ -58,6 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/comment_2"
+        android:fontFamily="@font/nanumgothic_regular"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 

@@ -65,6 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/email"
+        android:fontFamily="@font/nanumgothic_regular"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toBottomOf="@+id/register_password_layout" />
@@ -88,6 +89,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/comment3"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/nanumgothic_bold"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toTopOf="@+id/guideline8" />
@@ -97,6 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:fontFamily="@font/nanumgothic_bold"
         android:text="@string/comment4"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toBottomOf="@+id/register_title_tv" />
@@ -106,6 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
+        android:fontFamily="@font/nanumgothic_regular"
         android:text="@string/comment5"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toBottomOf="@+id/register_title_fi_tv" />
@@ -116,6 +121,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/name"
+        android:fontFamily="@font/nanumgothic_regular"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toBottomOf="@+id/register_title_th_tv" />
 
@@ -150,6 +156,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/phone_number"
+        android:fontFamily="@font/nanumgothic_regular"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toBottomOf="@+id/register_repassword_layout" />
 
@@ -186,10 +193,11 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/comment_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/already_used"
+        android:text="@{vm.changeComment}"
+        android:fontFamily="@font/nanumgothic_regular"
         android:visibility="invisible"
         android:textColor="@color/red"
         app:layout_constraintBottom_toTopOf="@+id/register_btn"
