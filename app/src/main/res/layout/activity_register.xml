@@ -90,7 +90,6 @@
         android:layout_height="wrap_content"
         android:text="@string/comment3"
         android:layout_marginTop="30dp"
-        android:fontFamily="@font/nanumgothic_bold"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toTopOf="@+id/guideline8" />
@@ -100,7 +99,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:fontFamily="@font/nanumgothic_bold"
         android:text="@string/comment4"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toBottomOf="@+id/register_title_tv" />

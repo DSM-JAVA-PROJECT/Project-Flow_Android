@@ -40,10 +40,9 @@ class RegisterViewModel(private val sharedPrefenceStorage: SharedPreferenceStora
     val toastMessage: LiveData<String> get() = _toastMessage
 
 
-
-    fun doVerifyEmail(){
+    fun doVerifyEmail() {
         val verityCall = registerInterface.doCertification(CertificationRequest(verifyCode.value!!))
-        verityCall.enqueue()
+
     }
 
 
@@ -64,7 +63,24 @@ class RegisterViewModel(private val sharedPrefenceStorage: SharedPreferenceStora
             sharedPrefenceStorage.saveInfo(userName.value!!, "userName")
             sharedPrefenceStorage.saveInfo(userEmail.value!!, "userEmail")
             sharedPrefenceStorage.saveInfo(userPhone.value!!, "userPhone")
+
+            val certificationCall = registerInterface.doCertification(
+                CertificationRequest(
+                    sharedPrefenceStorage.getInfo(userEmail.value!!)
+                )
+            )
+            certificationCall.enqueue(object : Callback<Unit>{
+                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                    _toastMessage.value = "인증번호를 발송하였습니다."
+                }
+
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+            })
         }
+
     }
 
     fun livePassword() {
@@ -91,6 +107,7 @@ class RegisterViewModel(private val sharedPrefenceStorage: SharedPreferenceStora
                             livePassword()
                         }
                     }
+
                     override fun onFailure(call: Call<Unit>, t: Throwable) {
                         _toastMessage.value = "회원가입 실패"
                     }
@@ -100,7 +117,6 @@ class RegisterViewModel(private val sharedPrefenceStorage: SharedPreferenceStora
         }
         _toastMessage.value = "비밀번호는 8자~20자로 입력하세요"
     }
-
 
 
     fun goLogin() {
