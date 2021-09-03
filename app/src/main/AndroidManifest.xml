@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectFlow_Android">
-        <activity android:name=".ui.sign.ui.EditPasswordActivity"></activity>
+        <activity android:name=".ui.sign.ui.EmailVerifyActivity"></activity>
+        <activity android:name=".ui.sign.ui.EditPasswordActivity" />
         <activity android:name=".ui.sign.ui.DashBoradActivity" />
         <activity android:name=".ui.sign.ui.RegisterActivity" />
         <activity android:name=".ui.sign.ui.LoginActivity" />
