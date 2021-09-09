@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.example.project_flow_android.R
 
-class DashBoradActivity : AppCompatActivity() {
+class DashBoardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dash_borad)
