@@ -11,8 +11,8 @@ import kotlinx.android.synthetic.main.chat_item_other.view.*
 import java.lang.RuntimeException
 
 class ChatRvAdapter(private val items: ChatListResponse) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    val MINE_TALK = 0
-    val OTHER_TALK = 1
+    private val MINE_TALK = 0
+    private val OTHER_TALK = 1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RecyclerView.ViewHolder {
         return when(viewType){

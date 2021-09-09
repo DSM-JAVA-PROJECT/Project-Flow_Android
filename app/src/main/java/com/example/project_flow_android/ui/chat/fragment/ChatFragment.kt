@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.project_flow_android.R
 import com.example.project_flow_android.network.SocketClient
-import java.net.Socket
+import kotlinx.android.synthetic.main.fragment_chat.*
 
 class ChatFragment : Fragment() {
 
@@ -24,5 +24,14 @@ class ChatFragment : Fragment() {
 
         val socket = SocketClient()
         socket.start()
+
+        chat_more_iv.setOnClickListener{
+            if(view_more.visibility == View.VISIBLE)
+                view_more.visibility = View.GONE
+            else
+                view_more.visibility = View.VISIBLE
+        }
+
+
     }
 }

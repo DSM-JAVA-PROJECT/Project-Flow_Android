@@ -98,7 +98,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/view_more"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:orientation="horizontal"
