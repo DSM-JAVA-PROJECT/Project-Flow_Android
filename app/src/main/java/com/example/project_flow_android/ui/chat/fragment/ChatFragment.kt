@@ -6,7 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.project_flow_android.R
-import com.example.project_flow_android.network.SocketClient
+import com.example.project_flow_android.network.StompClient
+import com.example.project_flow_android.util.GalleryHelper
 import kotlinx.android.synthetic.main.fragment_chat.*
 
 class ChatFragment : Fragment() {
@@ -22,7 +23,8 @@ class ChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val socket = SocketClient()
+        val galleryHelper = GalleryHelper(requireActivity())
+        val socket = StompClient()
         socket.start()
 
         chat_more_iv.setOnClickListener{
@@ -33,5 +35,9 @@ class ChatFragment : Fragment() {
         }
 
 
+
+        chat_photo_tv.setOnClickListener{
+            galleryHelper.selectGallery()
+        }
     }
 }
