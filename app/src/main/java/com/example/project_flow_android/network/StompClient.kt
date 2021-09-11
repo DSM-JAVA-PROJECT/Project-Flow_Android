@@ -5,7 +5,7 @@ import ua.naiksoftware.stomp.Stomp
 
 class StompClient : Thread() {
     override fun run() {
-        val url = "ws://54.180.224.67:8080/websocket"
+        val url = "ws://211.38.86.92:8010/websocket"
         val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, url)
 
         stompClient.connect()

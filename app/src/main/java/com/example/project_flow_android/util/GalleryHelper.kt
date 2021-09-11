@@ -5,10 +5,15 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.provider.MediaStore
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_chat.*
 
-class GalleryHelper(private val activity : Activity) {
+class GalleryHelper(private val activity : Activity, private val startForResult : ActivityResultLauncher<Intent>) {
 
     fun selectGallery() {
         val writePermission =
@@ -32,7 +37,7 @@ class GalleryHelper(private val activity : Activity) {
                 data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
                 type = "image/*"
             }
-            activity.startActivityForResult(intent, 1)
+            startForResult.launch(intent)
         }
     }
 }
