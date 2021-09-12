@@ -5,4 +5,13 @@
         <item name="colorSwitchThumbNormal">#C4C4C4</item>
         <item name="android:colorForeground">#C4C4C4</item>
     </style>
+
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottomsheet_radius</item>
+    </style>
 </resources>

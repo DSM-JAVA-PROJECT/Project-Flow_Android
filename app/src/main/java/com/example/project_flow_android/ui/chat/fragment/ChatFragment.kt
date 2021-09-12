@@ -13,6 +13,7 @@ import com.example.project_flow_android.network.StompClient
 import com.example.project_flow_android.ui.chat.ChatActivity
 import com.example.project_flow_android.util.GalleryHelper
 import com.example.project_flow_android.util.KeyboardUtil
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.fragment_chat.*
 
 class ChatFragment : Fragment() {
@@ -62,5 +63,12 @@ class ChatFragment : Fragment() {
         chat_manage_tv.setOnClickListener{
             (activity as ChatActivity).replace(ManageFragment())
         }
+        chat_add_schedule_tv.setOnClickListener{
+            val bottom = BottomSheetDialog(requireContext())
+            bottom.setContentView(R.layout.add_schedule_bottom)
+            bottom.show()
+        }
     }
+
+
 }
