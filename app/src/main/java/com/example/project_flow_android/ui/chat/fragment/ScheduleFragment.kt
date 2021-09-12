@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.project_flow_android.R
+import com.example.project_flow_android.ui.chat.ChatActivity
+import kotlinx.android.synthetic.main.fragment_chat.*
+import kotlinx.android.synthetic.main.fragment_schedule.*
 import java.net.Socket
 
 class ScheduleFragment : Fragment() {
@@ -21,7 +24,10 @@ class ScheduleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val socket = Socket("", 1234)
-
+        schedule_prev_btn.setOnClickListener{
+            val fragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.beginTransaction().remove(ScheduleFragment()).commit()
+            fragmentManager.popBackStack()
+        }
     }
 }

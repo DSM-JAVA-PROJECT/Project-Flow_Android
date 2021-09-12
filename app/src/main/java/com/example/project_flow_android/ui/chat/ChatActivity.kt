@@ -18,8 +18,8 @@ class ChatActivity : AppCompatActivity() {
 
     fun replace(fragment: Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.setCustomAnimations(R.anim.from_bottom, R.anim.to_top, R.anim.from_top, R.anim.to_bottom)
+            .addToBackStack(null)
         fragmentTransaction.replace(R.id.chat_frame_container, fragment).commit()
     }
-
-
 }

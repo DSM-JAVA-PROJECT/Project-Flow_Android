@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
 import com.example.project_flow_android.R
 import com.example.project_flow_android.network.StompClient
+import com.example.project_flow_android.ui.chat.ChatActivity
 import com.example.project_flow_android.util.GalleryHelper
 import com.example.project_flow_android.util.KeyboardUtil
 import kotlinx.android.synthetic.main.fragment_chat.*
@@ -55,5 +56,11 @@ class ChatFragment : Fragment() {
             galleryHelper.selectGallery()
         }
 
+        chat_schedule_tv.setOnClickListener{
+            (activity as ChatActivity).replace(ScheduleFragment())
+        }
+        chat_manage_tv.setOnClickListener{
+            (activity as ChatActivity).replace(ManageFragment())
+        }
     }
 }

@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.project_flow_android.R
+import com.example.project_flow_android.ui.chat.ChatActivity
+import kotlinx.android.synthetic.main.fragment_manage.*
 
 class ManageFragment : Fragment() {
 
@@ -17,4 +19,16 @@ class ManageFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_manage, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        manage_prev_iv.setOnClickListener{
+            val fragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.beginTransaction().remove(ManageFragment()).commit()
+            fragmentManager.popBackStack()
+        }
+
+        manage_invite_tv.setOnClickListener{
+            (activity as ChatActivity).replace(InviteFragment())
+        }
+    }
 }

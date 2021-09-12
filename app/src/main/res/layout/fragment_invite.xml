@@ -37,13 +37,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="프로젝트 플로우"
+            android:textSize="16sp"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/manage_project_iv" />
+            app:layout_constraintTop_toBottomOf="@+id/invite_project_iv" />
 
-        <view
+        <View
             android:layout_width="370dp"
             android:layout_height="1px"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -58,6 +59,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:text="@string/chat_invite_user"
+        android:textSize="16sp"
         android:textColor="@color/black"
         android:textStyle="bold" />
 
