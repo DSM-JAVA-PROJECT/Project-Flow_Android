@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:backgroundTint="@color/color_chat_item_mine"
+        android:backgroundTint="@color/color_flow"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,9 +23,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             android:maxLength="20"
             android:text="서버 나오기는 했는데 아직 오류 있어서 고치는 중"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
 
     </androidx.cardview.widget.CardView>
 

@@ -33,6 +33,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
         android:backgroundTint="@color/color_chat_item_other"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
