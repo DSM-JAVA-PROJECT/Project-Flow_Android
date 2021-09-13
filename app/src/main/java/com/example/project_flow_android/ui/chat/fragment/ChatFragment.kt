@@ -11,9 +11,10 @@ import com.bumptech.glide.Glide
 import com.example.project_flow_android.R
 import com.example.project_flow_android.network.StompClient
 import com.example.project_flow_android.ui.chat.ChatActivity
+import com.example.project_flow_android.util.DialogUtil
 import com.example.project_flow_android.util.GalleryHelper
 import com.example.project_flow_android.util.KeyboardUtil
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.android.synthetic.main.add_schedule_bottom.*
 import kotlinx.android.synthetic.main.fragment_chat.*
 
 class ChatFragment : Fragment() {
@@ -36,6 +37,7 @@ class ChatFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val keyboardUtil = KeyboardUtil(requireContext())
+        val dialogUtil = DialogUtil(requireContext())
         val galleryHelper = GalleryHelper(requireActivity(), startForResult)
         val socket = StompClient()
         socket.start()
@@ -64,11 +66,14 @@ class ChatFragment : Fragment() {
             (activity as ChatActivity).replace(ManageFragment())
         }
         chat_add_schedule_tv.setOnClickListener{
-            val bottom = BottomSheetDialog(requireContext())
-            bottom.setContentView(R.layout.add_schedule_bottom)
-            bottom.show()
+            val bottom = dialogUtil.shoBottomSheet()
+            bottom.add_schedule_start_et.setOnClickListener{
+                dialogUtil.showDatePicker(bottom.add_schedule_start_et)
+            }
+            bottom.add_schedule_end_et.setOnClickListener{
+                val dialogUtil = DialogUtil(requireContext())
+                dialogUtil.showDatePicker(bottom.add_schedule_end_et)
+            }
         }
     }
-
-
 }

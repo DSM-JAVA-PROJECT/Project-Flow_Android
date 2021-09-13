@@ -14,4 +14,12 @@
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bottomsheet_radius</item>
     </style>
+
+    <style name="DatePickerStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlActivated">@color/color_chat_item_mine</item>
+        <item name="android:textColorSecondaryInverse">@color/color_flow</item>
+        <item name="android:textColorPrimaryInverse">@color/color_flow</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>
