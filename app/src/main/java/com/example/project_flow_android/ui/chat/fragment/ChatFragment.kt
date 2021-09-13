@@ -67,11 +67,11 @@ class ChatFragment : Fragment() {
         }
         chat_add_schedule_tv.setOnClickListener{
             val bottom = dialogUtil.shoBottomSheet()
+            bottom.show()
             bottom.add_schedule_start_et.setOnClickListener{
                 dialogUtil.showDatePicker(bottom.add_schedule_start_et)
             }
             bottom.add_schedule_end_et.setOnClickListener{
-                val dialogUtil = DialogUtil(requireContext())
                 dialogUtil.showDatePicker(bottom.add_schedule_end_et)
             }
         }

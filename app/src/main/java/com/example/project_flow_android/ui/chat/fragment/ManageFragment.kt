@@ -30,5 +30,9 @@ class ManageFragment : Fragment() {
         manage_invite_tv.setOnClickListener{
             (activity as ChatActivity).replace(InviteFragment())
         }
+
+        manage_change_name_tv.setOnClickListener{
+            (activity as ChatActivity).replace(ModifyFragment())
+        }
     }
 }
