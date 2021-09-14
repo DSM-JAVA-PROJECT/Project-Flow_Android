@@ -34,4 +34,5 @@
     <string name="add_schedule_bottom_essential">필수 참여</string>
     <string name="add_schedule_bottom_btn">추가하기</string>
     <string name="add_schedule_bottom_date_hint">날짜를 선택하세요</string>
+    <string name="chat_list_my_chat">나의 채팅</string>
 </resources>
