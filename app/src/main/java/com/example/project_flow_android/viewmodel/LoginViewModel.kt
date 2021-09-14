@@ -11,7 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginViewModel(private val sharedPrefenceStorage: SharedPreferenceStorage) : ViewModel() {
+class LoginViewModel() : ViewModel() {
 
     val loginInterface = ApiProvider.getInstnace().create(ProjectFlowAPI::class.java)
 
@@ -22,26 +22,26 @@ class LoginViewModel(private val sharedPrefenceStorage: SharedPreferenceStorage)
     val changeComment: LiveData<String> get() = _changeComment
 
     fun doLogin() {
-        if (userEmail.value != null || userPassword.value != null) {
-            val loginCall = loginInterface.doLogin(
-                LoginRequest(
-                    sharedPrefenceStorage.getInfo(userEmail.value!!),
-                    sharedPrefenceStorage.getInfo(userPassword.value!!)
-                )
-            )
-            loginCall.enqueue(object : Callback<Unit> {
-                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-                    while (response.isSuccessful) {
-
-                    }
-                }
-
-                override fun onFailure(call: Call<Unit>, t: Throwable) {
-
-                }
-            })
-        } else {
-            _changeComment.value = "비밀번호가 일치하지 않습니다"
-        }
+//        if (userEmail.value != null || userPassword.value != null) {
+//            val loginCall = loginInterface.doLogin(
+//                LoginRequest(
+//                    SharedPreferenceStorage.getInfo(userEmail.value!!),
+//                    SharedPreferenceStorage.getInfo(userPassword.value!!)
+//                )
+//            )
+//            loginCall.enqueue(object : Callback<Unit> {
+//                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+//                    while (response.isSuccessful) {
+//
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<Unit>, t: Throwable) {
+//
+//                }
+//            })
+//        } else {
+//            _changeComment.value = "비밀번호가 일치하지 않습니다"
+//        }
     }
 }
