@@ -41,6 +41,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:hint="@string/add_schedule_bottom_content_hint"
+        android:backgroundTint="@color/color_flow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -104,6 +105,7 @@
         android:textSize="14sp"
         android:textColor="@color/black"
         android:focusable="false"
+        android:backgroundTint="@color/color_flow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -132,6 +134,7 @@
         android:textSize="14sp"
         android:focusable="false"
         android:clickable="false"
+        android:backgroundTint="@color/color_flow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_schedule_start_et" />
