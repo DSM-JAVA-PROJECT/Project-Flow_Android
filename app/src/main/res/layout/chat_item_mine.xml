@@ -27,7 +27,8 @@
             android:paddingEnd="5dp"
             android:maxLength="20"
             android:text="서버 나오기는 했는데 아직 오류 있어서 고치는 중"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:fontFamily="@font/font_roboto_regular"/>
 
     </androidx.cardview.widget.CardView>
 
@@ -39,6 +40,7 @@
         android:text="5"
         android:textSize="10sp"
         android:textColor="@color/color_flow"
+        android:fontFamily="@font/font_roboto_regular"
         app:layout_constraintBottom_toTopOf="@+id/chat_mine_time_tv"
         app:layout_constraintEnd_toStartOf="@+id/cardView"/>
 
@@ -51,6 +53,7 @@
         android:text="오전 7:56"
         android:textColor="@color/black"
         android:textSize="10sp"
+        android:fontFamily="@font/font_roboto_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/cardView" />
 

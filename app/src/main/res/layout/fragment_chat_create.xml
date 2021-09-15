@@ -13,7 +13,7 @@
         android:text="@string/new_chatting"
         android:textSize="20sp"
         android:textColor="@color/black"
-        android:textStyle="bold"/>
+        android:fontFamily="@font/font_nanumgothic_bold"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chat_create_project_rv"
@@ -51,8 +51,8 @@
             android:layout_height="wrap_content"
             android:text="@string/chat_create_project"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/color_flow" />
+            android:textColor="@color/color_flow"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/chat_create_project_name_tv"
@@ -102,8 +102,8 @@
         android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal"
         android:text="@string/chat_create_start"
-        android:textStyle="bold"
         android:textSize="16sp"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:fontFamily="@font/font_nanumgothic_bold"/>
     
 </LinearLayout>

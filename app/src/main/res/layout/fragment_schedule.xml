@@ -27,7 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:text="프플(Project-Flow) 일정"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:fontFamily="@font/font_nanumgothic_bold"/>
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -55,7 +56,7 @@
         android:text="8월 10일"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:fontFamily="@font/font_nanumgothic_bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/schedule_rv"
@@ -72,13 +73,13 @@
 
         <Button
             android:id="@+id/schedule_exclude_btn"
-            android:layout_width="180dp"
+            android:layout_width="185dp"
             android:layout_height="55dp"
             android:layout_marginStart="15dp"
             android:text="@string/schedule_exclude"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/font_nanumgothic_bold"
             android:backgroundTint="@color/color_flow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,13 +87,13 @@
 
         <Button
             android:id="@+id/schedule_delete_btn"
-            android:layout_width="180dp"
+            android:layout_width="185dp"
             android:layout_height="55dp"
             android:layout_marginEnd="15dp"
             android:text="@string/schedule_delete"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/font_nanumgothic_bold"
             android:backgroundTint="@color/color_flow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

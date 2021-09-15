@@ -23,6 +23,7 @@
         android:layout_marginStart="10dp"
         android:text="안병헌"
         android:textColor="@color/black"
+        android:fontFamily="@font/font_roboto_regular"
         app:layout_constraintStart_toEndOf="@+id/chat_other_profile_iv"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,7 +50,8 @@
             android:layout_margin="10dp"
             android:maxLength="20"
             android:text="서버 나오기는 했는데 아직 오류 있어서 고치는 중"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:fontFamily="@font/font_roboto_regular"/>
 
     </androidx.cardview.widget.CardView>
 
@@ -61,6 +63,7 @@
         android:text="5"
         android:textColor="@color/color_flow"
         android:textSize="10sp"
+        android:fontFamily="@font/font_roboto_regular"
         app:layout_constraintBottom_toTopOf="@+id/chat_other_time_tv"
         app:layout_constraintStart_toEndOf="@+id/cardView" />
 
@@ -73,6 +76,7 @@
         android:text="오전 7:56"
         android:textColor="@color/black"
         android:textSize="10sp"
+        android:fontFamily="@font/font_roboto_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cardView" />
 

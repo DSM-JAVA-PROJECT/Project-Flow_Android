@@ -23,7 +23,7 @@
         android:layout_marginStart="85dp"
         android:layout_gravity="center_vertical"
         android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:fontFamily="@font/font_nanumgothic_bold" />
 
     <ImageView
         android:id="@+id/manage_item_arrow_iv"

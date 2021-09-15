@@ -28,6 +28,7 @@
             android:layout_margin="17dp"
             android:text="@string/manage_invite"
             android:textColor="@color/black"
+            android:fontFamily="@font/font_nanumgothic_bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,6 +52,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/black"
+            android:fontFamily="@font/font_roboto_bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/manage_project_iv" />
@@ -72,7 +74,7 @@
         android:text="@string/manage_already_join"
         android:textSize="16sp"
         android:textColor="@color/black"
-        android:textStyle="bold"/>
+        android:fontFamily="@font/font_nanumgothic_bold"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/manage_rv"

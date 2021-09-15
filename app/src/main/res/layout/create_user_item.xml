@@ -23,7 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="85dp"
         android:layout_gravity="center_vertical"
+        android:text="안병헌"
         android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:fontFamily="@font/font_nanumgothic_bold" />
 
 </androidx.cardview.widget.CardView>

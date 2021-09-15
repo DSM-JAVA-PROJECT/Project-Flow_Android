@@ -40,6 +40,7 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             android:textStyle="bold"
+            android:fontFamily="@font/font_roboto_bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/invite_project_iv" />
@@ -61,7 +62,7 @@
         android:text="@string/chat_invite_user"
         android:textSize="16sp"
         android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:fontFamily="@font/font_nanumgothic_bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/invite_rv"
@@ -79,8 +80,8 @@
         android:layout_gravity="center_horizontal"
         android:text="@string/chat_invite_user2"
         android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:fontFamily="@font/font_nanumgothic_bold"/>
 
 
 

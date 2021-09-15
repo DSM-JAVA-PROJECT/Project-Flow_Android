@@ -33,14 +33,14 @@
             android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/black"
-            android:textStyle="bold"/>
+            android:fontFamily="@font/font_roboto_bold" />
 
         <Spinner
             android:id="@+id/major_sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal" />
 
         <TextView
             android:id="@+id/user_info_tel_tv"
@@ -49,6 +49,7 @@
             android:layout_marginTop="15dp"
             android:textColor="@color/black"
             android:textStyle="bold"
+            android:fontFamily="@font/font_nanumgothic_bold"
             android:layout_gravity="center_horizontal"/>
 
     </LinearLayout>
@@ -65,7 +66,8 @@
         android:layout_marginStart="20dp"
         android:text="@string/user_info_attend_project"
         android:textColor="@color/black"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:fontFamily="@font/font_nanumgothic_bold"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
