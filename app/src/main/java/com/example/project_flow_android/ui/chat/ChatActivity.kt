@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.project_flow_android.R
-import com.example.project_flow_android.ui.chat.fragment.ChatFragment
+import com.example.project_flow_android.ui.chat.fragment.ChatListFragment
 
 class ChatActivity : AppCompatActivity() {
 
@@ -13,7 +13,7 @@ class ChatActivity : AppCompatActivity() {
         setContentView(R.layout.activity_chat)
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.chat_frame_container, ChatFragment()).commit()
+        fragmentTransaction.replace(R.id.chat_frame_container, ChatListFragment()).commit()
     }
 
     fun replace(fragment: Fragment) {

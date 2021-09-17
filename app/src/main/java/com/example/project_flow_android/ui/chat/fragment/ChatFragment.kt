@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
 import com.example.project_flow_android.R
-import com.example.project_flow_android.network.StompClient
 import com.example.project_flow_android.ui.chat.ChatActivity
 import com.example.project_flow_android.util.DialogUtil
 import com.example.project_flow_android.util.GalleryHelper
@@ -39,8 +38,6 @@ class ChatFragment : Fragment() {
         val keyboardUtil = KeyboardUtil(requireContext())
         val dialogUtil = DialogUtil(requireContext())
         val galleryHelper = GalleryHelper(requireActivity(), startForResult)
-        val socket = StompClient()
-        socket.start()
 
         chat_more_iv.setOnClickListener{
             if(view_more.visibility == View.VISIBLE)

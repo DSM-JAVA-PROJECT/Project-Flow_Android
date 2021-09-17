@@ -1,7 +1,11 @@
 package com.example.project_flow_android.network
 
-import android.util.Log
+import org.koin.dsl.module
 import ua.naiksoftware.stomp.Stomp
+
+val socketModule = module {
+    single { StompClient() }
+}
 
 class StompClient : Thread() {
     override fun run() {
@@ -10,13 +14,13 @@ class StompClient : Thread() {
 
         stompClient.connect()
 
-        stompClient.topic("/topic/greetings").subscribe { topicMessage ->
-            Log.d("ChatFragment",
-                topicMessage.payload)
-        }
-
-        stompClient.send("/topic/hello-msg-mapping", "My first STOMP message!").subscribe();
-
-        stompClient.disconnect()
+//        stompClient.topic("/topic/greetings").subscribe { topicMessage ->
+//            Log.d("ChatFragment",
+//                topicMessage.payload)
+//        }
+//
+//        stompClient.send("/", "My first STOMP message!").subscribe();
+//
+//        stompClient.disconnect()
     }
 }
