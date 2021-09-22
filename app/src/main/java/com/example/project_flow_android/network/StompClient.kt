@@ -1,11 +1,6 @@
 package com.example.project_flow_android.network
 
-import org.koin.dsl.module
 import ua.naiksoftware.stomp.Stomp
-
-val socketModule = module {
-    single { StompClient() }
-}
 
 class StompClient : Thread() {
     override fun run() {
