@@ -13,7 +13,6 @@ class ProjectFlowApplication : Application() {
                 listOf(
                     loginModule,
                     registerModule
-
                 )
             )
         }
