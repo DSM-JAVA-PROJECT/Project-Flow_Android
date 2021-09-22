@@ -1,7 +1,7 @@
 package com.example.project_flow_android.util
 
 import android.app.Application
-import com.example.project_flow_android.network.socketModule
+import com.example.project_flow_android.di.socketModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
