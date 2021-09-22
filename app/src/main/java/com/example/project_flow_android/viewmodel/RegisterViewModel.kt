@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.project_flow_android.data.SharedPreferenceStorage
+import com.example.project_flow_android.data.remote.SignApiImpl
 import com.example.project_flow_android.feature.CertificationRequest
 import com.example.project_flow_android.feature.RegisterRequest
 import retrofit2.Callback
@@ -12,9 +13,7 @@ import com.example.project_flow_android.network.ProjectFlowAPI
 import retrofit2.Call
 import retrofit2.Response
 
-class RegisterViewModel(private val sharedPrefenceStorage: SharedPreferenceStorage) : ViewModel() {
-
-    val registerInterface = ApiProvider.getInstnace().create(ProjectFlowAPI::class.java)
+class RegisterViewModel(private val signApiImpl: SignApiImpl, private val sharedPrefenceStorage: SharedPreferenceStorage) : ViewModel() {
 
     val userName = MutableLiveData<String>()
     val userEmail = MutableLiveData<String>()
@@ -40,12 +39,6 @@ class RegisterViewModel(private val sharedPrefenceStorage: SharedPreferenceStora
     val toastMessage: LiveData<String> get() = _toastMessage
 
 
-    fun doVerifyEmail() {
-        val verityCall = registerInterface.doCertification(CertificationRequest(verifyCode.value!!))
-
-    }
-
-
     fun checkNull() {
         if (userName.value == null) {
             _changeComment.value = "이름을 입력해주세요"
@@ -59,27 +52,26 @@ class RegisterViewModel(private val sharedPrefenceStorage: SharedPreferenceStora
     }
 
     fun nextRegister() {
-        if (nextRegister.value!!) {
-            sharedPrefenceStorage.saveInfo(userName.value!!, "userName")
-            sharedPrefenceStorage.saveInfo(userEmail.value!!, "userEmail")
-            sharedPrefenceStorage.saveInfo(userPhone.value!!, "userPhone")
-
-            val certificationCall = registerInterface.doCertification(
-                CertificationRequest(
-                    sharedPrefenceStorage.getInfo(userEmail.value!!)
-                )
-            )
-            certificationCall.enqueue(object : Callback<Unit>{
-                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-                    _toastMessage.value = "인증번호를 발송하였습니다."
-                }
-
-                override fun onFailure(call: Call<Unit>, t: Throwable) {
-                    TODO("Not yet implemented")
-                }
-
-            })
-        }
+//        if (nextRegister.value!!) {
+//            val userEmail = sharedPrefenceStorage.saveInfo(userEmail.value!!, "userEmail")
+//            sharedPrefenceStorage.saveInfo(userPhone.value!!, "userPhone")
+//
+//            val certificationCall = registerInterface.doCertification(
+//                CertificationRequest(
+//                   userEmail.toString()
+//                )
+//            )
+//            certificationCall.enqueue(object : Callback<Unit>{
+//                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+//                    _toastMessage.value = "인증번호를 발송하였습니다."
+//                }
+//
+//                override fun onFailure(call: Call<Unit>, t: Throwable) {
+//                    _toastMessage.value = "인증번호를 발송에 실패하였습니다"
+//                }
+//
+//            })
+//        }
 
     }
 
@@ -90,32 +82,33 @@ class RegisterViewModel(private val sharedPrefenceStorage: SharedPreferenceStora
     }
 
     fun doLogin() {
-        if (userPassword.value?.length.toString() >= 8.toString() || userPassword.value?.length.toString() <= 20.toString()) {
-            if (userPassword == userRePassword) {
-                val registerCall = registerInterface.doRegister(
-                    RegisterRequest(
-                        sharedPrefenceStorage.getInfo(userName.value!!),
-                        sharedPrefenceStorage.getInfo(userEmail.value!!),
-                        sharedPrefenceStorage.getInfo(userPhone.value!!),
-                        sharedPrefenceStorage.getInfo(userPassword.value!!)
-                    )
-                )
-                registerCall.enqueue(object : Callback<Unit> {
-                    override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-                        while (response.isSuccessful) {
-                            _toastMessage.value = "성공"
-                            livePassword()
-                        }
-                    }
-
-                    override fun onFailure(call: Call<Unit>, t: Throwable) {
-                        _toastMessage.value = "회원가입 실패"
-                    }
-                })
-            }
-            _changeComment_2.value = "비밀번호가 일치하지 않아요"
-        }
-        _toastMessage.value = "비밀번호는 8자~20자로 입력하세요"
+//        checkNull()
+//        if (userPassword.value?.length.toString() >= 8.toString() || userPassword.value?.length.toString() <= 20.toString()) {
+//            if (userPassword == userRePassword) {
+//                val registerCall = signApiImpl.loginApi(userPassword.value!!,)
+//                    RegisterRequest(
+//                        sharedPrefenceStorage.getInfo(userName.value!!),
+//                        sharedPrefenceStorage.getInfo(userEmail.value!!),
+//                        sharedPrefenceStorage.getInfo(userPhone.value!!),
+//                        sharedPrefenceStorage.getInfo(userPassword.value!!)
+//                    )
+//                )
+//                registerCall.enqueue(object : Callback<Unit> {
+//                    override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+//                        while (response.isSuccessful) {
+//                            _toastMessage.value = "성공"
+//                            livePassword()
+//                        }
+//                    }
+//
+//                    override fun onFailure(call: Call<Unit>, t: Throwable) {
+//                        _toastMessage.value = "회원가입 실패"
+//                    }
+//                })
+//            }
+//            _changeComment_2.value = "비밀번호가 일치하지 않아요"
+//        }
+//        _toastMessage.value = "비밀번호는 8자~20자로 입력하세요"
     }
 
 

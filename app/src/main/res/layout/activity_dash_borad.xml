@@ -14,7 +14,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:srcCompat="@drawable/intro_human" />
+        app:srcCompat="@drawable/intro_human"
+        android:contentDescription="TODO" />
 
     <TextView
         android:id="@+id/intro_tv"
@@ -45,7 +46,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/intro_se_tv"
-        app:srcCompat="@drawable/graph1_11" />
+        app:srcCompat="@drawable/graph1_11"
+        android:contentDescription="TODO" />
 
     <TextView
         android:id="@+id/textView2"
