@@ -112,6 +112,7 @@ class RegisterViewModel(private val signApiImpl: SignApiImpl, private val shared
     }
 
 
+    //이게 로그인으로 이동
     fun goLogin() {
         goLogin.value!!
     }

@@ -72,7 +72,6 @@ dependencies {
 
     //rxjava
     implementation 'io.reactivex.rxjava3:rxjava:3.1.1'
-
     //rxkotlin
     implementation("io.reactivex.rxjava2:rxkotlin:2.4.0")
     //rx retrofit
@@ -89,6 +88,16 @@ dependencies {
 
     //coroutine
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2-native-mt'
+
+    //koin
+    def koin_version = "2.1.6"
+    implementation "org.koin:koin-core:$koin_version"
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    androidTestImplementation "org.koin:koin-test:$koin_version"
+
+    implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0"
 
 
 
