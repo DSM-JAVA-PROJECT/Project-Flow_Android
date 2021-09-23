@@ -20,11 +20,5 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding> (R.layout.activit
 
     override val vm: RegisterViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-
-
 
 }
