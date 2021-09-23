@@ -9,6 +9,7 @@
     <application
         android:name=".util.TestApplication"
         android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
