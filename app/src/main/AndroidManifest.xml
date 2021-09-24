@@ -6,12 +6,13 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".di.ProjectFlowApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/Theme.ProjectFlow_Android">
         <activity android:name=".ui.sign.ui.EmailVerifyActivity" />
         <activity android:name=".ui.sign.ui.EditPasswordActivity" />
         <activity android:name=".ui.sign.ui.DashBoardActivity">
