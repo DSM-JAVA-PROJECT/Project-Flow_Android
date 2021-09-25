@@ -1,4 +1,4 @@
-package com.example.project_flow_android.viewmodel
+package com.example.project_flow_android.viewmodel.register
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +13,10 @@ import com.example.project_flow_android.network.ProjectFlowAPI
 import retrofit2.Call
 import retrofit2.Response
 
-class RegisterViewModel(private val signApiImpl: SignApiImpl, private val sharedPrefenceStorage: SharedPreferenceStorage) : ViewModel() {
+class RegisterViewModel(
+    private val signApiImpl: SignApiImpl,
+    private val sharedPrefenceStorage: SharedPreferenceStorage
+) : ViewModel() {
 
     val userName = MutableLiveData<String>()
     val userEmail = MutableLiveData<String>()
@@ -22,10 +25,14 @@ class RegisterViewModel(private val signApiImpl: SignApiImpl, private val shared
     val userRePassword = MutableLiveData<String>()
     val verifyCode = MutableLiveData<String>()
 
-    val nextRegister = MutableLiveData<Boolean>(false)
-    val goLogin = MutableLiveData<Boolean>(false)
+    private val _goLogin = MutableLiveData<String>()
+    val goLogin: LiveData<String> get() = _goLogin
 
+    private val _checkRegister = MutableLiveData<Boolean>()
+    val checkRegister: LiveData<Boolean> get() = _checkRegister
 
+    private val _nextRegister = MutableLiveData<Boolean>()
+    val nextRegister: LiveData<Boolean> get() = nextRegister
 
     private val _changeComment = MutableLiveData<String>()
     val changeComment: LiveData<String> get() = _changeComment
@@ -39,30 +46,26 @@ class RegisterViewModel(private val signApiImpl: SignApiImpl, private val shared
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
 
-    //null check
-    fun checkNull() {
-        if (userName.value == null) {
+
+    fun editRegisterInfo() {
+        if (true) {
+            _checkRegister.value = true
+            _nextRegister.value = true
+            sharedPrefenceStorage.saveInfo(userName.value!!, "userName")
+            sharedPrefenceStorage.saveInfo(userEmail.value!!, "userEmail")
+            sharedPrefenceStorage.saveInfo(userPhone.value!!, "userPhone")
+        } else if (userName.value == null) {
             _changeComment.value = "이름을 입력해주세요"
         } else if (userEmail.value == null)
             _changeComment.value = "이메일을 입력해주세요"
         else if (userPhone.value == null)
             _changeComment.value = "핸드폰 번호를 입력해주세요"
         else if (userName.value == null || userEmail.value == null) {
+            _changeComment.value = "이름과 이메일을 모두 입력해주세요"
+        } else if (userName.value == null || userPhone.value == null) {
             _changeComment.value = "이름과 핸드폰 번호를 모두 입력해주세요"
-        }
-    }
-    //add register info
-    fun editRegisterInfo(){
-        checkNull()
-        if(nextRegister.value!!){
-            sharedPrefenceStorage.saveInfo(userName.value!!,"userName")
-            sharedPrefenceStorage.saveInfo(userEmail.value!!,"userEmail")
-            sharedPrefenceStorage.saveInfo(userPhone.value!!,"userPhone")
-        }
-    }
-
-    //이게 로그인으로 이동
-    fun goLogin() {
-        goLogin.value!!
+        } else if (userEmail.value == null || userPhone.value == null) {
+            _changeComment.value = "이메일과 핸드폰 번호를 모두 입력해주세요"
+        } else _changeComment.value = "모든 정보를 입력해주세요"
     }
 }

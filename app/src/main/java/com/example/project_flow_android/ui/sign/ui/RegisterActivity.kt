@@ -1,24 +1,38 @@
 package com.example.project_flow_android.ui.sign.ui
 
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.AttributeSet
-import android.view.View
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseActivity
-import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.databinding.ActivityRegisterBinding
-import com.example.project_flow_android.viewmodel.RegisterViewModel
-import org.koin.androidx.viewmodel.compat.ScopeCompat.viewModel
+import com.example.project_flow_android.viewmodel.register.RegisterViewModel
+import com.example.project_flow_android.viewmodel.register.RegisterViewModelFactory
+import org.koin.android.ext.android.inject
 
-class RegisterActivity : BaseActivity<ActivityRegisterBinding> (R.layout.activity_register){
+class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity_register) {
 
-    override val vm: RegisterViewModel by viewModels()
+    private val vmFactory by inject<RegisterViewModelFactory>()
+    override val vm: RegisterViewModel by lazy {
+        ViewModelProvider(this, vmFactory).get(RegisterViewModel::class.java)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        binding.registerCheckTv.setOnClickListener() {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
 
 
+    }
+
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+    }
 }
+
