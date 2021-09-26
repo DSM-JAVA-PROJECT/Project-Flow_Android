@@ -10,7 +10,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.sign.ui.EmailVerifyActivity">
+    tools:context=".ui.sign.ui.CertificationActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline10"
@@ -27,7 +27,7 @@
         app:layout_constraintGuide_begin="61dp" />
 
     <TextView
-        android:id="@+id/register_email_vertify_tv"
+        android:id="@+id/welcome_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/email_verify"
@@ -37,28 +37,28 @@
         app:layout_constraintTop_toTopOf="@+id/guideline11" />
 
     <TextView
-        android:id="@+id/register_title_tv"
+        android:id="@+id/nim_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:fontFamily="@font/nanumgothic_bold"
         android:text="@string/certification_verify"
         app:layout_constraintStart_toStartOf="@+id/guideline10"
-        app:layout_constraintTop_toBottomOf="@+id/register_email_vertify_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/welcome_tv" />
 
     <EditText
         android:id="@+id/certification_et"
         android:layout_width="match_parent"
-        android:layout_marginLeft="34dp"
-        android:layout_marginRight="34dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="34dp"
         android:layout_marginTop="120dp"
+        android:layout_marginRight="34dp"
         android:ems="10"
-        android:maxLength="6"
         android:inputType="text"
+        android:maxLength="6"
         app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintStart_toStartOf="@+id/guideline10"
-        app:layout_constraintTop_toBottomOf="@+id/register_title_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/nim_tv" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline12"
@@ -71,16 +71,17 @@
         android:id="@+id/comment3_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/vertical_btn"
+        app:layout_constraintBottom_toTopOf="@+id/login_btn"
         app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintStart_toStartOf="@+id/guideline10" />
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/vertical_btn"
+        android:id="@+id/login_btn"
         android:layout_width="0dp"
         android:layout_height="66dp"
         android:layout_marginBottom="28dp"
+        android:backgroundTint="@color/blue_main"
         android:fontFamily="@font/nanumgothic_regular"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -88,6 +89,15 @@
         app:layout_constraintStart_toStartOf="@+id/guideline10">
 
     </com.google.android.material.button.MaterialButton>
+
+    <TextView
+        android:id="@+id/return_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/remessage"
+        app:layout_constraintEnd_toStartOf="@+id/guideline12"
+        app:layout_constraintStart_toStartOf="@+id/guideline10"
+        app:layout_constraintTop_toBottomOf="@+id/certification_et" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

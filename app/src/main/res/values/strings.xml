@@ -24,4 +24,8 @@
     <string name="check">확인</string>
     <string name="email_verify">이메일로 발송된</string>
     <string name="certification_verify">인증번호를 입력해주세요</string>
+    <string name="remessage">인증번호를 입력해주세요</string>
+    <string name="successful_register">반가워요!</string>
+    <string name="nim">님!</string>
+    <string name="welcome">프플에 오신 것을 진심으로 환영합니다</string>
 </resources>
