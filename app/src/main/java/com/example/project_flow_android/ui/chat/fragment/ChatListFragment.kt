@@ -9,9 +9,11 @@ import com.example.project_flow_android.R
 import com.example.project_flow_android.ui.chat.ChatActivity
 import com.example.project_flow_android.viewmodel.ChatViewModel
 import kotlinx.android.synthetic.main.fragment_chat_list.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChatListFragment : Fragment() {
-    private val viewModel = ChatViewModel()
+    val chatViewModel : ChatViewModel by viewModel()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

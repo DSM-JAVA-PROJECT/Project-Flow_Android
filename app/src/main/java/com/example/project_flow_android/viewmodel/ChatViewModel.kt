@@ -1,5 +1,6 @@
 package com.example.project_flow_android.viewmodel
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import org.json.JSONObject
@@ -34,6 +35,13 @@ class ChatViewModel : ViewModel() {
         val data = JSONObject()
         data.put("message", message)
         stompClient.send("/chat/$chatRoomId/send", data.toString()).subscribe()
+    }
+
+    @SuppressLint("CheckResult")
+    fun subscribe(){
+        stompClient.topic("/chat/$chatRoomId/send").subscribe{
+            Log.i(TAG, it.payload)
+        }
     }
 
     fun setChatRoomId(chatRoomId: Int){
