@@ -100,5 +100,10 @@ dependencies {
     implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0"
 
 
+    //lottie
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
+
 
 }
