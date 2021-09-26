@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectFlow_Android">
-        <activity android:name=".ui.sign.ui.EmailVerifyActivity" />
+        <activity android:name=".ui.sign.ui.FinishSignActivity"/>
+        <activity android:name=".ui.sign.ui.CertificationActivity" />
         <activity android:name=".ui.sign.ui.EditPasswordActivity" />
         <activity android:name=".ui.sign.ui.DashBoardActivity">
             <intent-filter>
