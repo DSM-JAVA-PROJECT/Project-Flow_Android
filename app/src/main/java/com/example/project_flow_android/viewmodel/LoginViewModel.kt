@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.project_flow_android.data.SharedPreferenceStorage
+import com.example.project_flow_android.data.remote.LoginApiImpl
 import com.example.project_flow_android.data.remote.SignApiImpl
 import com.example.project_flow_android.feature.LoginRequest
 import com.example.project_flow_android.network.ApiProvider
@@ -13,7 +14,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.create
 
-class LoginViewModel(private val signApiImpl: SignApiImpl, private val sharedPreferenceStorage: SharedPreferenceStorage) : ViewModel() {
+class LoginViewModel(private val loginApiImpl: LoginApiImpl, private val sharedPreferenceStorage: SharedPreferenceStorage) : ViewModel() {
 
     val userEmail = MutableLiveData<String>()
     val userPassword = MutableLiveData<String>()
