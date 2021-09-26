@@ -13,16 +13,5 @@ interface SignApi {
     @POST("/auth/join")
     fun register(@Body request:RegisterRequest): Single<Response<Void>>
 
-    @POST("/auth")
-    fun login(@Body request: LoginRequest): Single<Response<LoginResponse>>
-
-    @POST("/email/")
-    fun postCertification(@Body request: CertificationRequest): Single<Response<Void>>
-
-    @POST("/email/verifyCode")
-    fun checkCertification(@Body request: CertificationResponse): Single<Response<Void>>
-
-
-
 
 }

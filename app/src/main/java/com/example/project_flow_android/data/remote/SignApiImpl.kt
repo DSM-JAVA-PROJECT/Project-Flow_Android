@@ -13,19 +13,8 @@ class SignApiImpl {
 
     private fun providerSignApi(): SignApi = ApiProvider.RetroFitBuilder.create(SignApi::class.java)
 
-    fun loginApi(request: LoginRequest):@NonNull Single<Response<LoginResponse>> = providerSignApi().login(request)
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeOn(Schedulers.io())
 
     fun registerApi(request: RegisterRequest):@NonNull Single<Response<Void>> = providerSignApi().register(request)
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeOn(Schedulers.io())
-
-    fun checkCertification(request: CertificationResponse):@NonNull Single<Response<Void>> = providerSignApi().checkCertification(request)
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeOn(Schedulers.io())
-
-    fun postCertification(request: CertificationRequest):@NonNull Single<Response<Void>> = providerSignApi().postCertification(request)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
 
