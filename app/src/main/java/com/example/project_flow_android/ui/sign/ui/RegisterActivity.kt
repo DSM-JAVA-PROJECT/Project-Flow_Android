@@ -23,22 +23,26 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        next()
 
         binding.registerCheckTv.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 
-    }
-
-    fun next() {
-        vm.nullCheck()
-        if (vm.nextRegister.value == true) {
+        binding.registerBtn.setOnClickListener{
             val intent = Intent(this, CertificationActivity::class.java)
             startActivity(intent)
         }
+
     }
+
+//    fun next() {
+//        vm.nullCheck()
+//        if (vm.nextRegister.value == true) {
+//            val intent = Intent(this, CertificationActivity::class.java)
+//            startActivity(intent)
+//        }
+//    }
 
 }
 
