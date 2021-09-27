@@ -1,9 +1,8 @@
-package com.example.project_flow_android.di
+package com.example.project_flow_android.di.module
 
 import android.app.Application
-import com.example.project_flow_android.di.module.certificationModule
-import com.example.project_flow_android.di.module.mainModule
-import com.example.project_flow_android.di.module.successfulModule
+import com.example.project_flow_android.di.loginModule
+import com.example.project_flow_android.di.registerModule
 
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin

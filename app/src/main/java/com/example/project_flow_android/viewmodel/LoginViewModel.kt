@@ -9,10 +9,6 @@ import com.example.project_flow_android.data.remote.SignApiImpl
 import com.example.project_flow_android.feature.LoginRequest
 import com.example.project_flow_android.network.ApiProvider
 import com.example.project_flow_android.network.ProjectFlowAPI
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.create
 
 class LoginViewModel(private val loginApiImpl: LoginApiImpl, private val sharedPreferenceStorage: SharedPreferenceStorage) : ViewModel() {
 
