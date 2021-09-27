@@ -1,5 +1,40 @@
 <resources>
     <string name="app_name">Project-Flow_Android</string>
+
+    <!--  Chatting  -->
+    <string name="chat_manage_text">방 관리</string>
+    <string name="chat_input_text">메시지를 입력하세요</string>
+    <string name="chat_photo">앨범</string>
+    <string name="chat_view_schedule">일정 보기</string>
+    <string name="chat_add_schedule">일정 추가</string>
+    <string name="manage_invite">추가</string>
+    <string name="manage_already_join">참가자</string>
+    <string name="manage_notify">알림 설정</string>\
+    <string name="manage_change_name">이름 변경</string>
+    <string name="manage_exit_room">방 나가기</string>
+    <string name="user_info_attend_project">참여한 프로젝트</string>
+    <string name="user_info_finish">완료</string>
+    <string name="new_chatting">새로운 채팅</string>
+    <string name="chat_create_project">프로젝트</string>
+    <string name="chat_create_user">참여원</string>
+    <string name="chat_create_start">시작하기</string>
+    <string name="chat_invite_user">추가</string>
+    <string name="chat_invite_user2">추가하기</string>
+    <string name="chat_modify_name">변경하기</string>
+    <string name="chat_modify_name2">이름 변경</string>
+    <string name="schedule"> 일정</string>
+    <string name="schedule_exclude">일정 제외하기</string>
+    <string name="schedule_delete">일정 삭제하기</string>
+    <string name="add_schedule_bottom_title">일정 추가하기</string>
+    <string name="add_schedule_bottom_content">일정 내용</string>
+    <string name="add_schedule_bottom_content_hint">일정을 입력하세요</string>
+    <string name="add_schedule_bottom_term">기간</string>
+    <string name="add_schedule_bottom_start">시작일</string>
+    <string name="add_schedule_bottom_end">마감일</string>
+    <string name="add_schedule_bottom_essential">필수 참여</string>
+    <string name="add_schedule_bottom_btn">추가하기</string>
+    <string name="add_schedule_bottom_date_hint">날짜를 선택하세요</string>
+    <string name="chat_list_my_chat">나의 채팅</string>
     <string name="start_project">프로젝트 관리는</string>
     <string name="start_project_se">프로젝트 플로우에서</string>
     <string name="comment_1">프로젝트 플로우는 개발자의</string>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.chat.fragment.UserInfoFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="290dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/user_info_prev_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:src="@drawable/ic_baseline_arrow_back_ios_new_24" />
+
+        <ImageView
+            android:id="@+id/user_info_iv"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/user_info_profile_radius"
+            android:elevation="10dp"/>
+
+        <TextView
+            android:id="@+id/user_info_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/black"
+            android:fontFamily="@font/font_roboto_bold" />
+
+        <Spinner
+            android:id="@+id/major_sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/user_info_tel_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:fontFamily="@font/font_nanumgothic_bold"
+            android:layout_gravity="center_horizontal"/>
+
+    </LinearLayout>
+
+    <view
+        android:layout_width="370dp"
+        android:layout_height="1px"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="20dp"
+        android:text="@string/user_info_attend_project"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:fontFamily="@font/font_nanumgothic_bold"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"/>
+
+</LinearLayout>
