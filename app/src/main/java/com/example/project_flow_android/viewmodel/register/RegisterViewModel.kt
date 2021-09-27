@@ -48,26 +48,26 @@ class RegisterViewModel(
 
 
 
-    fun nullCheck() {
-        if (userName.value == null) {
-            _changeComment.value = "이름을 입력해주세요"
-        } else if (userEmail.value == null)
-            _changeComment.value = "이메일을 입력해주세요"
-        else if (userPhone.value == null)
-            _changeComment.value = "핸드폰 번호를 입력해주세요"
-        else if (userName.value == null || userEmail.value == null) {
-            _changeComment.value = "이름과 이메일을 모두 입력해주세요"
-        } else if (userName.value == null || userPhone.value == null) {
-            _changeComment.value = "이름과 핸드폰 번호를 모두 입력해주세요"
-        } else if (userEmail.value == null || userPhone.value == null) {
-            _changeComment.value = "이메일과 핸드폰 번호를 모두 입력해주세요"
-        } else if(userEmail.value == null || userPhone.value == null || userName.value == null){
-            _changeComment.value = "모든 정보를 입력해주세요"
-        }else
-        sharedPrefenceStorage.saveInfo(userName.value!!, "userName")
-        sharedPrefenceStorage.saveInfo(userEmail.value!!, "userEmail")
-        sharedPrefenceStorage.saveInfo(userPhone.value!!, "userPhone")
-        _nextRegister.value = true
-
-    }
+//    fun nullCheck() {
+//        if (userName.value == null) {
+//            _changeComment.value = "이름을 입력해주세요"
+//        } else if (userEmail.value == null)
+//            _changeComment.value = "이메일을 입력해주세요"
+//        else if (userPhone.value == null)
+//            _changeComment.value = "핸드폰 번호를 입력해주세요"
+//        else if (userName.value == null || userEmail.value == null) {
+//            _changeComment.value = "이름과 이메일을 모두 입력해주세요"
+//        } else if (userName.value == null || userPhone.value == null) {
+//            _changeComment.value = "이름과 핸드폰 번호를 모두 입력해주세요"
+//        } else if (userEmail.value == null || userPhone.value == null) {
+//            _changeComment.value = "이메일과 핸드폰 번호를 모두 입력해주세요"
+//        } else if(userEmail.value == null || userPhone.value == null || userName.value == null){
+//            _changeComment.value = "모든 정보를 입력해주세요"
+//        }else
+//        sharedPrefenceStorage.saveInfo(userName.value!!, "userName")
+//        sharedPrefenceStorage.saveInfo(userEmail.value!!, "userEmail")
+//        sharedPrefenceStorage.saveInfo(userPhone.value!!, "userPhone")
+//        _nextRegister.value = true
+//
+//    }
 }
