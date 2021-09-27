@@ -1,4 +1,4 @@
-package com.example.project_flow_android.viewmodel.register
+package com.example.project_flow_android.viewmodel.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -1,4 +1,4 @@
-package com.example.project_flow_android.viewmodel
+package com.example.project_flow_android.viewmodel.chat
 
 import android.annotation.SuppressLint
 import android.util.Log

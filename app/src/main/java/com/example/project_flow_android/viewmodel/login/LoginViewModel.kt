@@ -1,4 +1,4 @@
-package com.example.project_flow_android.viewmodel
+package com.example.project_flow_android.viewmodel.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
