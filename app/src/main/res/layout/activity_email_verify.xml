@@ -4,7 +4,7 @@
     <data>
         <variable
             name="vm"
-            type="com.example.project_flow_android.viewmodel.CertificationViewModel"
+            type="com.example.project_flow_android.viewmodel.certification.CertificationViewModel"
             />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout

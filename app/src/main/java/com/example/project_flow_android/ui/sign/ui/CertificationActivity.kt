@@ -1,16 +1,13 @@
 package com.example.project_flow_android.ui.sign.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseActivity
 import com.example.project_flow_android.databinding.ActivityEmailVerifyBinding
-import com.example.project_flow_android.viewmodel.CertificationViewModel
-import com.example.project_flow_android.viewmodel.LoginViewModel
-import com.example.project_flow_android.viewmodel.register.CertificationViewModelFactory
-import com.example.project_flow_android.viewmodel.register.LoginViewModelFactory
+import com.example.project_flow_android.viewmodel.certification.CertificationViewModel
+import com.example.project_flow_android.viewmodel.certification.CertificationViewModelFactory
 import org.koin.android.ext.android.inject
 
 class CertificationActivity : BaseActivity<ActivityEmailVerifyBinding>(R.layout.activity_email_verify){

@@ -1,6 +1,6 @@
 package com.example.project_flow_android.di
 
-import com.example.project_flow_android.viewmodel.ChatViewModel
+import com.example.project_flow_android.viewmodel.chat.ChatViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
