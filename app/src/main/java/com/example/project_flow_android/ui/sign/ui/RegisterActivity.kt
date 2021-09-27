@@ -10,6 +10,7 @@ import com.example.project_flow_android.base.BaseActivity
 import com.example.project_flow_android.databinding.ActivityRegisterBinding
 import com.example.project_flow_android.viewmodel.register.RegisterViewModel
 import com.example.project_flow_android.viewmodel.register.RegisterViewModelFactory
+import io.reactivex.rxjava3.internal.util.ExceptionHelper.nullCheck
 import org.koin.android.ext.android.inject
 
 class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity_register) {
@@ -22,12 +23,18 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        next()
+
         binding.registerCheckTv.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 
-        binding.registerBtn.setOnClickListener {
+    }
+
+    fun next() {
+        vm.nullCheck()
+        if (vm.nextRegister.value == true) {
             val intent = Intent(this, CertificationActivity::class.java)
             startActivity(intent)
         }

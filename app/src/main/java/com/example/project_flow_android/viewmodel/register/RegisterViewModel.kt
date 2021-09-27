@@ -37,35 +37,37 @@ class RegisterViewModel(
     private val _changeComment = MutableLiveData<String>()
     val changeComment: LiveData<String> get() = _changeComment
 
-//    private val _changeComment_2 = MutableLiveData<String>()
-//    val changeComment2: LiveData<String> get() = _changeComment_2
-//
-//    private val _changeComment_3 = MutableLiveData<String>()
-//    val changeComment3: LiveData<String> get() = _changeComment_3
+    private val _changeComment_2 = MutableLiveData<String>()
+    val changeComment2: LiveData<String> get() = _changeComment_2
+
+    private val _changeComment_3 = MutableLiveData<String>()
+    val changeComment3: LiveData<String> get() = _changeComment_3
 
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
 
 
-//
-//    fun editRegisterInfo() {
-//        if (userName.value == 1) {
-//            sharedPrefenceStorage.saveInfo(userName.value!!, "userName")
-//            sharedPrefenceStorage.saveInfo(userEmail.value!!, "userEmail")
-//            sharedPrefenceStorage.saveInfo(userPhone.value!!, "userPhone")
-//
-//        } else if (userName.value == null) {
-//            _changeComment.value = "이름을 입력해주세요"
-//        } else if (userEmail.value == null)
-//            _changeComment.value = "이메일을 입력해주세요"
-//        else if (userPhone.value == null)
-//            _changeComment.value = "핸드폰 번호를 입력해주세요"
-//        else if (userName.value == null || userEmail.value == null) {
-//            _changeComment.value = "이름과 이메일을 모두 입력해주세요"
-//        } else if (userName.value == null || userPhone.value == null) {
-//            _changeComment.value = "이름과 핸드폰 번호를 모두 입력해주세요"
-//        } else if (userEmail.value == null || userPhone.value == null) {
-//            _changeComment.value = "이메일과 핸드폰 번호를 모두 입력해주세요"
-//        } else _changeComment.value = "모든 정보를 입력해주세요"
-//    }
+
+    fun nullCheck() {
+        if (userName.value == null) {
+            _changeComment.value = "이름을 입력해주세요"
+        } else if (userEmail.value == null)
+            _changeComment.value = "이메일을 입력해주세요"
+        else if (userPhone.value == null)
+            _changeComment.value = "핸드폰 번호를 입력해주세요"
+        else if (userName.value == null || userEmail.value == null) {
+            _changeComment.value = "이름과 이메일을 모두 입력해주세요"
+        } else if (userName.value == null || userPhone.value == null) {
+            _changeComment.value = "이름과 핸드폰 번호를 모두 입력해주세요"
+        } else if (userEmail.value == null || userPhone.value == null) {
+            _changeComment.value = "이메일과 핸드폰 번호를 모두 입력해주세요"
+        } else if(userEmail.value == null || userPhone.value == null || userName.value == null){
+            _changeComment.value = "모든 정보를 입력해주세요"
+        }else
+        sharedPrefenceStorage.saveInfo(userName.value!!, "userName")
+        sharedPrefenceStorage.saveInfo(userEmail.value!!, "userEmail")
+        sharedPrefenceStorage.saveInfo(userPhone.value!!, "userPhone")
+        _nextRegister.value = true
+
+    }
 }

@@ -85,6 +85,7 @@
             android:layout_height="66dp"
             android:layout_marginBottom="28dp"
             android:text="@string/next"
+            android:onClick="@{()->vm.nullCheck()}"
             android:backgroundTint="@color/blue_main"
             android:layout_marginLeft="34dp"
             android:layout_marginRight="34dp"
