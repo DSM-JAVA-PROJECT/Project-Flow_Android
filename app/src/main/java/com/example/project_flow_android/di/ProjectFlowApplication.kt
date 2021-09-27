@@ -19,7 +19,8 @@ class ProjectFlowApplication : Application() {
                     registerModule,
                     mainModule,
                     certificationModule,
-                    successfulModule
+                    successfulModule,
+                    chatViewModelModule
                 )
             )
         }
