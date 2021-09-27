@@ -27,12 +27,12 @@
     + ex) activity_main, fragment_chatting
   
   ###### ID
-    + `what_description`
+    + `where_what_description`
     + textview -> tv, editText -> et, button -> btn, customview → cv 등등등 줄여서 사용
-    + ex) `intro_tv`, `submit_btn`
+    + ex) `main_intro_tv`, `login_submit_btn`
   
   ###### colors.xml
-    + color[What] 으로 작성하여 사용합니다.
+    + color_what 으로 작성하여 사용합니다.
 
 
 ### 	Git 관련  

@@ -89,6 +89,7 @@ dependencies {
     //coroutine
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2-native-mt'
 
+
     //koin
     def koin_version = "2.1.6"
     implementation "org.koin:koin-core:$koin_version"
@@ -103,7 +104,6 @@ dependencies {
     //lottie
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
-
 
 
 }
