@@ -7,6 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="color_flow">#1F43C2</color>
+    <color name="color_toolbar">#F6F6F6</color>
+    <color name="color_chat_et_tint">#D5DCF2</color>
+    <color name="color_chat_item_other">#E9E9E9</color>
+    <color name="color_chat_item_mine">#D5DCF2</color>
+    <color name="color_chat_more_tint">#D2D9F2</color>
+    <color name="color_chat_red">#FF5151</color>
+    <color name="color_calendar_current">#829EFD</color>
+    <color name="color_gray">#C4C4C4</color>
     <color name="blue_main">#1F43C2</color>
     <color name="main">#1F43C2</color>
     <color name="red">#FF5151</color>

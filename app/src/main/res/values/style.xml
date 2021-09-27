@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Switch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">#1F43C2</item>
+        <item name="colorSwitchThumbNormal">#C4C4C4</item>
+        <item name="android:colorForeground">#C4C4C4</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottomsheet_radius</item>
+    </style>
+
+    <style name="DatePickerStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlActivated">@color/color_chat_item_mine</item>
+        <item name="android:textColorSecondaryInverse">@color/color_flow</item>
+        <item name="android:textColorPrimaryInverse">@color/color_flow</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+</resources>
