@@ -31,4 +31,9 @@ class ChatListFragment : Fragment() {
             (activity as ChatActivity).replace(ChatCreateFragment())
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        chatViewModel.disconnect()
+    }
 }

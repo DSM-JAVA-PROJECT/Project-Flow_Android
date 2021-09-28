@@ -52,6 +52,9 @@ class ChatViewModel : ViewModel() {
         }
     }
 
+    fun disconnect(){
+        stompClient.disconnect()
+    }
 
     fun setChatRoomId(chatRoomId: Int){
         this.chatRoomId = chatRoomId
