@@ -25,6 +25,8 @@ class ChatListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        chatViewModel.stompConnect()
+
         chat_list_add_iv.setOnClickListener{
             (activity as ChatActivity).replace(ChatCreateFragment())
         }
