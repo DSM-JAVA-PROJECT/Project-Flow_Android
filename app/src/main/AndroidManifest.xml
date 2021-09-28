@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".di.ProjectFlowApplication"
+        android:name=".di.module.ProjectFlowApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -15,6 +15,7 @@
         <activity android:name=".ui.sign.ui.FinishSignActivity" />
         <activity android:name=".ui.sign.ui.CertificationActivity" />
         <activity android:name=".ui.sign.ui.EditPasswordActivity" />
+        <activity android:name=".ui.sign.ui.DashBoardActivity"/>
         <activity android:name=".ui.chat.ChatActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
