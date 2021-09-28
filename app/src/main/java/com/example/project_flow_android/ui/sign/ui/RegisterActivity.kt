@@ -24,25 +24,32 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
         super.onCreate(savedInstanceState)
 
 
+        next()
+
         binding.registerCheckTv.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
+    }
 
-        binding.registerBtn.setOnClickListener{
-            val intent = Intent(this, CertificationActivity::class.java)
-            startActivity(intent)
-        }
+    override fun onStart() {
+        super.onStart()
 
     }
 
-//    fun next() {
-//        vm.nullCheck()
-//        if (vm.nextRegister.value == true) {
-//            val intent = Intent(this, CertificationActivity::class.java)
-//            startActivity(intent)
-//        }
-//    }
+    fun next() {
+        vm.run {
+            if(nextRegister.value!!) {
+                //안내 문구
+                nextRegister.observe(this@RegisterActivity,{
+                    binding.commentTv.text = changeComment.value
+                })
+                //넘어가기
+                val intent = Intent(this@RegisterActivity, CertificationActivity::class.java)
+                startActivity(intent)
+            }
+        }
+    }
 
 }
 
