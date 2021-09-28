@@ -23,9 +23,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         next()
-
         binding.registerCheckTv.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -39,17 +37,17 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
 
     fun next() {
         vm.run {
-            if(nextRegister.value!!) {
-                //안내 문구
-                nextRegister.observe(this@RegisterActivity,{
-                    binding.commentTv.text = changeComment.value
-                })
-                //넘어가기
-                val intent = Intent(this@RegisterActivity, CertificationActivity::class.java)
-                startActivity(intent)
-            }
+            nextRegister.observe(this@RegisterActivity, {
+                if (it) {
+                    val intent = Intent(this@RegisterActivity, CertificationActivity::class.java)
+                    startActivity(intent)
+                }
+
+            })
+            changeComment.observe(this@RegisterActivity, {
+                binding.commentTv.text = it
+            })
         }
     }
-
 }
 
