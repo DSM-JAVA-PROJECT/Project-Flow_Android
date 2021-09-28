@@ -16,7 +16,7 @@ class ChatViewModel : ViewModel() {
     private var chatRoomId = 0
     private var projectId = 0
 
-    fun stompConnect(){
+    fun connect(){
         Thread {
             stompClient.topic("/topic/chatroom/$projectId").subscribe ({
                 Log.d(TAG, it.payload)
@@ -51,6 +51,7 @@ class ChatViewModel : ViewModel() {
             Log.i(TAG, it.payload)
         }
     }
+
 
     fun setChatRoomId(chatRoomId: Int){
         this.chatRoomId = chatRoomId
