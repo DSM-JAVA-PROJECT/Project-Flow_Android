@@ -40,14 +40,11 @@ class RegisterViewModel(
     private val _changeComment_2 = MutableLiveData<String>()
     val changeComment2: LiveData<String> get() = _changeComment_2
 
-    private val _changeComment_3 = MutableLiveData<String>()
-    val changeComment3: LiveData<String> get() = _changeComment_3
-
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
 
 
-    fun leaveData() {
+    private fun leaveData() {
         with(sharedPrefenceStorage) {
             saveInfo(userName.value!!, "userName")
             saveInfo(userEmail.value!!, "userEmail")
