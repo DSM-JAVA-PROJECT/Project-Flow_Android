@@ -15,7 +15,7 @@ import retrofit2.Response
 
 class RegisterViewModel(
     private val signApiImpl: SignApiImpl,
-    private val sharedPrefenceStorage: SharedPreferenceStorage
+    private val sharedPrefenceStorage: SharedPreferenceStorage,
 ) : ViewModel() {
 
     val userName = MutableLiveData<String>()
@@ -28,11 +28,11 @@ class RegisterViewModel(
     private val _goLogin = MutableLiveData<String>()
     val goLogin: LiveData<String> get() = _goLogin
 
-    private val _checkRegister = MutableLiveData<Boolean>()
+    private val _checkRegister = MutableLiveData(false)
     val checkRegister: LiveData<Boolean> get() = _checkRegister
 
-    private val _nextRegister = MutableLiveData<Boolean>()
-    val nextRegister: LiveData<Boolean> get() = nextRegister
+    private val _nextRegister = MutableLiveData(false)
+    val nextRegister: LiveData<Boolean> get() = _nextRegister
 
     private val _changeComment = MutableLiveData<String>()
     val changeComment: LiveData<String> get() = _changeComment
@@ -40,34 +40,35 @@ class RegisterViewModel(
     private val _changeComment_2 = MutableLiveData<String>()
     val changeComment2: LiveData<String> get() = _changeComment_2
 
-    private val _changeComment_3 = MutableLiveData<String>()
-    val changeComment3: LiveData<String> get() = _changeComment_3
-
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
 
 
+    private fun leaveData() {
+        with(sharedPrefenceStorage) {
+            saveInfo(userName.value!!, "userName")
+            saveInfo(userEmail.value!!, "userEmail")
+            saveInfo(userPhone.value!!, "userPhone")
+        }
+        _nextRegister.value = true
+    }
 
-//    fun nullCheck() {
-//        if (userName.value == null) {
-//            _changeComment.value = "이름을 입력해주세요"
-//        } else if (userEmail.value == null)
-//            _changeComment.value = "이메일을 입력해주세요"
-//        else if (userPhone.value == null)
-//            _changeComment.value = "핸드폰 번호를 입력해주세요"
-//        else if (userName.value == null || userEmail.value == null) {
-//            _changeComment.value = "이름과 이메일을 모두 입력해주세요"
-//        } else if (userName.value == null || userPhone.value == null) {
-//            _changeComment.value = "이름과 핸드폰 번호를 모두 입력해주세요"
-//        } else if (userEmail.value == null || userPhone.value == null) {
-//            _changeComment.value = "이메일과 핸드폰 번호를 모두 입력해주세요"
-//        } else if(userEmail.value == null || userPhone.value == null || userName.value == null){
-//            _changeComment.value = "모든 정보를 입력해주세요"
-//        }else
-//        sharedPrefenceStorage.saveInfo(userName.value!!, "userName")
-//        sharedPrefenceStorage.saveInfo(userEmail.value!!, "userEmail")
-//        sharedPrefenceStorage.saveInfo(userPhone.value!!, "userPhone")
-//        _nextRegister.value = true
-//
-//    }
+
+    fun addInfo() {
+        if (userEmail.value == null && userPhone.value == null && userName.value == null) {
+            _changeComment.value = "모든 정보를 입력해주세요"
+        } else if (userEmail.value == null && userPhone.value == null)
+            _changeComment.value = "이메일과 전화번호를 모두 입력해주세요"
+        else if (userName.value == null && userPhone.value == null)
+            _changeComment.value = "이름과 전화번호를 모두 입력해주세요"
+        else if (userName.value == null || userEmail.value == null) {
+            _changeComment.value = "이름과 이메일을 모두 입력해주세요"
+        } else if (userPhone.value == null) {
+            _changeComment.value = "전화번호를 입력해주세요"
+        } else if (userEmail.value == null) {
+            _changeComment.value = "이메일을 입력해주세요"
+        } else if (userName.value == null) {
+            _changeComment.value = "이름을 입력해주세요"
+        } else leaveData()
+    }
 }
