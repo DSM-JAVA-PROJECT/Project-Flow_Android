@@ -5,10 +5,11 @@ import com.example.project_flow_android.feature.LoginResponse
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface LoginApi {
 
     @POST("/auth")
-    fun login(@Body request: LoginRequest): Single<Response<LoginResponse>>
+    fun login(@Header("Authorization")accessToken:String,refreshToken:String,@Body request: LoginRequest): Single<Response<LoginResponse>>
 }

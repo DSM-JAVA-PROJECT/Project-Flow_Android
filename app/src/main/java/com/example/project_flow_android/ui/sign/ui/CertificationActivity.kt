@@ -26,4 +26,13 @@ class CertificationActivity : BaseActivity<ActivityEmailVerifyBinding>(R.layout.
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        vm.run {
+            postCertification()
+            firstPostCertificationCode.observe(this@CertificationActivity, {
+                binding.comment3Tv.text = changeComment3.value
+            })
+        }
+    }
 }
