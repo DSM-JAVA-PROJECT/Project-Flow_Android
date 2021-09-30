@@ -52,7 +52,7 @@
             app:layout_constraintGuide_begin="376dp" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/login_btn"
+            android:id="@+id/success_register_btn"
             android:layout_width="0dp"
             android:layout_height="66dp"
             android:layout_marginBottom="28dp"
@@ -87,7 +87,7 @@
             android:id="@+id/lottieView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/login_btn"
+            app:layout_constraintBottom_toTopOf="@+id/success_register_btn"
             app:layout_constraintEnd_toStartOf="@+id/guideline12"
             app:layout_constraintStart_toStartOf="@+id/guideline10"
             app:layout_constraintTop_toBottomOf="@+id/textView"

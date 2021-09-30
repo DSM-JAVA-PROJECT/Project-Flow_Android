@@ -63,4 +63,5 @@
     <string name="successful_register">반가워요!</string>
     <string name="nim">님!</string>
     <string name="welcome">프플에 오신 것을 진심으로 환영합니다</string>
+    <string name="dontsend">인증번호가 오지 않았나요?</string>
 </resources>
