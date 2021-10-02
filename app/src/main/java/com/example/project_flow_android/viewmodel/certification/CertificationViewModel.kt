@@ -64,8 +64,8 @@ class CertificationViewModel(
 
     fun checkCertifcation() {
         certificationApiImpl.checkCertification(PostCertificationRequest(certificationCode.value!!))
-            .subscribe({ subscribe ->
-                    when (subscribe.code()) {
+            .subscribe({
+                    when (it.code()) {
                         200 -> {
                             _successfulCertification.value = true
                         }
