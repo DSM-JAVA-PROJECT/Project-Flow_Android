@@ -64,4 +64,7 @@
     <string name="nim">님!</string>
     <string name="welcome">프플에 오신 것을 진심으로 환영합니다</string>
     <string name="dontsend">인증번호가 오지 않았나요?</string>
+    <string name="menu_flow">나의 Flow</string>
+    <string name="menu_chat">채팅</string>
+    <string name="menu_mypage">마이페이지</string>
 </resources>
