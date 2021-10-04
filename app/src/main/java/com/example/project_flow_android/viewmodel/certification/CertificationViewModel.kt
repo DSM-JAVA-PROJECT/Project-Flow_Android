@@ -64,17 +64,16 @@ class CertificationViewModel(
 
     fun checkCertifcation() {
         certificationApiImpl.checkCertification(PostCertificationRequest(certificationCode.value!!))
-            .subscribe({
-                    when (it.code()) {
-                        200 -> {
-                            _successfulCertification.value = true
-                        }
-                        400 -> {
-                            _changeComment_3.value = "인증번호가 일치하지 않습니다"
-                        }
+            .subscribe { subscribe ->
+                when (subscribe.code()) {
+                    200 -> {
+                        _successfulCertification.value = true
                     }
-                    _changeComment_3.value = "인증을 다시 시도해주세요"
-                }, {
-                })
+                    400 -> {
+                        _changeComment_3.value = "인증번호가 일치하지 않습니다"
+                    }
+                }
+                _changeComment_3.value = "인증을 다시 시도해주세요"
+            }
     }
 }
