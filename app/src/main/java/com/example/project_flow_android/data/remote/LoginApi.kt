@@ -10,6 +10,6 @@ import retrofit2.http.POST
 
 interface LoginApi {
 
-    @POST("/auth")
-    fun login(@Header("Authorization")accessToken:String,refreshToken:String,@Body request: LoginRequest): Single<Response<LoginResponse>>
+    @POST("/auth/login")
+    fun login(@Body request: LoginRequest): Single<Response<LoginResponse>>
 }

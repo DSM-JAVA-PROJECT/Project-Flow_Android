@@ -12,7 +12,7 @@ class LoginApiImpl {
 
     private fun providerSignApi(): LoginApi = ApiProvider.RetroFitBuilder.create(LoginApi::class.java)
 
-    fun loginApi(accessToken:String,refreshToken:String,request: LoginRequest):@NonNull Single<Response<LoginResponse>> = providerSignApi().login(accessToken,refreshToken,request)
+    fun loginApi(request: LoginRequest):@NonNull Single<Response<LoginResponse>> = providerSignApi().login(request)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
 
