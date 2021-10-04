@@ -27,12 +27,6 @@ class RegisterViewModel(
     private val _finishRegister = MutableLiveData(false)
     val finishRegister: LiveData<Boolean> get() = _finishRegister
 
-    private val _goLogin = MutableLiveData<String>()
-    val goLogin: LiveData<String> get() = _goLogin
-
-    private val _checkRegister = MutableLiveData(false)
-    val checkRegister: LiveData<Boolean> get() = _checkRegister
-
     private val _nextRegister = MutableLiveData(false)
     val nextRegister: LiveData<Boolean> get() = _nextRegister
 
@@ -41,10 +35,6 @@ class RegisterViewModel(
 
     private val _changeComment_2 = MutableLiveData<String>()
     val changeComment2: LiveData<String> get() = _changeComment_2
-
-    private val _toastMessage = MutableLiveData<String>()
-    val toastMessage: LiveData<String> get() = _toastMessage
-
 
     private fun leaveData() {
         with(sharedPrefenceStorage) {
@@ -74,12 +64,28 @@ class RegisterViewModel(
         } else leaveData()
     }
 
-    fun editPassword(){
-        if(userPassword.value == userRePassword.value){
-            _finishRegister.value!!
+    fun finishRegister() {
+        val userEmail = sharedPrefenceStorage.getInfo("userEmail")
+        val userName = sharedPrefenceStorage.getInfo("userName")
+        val userPhonenumber = sharedPrefenceStorage.getInfo("userPhone")
+
+        if (userPassword.value == userRePassword.value) {
+            signApiImpl.registerApi(RegisterRequest(sharedPrefenceStorage.getInfo(userName),
+                sharedPrefenceStorage.getInfo(userEmail),
+                sharedPrefenceStorage.getInfo(userPhonenumber), userPassword.value!!))
+                .subscribe { subscribe ->
+                    when (subscribe.code()) {
+                        201 -> {
+                            _finishRegister.value = true
+                        }
+                        401 -> {
+                            _changeComment_2.value = "이메일 인증을 하지 않았습니다"
+                        }
+                        else ->
+                            _changeComment_2.value = "회원가입에 실패하였습니다"
+                    }
+                }
         }
-        else if(userPassword.value == userRePassword.value) {
-            _changeComment_2.value = "비밀번호가 일치하지 않습니다"
-        }
+        _changeComment_2.value = "작성 비밀번호가 일치하지 않습니다"
     }
 }
