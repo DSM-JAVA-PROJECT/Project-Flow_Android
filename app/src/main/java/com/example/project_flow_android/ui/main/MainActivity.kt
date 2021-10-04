@@ -22,6 +22,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
+
+        observerEvent()
     }
 
 
@@ -40,7 +42,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             vm.tabSelectedItem.value = item.itemId
             true
         }
-    override fun observeEvent() {
+    fun observerEvent() {
         vm.run {
             tabSelectedItem.observe(this@MainActivity, { id ->
                 when (id) {
