@@ -21,12 +21,20 @@ class EditPasswordActivity : BaseActivity<ActivityEditPasswordBinding>(R.layout.
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding.registerBtn.setOnClickListener{
-            val intent = Intent(this,FinishSignActivity::class.java)
-            startActivity(intent)
-        }
+        editPassword()
     }
 
+    fun editPassword(){
+        vm.run {
+            finishRegister.observe(this@EditPasswordActivity,{
+                if(it){
+                    val intent = Intent(this@EditPasswordActivity,FinishSignActivity::class.java)
+                    startActivity(intent)
+                    binding.commentTv.text = changeComment2.value
+                }
+                binding.commentTv.text = changeComment2.value
+            })
 
+        }
+    }
 }
