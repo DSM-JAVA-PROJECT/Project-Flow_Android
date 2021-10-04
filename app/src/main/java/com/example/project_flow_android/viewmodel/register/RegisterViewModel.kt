@@ -23,7 +23,9 @@ class RegisterViewModel(
     val userPhone = MutableLiveData<String>()
     val userPassword = MutableLiveData<String>()
     val userRePassword = MutableLiveData<String>()
-    val verifyCode = MutableLiveData<String>()
+
+    private val _finishRegister = MutableLiveData(false)
+    val finishRegister: LiveData<Boolean> get() = _finishRegister
 
     private val _goLogin = MutableLiveData<String>()
     val goLogin: LiveData<String> get() = _goLogin
@@ -70,5 +72,14 @@ class RegisterViewModel(
         } else if (userName.value == null) {
             _changeComment.value = "이름을 입력해주세요"
         } else leaveData()
+    }
+
+    fun editPassword(){
+        if(userPassword.value == userRePassword.value){
+            _finishRegister.value!!
+        }
+        else if(userPassword.value == userRePassword.value) {
+            _changeComment_2.value = "비밀번호가 일치하지 않습니다"
+        }
     }
 }
