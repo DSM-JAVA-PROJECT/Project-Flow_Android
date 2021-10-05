@@ -1,7 +1,7 @@
 package com.example.project_flow_android.data.remote
 
 import com.example.project_flow_android.feature.CertificationRequest
-import com.example.project_flow_android.feature.CertificationResponse
+import com.example.project_flow_android.feature.PostCertificationRequest
 import com.example.project_flow_android.network.ApiProvider
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.annotations.NonNull
@@ -12,7 +12,7 @@ import retrofit2.Response
 class CertificationApiImpl {
     private fun providerSignApi(): CertificationApi = ApiProvider.RetroFitBuilder.create(CertificationApi::class.java)
 
-    fun checkCertification(request: CertificationResponse): @NonNull Single<Response<Void>> =
+    fun checkCertification(request: PostCertificationRequest): @NonNull Single<Response<Void>> =
         providerSignApi().checkCertification(request)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())

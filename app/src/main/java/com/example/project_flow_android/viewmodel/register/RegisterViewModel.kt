@@ -23,13 +23,9 @@ class RegisterViewModel(
     val userPhone = MutableLiveData<String>()
     val userPassword = MutableLiveData<String>()
     val userRePassword = MutableLiveData<String>()
-    val verifyCode = MutableLiveData<String>()
 
-    private val _goLogin = MutableLiveData<String>()
-    val goLogin: LiveData<String> get() = _goLogin
-
-    private val _checkRegister = MutableLiveData(false)
-    val checkRegister: LiveData<Boolean> get() = _checkRegister
+    private val _finishRegister = MutableLiveData(false)
+    val finishRegister: LiveData<Boolean> get() = _finishRegister
 
     private val _nextRegister = MutableLiveData(false)
     val nextRegister: LiveData<Boolean> get() = _nextRegister
@@ -40,10 +36,6 @@ class RegisterViewModel(
     private val _changeComment_2 = MutableLiveData<String>()
     val changeComment2: LiveData<String> get() = _changeComment_2
 
-    private val _toastMessage = MutableLiveData<String>()
-    val toastMessage: LiveData<String> get() = _toastMessage
-
-
     private fun leaveData() {
         with(sharedPrefenceStorage) {
             saveInfo(userName.value!!, "userName")
@@ -52,7 +44,6 @@ class RegisterViewModel(
         }
         _nextRegister.value = true
     }
-
 
     fun addInfo() {
         if (userEmail.value == null && userPhone.value == null && userName.value == null) {
@@ -70,5 +61,29 @@ class RegisterViewModel(
         } else if (userName.value == null) {
             _changeComment.value = "이름을 입력해주세요"
         } else leaveData()
+    }
+
+    fun finishRegister() {
+        val userEmail = sharedPrefenceStorage.getInfo("userEmail")
+        val userName = sharedPrefenceStorage.getInfo("userName")
+        val userPhonenumber = sharedPrefenceStorage.getInfo("userPhone")
+
+        if (userPassword.value?.length.toString() >= 8.toString() || userPassword.value?.length.toString() < 20.toString()) {
+            if (userPassword.value!! == userRePassword.value!!) {
+                signApiImpl.registerApi(RegisterRequest(sharedPrefenceStorage.getInfo(userName),
+                    sharedPrefenceStorage.getInfo(userEmail),
+                    sharedPrefenceStorage.getInfo(userPhonenumber), userPassword.value!!))
+                    .subscribe { subscribe ->
+                        if (subscribe.isSuccessful) {
+                            _finishRegister.value = true
+                        } else {
+                            _changeComment_2.value = "회원가입에 실패하였습니다"
+                        }
+                    }
+            } else
+                _changeComment_2.value = "작성 비밀번호가 일치하지 않습니다"
+        }
+        else
+            _changeComment_2.value = "비밀번호를 8자에서 16자로 설정해주세요"
     }
 }

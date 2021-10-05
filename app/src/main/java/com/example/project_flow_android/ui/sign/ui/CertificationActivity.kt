@@ -20,10 +20,35 @@ class CertificationActivity : BaseActivity<ActivityEmailVerifyBinding>(R.layout.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.loginBtn.setOnClickListener{
-            val intent = Intent(this,EditPasswordActivity::class.java)
-            startActivity(intent)
+
+        successfulCertification()
+        vm.run {
+            secondPostCertificationCode.observe(this@CertificationActivity,{
+                binding.comment3Tv.text = changeComment3.value
+            })
+
+
         }
     }
 
+    fun successfulCertification() {
+        vm.run {
+            successfulCertification.observe(this@CertificationActivity,{
+                if(it) {
+                    val intent = Intent(this@CertificationActivity, EditPasswordActivity::class.java)
+                    startActivity(intent)
+                }
+            })
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        vm.run {
+            postCertification()
+            firstPostCertificationCode.observe(this@CertificationActivity, {
+                binding.comment3Tv.text = changeComment3.value
+            })
+        }
+    }
 }

@@ -16,6 +16,4 @@ class LoginApiImpl {
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
 
-
-
 }

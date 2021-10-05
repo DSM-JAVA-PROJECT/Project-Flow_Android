@@ -1,11 +1,10 @@
 package com.example.project_flow_android.network
 
 import com.example.project_flow_android.feature.CertificationRequest
-import com.example.project_flow_android.feature.CertificationResponse
+import com.example.project_flow_android.feature.PostCertificationRequest
 import com.example.project_flow_android.feature.LoginRequest
 import com.example.project_flow_android.feature.RegisterRequest
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.*
 
 
@@ -25,7 +24,7 @@ interface ProjectFlowAPI {
 
     //인증 코드 확인
     @POST("/email/verifyCode")
-    fun checkCertification(@Body request:CertificationResponse):Call<Unit>
+    fun checkCertification(@Body request:PostCertificationRequest):Call<Unit>
 
 
 
