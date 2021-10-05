@@ -1,9 +1,7 @@
 package com.example.project_flow_android.ui.sign.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseActivity
@@ -21,6 +19,7 @@ class EditPasswordActivity : BaseActivity<ActivityEditPasswordBinding>(R.layout.
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         editPassword()
     }
 
@@ -30,9 +29,8 @@ class EditPasswordActivity : BaseActivity<ActivityEditPasswordBinding>(R.layout.
                 if(it){
                     val intent = Intent(this@EditPasswordActivity,FinishSignActivity::class.java)
                     startActivity(intent)
-                    binding.commentTv.text = changeComment2.value
                 }
-                binding.commentTv.text = changeComment2.value
+                binding.comment2Tv.text = changeComment2.value
             })
 
         }

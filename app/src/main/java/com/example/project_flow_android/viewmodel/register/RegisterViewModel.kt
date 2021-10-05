@@ -45,7 +45,6 @@ class RegisterViewModel(
         _nextRegister.value = true
     }
 
-
     fun addInfo() {
         if (userEmail.value == null && userPhone.value == null && userName.value == null) {
             _changeComment.value = "모든 정보를 입력해주세요"
@@ -69,23 +68,22 @@ class RegisterViewModel(
         val userName = sharedPrefenceStorage.getInfo("userName")
         val userPhonenumber = sharedPrefenceStorage.getInfo("userPhone")
 
-        if (userPassword.value == userRePassword.value) {
-            signApiImpl.registerApi(RegisterRequest(sharedPrefenceStorage.getInfo(userName),
-                sharedPrefenceStorage.getInfo(userEmail),
-                sharedPrefenceStorage.getInfo(userPhonenumber), userPassword.value!!))
-                .subscribe { subscribe ->
-                    when (subscribe.code()) {
-                        201 -> {
+        if (userPassword.value?.length.toString() >= 8.toString() || userPassword.value?.length.toString() < 20.toString()) {
+            if (userPassword.value!! == userRePassword.value!!) {
+                signApiImpl.registerApi(RegisterRequest(sharedPrefenceStorage.getInfo(userName),
+                    sharedPrefenceStorage.getInfo(userEmail),
+                    sharedPrefenceStorage.getInfo(userPhonenumber), userPassword.value!!))
+                    .subscribe { subscribe ->
+                        if (subscribe.isSuccessful) {
                             _finishRegister.value = true
-                        }
-                        401 -> {
-                            _changeComment_2.value = "이메일 인증을 하지 않았습니다"
-                        }
-                        else ->
+                        } else {
                             _changeComment_2.value = "회원가입에 실패하였습니다"
+                        }
                     }
-                }
+            } else
+                _changeComment_2.value = "작성 비밀번호가 일치하지 않습니다"
         }
-        _changeComment_2.value = "작성 비밀번호가 일치하지 않습니다"
+        else
+            _changeComment_2.value = "비밀번호를 8자에서 16자로 설정해주세요"
     }
 }
