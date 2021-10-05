@@ -60,7 +60,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_gravity="center_vertical"
-            android:text="프로젝트 플로우"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/black" />
@@ -89,7 +88,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_gravity="center_vertical"
-            android:text="안병헌 이은별 이주열 홍정현"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/black" />
@@ -101,9 +99,11 @@
         android:layout_height="55dp"
         android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal"
+        android:gravity="center"
         android:text="@string/chat_create_start"
         android:textSize="16sp"
         android:textColor="@color/white"
+        android:backgroundTint="@color/color_gray"
         android:fontFamily="@font/font_nanumgothic_bold"/>
     
 </LinearLayout>
