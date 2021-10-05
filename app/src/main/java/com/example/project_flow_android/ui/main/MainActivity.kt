@@ -10,6 +10,7 @@ import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseActivity
 import com.example.project_flow_android.databinding.ActivityMainBinding
 import com.example.project_flow_android.ui.chat.fragment.ChatFragment
+import com.example.project_flow_android.ui.chat.fragment.ChatListFragment
 import com.example.project_flow_android.ui.flow.FlowFragment
 import com.example.project_flow_android.ui.mypage.MyPageFragment
 import com.example.project_flow_android.viewmodel.MainViewModel
@@ -26,9 +27,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         observerEvent()
     }
 
+    override fun onStart() {
+        super.onStart()
+        initFragment()
+    }
+
 
     private val flowFragment = FlowFragment()
-    private val chatFragment = ChatFragment()
+    private val chatFragment = ChatListFragment()
     private val myPageFragment = MyPageFragment()
 
     private fun changeFragment(fragment: Fragment) {
@@ -42,6 +48,25 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             vm.tabSelectedItem.value = item.itemId
             true
         }
+
+    private fun initFragment() {
+        supportFragmentManager.beginTransaction().run {
+            add(R.id.main_container, flowFragment)
+            add(R.id.main_container, chatFragment)
+            add(R.id.main_container, myPageFragment)
+        }.commit()
+        resetFragment()
+    }
+
+    private fun resetFragment() {
+        supportFragmentManager.beginTransaction().run {
+            hide(flowFragment)
+            hide(chatFragment)
+            hide(myPageFragment)
+        }.commit()
+        changeFragment(vm.activeFragment ?: flowFragment)
+    }
+
     fun observerEvent() {
         vm.run {
             tabSelectedItem.observe(this@MainActivity, { id ->
