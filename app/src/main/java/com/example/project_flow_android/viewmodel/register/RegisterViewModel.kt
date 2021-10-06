@@ -68,22 +68,27 @@ class RegisterViewModel(
         val userName = sharedPrefenceStorage.getInfo("userName")
         val userPhonenumber = sharedPrefenceStorage.getInfo("userPhone")
 
-        if (userPassword.value?.length.toString() >= 8.toString() || userPassword.value?.length.toString() < 20.toString()) {
+        if (userPassword.value?.length?:0 in 8..16) {
             if (userPassword.value!! == userRePassword.value!!) {
                 signApiImpl.registerApi(RegisterRequest(sharedPrefenceStorage.getInfo(userName),
                     sharedPrefenceStorage.getInfo(userEmail),
                     sharedPrefenceStorage.getInfo(userPhonenumber), userPassword.value!!))
-                    .subscribe { subscribe ->
-                        if (subscribe.isSuccessful) {
+                    .subscribe ({
+                        if (it.isSuccessful) {
                             _finishRegister.value = true
                         } else {
-                            _changeComment_2.value = "회원가입에 실패하였습니다"
+                            _changeComment_2.value = it.message()
                         }
-                    }
-            } else
+                        _changeComment_2.value = it.message()
+                    },{
+                    })
+                }else{
                 _changeComment_2.value = "작성 비밀번호가 일치하지 않습니다"
-        }
-        else
+            }
+
+            }else{
             _changeComment_2.value = "비밀번호를 8자에서 16자로 설정해주세요"
+        }
+
+         }
     }
-}
