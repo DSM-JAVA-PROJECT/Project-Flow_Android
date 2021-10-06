@@ -1,6 +1,5 @@
 package com.example.project_flow_android.network
 
-import com.example.project_flow_android.data.remote.ChatApi
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -15,6 +14,7 @@ object ApiProvider {
     private const val WRITE_TIME_OUT: Long = 15
     private const val READ_TIME_OUT: Long = 15
     private var chatRetrofitBuilder : Retrofit
+    private var chatApi : ChatApi
 
     private val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
@@ -41,8 +41,8 @@ object ApiProvider {
             .client(okHttpClient)
             .build()
 
-        chatRetrofitBuilder.create(ChatApi::class.java)
+        chatApi = chatRetrofitBuilder.create(ChatApi::class.java)
     }
 
-    fun getChatAPI() = chatRetrofitBuilder
+    fun getChatAPI() = chatApi
 }
