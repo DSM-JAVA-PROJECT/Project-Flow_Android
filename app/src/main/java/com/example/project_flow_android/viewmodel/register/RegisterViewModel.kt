@@ -77,9 +77,9 @@ class RegisterViewModel(
                         if (it.isSuccessful) {
                             _finishRegister.value = true
                         } else {
-                            _changeComment_2.value = it.message()
+                            _changeComment_2.value =  it.body().toString()
                         }
-                        _changeComment_2.value = it.message()
+                        _changeComment_2.value = "회원가입에 실패하였습니다"
                     },{
                     })
                 }else{
