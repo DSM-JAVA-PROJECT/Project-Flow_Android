@@ -6,7 +6,7 @@ import com.example.project_flow_android.network.SafeApiRequest
 import retrofit2.Response
 
 class ChatRepositoryImpl : ChatRepository, SafeApiRequest() {
-    override suspend fun getProjectUser(projectId: String): Response<ProjectMemberResponse> {
-        return safeApiCall { ApiProvider.getChatAPI().getProjectUser(projectId) }
+    override suspend fun getProjectUser(header: String, projectId: String): Response<ProjectMemberResponse> {
+        return safeApiCall { ApiProvider.getChatAPI().getProjectUser(header, projectId) }
     }
 }

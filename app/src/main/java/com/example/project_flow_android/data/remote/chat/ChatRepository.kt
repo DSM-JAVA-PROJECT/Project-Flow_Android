@@ -4,5 +4,5 @@ import com.example.project_flow_android.data.model.sign.chat.ProjectMemberRespon
 import retrofit2.Response
 
 interface ChatRepository{
-    suspend fun getProjectUser(projectId: String) : Response<ProjectMemberResponse>
+    suspend fun getProjectUser(header:String, projectId: String) : Response<ProjectMemberResponse>
 }
