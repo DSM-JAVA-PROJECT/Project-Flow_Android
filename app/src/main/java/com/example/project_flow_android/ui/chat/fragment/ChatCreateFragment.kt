@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.project_flow_android.R
+import com.example.project_flow_android.viewmodel.chat.ChatViewModel
+import kotlinx.android.synthetic.main.fragment_chat_create.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChatCreateFragment : Fragment() {
-
+    val chatViewModel : ChatViewModel by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -20,6 +23,8 @@ class ChatCreateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        chat_create_btn.setOnClickListener{
+            chatViewModel.createRoom()
+        }
     }
 }

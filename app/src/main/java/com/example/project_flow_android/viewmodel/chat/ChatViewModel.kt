@@ -10,18 +10,14 @@ import ua.naiksoftware.stomp.dto.StompHeader
 
 class ChatViewModel : ViewModel() {
     private val TAG = "StompClient"
-    private val URL = "ws://54.180.224.67:8080/websocket"
-    private val access_token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzI3ODUyOTAsImV4cCI6MTYzMjc4NTg5MCwiaWQiOnsidGltZXN0YW1wIjoxNjMyMzYxNjgzLCJkYXRlIjoxNjMyMzYxNjgzMDAwfSwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.mKEokLH-nqfv-jMho9e2RtMxCXTVX6rLDQrP5AjfbK0"
+    private val URL = "ws://54.180.224.67:8080/wxebsocket"
+    private val access_token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzM1MDA2NzcsImV4cCI6MTYzMzUwMTI3NywiaWQiOiI2MTVkM2UwMmUyMDFjYzI1OThlNWVkOWUiLCJlbWFpbCI6ImFiaDA5MjBvbmVAZ21haWwuY29tIn0.s-V-tDVXGaJ31AN060iP5zMtfEYTFKM4BW5lpvXjGYc"
     private val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, URL)
     private var chatRoomId = 0
-    private var projectId = 0
+    private var projectId = "615c083a91bc3016ebf4f5af"
 
     fun connect(){
         Thread {
-            stompClient.topic("/topic/chatroom/$projectId").subscribe ({
-                Log.d(TAG, it.payload)
-            }) { throwable -> Log.e(TAG, "Error on subscribe topic", throwable)}
-
             val headerList = arrayListOf<StompHeader>()
             headerList.add(StompHeader("Authorization", access_token))
 
@@ -52,6 +48,11 @@ class ChatViewModel : ViewModel() {
         }
     }
 
+    @SuppressLint("CheckResult")
+    fun createRoom(){
+        stompClient.send("/create/chatroom/$projectId").subscribe()
+    }
+
     fun disconnect(){
         stompClient.disconnect()
     }
@@ -60,7 +61,7 @@ class ChatViewModel : ViewModel() {
         this.chatRoomId = chatRoomId
     }
 
-    fun setProjectId(projectId: Int){
+    fun setProjectId(projectId: String){
         this.projectId = projectId
     }
 }
