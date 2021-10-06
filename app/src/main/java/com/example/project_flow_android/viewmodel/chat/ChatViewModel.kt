@@ -2,7 +2,12 @@ package com.example.project_flow_android.viewmodel.chat
 
 import android.annotation.SuppressLint
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.project_flow_android.data.model.sign.chat.ProjectMemberResponse
+import com.example.project_flow_android.data.remote.chat.ChatRepositoryImpl
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 import ua.naiksoftware.stomp.Stomp
 import ua.naiksoftware.stomp.dto.LifecycleEvent
@@ -10,11 +15,15 @@ import ua.naiksoftware.stomp.dto.StompHeader
 
 class ChatViewModel : ViewModel() {
     private val TAG = "StompClient"
-    private val URL = "ws://54.180.224.67:8080/wxebsocket"
-    private val access_token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzM1MDA2NzcsImV4cCI6MTYzMzUwMTI3NywiaWQiOiI2MTVkM2UwMmUyMDFjYzI1OThlNWVkOWUiLCJlbWFpbCI6ImFiaDA5MjBvbmVAZ21haWwuY29tIn0.s-V-tDVXGaJ31AN060iP5zMtfEYTFKM4BW5lpvXjGYc"
+    private val URL = "ws://54.180.224.67:8080/websocket"
+    private val access_token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzM1MTA5ODMsImlkIjoiNjE1ZDNlMDJlMjAxY2MyNTk4ZTVlZDllIiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.v4-p1mdDS3fvk56TEKoS1KbCj7FFMclGihC3abYcICY"
     private val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, URL)
     private var chatRoomId = 0
-    private var projectId = "615c083a91bc3016ebf4f5af"
+    private var projectId = "615d3e2ae201cc2598e5ed9f"
+
+    private val chatRepository = ChatRepositoryImpl()
+    private val _chatLiveData : MutableLiveData<ProjectMemberResponse> = MutableLiveData()
+    val chatLiveData = _chatLiveData
 
     fun connect(){
         Thread {
@@ -55,6 +64,17 @@ class ChatViewModel : ViewModel() {
 
     fun disconnect(){
         stompClient.disconnect()
+    }
+
+    fun getProjectUser(){
+        viewModelScope.launch {
+            val response = chatRepository.getProjectUser(access_token ,projectId)
+            if(response.isSuccessful){
+                if(response.code() == 200){
+                    _chatLiveData.postValue(response.body())
+                }
+            }
+        }
     }
 
     fun setChatRoomId(chatRoomId: Int){
