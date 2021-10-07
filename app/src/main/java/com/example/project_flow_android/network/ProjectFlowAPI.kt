@@ -9,6 +9,9 @@ import retrofit2.http.*
 
 interface ProjectFlowAPI {
 
+    @POST("/auth/join")
+    fun register(@Body request:RegisterRequest): Single<Response<Void>>
+
     @POST("/auth/login")
     fun login(@Body request: LoginRequest): Single<Response<LoginResponse>>
 
@@ -18,7 +21,5 @@ interface ProjectFlowAPI {
     @POST("/email/verifyCode")
     fun checkCertification(@Body request: PostCertificationRequest): Single<Response<Void>>
 
-    @POST("/auth/join")
-    fun register(@Body request:RegisterRequest): Single<Response<Void>>
 
 }
