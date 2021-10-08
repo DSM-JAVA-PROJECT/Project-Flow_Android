@@ -5,7 +5,7 @@ data class ProjectMemberResponse(
 ) {
     data class User(
         val name : String,
-        val id : String,
-        val projectImage: String
+        val email : String,
+        val profileImage: String
     )
 }

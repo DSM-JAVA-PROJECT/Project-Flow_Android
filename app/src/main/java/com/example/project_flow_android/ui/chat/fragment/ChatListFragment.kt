@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_chat_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChatListFragment : Fragment() {
-    val chatViewModel : ChatViewModel by viewModel()
+    private val chatViewModel : ChatViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
