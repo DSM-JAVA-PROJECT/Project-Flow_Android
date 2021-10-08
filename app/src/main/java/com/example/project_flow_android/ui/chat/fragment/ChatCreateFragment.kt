@@ -16,6 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ChatCreateFragment : Fragment() {
     private val chatViewModel : ChatViewModel by viewModel()
     private val userState = HashMap<Int, Boolean>()
+    private val userList = ArrayList<String>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,13 +64,21 @@ class ChatCreateFragment : Fragment() {
 
     private fun itemSelected(v: View, position: Int){
         userState[position] = true
+        userList.add(v.create_user_item_name_tv.text.toString())
+        val user = userList.joinToString(" ")
+
         v.create_user_cv.setBackgroundColor(resources.getColor(R.color.color_flow, null))
         v.create_user_item_name_tv.setTextColor(resources.getColor(R.color.white, null))
+        chat_create_user_name_tv.text = user
     }
 
     private fun itemDeselected(v: View, position: Int){
         userState[position] = false
+        userList.remove(v.create_user_item_name_tv.text.toString())
+        val user = userList.joinToString(" ")
+
         v.create_user_cv.setBackgroundColor(resources.getColor(R.color.white, null))
         v.create_user_item_name_tv.setTextColor(resources.getColor(R.color.black, null))
+        chat_create_user_name_tv.text = user
     }
 }
