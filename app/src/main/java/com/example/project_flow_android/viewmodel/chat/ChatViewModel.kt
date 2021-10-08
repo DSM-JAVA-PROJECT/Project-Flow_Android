@@ -27,8 +27,9 @@ class ChatViewModel : ViewModel() {
 
     fun connect(){
         Thread {
-            val headerList = arrayListOf<StompHeader>()
+            val headerList = ArrayList<StompHeader>()
             headerList.add(StompHeader("Authorization", access_token))
+            stompClient.connect(headerList)
 
             stompClient.lifecycle().subscribe{
                 when(it.type){
@@ -39,8 +40,6 @@ class ChatViewModel : ViewModel() {
                         "stomp failed server heartbeat")
                 }
             }
-
-            stompClient.connect(headerList)
         }.start()
     }
 
@@ -51,10 +50,10 @@ class ChatViewModel : ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun subscribe(){
-        stompClient.topic("/chat/$chatRoomId/send").subscribe{
+    fun subscribe(destinationPath: String){
+        stompClient.topic(destinationPath).subscribe({
             Log.i(TAG, it.payload)
-        }
+        }) {throwable -> Log.e(TAG, "Error on subscribe topic", throwable)}
     }
 
     @SuppressLint("CheckResult")
@@ -86,4 +85,6 @@ class ChatViewModel : ViewModel() {
     fun setProjectId(projectId: String){
         this.projectId = projectId
     }
+
+    fun getProjectId() = projectId
 }
