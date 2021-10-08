@@ -58,8 +58,10 @@ class ChatViewModel : ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun createRoom(){
-        stompClient.send("/create/chatroom/$projectId").subscribe()
+    fun createRoom(emails : ArrayList<String>){
+        val data = JSONObject()
+        data.put("emails", emails)
+        stompClient.send("/create/chatroom/$projectId", data.toString()).subscribe()
     }
 
     fun disconnect(){
