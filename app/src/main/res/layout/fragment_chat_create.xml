@@ -71,7 +71,7 @@
         android:layout_height="55dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/color_gray"
+        android:backgroundTint="@color/color_flow"
         android:fontFamily="@font/font_nanumgothic_bold"
         android:gravity="center"
         android:text="@string/chat_create_start"
