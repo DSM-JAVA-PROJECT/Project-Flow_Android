@@ -2,7 +2,6 @@ package com.example.project_flow_android.data.remote
 
 import com.example.project_flow_android.feature.*
 import com.example.project_flow_android.network.ApiProvider
-import com.example.project_flow_android.network.ProjectFlowAPI
 import com.google.gson.JsonObject
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.annotations.NonNull
@@ -12,7 +11,8 @@ import retrofit2.Response
 
 class SignApiImpl {
 
-    private fun providerSignApi(): ProjectFlowAPI = ApiProvider.RetroFitBuilder.create(ProjectFlowAPI::class.java)
+    private fun providerSignApi(): SignApi = ApiProvider.RetroFitBuilder.create(SignApi::class.java)
+
 
     fun registerApi(request: RegisterRequest):@NonNull Single<Response<Void>> = providerSignApi().register(request)
         .observeOn(AndroidSchedulers.mainThread())
