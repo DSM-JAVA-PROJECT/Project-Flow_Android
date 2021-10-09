@@ -21,5 +21,8 @@ interface ProjectFlowAPI {
     @POST("/email/verifyCode")
     fun checkCertification(@Body request: PostCertificationRequest): Single<Response<Void>>
 
+    @POST("/project")
+    fun addProject(@Body request: AddProjectRequest): Single<Response<Void>>
+
 
 }
