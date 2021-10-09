@@ -70,10 +70,10 @@ class CertificationViewModel(
                         _successfulCertification.value = true
                     }
                     400 -> {
-                        _changeComment_3.value = "인증번호가 일치하지 않습니다"
+                        _changeComment_3.value = subscribe.body().toString()
                     }
                     else -> {
-                        _changeComment_3.value = "인증번호가 일치하지 않습니다"
+                        _changeComment_3.value = subscribe.body().toString()
                     }
                 }
                 _changeComment_3.value = "인증을 다시 시도해주세요"

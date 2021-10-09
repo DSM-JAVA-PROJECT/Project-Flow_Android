@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.example.project_flow_android.viewmodel.flow.ProjectViewModel"
+            />
+    </data>
+
+<FrameLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,3 +24,4 @@
         android:layout_gravity="center"/>
 
 </FrameLayout>
+</layout>

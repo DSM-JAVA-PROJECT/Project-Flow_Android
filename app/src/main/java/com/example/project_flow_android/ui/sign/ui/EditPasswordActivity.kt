@@ -23,7 +23,7 @@ class EditPasswordActivity : BaseActivity<ActivityEditPasswordBinding>(R.layout.
         editPassword()
     }
 
-    fun editPassword(){
+    private fun editPassword(){
         vm.run {
             finishRegister.observe(this@EditPasswordActivity,{
                 if(it){

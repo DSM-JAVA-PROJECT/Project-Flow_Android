@@ -23,7 +23,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         successfulLogin()
     }
 
-    fun successfulLogin() {
+    private fun successfulLogin() {
         vm.run {
            successLogin.observe(this@LoginActivity,{
                if(it) {

@@ -31,7 +31,7 @@ class CertificationActivity : BaseActivity<ActivityEmailVerifyBinding>(R.layout.
         }
     }
 
-    fun successfulCertification() {
+    private fun successfulCertification() {
         vm.run {
             successfulCertification.observe(this@CertificationActivity,{
                 if(it) {
