@@ -1,4 +1,9 @@
 package com.example.project_flow_android.viewmodel.flow
 
-class FlowViewModel {
+import androidx.lifecycle.ViewModel
+
+class FlowViewModel():ViewModel() {
+
+
+
 }
