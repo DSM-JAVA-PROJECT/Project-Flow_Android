@@ -27,6 +27,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         observerEvent()
     }
 
+    override fun onBackPressed() {
+        // TODO: 2021/10/06  super.onBackPressed()
+    }
+
     override fun onStart() {
         super.onStart()
         initFragment()
