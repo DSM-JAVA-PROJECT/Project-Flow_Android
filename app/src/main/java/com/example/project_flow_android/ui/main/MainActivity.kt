@@ -71,7 +71,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         changeFragment(vm.activeFragment ?: flowFragment)
     }
 
-    fun observerEvent() {
+    private fun observerEvent() {
         vm.run {
             tabSelectedItem.observe(this@MainActivity, { id ->
                 when (id) {

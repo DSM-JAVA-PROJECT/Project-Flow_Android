@@ -8,5 +8,5 @@ data class AddProjectRequest(
     val startDate: String,
     val endDate: String,
     val file: File,
-    val emails: Array<String>,
+    val emails: Array<String>
 )
