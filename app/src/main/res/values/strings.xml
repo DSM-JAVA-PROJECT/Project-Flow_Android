@@ -70,6 +70,10 @@
     <string name="empty_project">현재 프로젝트가 하나도 없습니다</string>
     <string name="who_project">님의 프로젝트</string>
     <string name="make_project">프로젝트 생성</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="editname">프로젝트명</string>
+    <string name="editday">시작날</string>
+    <string name="editfinal">마감날짜</string>
+    <string name="add_member">팀원 추가하기</string>
+    <string name="project_image">프로젝트 이미지 추가</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
