@@ -30,11 +30,6 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(R.layout.activity
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-
-    }
-
     fun next() {
         vm.run {
             nextRegister.observe(this@RegisterActivity, {
