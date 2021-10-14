@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.project_flow_android.data.model.sign.chat.ProjectMemberResponse
+import com.example.project_flow_android.data.model.sign.chat.RoomListResponse
 import com.example.project_flow_android.data.remote.chat.ChatRepositoryImpl
 import kotlinx.coroutines.launch
 import org.json.JSONObject
@@ -15,7 +16,7 @@ import ua.naiksoftware.stomp.dto.StompHeader
 
 class ChatViewModel : ViewModel() {
     private val TAG = "StompClient"
-    private val URL = "ws://54.180.224.67:8080/websocket"
+    private val URL = "ws://65c3-223-39-206-162.ngrok.io/websocket"
     private val access_token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzM1MTA5ODMsImlkIjoiNjE1ZDNlMDJlMjAxY2MyNTk4ZTVlZDllIiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.v4-p1mdDS3fvk56TEKoS1KbCj7FFMclGihC3abYcICY"
     private val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, URL)
     private var chatRoomId = 0
@@ -23,7 +24,9 @@ class ChatViewModel : ViewModel() {
 
     private val chatRepository = ChatRepositoryImpl()
     private val _chatLiveData : MutableLiveData<ProjectMemberResponse> = MutableLiveData()
+    private val _chatRoomLiveData : MutableLiveData<RoomListResponse> = MutableLiveData()
     val chatLiveData = _chatLiveData
+    val chatRoomLiveData = _chatRoomLiveData
 
     fun connect(){
         Thread {
@@ -68,10 +71,21 @@ class ChatViewModel : ViewModel() {
 
     fun getProjectUser(){
         viewModelScope.launch {
-            val response = chatRepository.getProjectUser(access_token ,projectId)
+            val response = chatRepository.getProjectUser(access_token, projectId)
             if(response.isSuccessful){
                 if(response.code() == 200){
                     _chatLiveData.postValue(response.body())
+                }
+            }
+        }
+    }
+
+    fun getRoomList(){
+        viewModelScope.launch {
+            val response = chatRepository.getRoomList(access_token, projectId)
+            if(response.isSuccessful){
+                if(response.code() == 200){
+                    _chatRoomLiveData.postValue(response.body())
                 }
             }
         }
