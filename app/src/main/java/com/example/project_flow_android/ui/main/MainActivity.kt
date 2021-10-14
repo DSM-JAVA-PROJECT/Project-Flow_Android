@@ -11,6 +11,7 @@ import com.example.project_flow_android.base.BaseActivity
 import com.example.project_flow_android.databinding.ActivityMainBinding
 import com.example.project_flow_android.ui.chat.fragment.ChatFragment
 import com.example.project_flow_android.ui.chat.fragment.ChatListFragment
+import com.example.project_flow_android.ui.flow.DefaultProjectFragment
 import com.example.project_flow_android.ui.flow.FlowFragment
 import com.example.project_flow_android.ui.mypage.MyPageFragment
 import com.example.project_flow_android.viewmodel.MainViewModel
@@ -37,7 +38,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
 
-    private val flowFragment = FlowFragment()
+    private val flowFragment = DefaultProjectFragment()
     private val chatFragment = ChatListFragment()
     private val myPageFragment = MyPageFragment()
 
