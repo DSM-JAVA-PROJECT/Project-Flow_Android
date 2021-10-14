@@ -49,6 +49,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:fontFamily="@font/nanumgothic_regular"
         android:text="@string/comment_1"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -58,6 +59,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:fontFamily="@font/nanumgothic_regular"
         android:text="@string/comment_2"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -75,5 +77,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="200dp" />
+        app:layout_constraintGuide_begin="160dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
