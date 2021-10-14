@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.project_flow_android.R
 
-class DefaultProjectFragment : Fragment() {
+class AddProjectFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_default_project, container, false)
+        return inflater.inflate(R.layout.fragment_add_project, container, false)
     }
 
 }

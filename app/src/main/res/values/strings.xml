@@ -76,4 +76,6 @@
     <string name="add_member">팀원 추가하기</string>
     <string name="project_image">프로젝트 이미지 추가</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_main_image">프로젝트 대표 이미지를 넣어주세요</string>
+    <string name="upload_project_name">프로젝트명을 입력해주세요</string>
 </resources>
