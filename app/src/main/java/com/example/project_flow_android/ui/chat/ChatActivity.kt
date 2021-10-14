@@ -18,7 +18,6 @@ class ChatActivity : AppCompatActivity() {
         fragmentTransaction.replace(R.id.chat_frame_container, ChatListFragment()).commit()
 
         chatViewModel.connect()
-        chatViewModel.subscribe("/${chatViewModel.getProjectId()}/chatroom")
     }
 
     fun replace(fragment: Fragment) {

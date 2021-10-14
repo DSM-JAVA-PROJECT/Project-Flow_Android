@@ -29,17 +29,16 @@ class ChatViewModel : ViewModel() {
         Thread {
             val headerList = ArrayList<StompHeader>()
             headerList.add(StompHeader("Authorization", access_token))
-            stompClient.connect(headerList)
 
             stompClient.lifecycle().subscribe{
                 when(it.type){
                     LifecycleEvent.Type.OPENED -> Log.d(TAG, "stomp connection opened")
                     LifecycleEvent.Type.ERROR -> Log.d(TAG, "stomp connection error")
                     LifecycleEvent.Type.CLOSED -> Log.d(TAG, "stomp connection closed")
-                    LifecycleEvent.Type.FAILED_SERVER_HEARTBEAT -> Log.d(TAG,
-                        "stomp failed server heartbeat")
+                    LifecycleEvent.Type.FAILED_SERVER_HEARTBEAT -> Log.d(TAG, "stomp failed server heartbeat")
                 }
             }
+            stompClient.connect(headerList)
         }.start()
     }
 
@@ -53,7 +52,7 @@ class ChatViewModel : ViewModel() {
     fun subscribe(destinationPath: String){
         stompClient.topic(destinationPath).subscribe({
             Log.i(TAG, it.payload)
-        }) {throwable -> Log.e(TAG, "Error on subscribe topic", throwable)}
+        }) {throwable -> Log.e(TAG,"Error on subscribe topic", throwable)}
     }
 
     @SuppressLint("CheckResult")
