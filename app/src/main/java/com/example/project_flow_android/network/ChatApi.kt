@@ -13,7 +13,7 @@ interface ChatApi {
         @Header("Authorization") header : String,
         @Path("projectId") projectId : String) : Response<ProjectMemberResponse>
 
-    @GET("/{projectId}")
+    @GET("/{projectId}/rooms")
     suspend fun getRoomList(
         @Header("Authorization") header: String,
         @Path("projectId") projectId: String) : Response<RoomListResponse>
