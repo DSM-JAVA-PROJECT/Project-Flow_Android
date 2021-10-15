@@ -8,7 +8,4 @@ import android.view.ViewGroup
 import com.example.project_flow_android.R
 
 
-class MyPageFragment : Fragment() {
-
-
-}
+class MyPageFragment : Fragment()
