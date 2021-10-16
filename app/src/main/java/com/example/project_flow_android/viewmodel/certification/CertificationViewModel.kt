@@ -74,7 +74,7 @@ class CertificationViewModel(
         val request = RegisterRequest(leaveUserName,leaveUserEmail,leaveUserPhone,leaveUserPassword)
         signApiImpl.registerApi(request).subscribe{response ->
             when(response.code()){
-                200 -> {
+                201 -> {
                     _successfulCertification.value = true
                 }
                 400 -> {
