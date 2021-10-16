@@ -23,11 +23,11 @@ class EditPasswordActivity : BaseActivity<ActivityEditPasswordBinding>(R.layout.
         editPassword()
     }
 
-    fun editPassword(){
+    private fun editPassword(){
         vm.run {
             finishRegister.observe(this@EditPasswordActivity,{
                 if(it){
-                    val intent = Intent(this@EditPasswordActivity,FinishSignActivity::class.java)
+                    val intent = Intent(this@EditPasswordActivity,CertificationActivity::class.java)
                     startActivity(intent)
                 }
                 binding.comment2Tv.text = changeComment2.value
