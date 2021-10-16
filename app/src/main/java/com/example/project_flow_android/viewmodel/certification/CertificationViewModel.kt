@@ -5,11 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.data.remote.CertificationApiImpl
+import com.example.project_flow_android.data.remote.SignApiImpl
 import com.example.project_flow_android.feature.CertificationRequest
 import com.example.project_flow_android.feature.PostCertificationRequest
+import com.example.project_flow_android.feature.RegisterRequest
 
 class CertificationViewModel(
     private val certificationApiImpl: CertificationApiImpl,
+    private val signApiImpl: SignApiImpl,
     private val sharedPreferenceStorage: SharedPreferenceStorage,
 ) : ViewModel() {
 
@@ -62,12 +65,35 @@ class CertificationViewModel(
             }
     }
 
+    fun doRegister(){
+        val leaveUserName = sharedPreferenceStorage.getInfo("userName")
+        val leaveUserEmail = sharedPreferenceStorage.getInfo("userEmail")
+        val leaveUserPassword = sharedPreferenceStorage.getInfo("userPassword")
+        val leaveUserPhone = sharedPreferenceStorage.getInfo("userPhone")
+
+        val request = RegisterRequest(leaveUserName,leaveUserEmail,leaveUserPhone,leaveUserPassword)
+        signApiImpl.registerApi(request).subscribe{response ->
+            when(response.code()){
+                201 -> {
+                    _successfulCertification.value = true
+                }
+                400 -> {
+                    _changeComment_3.value = "이미 가입된 이메일 입니다😮‍💨"
+                }
+                else -> {
+                    _changeComment_3.value ="회원가입에 실패하였습니다😮‍💨"
+                }
+            }
+        }
+
+    }
+
     fun checkCertifcation() {
         certificationApiImpl.checkCertification(PostCertificationRequest(certificationCode.value!!))
             .subscribe { subscribe ->
                 when (subscribe.code()) {
                     200 -> {
-                        _successfulCertification.value = true
+                        doRegister()
                     }
                     400 -> {
                         _changeComment_3.value = subscribe.body().toString()

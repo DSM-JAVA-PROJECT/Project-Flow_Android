@@ -35,7 +35,7 @@ class CertificationActivity : BaseActivity<ActivityEmailVerifyBinding>(R.layout.
         vm.run {
             successfulCertification.observe(this@CertificationActivity,{
                 if(it) {
-                    val intent = Intent(this@CertificationActivity, EditPasswordActivity::class.java)
+                    val intent = Intent(this@CertificationActivity, FinishSignActivity::class.java)
                     startActivity(intent)
                 }
             })

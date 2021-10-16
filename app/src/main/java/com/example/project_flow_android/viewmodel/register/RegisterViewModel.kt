@@ -8,8 +8,7 @@ import com.example.project_flow_android.data.remote.SignApiImpl
 import com.example.project_flow_android.feature.RegisterRequest
 
 class RegisterViewModel(
-    private val signApiImpl: SignApiImpl,
-    private val sharedPrefenceStorage: SharedPreferenceStorage,
+    private val sharedPrefenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
 
     val userName = MutableLiveData<String>()
@@ -57,30 +56,19 @@ class RegisterViewModel(
         } else leaveData()
     }
 
-    fun finishRegister() {
-        val userEmail = sharedPrefenceStorage.getInfo("userEmail")
-        val userName = sharedPrefenceStorage.getInfo("userName")
-        val userPhonenumber = sharedPrefenceStorage.getInfo("userPhone")
 
-        if (userPassword.value?.length ?: 0 in 8..16) {
-            if (userPassword.value!! == userRePassword.value!!) {
-                signApiImpl.registerApi(RegisterRequest(sharedPrefenceStorage.getInfo(userName),
-                    sharedPrefenceStorage.getInfo(userEmail),
-                    sharedPrefenceStorage.getInfo(userPhonenumber), userPassword.value!!))
-                    .subscribe({
-                        if (it.isSuccessful) {
-                            _finishRegister.value = true
-                        } else {
-                            _changeComment_2.value = it.body().toString()
-                        }
-                    }, {
-                        _changeComment_2.value = "회원가입에 실패하였습니다"
-                    })
+    fun leavePassword() {
+        if (userPassword.value == userRePassword.value) {
+            if (userPassword.value?.length ?: 0 in 8..16) {
+                with(sharedPrefenceStorage) {
+                    saveInfo(userPassword.value!!, "userPassword")
+                }
+                _finishRegister.value = true
             } else {
-                _changeComment_2.value = "작성 비밀번호가 일치하지 않습니다"
+                _changeComment_2.value = "비밀번호는 8~16자로 입력해주세요😳"
             }
         } else {
-            _changeComment_2.value = "비밀번호를 8자에서 16자로 설정해주세요"
+            _changeComment_2.value = "비밀번호가 일치하는지 확인해주세요😳"
         }
 
     }

@@ -37,10 +37,10 @@ class LoginViewModel(
                 sharedPreferenceStorage.saveInfo("userEmail", userEmail.value!!)
                 sharedPreferenceStorage.saveInfo("userPassword", userPassword.value!!)
             } else {
-                _changeComment.value = it.body().toString()
+                _changeComment.value = "로그인에 실패하였습니다"
             }
         }, {
-            _changeComment.value = "로그인 실패"
+            _changeComment.value = "로그인 실패하였습니다"
         })
     }
 }

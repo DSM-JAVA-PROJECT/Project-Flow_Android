@@ -193,6 +193,7 @@
             android:id="@+id/comment_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:fontFamily="@font/nanumgothic_regular"
             android:textColor="@color/red"
             app:layout_constraintBottom_toTopOf="@+id/register_btn"

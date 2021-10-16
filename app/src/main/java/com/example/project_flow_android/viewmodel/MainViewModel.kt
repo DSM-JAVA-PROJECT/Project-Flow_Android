@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.project_flow_android.R
 
-class MainViewModel ():ViewModel(){
+class MainViewModel :ViewModel(){
 
     var activeFragment: Fragment? = null
     val tabSelectedItem = MutableLiveData(R.id.menu_flow_it)
