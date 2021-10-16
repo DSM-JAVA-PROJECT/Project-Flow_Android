@@ -6,5 +6,5 @@ import org.koin.dsl.module
 
 val aboutProjectmodule = module {
     single { FlowApilmpl() }
-    single { AddProjectViewModeFactory(get()) }
+    single { AddProjectViewModeFactory(get(),get()) }
 }
