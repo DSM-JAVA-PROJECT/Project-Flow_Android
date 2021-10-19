@@ -78,4 +78,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_main_image">프로젝트 대표 이미지를 넣어주세요</string>
     <string name="upload_project_name">프로젝트명을 입력해주세요</string>
+    <string name="mypage_title">마이페이지</string>
+    <string name="change_password">비밀번호 변경</string>
+    <string name="logout">로그아웃</string>
+    <string name="my_project">나의 프로젝트</string>
+    <string name="show_all_project">나의 모든 프로젝트를 확인할 수 있습니다</string>
 </resources>
