@@ -18,11 +18,12 @@ import retrofit2.create
 
 class LoginViewModel(
     private val loginApiImpl: LoginApiImpl,
-    private val sharedPreferenceStorage: SharedPreferenceStorage,
+    private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
 
     val userEmail = MutableLiveData<String>()
     val userPassword = MutableLiveData<String>()
+    val accessToken = MutableLiveData<String>()
 
     private val _changeComment = MutableLiveData<String>()
     val changeComment: LiveData<String> get() = _changeComment

@@ -20,7 +20,8 @@ class ProjectFlowApplication : Application() {
                     successfulModule,
                     chatViewModelModule,
                     finishRegisterModule,
-                    aboutProjectmodule
+                    aboutProjectmodule,
+                    mypageModule
                 )
             )
         }
