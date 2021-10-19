@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.example.project_flow_android.viewmodel.flow.ProjectViewModel"
+            />
+    </data>
+
+<FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,23 +21,23 @@
 
         <ImageView
             android:id="@+id/imageView5"
-            android:layout_marginTop="60sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="60sp"
             android:src="@drawable/rectangle182"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/group"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-        app:layout_constraintEnd_toEndOf="@+id/imageView5"
-        app:layout_constraintStart_toStartOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/group"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+            app:layout_constraintEnd_toEndOf="@+id/imageView5"
+            app:layout_constraintStart_toStartOf="@+id/imageView5"
+            app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
         <TextView
             android:id="@+id/textView9"
@@ -61,7 +70,7 @@
                 android:fontFamily="@font/nanumgothic_regular"
                 android:hint="@string/upload_project_name"
                 android:singleLine="true"
-                android:text="@={vm.userEmail}" />
+                android:text="@={vm.projectName}"/>
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -71,8 +80,9 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:hint="@string/explain_project_im"
+            android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline14"
             app:layout_constraintTop_toBottomOf="@+id/add_project_name_tf">
@@ -83,7 +93,8 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/nanumgothic_regular"
-                android:singleLine="true" />
+                android:singleLine="true"
+               android:text="@={vm.explanation}"/>
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -119,7 +130,8 @@
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/nanumgothic_regular"
                 android:hint="@string/add_member_email"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="@={vm.explanation}"/>
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -131,10 +143,10 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginBottom="30dp"
-            android:textColor="@color/white"
             android:backgroundTint="@color/blue_main"
-            android:text="@string/make_project"
             android:fontFamily="@font/nanumgothic_regular"
+            android:text="@string/make_project"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -142,10 +154,14 @@
         </com.google.android.material.button.MaterialButton>
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/period_project_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/nanumgothic_bold"
+            android:text="@string/add_schedule_bottom_term"
+            android:textColor="@color/black"
+            android:textSize="15sp"
             app:layout_constraintStart_toStartOf="@+id/guideline14"
             app:layout_constraintTop_toBottomOf="@+id/add_project_email_tf" />
 
@@ -156,6 +172,79 @@
             android:orientation="vertical"
             app:layout_constraintGuide_begin="20dp" />
 
+        <ImageView
+            android:id="@+id/go_project_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
+            app:layout_constraintStart_toStartOf="@+id/guideline14"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/go_project_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/nanumgothic_regular"
+            android:text="@string/started_project"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/go_project_img"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/add_project_period_tf"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline14"
+            app:layout_constraintTop_toBottomOf="@+id/period_project_tv">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/add_project_period_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/nanumgothic_regular"
+                android:hint="@string/add_schedule_bottom_start"
+                android:text="@={vm.startDay}"
+                android:singleLine="true" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/add_project_period_end_tf"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/make_project_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline14"
+            app:layout_constraintTop_toBottomOf="@+id/add_project_period_tf">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/add_project_period__end_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/nanumgothic_regular"
+                android:hint="@string/add_schedule_bottom_end"
+                android:text="@={vm.endDate}"
+                android:singleLine="true" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
+</layout>
