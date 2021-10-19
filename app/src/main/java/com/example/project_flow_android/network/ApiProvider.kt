@@ -9,9 +9,12 @@ import java.util.concurrent.TimeUnit
 
 object ApiProvider {
     private const val BASE_URL: String = "http://3.36.224.130:8080"
+    private const val BASE_URL_CHAT = "http://3.36.224.130:8080"
     private const val CONNECT_TIME_OUT: Long = 15
     private const val WRITE_TIME_OUT: Long = 15
     private const val READ_TIME_OUT: Long = 15
+    private var chatRetrofitBuilder : Retrofit
+    private var chatApi : ChatApi
 
     private val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
@@ -31,4 +34,15 @@ object ApiProvider {
         addConverterFactory(GsonConverterFactory.create())
     }.build()
 
+    init {
+        chatRetrofitBuilder = Retrofit.Builder()
+            .baseUrl(BASE_URL_CHAT)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+
+        chatApi = chatRetrofitBuilder.create(ChatApi::class.java)
+    }
+
+    fun getChatAPI() = chatApi
 }

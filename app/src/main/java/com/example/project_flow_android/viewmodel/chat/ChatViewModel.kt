@@ -2,7 +2,13 @@ package com.example.project_flow_android.viewmodel.chat
 
 import android.annotation.SuppressLint
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.project_flow_android.data.model.sign.chat.ProjectMemberResponse
+import com.example.project_flow_android.data.model.sign.chat.RoomListResponse
+import com.example.project_flow_android.data.remote.chat.ChatRepositoryImpl
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 import ua.naiksoftware.stomp.Stomp
 import ua.naiksoftware.stomp.dto.LifecycleEvent
@@ -10,14 +16,22 @@ import ua.naiksoftware.stomp.dto.StompHeader
 
 class ChatViewModel : ViewModel() {
     private val TAG = "StompClient"
-    private val URL = "ws://54.180.224.67:8080/websocket"
+    private val URL = "ws://65c3-223-39-206-162.ngrok.io/websocket"
+    private val access_token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzM1MTA5ODMsImlkIjoiNjE1ZDNlMDJlMjAxY2MyNTk4ZTVlZDllIiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.v4-p1mdDS3fvk56TEKoS1KbCj7FFMclGihC3abYcICY"
     private val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, URL)
     private var chatRoomId = 0
+    private var projectId = "615d3e2ae201cc2598e5ed9f"
 
-    fun stompConnect(){
+    private val chatRepository = ChatRepositoryImpl()
+    private val _chatLiveData : MutableLiveData<ProjectMemberResponse> = MutableLiveData()
+    private val _chatRoomLiveData : MutableLiveData<RoomListResponse> = MutableLiveData()
+    val chatLiveData = _chatLiveData
+    val chatRoomLiveData = _chatRoomLiveData
+
+    fun connect(){
         Thread {
-            val headerList = arrayListOf<StompHeader>()
-            headerList.add(StompHeader("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzI2MzY1MzUsImV4cCI6MTYzMjYzNzEzNSwiaWQiOnsidGltZXN0YW1wIjoxNjMyMzYxNjgzLCJkYXRlIjoxNjMyMzYxNjgzMDAwfSwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.oYbKcXFA0z25gJJUMPM_86nSybVQqzLgbv8cG-SVbPk"))
+            val headerList = ArrayList<StompHeader>()
+            headerList.add(StompHeader("Authorization", access_token))
 
             stompClient.lifecycle().subscribe{
                 when(it.type){
@@ -28,7 +42,7 @@ class ChatViewModel : ViewModel() {
                 }
             }
             stompClient.connect(headerList)
-        }
+        }.start()
     }
 
     fun send(message: String){
@@ -38,13 +52,52 @@ class ChatViewModel : ViewModel() {
     }
 
     @SuppressLint("CheckResult")
-    fun subscribe(){
-        stompClient.topic("/chat/$chatRoomId/send").subscribe{
+    fun subscribe(destinationPath: String){
+        stompClient.topic(destinationPath).subscribe({
             Log.i(TAG, it.payload)
+        }) {throwable -> Log.e(TAG,"Error on subscribe topic", throwable)}
+    }
+
+    @SuppressLint("CheckResult")
+    fun createRoom(emails : ArrayList<String>){
+        val data = JSONObject()
+        data.put("emails", emails)
+        stompClient.send("/create/chatroom/$projectId", data.toString()).subscribe()
+    }
+
+    fun disconnect(){
+        stompClient.disconnect()
+    }
+
+    fun getProjectUser(){
+        viewModelScope.launch {
+            val response = chatRepository.getProjectUser(access_token, projectId)
+            if(response.isSuccessful){
+                if(response.code() == 200){
+                    _chatLiveData.postValue(response.body())
+                }
+            }
+        }
+    }
+
+    fun getRoomList(){
+        viewModelScope.launch {
+            val response = chatRepository.getRoomList(access_token, projectId)
+            if(response.isSuccessful){
+                if(response.code() == 200){
+                    _chatRoomLiveData.postValue(response.body())
+                }
+            }
         }
     }
 
     fun setChatRoomId(chatRoomId: Int){
         this.chatRoomId = chatRoomId
     }
+
+    fun setProjectId(projectId: String){
+        this.projectId = projectId
+    }
+
+    fun getProjectId() = projectId
 }
