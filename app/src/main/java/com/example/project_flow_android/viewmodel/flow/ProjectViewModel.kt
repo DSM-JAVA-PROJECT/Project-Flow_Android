@@ -19,10 +19,12 @@ class ProjectViewModel(private val flowApilmpl: FlowApilmpl, private val sharedP
     val projectImage = MutableLiveData<File>()
     val userEmails = MutableLiveData<Array<String>>()
 
-
     fun inputUser(){
         user.value = userName.toString()
     }
+
+
+
 
 
 }
