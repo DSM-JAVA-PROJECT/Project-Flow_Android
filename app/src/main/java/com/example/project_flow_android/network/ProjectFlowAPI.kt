@@ -1,9 +1,7 @@
 package com.example.project_flow_android.network
 
-import com.example.project_flow_android.feature.CertificationRequest
-import com.example.project_flow_android.feature.CertificationResponse
-import com.example.project_flow_android.feature.LoginRequest
-import com.example.project_flow_android.feature.RegisterRequest
+import com.example.project_flow_android.feature.*
+import io.reactivex.rxjava3.core.Single
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -11,24 +9,20 @@ import retrofit2.http.*
 
 interface ProjectFlowAPI {
 
-    //Register
     @POST("/auth/join")
-    fun doRegister(@Body request:RegisterRequest):Call<Unit>
+    fun register(@Body request:RegisterRequest): Single<Response<Void>>
 
-    //Login
     @POST("/auth/login")
-    fun doLogin(@Body request:LoginRequest):Call<Unit>
+    fun login(@Body request: LoginRequest): Single<Response<LoginResponse>>
 
-    //인증코드 전송
-    @POST("/email")
-    fun doCertification(@Body request:CertificationRequest):Call<Unit>
+    @POST("/email/")
+    fun postCertification(@Body request: CertificationRequest): Single<Response<Void>>
 
-    //인증 코드 확인
     @POST("/email/verifyCode")
-    fun checkCertification(@Body request:CertificationResponse):Call<Unit>
+    fun checkCertification(@Body request: PostCertificationRequest): Single<Response<Void>>
 
-
-
+    @POST("/project")
+    fun addProject(@Body request: AddProjectRequest): Single<Response<Void>>
 
 
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_flow_it"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_usb_24"
+        android:title="@string/menu_flow"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_chat_it"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_chat_24"
+        app:showAsAction="ifRoom"
+        android:title="@string/menu_chat" />
+    <item
+        android:id="@+id/menu_mypage_it"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="@string/menu_mypage"
+        app:showAsAction="ifRoom" />
+
+</menu>

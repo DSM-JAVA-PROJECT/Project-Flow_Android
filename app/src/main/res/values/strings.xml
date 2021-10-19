@@ -63,4 +63,19 @@
     <string name="successful_register">반가워요!</string>
     <string name="nim">님!</string>
     <string name="welcome">프플에 오신 것을 진심으로 환영합니다</string>
+    <string name="dontsend">인증번호가 오지 않았나요?</string>
+    <string name="menu_flow">나의 Flow</string>
+    <string name="menu_chat">채팅</string>
+    <string name="menu_mypage">마이페이지</string>
+    <string name="empty_project">현재 프로젝트가 하나도 없습니다</string>
+    <string name="who_project">님의 프로젝트</string>
+    <string name="make_project">프로젝트 생성</string>
+    <string name="editname">프로젝트명</string>
+    <string name="editday">시작날</string>
+    <string name="editfinal">마감날짜</string>
+    <string name="add_member">팀원 추가하기</string>
+    <string name="project_image">프로젝트 이미지 추가</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_main_image">프로젝트 대표 이미지를 넣어주세요</string>
+    <string name="upload_project_name">프로젝트명을 입력해주세요</string>
 </resources>

@@ -9,6 +9,7 @@ import android.os.Looper
 import androidx.lifecycle.ViewModel
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseActivity
+import com.example.project_flow_android.ui.main.MainActivity
 
 
 class DashBoardActivity : AppCompatActivity() {
@@ -18,9 +19,14 @@ class DashBoardActivity : AppCompatActivity() {
         setContentView(R.layout.activity_dash_borad)
 
         Handler().postDelayed({
-            val dashboardIntent = Intent(this,RegisterActivity::class.java)
-            startActivity(dashboardIntent)
-        },1500)
-    }
+            val intent = Intent(this, RegisterActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+            finish()
+        },DURATION)
 
+    }
+    companion object {
+        private const val DURATION : Long = 1500
+    }
 }

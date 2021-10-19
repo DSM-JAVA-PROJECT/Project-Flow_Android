@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawablePadding="16dp"
-                android:text="@{vm.userName}"
+                android:text="@={vm.userName}"
                 android:inputType="text"
                 android:singleLine="true">
 
@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawablePadding="16dp"
-                android:text="@{vm.userEmail}"
+                android:text="@={vm.userEmail}"
                 android:inputType="textEmailAddress">
 
             </com.google.android.material.textfield.TextInputEditText>
@@ -85,6 +85,7 @@
             android:layout_height="66dp"
             android:layout_marginBottom="28dp"
             android:text="@string/next"
+            android:onClick="@{()->vm.addInfo()}"
             android:backgroundTint="@color/blue_main"
             android:layout_marginLeft="34dp"
             android:layout_marginRight="34dp"
@@ -182,7 +183,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="16dp"
                 android:inputType="textPersonName"
-                android:text="@{vm.userPhone}"
+                android:text="@={vm.userPhone}"
                 android:singleLine="true">
 
             </com.google.android.material.textfield.TextInputEditText>
@@ -192,10 +193,9 @@
             android:id="@+id/comment_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:fontFamily="@font/nanumgothic_regular"
             android:textColor="@color/red"
-            android:visibility="invisible"
-            android:text="@{vm.changeComment}"
             app:layout_constraintBottom_toTopOf="@+id/register_btn"
             app:layout_constraintEnd_toStartOf="@+id/guideline9"
             app:layout_constraintStart_toStartOf="@+id/guideline7" />
