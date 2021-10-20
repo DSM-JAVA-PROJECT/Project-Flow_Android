@@ -16,16 +16,13 @@
         <activity android:name=".ui.sign.ui.FinishSignActivity" />
         <activity android:name=".ui.sign.ui.CertificationActivity" />
         <activity android:name=".ui.sign.ui.EditPasswordActivity" />
-        <activity android:name=".ui.sign.ui.DashBoardActivity"/>
-        <activity android:name=".ui.chat.ChatActivity">
+        <activity android:name=".ui.sign.ui.DashBoardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.sign.ui.DashBoardActivity" />
-
         <activity android:name=".ui.chat.ChatActivity" />
         <activity android:name=".ui.sign.ui.RegisterActivity" />
         <activity android:name=".ui.sign.ui.LoginActivity" />
