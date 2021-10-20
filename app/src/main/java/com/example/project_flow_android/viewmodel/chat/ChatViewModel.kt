@@ -16,11 +16,11 @@ import ua.naiksoftware.stomp.dto.StompHeader
 
 class ChatViewModel : ViewModel() {
     private val TAG = "StompClient"
-    private val URL = "ws://65c3-223-39-206-162.ngrok.io/websocket"
-    private val access_token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzM1MTA5ODMsImlkIjoiNjE1ZDNlMDJlMjAxY2MyNTk4ZTVlZDllIiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.v4-p1mdDS3fvk56TEKoS1KbCj7FFMclGihC3abYcICY"
+    private val URL = "ws://54.180.224.67:8080/websocket"
+    private val access_token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzQyODMzMjMsImlkIjoiNjE2N2JhNTQyNjdjYTEwZWI1NDkwNGE5IiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.Y_smWBnm1RrvToFW9kB9pHhnmgZIu0O73OZH4Cy3iZ4"
     private val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, URL)
     private var chatRoomId = 0
-    private var projectId = "615d3e2ae201cc2598e5ed9f"
+    private var projectId = "616c247724ffea704e117e6e"
 
     private val chatRepository = ChatRepositoryImpl()
     private val _chatLiveData : MutableLiveData<ProjectMemberResponse> = MutableLiveData()
@@ -58,7 +58,6 @@ class ChatViewModel : ViewModel() {
         }) {throwable -> Log.e(TAG,"Error on subscribe topic", throwable)}
     }
 
-    @SuppressLint("CheckResult")
     fun createRoom(emails : ArrayList<String>){
         val data = JSONObject()
         data.put("emails", emails)
