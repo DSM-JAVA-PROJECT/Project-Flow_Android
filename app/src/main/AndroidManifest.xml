@@ -24,9 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.sign.ui.DashBoardActivity" />
-
-        <activity android:name=".ui.chat.ChatActivity" />
         <activity android:name=".ui.sign.ui.RegisterActivity" />
         <activity android:name=".ui.sign.ui.LoginActivity" />
         <activity android:name=".ui.main.MainActivity" />
