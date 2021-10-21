@@ -5,8 +5,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.project_flow_android.data.model.sign.chat.ProjectMemberResponse
-import com.example.project_flow_android.data.model.sign.chat.RoomListResponse
+import com.example.project_flow_android.data.chat.ProjectMemberResponse
+import com.example.project_flow_android.data.chat.RoomListResponse
 import com.example.project_flow_android.data.remote.chat.ChatRepositoryImpl
 import kotlinx.coroutines.launch
 import org.json.JSONObject
