@@ -79,7 +79,7 @@
     <string name="add_main_image">프로젝트 대표 이미지를 넣어주세요</string>
     <string name="upload_project_name">프로젝트명을 입력해주세요</string>
     <string name="explain_project_im">프로젝트 설명을 입력해주세요 (선택)</string>
-
+    <string name="menu_calendar">캘린더</string>
     <style name="explain_project">프로젝트 설명을 입력해주세요 (선택)</style>
     <style name="per_project">프로젝트 기간</style>
     <style name="exp_project">프로젝트 설명을 입력해주세요 (선택)</style>
