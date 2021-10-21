@@ -22,7 +22,7 @@ interface ProjectFlowAPI {
     fun checkCertification(@Body request: PostCertificationRequest): Single<Response<Void>>
 
     @POST("/project")
-    fun addProject(@Body request: AddProjectRequest): Single<Response<Void>>
+    suspend fun addProject(@Body request: AddProjectRequest): Response<Void>
 
 
 }
