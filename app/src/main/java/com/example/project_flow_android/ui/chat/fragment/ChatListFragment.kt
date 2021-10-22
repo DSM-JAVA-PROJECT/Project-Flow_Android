@@ -32,7 +32,7 @@ class ChatListFragment : Fragment() {
         chat_list_rv.layoutManager = layoutManager
 
         chatViewModel.chatRoomLiveData.observe(viewLifecycleOwner, {
-            val adapter = RoomRVAdapter(chatViewModel.chatRoomLiveData.value!!)
+            val adapter = RoomRVAdapter(chatViewModel.chatRoomLiveData.value!!, requireActivity())
             chat_list_rv.adapter = adapter
         })
 
