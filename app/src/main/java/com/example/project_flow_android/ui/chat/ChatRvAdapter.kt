@@ -1,12 +1,11 @@
 package com.example.project_flow_android.ui.chat
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project_flow_android.R
-import com.example.project_flow_android.data.model.sign.chat.ChatListResponse
+import com.example.project_flow_android.data.chat.ChatListResponse
 import kotlinx.android.synthetic.main.chat_item_mine.view.*
 import kotlinx.android.synthetic.main.chat_item_other.view.*
 import java.lang.RuntimeException

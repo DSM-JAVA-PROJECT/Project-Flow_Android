@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Project-Flow_Android</string>
-
-    <!--  Chatting  -->
     <string name="chat_manage_text">방 관리</string>
     <string name="chat_input_text">메시지를 입력하세요</string>
     <string name="chat_photo">앨범</string>
@@ -75,6 +73,8 @@
     <string name="editfinal">마감날짜</string>
     <string name="add_member">팀원 추가하기</string>
     <string name="project_image">프로젝트 이미지 추가</string>
+    <string name="add_member_email">초대할 팀원의 이메일을 입력해주세요</string>
+    <string name="started_project">프로젝트 시작하기</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_main_image">프로젝트 대표 이미지를 넣어주세요</string>
     <string name="upload_project_name">프로젝트명을 입력해주세요</string>
@@ -83,4 +83,9 @@
     <string name="logout">로그아웃</string>
     <string name="my_project">나의 프로젝트</string>
     <string name="show_all_project">나의 모든 프로젝트를 확인할 수 있습니다</string>
+    <string name="explain_project_im">프로젝트 설명을 입력해주세요 (선택)</string>
+    <string name="menu_calendar">캘린더</string>
+    <style name="explain_project">프로젝트 설명을 입력해주세요 (선택)</style>
+    <style name="per_project">프로젝트 기간</style>
+    <style name="exp_project">프로젝트 설명을 입력해주세요 (선택)</style>
 </resources>

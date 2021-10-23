@@ -3,7 +3,7 @@ package com.example.project_flow_android.viewmodel.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.project_flow_android.data.SharedPreferenceStorage
-import com.example.project_flow_android.data.remote.LoginApiImpl
+import com.example.project_flow_android.data.remote.sign.LoginApiImpl
 
 class LoginViewModelFactory(
     private val loginApiImpl: LoginApiImpl,

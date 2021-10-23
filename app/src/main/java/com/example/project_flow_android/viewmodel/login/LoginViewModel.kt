@@ -3,14 +3,9 @@ package com.example.project_flow_android.viewmodel.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.project_flow_android.data.SharedPreferenceStorage
-import com.example.project_flow_android.data.remote.LoginApiImpl
-import com.example.project_flow_android.data.remote.SignApiImpl
+import com.example.project_flow_android.data.remote.sign.LoginApiImpl
 import com.example.project_flow_android.feature.LoginRequest
-import com.example.project_flow_android.feature.LoginResponse
-import com.example.project_flow_android.network.ApiProvider
-import com.example.project_flow_android.network.ProjectFlowAPI
 
 class LoginViewModel(
     private val loginApiImpl: LoginApiImpl,

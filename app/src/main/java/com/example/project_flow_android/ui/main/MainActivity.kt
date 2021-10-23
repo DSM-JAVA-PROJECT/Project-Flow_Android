@@ -1,16 +1,13 @@
 package com.example.project_flow_android.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseActivity
 import com.example.project_flow_android.databinding.ActivityMainBinding
-import com.example.project_flow_android.ui.chat.fragment.ChatFragment
 import com.example.project_flow_android.ui.chat.fragment.ChatListFragment
+import com.example.project_flow_android.ui.flow.AddProjectFragment
 import com.example.project_flow_android.ui.flow.DefaultProjectFragment
 import com.example.project_flow_android.ui.flow.FlowFragment
 import com.example.project_flow_android.ui.mypage.MyPageFragment
@@ -89,5 +86,4 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             })
         }
     }
-
 }
