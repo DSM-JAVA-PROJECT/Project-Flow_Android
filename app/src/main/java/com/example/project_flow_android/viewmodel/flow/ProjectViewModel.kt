@@ -14,7 +14,7 @@ class ProjectViewModel() : ViewModel() {
 
     private val flowRepository = FlowRepositorylmpl()
 
-    val user = MutableLiveData<String>()
+    val userName = MutableLiveData<String>()
     val projectName = MutableLiveData<String>()
     val explanation = MutableLiveData<String>()
     val startDay = MutableLiveData<String>()
@@ -30,6 +30,10 @@ class ProjectViewModel() : ViewModel() {
         viewModelScope.launch {
             projectData()
         }
+    }
+
+    fun inputUserNmae(){
+       val user =
     }
 
     private suspend fun projectData()  {

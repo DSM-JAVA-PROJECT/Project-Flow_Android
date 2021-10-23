@@ -5,4 +5,6 @@ import retrofit2.Response
 
 interface FlowRepository {
     suspend fun addProjectApi(request: AddProjectRequest): Response<Void>
+
+    suspend fun getUserName()
 }
