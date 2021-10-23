@@ -2,7 +2,6 @@ package com.example.project_flow_android.network
 
 import com.example.project_flow_android.feature.*
 import io.reactivex.rxjava3.core.Single
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -23,6 +22,9 @@ interface ProjectFlowAPI {
 
     @POST("/project")
     suspend fun addProject(@Body request: AddProjectRequest): Response<Void>
+
+    @GET("/auth/myPage")
+    fun userInfo(@Header("Authorization") request: GetUserTokenRequest): Single<Response<GetUserInfoResponse>>
 
 
 }
