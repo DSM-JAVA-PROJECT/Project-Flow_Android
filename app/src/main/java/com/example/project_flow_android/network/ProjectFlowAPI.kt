@@ -24,7 +24,7 @@ interface ProjectFlowAPI {
     suspend fun addProject(@Body request: AddProjectRequest): Response<Void>
 
     @GET("/auth/myPage")
-    fun userInfo(@Header("Authorization") request: GetUserTokenRequest): Single<Response<GetUserInfoResponse>>
+    fun userInfo(@Header("Authorization") request: GetUserTokenRequest): Response<GetUserInfoResponse>
 
 
 }
