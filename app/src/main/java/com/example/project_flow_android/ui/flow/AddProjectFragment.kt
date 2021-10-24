@@ -19,7 +19,7 @@ class AddProjectFragment : BaseFragment<FragmentAddProjectBinding>(R.layout.frag
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.goProjectImg.setOnClickListener(){
+        binding.goProjectImg.setOnClickListener {
             goFlowPage()
         }
 

@@ -1,9 +1,11 @@
 package com.example.project_flow_android.network
+import com.example.project_flow_android.data.chat.ProjectMemberResponse
+import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import java.lang.Exception
 
 abstract class SafeApiRequest {
-    suspend fun <T : Any> safeApiCall(result: suspend () -> Response<T>): Response<T> {
+    suspend fun <T : Any> safeApiCall(result: suspend() -> Response<T>): Response<T> {
         val response = result.invoke()
         return try {
             if(response.isSuccessful){

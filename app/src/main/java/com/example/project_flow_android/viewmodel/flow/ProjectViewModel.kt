@@ -1,18 +1,25 @@
 package com.example.project_flow_android.viewmodel.flow
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.project_flow_android.data.remote.flow.FlowRepositorylmpl
+import com.example.project_flow_android.data.SharedPreferenceStorage
+import com.example.project_flow_android.data.remote.flow.FlowRepositoryImpl
+import com.example.project_flow_android.data.remote.mypage.MyPageRepository
+import com.example.project_flow_android.data.remote.mypage.MyPageRepositoryImpl
 import com.example.project_flow_android.feature.AddProjectRequest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.io.File
 
-class ProjectViewModel() : ViewModel() {
+class ProjectViewModel : ViewModel() {
 
-    private val flowRepository = FlowRepositorylmpl()
+    private val flowRepository = FlowRepositoryImpl()
+    private val myPageRepository = MyPageRepositoryImpl()
+
+
 
     val userName = MutableLiveData<String>()
     val projectName = MutableLiveData<String>()
@@ -33,7 +40,7 @@ class ProjectViewModel() : ViewModel() {
     }
 
     fun inputUserNmae(){
-       val user =
+
     }
 
     private suspend fun projectData()  {
