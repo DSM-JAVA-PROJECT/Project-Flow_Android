@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.project_flow_android.R
+import com.example.project_flow_android.network.SocketApplication
 import com.example.project_flow_android.ui.chat.fragment.ChatListFragment
 import com.example.project_flow_android.viewmodel.chat.ChatViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChatActivity : AppCompatActivity() {
     private val chatViewModel : ChatViewModel by viewModel()
+    private val socket = SocketApplication.getSocket()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
@@ -17,7 +19,7 @@ class ChatActivity : AppCompatActivity() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.chat_frame_container, ChatListFragment()).commit()
 
-        chatViewModel.connect()
+        socket.connect()
     }
 
     fun replace(fragment: Fragment) {
@@ -29,6 +31,5 @@ class ChatActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        chatViewModel.disconnect()
     }
 }

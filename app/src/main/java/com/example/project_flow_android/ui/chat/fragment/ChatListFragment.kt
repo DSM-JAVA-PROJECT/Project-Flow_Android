@@ -13,7 +13,7 @@ import com.example.project_flow_android.viewmodel.chat.ChatViewModel
 import kotlinx.android.synthetic.main.fragment_chat_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ChatListFragment : Fragment() {
+class ChatListFragment: Fragment() {
     private val chatViewModel : ChatViewModel by viewModel()
 
     override fun onCreateView(
