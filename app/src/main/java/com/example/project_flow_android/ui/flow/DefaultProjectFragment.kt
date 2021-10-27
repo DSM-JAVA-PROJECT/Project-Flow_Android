@@ -8,7 +8,6 @@ import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseFragment
 import com.example.project_flow_android.databinding.FragmentDefaultProjectBinding
 import com.example.project_flow_android.viewmodel.flow.ProjectViewModel
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DefaultProjectFragment :
@@ -20,6 +19,10 @@ class DefaultProjectFragment :
         savedInstanceState: Bundle?,
     ): View? {
         return inflater.inflate(R.layout.fragment_default_project, container, false)
+    }
+
+    override fun observeEvent() {
+        TODO("Not yet implemented")
     }
 
 }
