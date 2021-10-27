@@ -39,7 +39,7 @@ class CreateRVAdapter(private val items : ProjectMemberResponse) : RecyclerView.
         fun bind(item: ProjectMemberResponse.User){
             view.create_user_item_name_tv.text = item.name
 
-            val position = absoluteAdapterPosition
+            //val position = absoluteAdapterPosition
             if(position != RecyclerView.NO_POSITION){
                 itemView.setOnClickListener{
                     itemClickListener?.onItemClick(itemView, position)

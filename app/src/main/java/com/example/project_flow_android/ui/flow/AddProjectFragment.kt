@@ -15,24 +15,21 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddProjectFragment : BaseFragment<FragmentAddProjectBinding>(R.layout.fragment_add_project) {
 
-    override val vm : ProjectViewModel by sharedViewModel()
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override val vm: ProjectViewModel by sharedViewModel()
 
-        binding.goProjectImg.setOnClickListener {
-            goFlowPage()
-        }
-
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
-    private fun goFlowPage(){
+    private fun goFlowPage() {
         val fragment = requireActivity().supportFragmentManager
         val fragmentManager = fragment.beginTransaction()
         fragmentManager.run {
 
         }
     }
-
-
-
 }
