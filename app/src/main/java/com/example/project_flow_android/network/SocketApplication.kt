@@ -52,6 +52,12 @@ class SocketApplication {
         socket.emit("chatroom.create", data)
     }
 
+    fun send(message: String){
+        val data = JSONObject()
+        data.put("message", message)
+        socket.emit("message.send", data)
+    }
+
     fun setChatRoomId(chatRoomId: String){
         this.chatRoomId = chatRoomId
     }
