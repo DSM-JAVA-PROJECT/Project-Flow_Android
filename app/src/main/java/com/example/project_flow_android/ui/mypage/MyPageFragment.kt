@@ -15,9 +15,9 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
+class MyPageFragment : Fragment(){
 
-    override val vm : ViewModel by sharedViewModel()
+     val vm : ViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,13 +29,10 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.run {
-            vm?.getUserInfo()
-        }
 
     }
 
-    override fun observeEvent() {
+     fun observeEvent() {
         TODO("Not yet implemented")
     }
 }

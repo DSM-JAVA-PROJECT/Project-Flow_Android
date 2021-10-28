@@ -4,15 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseFragment
 import com.example.project_flow_android.databinding.FragmentAddProjectBinding
 import com.example.project_flow_android.viewmodel.flow.ProjectViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class AddProjectFragment : BaseFragment<FragmentAddProjectBinding>(R.layout.fragment_add_project) {
+class AddProjectFragment : Fragment() {
 
-    override val vm: ProjectViewModel by sharedViewModel()
+     val vm: ProjectViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,14 +30,10 @@ class AddProjectFragment : BaseFragment<FragmentAddProjectBinding>(R.layout.frag
     }
 
     private fun goFlowPage() {
-        val fragment = requireActivity().supportFragmentManager
-        val fragmentManager = fragment.beginTransaction()
-        fragmentManager.run {
 
-        }
     }
 
-    override fun observeEvent() {
+     fun observeEvent() {
         TODO("Not yet implemented")
     }
 
