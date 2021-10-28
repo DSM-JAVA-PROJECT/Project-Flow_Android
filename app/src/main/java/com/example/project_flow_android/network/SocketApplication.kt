@@ -2,15 +2,10 @@ package com.example.project_flow_android.network
 
 import android.util.Log
 import io.socket.client.IO
-import io.socket.client.Manager
 import io.socket.client.Socket
-import io.socket.emitter.Emitter
-import io.socket.engineio.client.Transport
 import io.socket.engineio.client.transports.WebSocket
 import org.json.JSONObject
-import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 class SocketApplication {
 
@@ -23,10 +18,10 @@ class SocketApplication {
             return socketApplication!!
         }
     }
-    private val url = "http://54.89.202.59:8081/"
+    private val url = "http://54.89.202.59:8081"
     private val access_token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzQyODMzMjMsImlkIjoiNjE2N2JhNTQyNjdjYTEwZWI1NDkwNGE5IiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.Y_smWBnm1RrvToFW9kB9pHhnmgZIu0O73OZH4Cy3iZ4"
     private lateinit var socket : Socket
-    private var chatRoomId = 0
+    private var chatRoomId = ""
     private var projectId = "616c247724ffea704e117e6e"
     fun connect(){
         Thread {
@@ -34,6 +29,7 @@ class SocketApplication {
                 val options = IO.Options()
                 options.transports = arrayOf(WebSocket.NAME)
                 socket = IO.socket(url, options)
+                socket.emit("/socket.io", access_token)
             } catch (e : Exception){
                 e.printStackTrace()
             }
@@ -56,7 +52,7 @@ class SocketApplication {
         socket.emit("chatroom.create", data)
     }
 
-    fun setChatRoomId(chatRoomId: Int){
+    fun setChatRoomId(chatRoomId: String){
         this.chatRoomId = chatRoomId
     }
 
