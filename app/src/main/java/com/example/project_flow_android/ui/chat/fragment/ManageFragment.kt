@@ -22,9 +22,7 @@ class ManageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         manage_prev_iv.setOnClickListener{
-            val fragmentManager = requireActivity().supportFragmentManager
-            fragmentManager.beginTransaction().remove(ManageFragment()).commit()
-            fragmentManager.popBackStack()
+            (activity as ChatActivity).popBackStack(ManageFragment())
         }
 
         manage_invite_tv.setOnClickListener{

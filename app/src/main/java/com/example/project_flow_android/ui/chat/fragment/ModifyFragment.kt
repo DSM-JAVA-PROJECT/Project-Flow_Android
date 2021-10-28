@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.project_flow_android.R
+import com.example.project_flow_android.ui.chat.ChatActivity
 import kotlinx.android.synthetic.main.fragment_modify.*
 
 class ModifyFragment : Fragment() {
@@ -22,12 +23,7 @@ class ModifyFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         modify_prev_iv.setOnClickListener{
-            val fragmentManager = requireActivity().supportFragmentManager
-            fragmentManager.beginTransaction().remove(ManageFragment()).commit()
-            fragmentManager.popBackStack()
+            (activity as ChatActivity).popBackStack(ModifyFragment())
         }
-
-
     }
-
 }
