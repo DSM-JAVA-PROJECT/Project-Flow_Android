@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.project_flow_android.R
+import com.example.project_flow_android.network.SocketApplication
 import com.example.project_flow_android.ui.chat.ChatActivity
 import com.example.project_flow_android.ui.chat.RoomRVAdapter
 import com.example.project_flow_android.viewmodel.chat.ChatViewModel
@@ -15,6 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChatListFragment: Fragment() {
     private val chatViewModel : ChatViewModel by viewModel()
+    private val socket = SocketApplication.getSocket()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,10 +36,22 @@ class ChatListFragment: Fragment() {
         chatViewModel.chatRoomLiveData.observe(viewLifecycleOwner, {
             val adapter = RoomRVAdapter(chatViewModel.chatRoomLiveData.value!!, requireActivity())
             chat_list_rv.adapter = adapter
+
+            adapter.setOnItemClickListener(object : RoomRVAdapter.OnItemClickListener{
+                override fun onItemClick(v: View, position: Int) {
+                    itemClick(v, position)
+                }
+
+            })
         })
 
         chat_list_add_iv.setOnClickListener{
             (activity as ChatActivity).replace(ChatCreateFragment())
         }
+    }
+
+    private fun itemClick(v: View, position: Int) {
+        socket.setChatRoomId(chatViewModel.chatRoomLiveData.value!!.responses[position].id)
+        (activity as ChatActivity).replace(ChatFragment())
     }
 }

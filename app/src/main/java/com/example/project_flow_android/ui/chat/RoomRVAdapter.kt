@@ -12,6 +12,16 @@ import com.example.project_flow_android.data.model.sign.chat.RoomListResponse
 import kotlinx.android.synthetic.main.chat_list_item.view.*
 
 class RoomRVAdapter(private val items : RoomListResponse, private val activity: Activity) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    interface OnItemClickListener{
+        fun onItemClick(v: View, position: Int)
+    }
+    private var itemClickListener: OnItemClickListener? = null
+
+    fun setOnItemClickListener(itemClickListener: OnItemClickListener){
+        this.itemClickListener = itemClickListener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflateView = LayoutInflater.from(parent.context).inflate(R.layout.chat_list_item, parent, false)
         return ViewHolder(inflateView)
@@ -34,6 +44,13 @@ class RoomRVAdapter(private val items : RoomListResponse, private val activity: 
                 Glide.with(activity).load(Uri.parse(item.chatRoomImage)).into(view.chat_list_iv)
             }
             view.chat_list_name_tv.text = item.chatRoomName
+
+            val position = absoluteAdapterPosition
+            if(position != RecyclerView.NO_POSITION){
+                itemView.setOnClickListener{
+                    itemClickListener?.onItemClick(itemView, position)
+                }
+            }
         }
     }
 }
