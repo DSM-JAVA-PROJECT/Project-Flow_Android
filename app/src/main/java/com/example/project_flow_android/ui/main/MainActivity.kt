@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseActivity
 import com.example.project_flow_android.databinding.ActivityMainBinding
+import com.example.project_flow_android.ui.calendar.CalendarFragment
 import com.example.project_flow_android.ui.chat.fragment.ChatListFragment
 import com.example.project_flow_android.ui.flow.AddProjectFragment
 import com.example.project_flow_android.ui.flow.DefaultProjectFragment
@@ -36,6 +37,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
 
     private val flowFragment = DefaultProjectFragment()
+    private val calendarFragment = CalendarFragment()
     private val chatFragment = ChatListFragment()
     private val myPageFragment = MyPageFragment()
 
@@ -54,6 +56,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private fun initFragment() {
         supportFragmentManager.beginTransaction().run {
             add(R.id.main_container, flowFragment)
+            add(R.id.main_container,calendarFragment)
             add(R.id.main_container, chatFragment)
             add(R.id.main_container, myPageFragment)
         }.commit()
@@ -63,6 +66,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private fun resetFragment() {
         supportFragmentManager.beginTransaction().run {
             hide(flowFragment)
+            hide(calendarFragment)
             hide(chatFragment)
             hide(myPageFragment)
         }.commit()
@@ -75,6 +79,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 when (id) {
                     R.id.menu_flow_it -> {
                         changeFragment(flowFragment)
+                    }
+                    R.id.menu_calendar_it -> {
+                        changeFragment(calendarFragment)
                     }
                     R.id.menu_chat_it -> {
                         changeFragment(chatFragment)

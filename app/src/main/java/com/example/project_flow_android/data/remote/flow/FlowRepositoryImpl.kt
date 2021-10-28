@@ -5,10 +5,10 @@ import com.example.project_flow_android.network.ApiProvider
 import com.example.project_flow_android.network.SafeApiRequest
 import retrofit2.Response
 
-class FlowRepositorylmpl : FlowRepository, SafeApiRequest() {
+class FlowRepositoryImpl : FlowRepository, SafeApiRequest() {
 
     override suspend fun addProjectApi(request: AddProjectRequest): Response<Void> {
-        return safeApiCall { ApiProvider.getAPI().addProject(request) }
+        return safeApiCall {ApiProvider.getAPI().addProject(request)}
     }
 
 }
