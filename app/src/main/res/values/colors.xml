@@ -19,5 +19,6 @@
     <color name="blue_main">#1F43C2</color>
     <color name="main">#1F43C2</color>
     <color name="red">#FF5151</color>
+    <color name="color_git">#444444</color>
 
 </resources>
