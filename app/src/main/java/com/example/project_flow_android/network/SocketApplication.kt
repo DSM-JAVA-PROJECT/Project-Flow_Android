@@ -23,6 +23,7 @@ class SocketApplication {
     private lateinit var socket : Socket
     private var chatRoomId = ""
     private var projectId = "616c247724ffea704e117e6e"
+    private var chatImage = ""
     fun connect(){
         Thread {
             try {
@@ -66,7 +67,13 @@ class SocketApplication {
         this.projectId = projectId
     }
 
+    fun setChatImage(chatImage: String){
+        this.chatImage = chatImage
+    }
+
     fun getProjectId() = projectId
 
     fun getChatRoomId() = chatRoomId
+
+    fun getChatImage() = chatImage
 }
