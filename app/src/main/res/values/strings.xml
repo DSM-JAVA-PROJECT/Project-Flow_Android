@@ -89,4 +89,8 @@
     <string name="per_project">프로젝트 기간</string>
     <string name="exp_project">프로젝트 설명을 입력해주세요 (선택)</string>
     <string name="exp_name">프로젝트 이름을 입력해주세요</string>
+    <string name="logout_second">프플에서 로그아웃 하시겠습니까?</string>
+    <string name="logout_yes">네</string>
+    <string name="logout_no">아니요</string>
+    <string name="change_password_edit">변경할 비밀번호를 설정해주세요</string>
 </resources>
