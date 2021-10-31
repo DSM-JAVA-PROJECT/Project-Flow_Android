@@ -54,6 +54,12 @@ class ChatFragment : Fragment() {
             }
         }
 
+        chat_send_iv.setOnClickListener{
+            val message = chat_input_et.text.toString().trim()
+            socket.send(message)
+            chat_input_et.setText("")
+        }
+
         chat_input_et.setOnClickListener{
             view_more.visibility = View.GONE
         }
