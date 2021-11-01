@@ -12,4 +12,5 @@ class MyPageRepositoryImpl : MyPageRepository,SafeApiRequest() {
         return safeApiCall { ApiProvider.getAPI().userInfo(request) }
     }
 
+
 }

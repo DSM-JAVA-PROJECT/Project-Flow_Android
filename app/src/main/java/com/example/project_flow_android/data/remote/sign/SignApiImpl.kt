@@ -17,5 +17,9 @@ class SignApiImpl {
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
 
+    fun changePassword(request: NewPasswordRequest):@NonNull Single<Response<Void>> = providerSignApi().changePassword(request)
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+
 
 }

@@ -8,5 +8,5 @@ import org.koin.dsl.module
 val mypageModule = module {
     viewModel { MyPageViewModel(get(),get()) }
 
-    viewModel { ChangePasswordViewModel()}
+    viewModel { ChangePasswordViewModel(get()) }
 }

@@ -26,6 +26,9 @@ interface ProjectFlowAPI {
     @GET("/auth/myPage")
     suspend fun userInfo(@Header("Authorization") request: GetUserTokenRequest): Response<GetUserInfoResponse>
 
+    @PATCH("/auth/password")
+    fun changePassword(@Header("token") @Body request : NewPasswordRequest) : Single<Response<Void>>
+
 
 
 }
