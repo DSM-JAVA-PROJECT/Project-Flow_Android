@@ -4,27 +4,32 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.project_flow_android.data.SharedPreferenceStorage
+import com.example.project_flow_android.data.remote.mypage.MyPageApiImpl
 import com.example.project_flow_android.data.remote.sign.SignApiImpl
 import com.example.project_flow_android.feature.NewPasswordRequest
 import kotlinx.coroutines.*
 import retrofit2.Callback
 
-class ChangePasswordViewModel(private val signApiImpl: SignApiImpl):ViewModel() {
+class ChangePasswordViewModel(val myPageApiImpl: MyPageApiImpl, private val sharedPreferenceStorage: SharedPreferenceStorage):ViewModel() {
 
     val changePassword = MutableLiveData<String>()
+    val token = sharedPreferenceStorage.getInfo("access_Token")
 
     private val _successChange = MutableLiveData(false)
     val successChange: LiveData<Boolean> get() = _successChange
 
-    fun editNewPassword() {
-        viewModelScope.launch {
-            val newpassword = changePassword.value!!
-            if (changePassword.value != null) {
-                val response = signApiImpl.changePassword(NewPasswordRequest(newpassword))
-//                if (response.isSuccessful) {
-//                    _successChange.value = true
-//                }
+    fun changePassword(){
+        myPageApiImpl.changePassword(token,
+            NewPasswordRequest(changePassword.value!!)).subscribe({ it ->
+            if(it.isSuccessful){
+                _successChange.value!!
             }
-        }
+            else {
+
+            }
+        },{
+
+        })
     }
 }

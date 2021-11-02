@@ -5,50 +5,40 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.project_flow_android.data.SharedPreferenceStorage
-import com.example.project_flow_android.data.remote.mypage.MyPageRepositoryImpl
+import com.example.project_flow_android.data.remote.mypage.MyPageApiImpl
 import com.example.project_flow_android.feature.GetUserTokenRequest
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 class MyPageViewModel(
-    private val myPageRepositorylmpl: MyPageRepositoryImpl,
-    private val sharedPreferenceStorage: SharedPreferenceStorage,
+    private val myPageApiImpl: MyPageApiImpl,
+    private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
+
     val userName = MutableLiveData<String>()
-    val token = sharedPreferenceStorage.getInfo("access_Token")
+    val token = sharedPreferenceStorage.getInfo("refresh_Token")
 
     private val _clearAll = MutableLiveData<Boolean>()
     val clearAll: LiveData<Boolean> get() = _clearAll
 
-    init {
-        viewModelScope.launch {
-            launchAll()
-        }
+    private val _successGet = MutableLiveData<Boolean>()
+    val successGet: LiveData<Boolean> get() = _successGet
+
+    private val _successChange = MutableLiveData<Boolean>()
+    val successChange: LiveData<Boolean> get() = _successChange
+
+    fun getUserInfo(){
+        myPageApiImpl.getUserInfo(token).subscribe({ it ->
+            if(it.isSuccessful){
+                _successGet.value!!
+                val name = it.body()!!.name
+                userName.value = name
+            }
+            else {
+                userName.value = "loading error😳"
+            }
+        },{
+            userName.value = "loading error😳"
+        })
     }
 
-    private suspend fun launchAll() = coroutineScope {
-        launchA()
-
-    }
-
-    private suspend fun launchA() {
-        logout()
-        getUserInfo()
-
-    }
-
-    private fun logout() {
-        sharedPreferenceStorage.clearAll()
-        _clearAll.value = true
-    }
-
-    private suspend fun getUserInfo() {
-        myPageRepositorylmpl.getUserInfo(GetUserTokenRequest(token))
-        val response = myPageRepositorylmpl.getUserInfo(GetUserTokenRequest(token))
-        if (response.isSuccessful) {
-            userName.value = response.body()!!.name
-        } else {
-            userName.value = "load error😮‍💨"
-        }
-    }
 }
