@@ -68,7 +68,7 @@ class ChatCreateFragment : Fragment() {
     private fun itemSelected(v: View, position: Int){
         userState[position] = true
         userList.add(v.create_user_item_name_tv.text.toString())
-        userEmail.add(chatViewModel.chatLiveData.value!!.responses[position].email)
+        userEmail.add(chatViewModel.chatLiveData.value!!.responses[position].id)
         val user = userList.joinToString(" ")
 
         v.create_user_cv.setBackgroundColor(resources.getColor(R.color.color_flow, null))
@@ -79,7 +79,7 @@ class ChatCreateFragment : Fragment() {
     private fun itemDeselected(v: View, position: Int){
         userState[position] = false
         userList.remove(v.create_user_item_name_tv.text.toString())
-        userEmail.remove(chatViewModel.chatLiveData.value!!.responses[position].email)
+        userEmail.remove(chatViewModel.chatLiveData.value!!.responses[position].id)
         val user = userList.joinToString(" ")
 
         v.create_user_cv.setBackgroundColor(resources.getColor(R.color.white, null))
