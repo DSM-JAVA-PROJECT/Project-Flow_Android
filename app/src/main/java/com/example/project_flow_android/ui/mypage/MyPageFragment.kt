@@ -1,21 +1,14 @@
 package com.example.project_flow_android.ui.mypage
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseFragment
 import com.example.project_flow_android.databinding.FragmentMyPageBinding
 import com.example.project_flow_android.ui.mypage.dialog.ChangePasswordDialog
 import com.example.project_flow_android.ui.mypage.dialog.LogoutDialog
-import com.example.project_flow_android.viewmodel.chat.ChatViewModel
-import com.example.project_flow_android.viewmodel.flow.ProjectViewModel
 import com.example.project_flow_android.viewmodel.mypage.ChangePasswordViewModel
 import com.example.project_flow_android.viewmodel.mypage.MyPageViewModel
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -47,8 +40,16 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
     }
 
 
+    private fun getUserInfo(){
+        vm.run {
+            getUserInfo()
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        getUserInfo()
         observeEvent()
 
     }

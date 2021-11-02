@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.project_flow_android.R
-import com.example.project_flow_android.viewmodel.flow.ProjectViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class FlowFragment :Fragment(){
-     val vm: ProjectViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,

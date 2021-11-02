@@ -14,13 +14,17 @@ class LogoutDialog(override val vm : MyPageViewModel):BaseDialog<DialogLogoutBin
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.checkLogoutTv.setOnClickListener {
-            //TODO
-            dismiss()
+
+        vm.run {
+            binding.checkLogoutTv.setOnClickListener {
+                //TODO
+                dismiss()
+            }
+            binding.checkCancelTv.setOnClickListener {
+                dismiss()
+            }
         }
-        binding.checkCancelTv.setOnClickListener {
-            dismiss()
-        }
+
     }
 
 }
