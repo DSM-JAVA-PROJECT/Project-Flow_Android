@@ -20,14 +20,11 @@ interface ProjectFlowAPI {
     @POST("/email/verifyCode")
     fun checkCertification(@Body request: PostCertificationRequest): Single<Response<Void>>
 
-    @POST("/project")
-    suspend fun addProject(@Body request: AddProjectRequest): Response<Void>
-
     @GET("/auth/myPage")
-    suspend fun userInfo(@Header("Authorization") request: GetUserTokenRequest): Response<GetUserInfoResponse>
+    fun getuserInfo(@Header("Authorization") token: String): Single<Response<GetUserInfoResponse>>
 
     @PATCH("/auth/password")
-    fun changePassword(@Header("token") @Body request : NewPasswordRequest) : Single<Response<Void>>
+    fun changePassword(@Header("Authorization") token :String,@Body password : NewPasswordRequest) : Single<Response<Void>>
 
 
 
