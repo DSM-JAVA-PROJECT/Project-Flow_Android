@@ -2,6 +2,7 @@ package com.example.project_flow_android.ui.mypage.dialog
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseDialog
 import com.example.project_flow_android.databinding.DialogChangepasswordBinding
@@ -16,7 +17,7 @@ class ChangePasswordDialog(override val vm: ChangePasswordViewModel) :
         binding.confirmTv.setOnClickListener {
             vm.run {
                 changePassword()
-                if(successChange.value==true){
+                if(successChange.value==true) {
                     dismiss()
                 }
             }

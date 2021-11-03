@@ -17,7 +17,7 @@ class LogoutDialog(override val vm : MyPageViewModel):BaseDialog<DialogLogoutBin
 
         vm.run {
             binding.checkLogoutTv.setOnClickListener {
-                //TODO
+                doLogout()
                 dismiss()
             }
             binding.checkCancelTv.setOnClickListener {
@@ -26,5 +26,4 @@ class LogoutDialog(override val vm : MyPageViewModel):BaseDialog<DialogLogoutBin
         }
 
     }
-
 }

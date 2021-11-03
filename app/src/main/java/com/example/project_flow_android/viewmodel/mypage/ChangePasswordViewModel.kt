@@ -19,17 +19,21 @@ class ChangePasswordViewModel(val myPageApiImpl: MyPageApiImpl, private val shar
     private val _successChange = MutableLiveData(false)
     val successChange: LiveData<Boolean> get() = _successChange
 
+    private val _toastMessage = MutableLiveData<String>()
+    val toastMessage: LiveData<String> get() = _toastMessage
+
     fun changePassword(){
         myPageApiImpl.changePassword(token,
-            NewPasswordRequest(changePassword.value!!)).subscribe({ it ->
+            NewPasswordRequest(changePassword.value!!)).subscribe({
             if(it.isSuccessful){
                 _successChange.value!!
+                _toastMessage.value ="비밀번호 변경에 성공 하였습니다"
             }
             else {
-
+                _toastMessage.value ="비밀번호 변경에 실패 하였습니다"
             }
         },{
-
+            _toastMessage.value ="비밀번호 변경에 실패 하였습니다"
         })
     }
 }
