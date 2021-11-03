@@ -8,12 +8,12 @@ import retrofit2.http.Header
 import retrofit2.http.Path
 
 interface ChatApi {
-    @GET("/{projectId}/member")
+    @GET("/project/{projectId}/member")
     suspend fun getProjectUser(
         @Header("Authorization") header : String,
         @Path("projectId") projectId : String) : Response<ProjectMemberResponse>
 
-    @GET("/{projectId}/rooms")
+    @GET("/chatroom/{projectId}/rooms")
     suspend fun getRoomList(
         @Header("Authorization") header: String,
         @Path("projectId") projectId: String) : Response<RoomListResponse>
