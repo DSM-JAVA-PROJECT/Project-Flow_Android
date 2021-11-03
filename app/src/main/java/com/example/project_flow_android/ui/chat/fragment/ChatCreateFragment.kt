@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.project_flow_android.R
 import com.example.project_flow_android.network.SocketApplication
+import com.example.project_flow_android.ui.chat.ChatActivity
 import com.example.project_flow_android.ui.chat.CreateRVAdapter
 import com.example.project_flow_android.viewmodel.chat.ChatViewModel
 import kotlinx.android.synthetic.main.chat_create_user_item.view.*
@@ -48,6 +49,7 @@ class ChatCreateFragment : Fragment() {
 
         chat_create_btn.setOnClickListener{
             socket.createRoom(userEmail)
+            (activity as ChatActivity).replace(ChatListFragment())
         }
     }
 
