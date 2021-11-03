@@ -2,6 +2,7 @@ package com.example.project_flow_android.data.remote.chat
 
 import com.example.project_flow_android.data.model.sign.chat.ProjectMemberResponse
 import com.example.project_flow_android.data.model.sign.chat.RoomListResponse
+import com.example.project_flow_android.data.model.sign.chat.RoomMemberResponse
 import com.example.project_flow_android.network.ApiProvider
 import com.example.project_flow_android.network.SafeApiRequest
 import retrofit2.Response
@@ -17,4 +18,13 @@ class ChatRepositoryImpl : ChatRepository, SafeApiRequest() {
     ): Response<RoomListResponse> {
         return safeApiCall { ApiProvider.getChatAPI().getRoomList(header, projectId) }
     }
+
+    override suspend fun getRoomMember(
+        header: String,
+        chatRoomId: String,
+    ): Response<RoomMemberResponse> {
+        return safeApiCall { ApiProvider.getChatAPI().getRoomMember(header, chatRoomId) }
+    }
+
+
 }
