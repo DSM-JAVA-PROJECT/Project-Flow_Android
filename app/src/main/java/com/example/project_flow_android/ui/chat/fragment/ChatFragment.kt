@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.project_flow_android.R
+import com.example.project_flow_android.network.SocketApplication
 import com.example.project_flow_android.ui.chat.ChatActivity
 import com.example.project_flow_android.util.DialogUtil
 import com.example.project_flow_android.util.GalleryHelper
@@ -23,6 +25,7 @@ class ChatFragment : Fragment() {
             Glide.with(requireContext()).load(it.data?.data).into(test_iv)
         }
     }
+    private val socket = SocketApplication.getSocket()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +42,9 @@ class ChatFragment : Fragment() {
         val dialogUtil = DialogUtil(requireContext())
         val galleryHelper = GalleryHelper(requireActivity(), startForResult)
 
+        val layoutManager = LinearLayoutManager(requireContext())
+        chat_rv.layoutManager = layoutManager
+
         chat_more_iv.setOnClickListener{
             if(view_more.visibility == View.VISIBLE)
                 view_more.visibility = View.GONE
@@ -46,6 +52,12 @@ class ChatFragment : Fragment() {
                 keyboardUtil.hideKeyboard(chat_input_et)
                 view_more.visibility = View.VISIBLE
             }
+        }
+
+        chat_send_iv.setOnClickListener{
+            val message = chat_input_et.text.toString().trim()
+            socket.send(message)
+            chat_input_et.setText("")
         }
 
         chat_input_et.setOnClickListener{
@@ -71,6 +83,10 @@ class ChatFragment : Fragment() {
             bottom.add_schedule_end_et.setOnClickListener{
                 dialogUtil.showDatePicker(bottom.add_schedule_end_et)
             }
+        }
+        chat_prev_btn.setOnClickListener{
+            socket.setChatRoomId("")
+            (activity as ChatActivity).popBackStack(ChatFragment())
         }
     }
 }
