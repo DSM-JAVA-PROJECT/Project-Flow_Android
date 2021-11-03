@@ -40,15 +40,15 @@
             android:id="@+id/username_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="14dp"
             android:text="@={vm.userName}"
+            android:textSize="22sp"
             app:layout_constraintStart_toEndOf="@+id/imageView7"
             app:layout_constraintTop_toBottomOf="@+id/mypage_title_tv" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/change_pw_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -59,14 +59,14 @@
             app:layout_constraintTop_toBottomOf="@+id/username_tv" />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/logout_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:text="@string/logout"
             android:textColor="@color/blue_main"
-            app:layout_constraintStart_toEndOf="@+id/textView12"
+            app:layout_constraintStart_toEndOf="@+id/change_pw_tv"
             app:layout_constraintTop_toBottomOf="@+id/username_tv" />
 
         <ImageView

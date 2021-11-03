@@ -1,38 +1,68 @@
 package com.example.project_flow_android.ui.mypage
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseFragment
 import com.example.project_flow_android.databinding.FragmentMyPageBinding
-import com.example.project_flow_android.viewmodel.chat.ChatViewModel
-import com.example.project_flow_android.viewmodel.flow.ProjectViewModel
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import com.example.project_flow_android.ui.mypage.dialog.ChangePasswordDialog
+import com.example.project_flow_android.ui.mypage.dialog.LogoutDialog
+import com.example.project_flow_android.viewmodel.mypage.ChangePasswordViewModel
+import com.example.project_flow_android.viewmodel.mypage.MyPageViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MyPageFragment : Fragment(){
+class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_page){
 
-     val vm : ViewModel by sharedViewModel()
+     override val vm : MyPageViewModel by viewModel()
+     val vv : ChangePasswordViewModel by viewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        return inflater.inflate(R.layout.fragment_my_page, container, false)
+    private val logoutDialog by lazy {
+        LogoutDialog(vm)
+    }
+
+    private val changepasswordDialog by lazy {
+        ChangePasswordDialog(vv)
+    }
+
+    private val showLogoutDialog by lazy {
+        logoutDialog.show(
+            requireActivity().supportFragmentManager,
+            "logoutDialog"
+        )
+    }
+
+    private val showChangePasswordDialog by lazy {
+        changepasswordDialog.show(
+            requireActivity().supportFragmentManager,
+            "changePasswordDialog"
+        )
+    }
+
+
+    private fun getUserInfo(){
+        vm.run {
+            getUserInfo()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        getUserInfo()
+        observeEvent()
 
     }
 
-     fun observeEvent() {
-        TODO("Not yet implemented")
+     override fun observeEvent() {
+         binding.run {
+             binding.logoutTv.setOnClickListener{
+                 showLogoutDialog
+             }
+
+             binding.changePwTv.setOnClickListener {
+                 showChangePasswordDialog
+             }
+         }
     }
 }

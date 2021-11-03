@@ -17,5 +17,4 @@ class SignApiImpl {
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
 
-
 }

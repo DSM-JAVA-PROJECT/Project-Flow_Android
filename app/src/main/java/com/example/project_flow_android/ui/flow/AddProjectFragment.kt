@@ -6,14 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.project_flow_android.R
-import com.example.project_flow_android.base.BaseFragment
-import com.example.project_flow_android.databinding.FragmentAddProjectBinding
-import com.example.project_flow_android.viewmodel.flow.ProjectViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class AddProjectFragment : Fragment() {
 
-     val vm: ProjectViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
