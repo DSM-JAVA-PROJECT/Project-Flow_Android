@@ -2,6 +2,7 @@ package com.example.project_flow_android.network
 
 import com.example.project_flow_android.data.model.sign.chat.ProjectMemberResponse
 import com.example.project_flow_android.data.model.sign.chat.RoomListResponse
+import com.example.project_flow_android.data.model.sign.chat.RoomMemberResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -22,5 +23,5 @@ interface ChatApi {
     suspend fun getRoomMember(
         @Header("Authorization") header: String,
         @Path("chatRoomId") chatRoomId: String
-    ) :
+    ) : Response<RoomMemberResponse>
 }
