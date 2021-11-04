@@ -24,7 +24,7 @@
                 android:gravity="center"
                 android:text="@string/logout"
                 android:textColor="@color/blue_main"
-                android:textSize="23sp"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +39,7 @@
                 android:gravity="center"
                 android:text="@string/logout_second"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/check_title_tv" />
@@ -66,7 +66,7 @@
                 android:padding="10dp"
                 android:text="@string/logout_yes"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toStartOf="@id/check_logout_tv"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/check_body_tv" />
@@ -82,8 +82,8 @@
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="@string/logout_no"
-                android:textColor="@color/red"
-                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/check_cancel_tv"
                 app:layout_constraintTop_toBottomOf="@id/check_body_tv" />
