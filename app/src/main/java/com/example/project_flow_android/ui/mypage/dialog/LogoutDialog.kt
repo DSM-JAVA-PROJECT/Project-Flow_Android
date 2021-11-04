@@ -10,15 +10,18 @@ import com.example.project_flow_android.databinding.DialogLogoutBinding
 import com.example.project_flow_android.viewmodel.mypage.MyPageViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LogoutDialog(override val vm : MyPageViewModel):BaseDialog<DialogLogoutBinding>(R.layout.dialog_logout){
+class LogoutDialog(override val vm: MyPageViewModel) :
+    BaseDialog<DialogLogoutBinding>(R.layout.dialog_logout) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         vm.run {
             binding.checkLogoutTv.setOnClickListener {
-                doLogout()
-                dismiss()
+                if (successLogout.value!!) {
+                    doLogout()
+                    dismiss()
+                }
             }
             binding.checkCancelTv.setOnClickListener {
                 dismiss()
