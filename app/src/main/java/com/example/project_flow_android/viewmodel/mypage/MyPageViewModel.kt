@@ -14,6 +14,7 @@ class MyPageViewModel(
     private val sharedPreferenceStorage: SharedPreferenceStorage,
 ) : ViewModel() {
 
+
     val userName = MutableLiveData<String>()
 
     private val _clearAll = MutableLiveData<Boolean>()
@@ -42,7 +43,6 @@ class MyPageViewModel(
             userName.value = "loading error😳"
         })
     }
-
 
     fun doLogout() {
         sharedPreferenceStorage.clearAll()

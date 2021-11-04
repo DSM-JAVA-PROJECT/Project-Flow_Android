@@ -23,8 +23,8 @@ class ChangePasswordViewModel(val myPageApiImpl: MyPageApiImpl, private val shar
     val toastMessage: LiveData<String> get() = _toastMessage
 
     fun changePassword(){
-        myPageApiImpl.changePassword(token,
-            NewPasswordRequest(changePassword.value!!)).subscribe({
+        val token = sharedPreferenceStorage.getInfo("access_token")
+        myPageApiImpl.changePassword(token, NewPasswordRequest(changePassword.value!!)).subscribe({
             if(it.isSuccessful){
                 _successChange.value!!
                 _toastMessage.value ="비밀번호 변경에 성공 하였습니다"

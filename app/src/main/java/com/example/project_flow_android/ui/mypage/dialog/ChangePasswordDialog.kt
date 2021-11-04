@@ -15,15 +15,16 @@ class ChangePasswordDialog(override val vm: ChangePasswordViewModel) :
         super.onViewCreated(view, savedInstanceState)
 
         binding.confirmTv.setOnClickListener {
-            vm.run {
-                changePassword()
-                if(successChange.value==true) {
-                    dismiss()
-                }
-            }
+                vm.changePassword()
+                dismiss()
+
         }
 
         binding.cancleTv.setOnClickListener {
+            activity?.supportFragmentManager
+                ?.beginTransaction()
+                ?.remove(this)
+                ?.commit()
             dismiss()
         }
     }

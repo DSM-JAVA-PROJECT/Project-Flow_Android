@@ -15,14 +15,14 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_page){
 
      override val vm : MyPageViewModel by viewModel()
-     val vv : ChangePasswordViewModel by viewModel()
+     val cv : ChangePasswordViewModel by viewModel()
 
     private val logoutDialog by lazy {
         LogoutDialog(vm)
     }
 
     private val changepasswordDialog by lazy {
-        ChangePasswordDialog(vv)
+        ChangePasswordDialog(cv)
     }
 
     private val showLogoutDialog by lazy {
