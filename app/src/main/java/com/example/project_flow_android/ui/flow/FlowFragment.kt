@@ -6,17 +6,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.project_flow_android.R
+import com.example.project_flow_android.base.BaseFragment
+import com.example.project_flow_android.databinding.FragmentFlowBinding
+import com.example.project_flow_android.viewmodel.flow.FlowViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class FlowFragment :Fragment(){
+class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        return inflater.inflate(R.layout.fragment_flow, container, false)
+    override val vm: FlowViewModel by viewModel()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        observeEvent()
+
+    }
+
+    override fun observeEvent() {
+        vm.run {
+            getUserInfo()
+
+        }
     }
 
 }
