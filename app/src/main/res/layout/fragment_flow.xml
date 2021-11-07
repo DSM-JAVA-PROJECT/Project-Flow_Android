@@ -43,6 +43,7 @@
                 android:layout_marginTop="50dp"
                 android:text="@string/who_project"
                 android:textSize="20sp"
+                android:fontFamily="@font/nanumgothic_regular"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/input_user_name"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -53,7 +54,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="70sp"
                 android:layout_marginTop="50dp"
-                android:text="@={vm.userName()}"
+                android:text="@={vm.inputName}"
+                android:textSize="20sp"
+                android:fontFamily="@font/nanumgothic_regular"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
