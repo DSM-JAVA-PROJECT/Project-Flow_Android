@@ -26,6 +26,9 @@ interface ProjectFlowAPI {
     @PATCH("/auth/password")
     fun changePassword(@Header("Authorization") token :String,@Body password : NewPasswordRequest) : Single<Response<Void>>
 
+    @POST("/project")
+    fun addProject(@Header("Authorization") token: String,@Body request : AddProjectRequest,@Part("file") image: ImageRequest) : Single<Response<Void>>
+
 
 
 }

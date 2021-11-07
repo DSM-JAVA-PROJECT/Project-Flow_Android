@@ -1,6 +1,8 @@
 package com.example.project_flow_android.data.remote.flow
 
+import com.example.project_flow_android.feature.AddProjectRequest
 import com.example.project_flow_android.feature.GetUserInfoResponse
+import com.example.project_flow_android.feature.ImageRequest
 import com.example.project_flow_android.network.ApiProvider
 import com.example.project_flow_android.network.ProjectFlowAPI
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -18,5 +20,11 @@ class FlowApiImpl {
         providerFlowApi().getuserInfo(token)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
+
+    fun addProject(token: String, request: AddProjectRequest, image : ImageRequest): @NonNull Single<Response<Void>> =
+        providerFlowApi().addProject(token, request,image)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+
 
 }
