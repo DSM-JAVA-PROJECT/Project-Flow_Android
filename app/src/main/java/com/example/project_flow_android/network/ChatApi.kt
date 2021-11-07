@@ -27,7 +27,7 @@ interface ChatApi {
         @Path("chatRoomId") chatRoomId: String
     ) : Response<RoomMemberResponse>
 
-    @GET("/chat/{chatRoomId")
+    @GET("/chat/{chatRoomId}")
     suspend fun getChatList(
         @Header("Authorization") header: String,
         @Path("chatRoomId") chatRoomId: String,

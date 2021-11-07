@@ -12,11 +12,14 @@ import com.bumptech.glide.Glide
 import com.example.project_flow_android.R
 import com.example.project_flow_android.network.SocketApplication
 import com.example.project_flow_android.ui.chat.ChatActivity
+import com.example.project_flow_android.ui.chat.ChatRVAdapter
 import com.example.project_flow_android.util.DialogUtil
 import com.example.project_flow_android.util.GalleryHelper
 import com.example.project_flow_android.util.KeyboardUtil
+import com.example.project_flow_android.viewmodel.chat.ChatViewModel
 import kotlinx.android.synthetic.main.add_schedule_bottom.*
 import kotlinx.android.synthetic.main.fragment_chat.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChatFragment : Fragment() {
 
@@ -26,7 +29,10 @@ class ChatFragment : Fragment() {
         }
     }
 
+    private val chatViewModel: ChatViewModel by viewModel()
     private val socket = SocketApplication.getSocket()
+    private val SIZE = 10
+    private var page = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +45,11 @@ class ChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        socket.chatReceive()
+        chatViewModel.getChatList(socket.getChatRoomId(), getPage(), SIZE)
+        chatViewModel.messageListLiveData.observe(viewLifecycleOwner, {
+            val adapter = ChatRVAdapter(chatViewModel.messageListLiveData.value!!)
+            chat_rv.adapter = adapter
+        })
 
         val keyboardUtil = KeyboardUtil(requireContext())
         val dialogUtil = DialogUtil(requireContext())
@@ -47,6 +57,11 @@ class ChatFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(requireContext())
         chat_rv.layoutManager = layoutManager
+
+        socket.chatReceive()
+        socket.receiveLiveData.observe(viewLifecycleOwner, {
+            chatViewModel.messageListLiveData.value!!.oldChatMessageResponses.add(socket.receiveLiveData.value!!)
+        })
 
         chat_more_iv.setOnClickListener{
             if(view_more.visibility == View.VISIBLE)
@@ -92,4 +107,6 @@ class ChatFragment : Fragment() {
             (activity as ChatActivity).popBackStack(ChatFragment())
         }
     }
+
+    private fun getPage() = page++
 }
