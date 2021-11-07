@@ -4,6 +4,8 @@ data class ChatReceiveResponse(
     val id: String,
     val message: String,
     val senderName: String,
+    val senderImage: String,
     val readerList: ArrayList<String>,
-    val createdAt: String
+    val createdAt: String,
+    val mine: Boolean
 )
