@@ -25,6 +25,7 @@ class ChatFragment : Fragment() {
             Glide.with(requireContext()).load(it.data?.data).into(test_iv)
         }
     }
+
     private val socket = SocketApplication.getSocket()
 
     override fun onCreateView(
@@ -37,6 +38,8 @@ class ChatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        socket.chatReceive()
 
         val keyboardUtil = KeyboardUtil(requireContext())
         val dialogUtil = DialogUtil(requireContext())
