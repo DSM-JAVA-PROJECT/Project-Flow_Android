@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.chat_item_mine.view.*
 import kotlinx.android.synthetic.main.chat_item_other.view.*
 import java.lang.RuntimeException
 
-class ChatRvAdapter(private val items: ChatListResponse) :
+class ChatRVAdapter(private val items: ChatListResponse) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val MINE_TALK = 0
     private val OTHER_TALK = 1
