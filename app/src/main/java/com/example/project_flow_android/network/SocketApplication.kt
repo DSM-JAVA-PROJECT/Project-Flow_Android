@@ -1,6 +1,11 @@
 package com.example.project_flow_android.network
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
+import com.example.project_flow_android.data.model.sign.chat.ChatMessageResponse
+import com.example.project_flow_android.data.model.sign.chat.ChatReceiveResponse
+import com.google.gson.Gson
+import com.google.gson.JsonParser
 import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
@@ -27,6 +32,9 @@ class SocketApplication {
     private var chatRoomId = ""
     private var projectId = "618333504aa95ded53f3b359"
     private var chatImage = ""
+    private val _receiveLiveData : MutableLiveData<ChatMessageResponse.ChatReceiveResponse> = MutableLiveData()
+    val receiveLiveData = _receiveLiveData
+
     fun connect(){
         Thread {
             try {
@@ -93,5 +101,8 @@ class SocketApplication {
 
     private val onMassage = Emitter.Listener { args ->
         Log.i("Message payload", args[0].toString())
+        val json = args[0].toString()
+        val message = Gson().fromJson(json, ChatMessageResponse.ChatReceiveResponse::class.java)
+        _receiveLiveData.postValue(message)
     }
 }

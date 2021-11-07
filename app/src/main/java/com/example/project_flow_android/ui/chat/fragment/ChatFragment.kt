@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.project_flow_android.R
+import com.example.project_flow_android.data.model.sign.chat.ChatMessageResponse
 import com.example.project_flow_android.network.SocketApplication
 import com.example.project_flow_android.ui.chat.ChatActivity
 import com.example.project_flow_android.ui.chat.ChatRVAdapter
@@ -33,6 +34,7 @@ class ChatFragment : Fragment() {
     private val socket = SocketApplication.getSocket()
     private val SIZE = 10
     private var page = 0
+    private lateinit var adapter : ChatRVAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,8 +49,7 @@ class ChatFragment : Fragment() {
 
         chatViewModel.getChatList(socket.getChatRoomId(), getPage(), SIZE)
         chatViewModel.messageListLiveData.observe(viewLifecycleOwner, {
-            val adapter = ChatRVAdapter(chatViewModel.messageListLiveData.value!!)
-            chat_rv.adapter = adapter
+            adapterInit(chatViewModel.messageListLiveData.value!!)
         })
 
         val keyboardUtil = KeyboardUtil(requireContext())
@@ -61,6 +62,7 @@ class ChatFragment : Fragment() {
         socket.chatReceive()
         socket.receiveLiveData.observe(viewLifecycleOwner, {
             chatViewModel.messageListLiveData.value!!.oldChatMessageResponses.add(socket.receiveLiveData.value!!)
+            adapterInit(chatViewModel.messageListLiveData.value!!)
         })
 
         chat_more_iv.setOnClickListener{
@@ -109,4 +111,9 @@ class ChatFragment : Fragment() {
     }
 
     private fun getPage() = page++
+
+    private fun adapterInit(data: ChatMessageResponse){
+        adapter = ChatRVAdapter(data)
+        chat_rv.adapter = adapter
+    }
 }
