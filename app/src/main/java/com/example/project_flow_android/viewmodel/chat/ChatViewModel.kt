@@ -3,6 +3,7 @@ package com.example.project_flow_android.viewmodel.chat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.project_flow_android.data.model.sign.chat.ChatMessageResponse
 import com.example.project_flow_android.data.model.sign.chat.ProjectMemberResponse
 import com.example.project_flow_android.data.model.sign.chat.RoomListResponse
 import com.example.project_flow_android.data.model.sign.chat.RoomMemberResponse
@@ -19,9 +20,11 @@ class ChatViewModel : ViewModel() {
     private val _chatLiveData: MutableLiveData<ProjectMemberResponse> = MutableLiveData()
     private val _chatRoomLiveData: MutableLiveData<RoomListResponse> = MutableLiveData()
     private val _roomMemberLiveData: MutableLiveData<RoomMemberResponse> = MutableLiveData()
+    private val _messageListLiveData: MutableLiveData<ChatMessageResponse> = MutableLiveData()
     val chatLiveData = _chatLiveData
     val chatRoomLiveData = _chatRoomLiveData
     val roomMemberLiveData = _roomMemberLiveData
+    val messageListLiveData = _messageListLiveData
 
     fun getProjectUser() {
         viewModelScope.launch {
@@ -55,6 +58,18 @@ class ChatViewModel : ViewModel() {
             }
         }
     }
+
+    fun getChatList(chatRoomId: String, page: Int, size: Int){
+        viewModelScope.launch {
+            val response = chatRepository.getChatList(access_token, chatRoomId, page, size)
+            if(response.isSuccessful) {
+                if(response.code() == 200) {
+                    _messageListLiveData.postValue(response.body())
+                }
+            }
+        }
+    }
+
     fun setProjectId(projectId: String) {
         this.projectId = projectId
     }
