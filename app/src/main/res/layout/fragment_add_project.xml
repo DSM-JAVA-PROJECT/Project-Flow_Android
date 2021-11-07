@@ -3,8 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
 
-<FrameLayout
+        <variable
+            name="vm"
+            type="com.example.project_flow_android.viewmodel.flow.FlowViewModel" />
+    </data>
+
+
+    <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.flow.AddProjectFragment">
@@ -36,7 +43,7 @@
                 android:background="@color/color_light_gray"
                 android:fontFamily="@font/nanumgothic_regular"
                 android:singleLine="true"
-                android:text="" />
+                android:text="@{vm.projectName}" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -62,7 +69,7 @@
                 android:textSize="14sp"
                 android:fontFamily="@font/nanumgothic_regular"
                 android:singleLine="true"
-                android:text="" />
+                android:text="@{vm.projectExplain}" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -122,6 +129,7 @@
             android:backgroundTint="@color/blue_main"
             android:fontFamily="@font/nanumgothic_regular"
             android:text="@string/make_project"
+            android:onClick="@{()->vm.addProject()}"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -194,7 +202,9 @@
             android:gravity="end"
             android:hint="@string/add_schedule_bottom_date_hint"
             android:textColor="@color/black"
+            android:inputType="date"
             android:textSize="14sp"
+            android:text="@{vm.projectStartDate}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/period_project_tv" />
@@ -221,9 +231,11 @@
             android:clickable="false"
             android:focusable="false"
             android:gravity="end"
+            android:text="@{vm.projectEndDate}"
             android:hint="@string/add_schedule_bottom_date_hint"
             android:textColor="@color/black"
             android:textSize="14sp"
+            android:inputType="date"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
