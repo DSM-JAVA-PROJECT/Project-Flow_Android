@@ -10,13 +10,17 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.project_flow_android.R
+import com.example.project_flow_android.data.model.sign.chat.ChatMessageResponse
 import com.example.project_flow_android.network.SocketApplication
 import com.example.project_flow_android.ui.chat.ChatActivity
+import com.example.project_flow_android.ui.chat.ChatRVAdapter
 import com.example.project_flow_android.util.DialogUtil
 import com.example.project_flow_android.util.GalleryHelper
 import com.example.project_flow_android.util.KeyboardUtil
+import com.example.project_flow_android.viewmodel.chat.ChatViewModel
 import kotlinx.android.synthetic.main.add_schedule_bottom.*
 import kotlinx.android.synthetic.main.fragment_chat.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChatFragment : Fragment() {
 
@@ -25,7 +29,12 @@ class ChatFragment : Fragment() {
             Glide.with(requireContext()).load(it.data?.data).into(test_iv)
         }
     }
+
+    private val chatViewModel: ChatViewModel by viewModel()
     private val socket = SocketApplication.getSocket()
+    private val SIZE = 10
+    private var page = 0
+    private lateinit var adapter : ChatRVAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,12 +47,24 @@ class ChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        chatViewModel.getChatList(socket.getChatRoomId(), getPage(), SIZE)
+        chatViewModel.messageListLiveData.observe(viewLifecycleOwner, {
+            adapterInit(chatViewModel.messageListLiveData.value!!)
+        })
+
         val keyboardUtil = KeyboardUtil(requireContext())
         val dialogUtil = DialogUtil(requireContext())
         val galleryHelper = GalleryHelper(requireActivity(), startForResult)
 
         val layoutManager = LinearLayoutManager(requireContext())
+        layoutManager.stackFromEnd = true
         chat_rv.layoutManager = layoutManager
+
+        socket.chatReceive()
+        socket.receiveLiveData.observe(viewLifecycleOwner, {
+            chatViewModel.messageListLiveData.value!!.oldChatMessageResponses.add(socket.receiveLiveData.value!!)
+            adapterInit(chatViewModel.messageListLiveData.value!!)
+        })
 
         chat_more_iv.setOnClickListener{
             if(view_more.visibility == View.VISIBLE)
@@ -55,12 +76,15 @@ class ChatFragment : Fragment() {
         }
 
         chat_send_iv.setOnClickListener{
-            val message = chat_input_et.text.toString().trim()
-            socket.send(message)
-            chat_input_et.setText("")
+            if(chat_input_et.text.toString() != ""){
+                val message = chat_input_et.text.toString().trim()
+                socket.send(message)
+                chat_input_et.setText("")
+            }
         }
 
         chat_input_et.setOnClickListener{
+            chat_rv.scrollToPosition(chat_rv.adapter!!.itemCount - 1)
             view_more.visibility = View.GONE
         }
 
@@ -88,5 +112,13 @@ class ChatFragment : Fragment() {
             socket.setChatRoomId("")
             (activity as ChatActivity).popBackStack(ChatFragment())
         }
+    }
+
+    private fun getPage() = page++
+
+    private fun adapterInit(data: ChatMessageResponse){
+        adapter = ChatRVAdapter(data)
+        chat_rv.adapter = adapter
+        chat_rv.scrollToPosition(chat_rv.adapter!!.itemCount - 1)
     }
 }

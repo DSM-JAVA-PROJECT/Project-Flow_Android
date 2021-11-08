@@ -1,8 +1,14 @@
 package com.example.project_flow_android.network
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
+import com.example.project_flow_android.data.model.sign.chat.ChatMessageResponse
+import com.example.project_flow_android.data.model.sign.chat.ChatReceiveResponse
+import com.google.gson.Gson
+import com.google.gson.JsonParser
 import io.socket.client.IO
 import io.socket.client.Socket
+import io.socket.emitter.Emitter
 import io.socket.engineio.client.transports.WebSocket
 import org.json.JSONArray
 import org.json.JSONObject
@@ -21,10 +27,14 @@ class SocketApplication {
     }
     private val url = "http://54.89.202.59:8081"
     private val access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzQyODMzMjMsImlkIjoiNjE2N2JhNTQyNjdjYTEwZWI1NDkwNGE5IiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.Y_smWBnm1RrvToFW9kB9pHhnmgZIu0O73OZH4Cy3iZ4"
+    private val sub_access = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzU5ODgxMjUsImlkIjoiNjE4MzMyOTU0MzliNGU1Y2VhMjNhNjg0IiwiZW1haWwiOiJhYmgwOTIwb25lQG5hdmVyLmNvbSJ9.gO6C_afNJvyQoKTC5CN-cvhZuZaQRC5dHg9ptssTBag"
     private lateinit var socket : Socket
     private var chatRoomId = ""
-    private var projectId = "616c247724ffea704e117e6e"
+    private var projectId = "618333504aa95ded53f3b359"
     private var chatImage = ""
+    private val _receiveLiveData : MutableLiveData<ChatMessageResponse.ChatReceiveResponse> = MutableLiveData()
+    val receiveLiveData = _receiveLiveData
+
     fun connect(){
         Thread {
             try {
@@ -63,7 +73,12 @@ class SocketApplication {
         val data = JSONObject()
         data.put("message", message)
         data.put("chatRoomId", chatRoomId)
-        socket.emit("/message.send", data)
+        socket.emit("chatroom.rejoin", data)
+        socket.emit("message", data)
+    }
+
+    fun chatReceive(){
+        socket.on("message", onMassage)
     }
 
     fun setChatRoomId(chatRoomId: String){
@@ -83,4 +98,11 @@ class SocketApplication {
     fun getChatRoomId() = chatRoomId
 
     fun getChatImage() = chatImage
+
+    private val onMassage = Emitter.Listener { args ->
+        Log.i("Message payload", args[0].toString())
+        val json = args[0].toString()
+        val message = Gson().fromJson(json, ChatMessageResponse.ChatReceiveResponse::class.java)
+        _receiveLiveData.postValue(message)
+    }
 }

@@ -7,15 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.project_flow_android.R
 import com.example.project_flow_android.network.SocketApplication
 import com.example.project_flow_android.ui.chat.ChatActivity
+import com.example.project_flow_android.ui.chat.ManageRVAdapter
+import com.example.project_flow_android.viewmodel.chat.ChatViewModel
 import kotlinx.android.synthetic.main.fragment_manage.*
 import kotlinx.android.synthetic.main.fragment_modify.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ManageFragment : Fragment() {
 
+    private val chatViewModel : ChatViewModel by viewModel()
     private val socket = SocketApplication.getSocket()
 
     override fun onCreateView(
@@ -30,6 +35,15 @@ class ManageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         imageLoad(socket.getChatImage(), manage_project_iv)
+
+        chatViewModel.getRoomMember(socket.getChatRoomId())
+        val layoutManager = LinearLayoutManager(requireContext())
+        manage_rv.layoutManager = layoutManager
+
+        chatViewModel.roomMemberLiveData.observe(viewLifecycleOwner, {
+            val adapter = ManageRVAdapter(chatViewModel.roomMemberLiveData.value!!, requireActivity())
+            manage_rv.adapter = adapter
+        })
 
         manage_prev_iv.setOnClickListener{
             (activity as ChatActivity).popBackStack(ManageFragment())
