@@ -3,12 +3,15 @@ package com.example.project_flow_android.ui.chat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project_flow_android.R
 import com.example.project_flow_android.data.model.sign.chat.ChatMessageResponse
 import kotlinx.android.synthetic.main.chat_item_mine.view.*
 import kotlinx.android.synthetic.main.chat_item_other.view.*
 import java.lang.RuntimeException
+import java.text.ParseException
+import java.text.SimpleDateFormat
 
 class ChatRVAdapter(private val items: ChatMessageResponse) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -54,7 +57,8 @@ class ChatRVAdapter(private val items: ChatMessageResponse) :
         val view = v
         fun bind(item: ChatMessageResponse.ChatReceiveResponse) {
             view.chat_mine_content_tv.text = item.message
-            view.chat_mine_time_tv.text = item.createdAt
+            //view.chat_mine_time_tv.text = item.createdAt
+            dateFormat(item.createdAt, view.chat_mine_time_tv)
         }
     }
 
@@ -62,7 +66,8 @@ class ChatRVAdapter(private val items: ChatMessageResponse) :
         val view = v
         fun bind(item: ChatMessageResponse.ChatReceiveResponse) {
             view.chat_other_content_tv.text = item.message
-            view.chat_other_time_tv.text = item.createdAt
+            //view.chat_other_time_tv.text = item.createdAt
+            dateFormat(item.createdAt, view.chat_other_time_tv)
         }
     }
 
@@ -77,6 +82,19 @@ class ChatRVAdapter(private val items: ChatMessageResponse) :
         val view = v
         fun bind() {
 
+        }
+    }
+
+    private fun dateFormat(date: String, tv: TextView){
+        val old_format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+        val new_format = SimpleDateFormat("HH:mm")
+
+        try {
+            val old_date = old_format.parse(date)
+            val new_date = new_format.format(old_date)
+            tv.text = new_date
+        } catch (e: ParseException){
+            e.printStackTrace()
         }
     }
 }
