@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.data.remote.mypage.MyPageApiImpl
+import com.example.project_flow_android.feature.GetUserInfoResponse
 import com.example.project_flow_android.feature.GetUserTokenRequest
+import com.example.project_flow_android.feature.Projects
 import kotlinx.coroutines.launch
 
 class MyPageViewModel(
@@ -23,6 +25,8 @@ class MyPageViewModel(
     private val _successLogout = MutableLiveData<Boolean>()
     val successLogout: LiveData<Boolean> get() = _successLogout
 
+    private val _projects = MutableLiveData<GetUserInfoResponse>()
+    val projects: LiveData<GetUserInfoResponse> get() = _projects
 
     private val _successGet = MutableLiveData<Boolean>()
     val successGet: LiveData<Boolean> get() = _successGet
@@ -37,10 +41,23 @@ class MyPageViewModel(
             if (response.isSuccessful) {
                 userName.value = response.body()!!.name
             } else {
-                userName.value = "loading error😳"
+                userName.value = "로딩 실패"
             }
         }, {
-            userName.value = "loading error😳"
+            userName.value = "로딩 실패"
+        })
+    }
+
+    fun getProjectInfo() {
+        val token = sharedPreferenceStorage.getInfo("access_token")
+
+        myPageApiImpl.getUserInfo(token).subscribe({ response ->
+            if (response.isSuccessful) {
+                _projects.value = response.body()
+            } else {
+
+            }
+        }, {
         })
     }
 

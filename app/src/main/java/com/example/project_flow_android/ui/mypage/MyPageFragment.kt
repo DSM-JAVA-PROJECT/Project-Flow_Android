@@ -2,6 +2,7 @@ package com.example.project_flow_android.ui.mypage
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.LifecycleOwner
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseFragment
 import com.example.project_flow_android.databinding.FragmentMyPageBinding
@@ -12,10 +13,11 @@ import com.example.project_flow_android.viewmodel.mypage.MyPageViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_page){
+class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
 
-     override val vm : MyPageViewModel by viewModel()
-     val cv : ChangePasswordViewModel by viewModel()
+    override val vm: MyPageViewModel by viewModel()
+    private val cv: ChangePasswordViewModel by viewModel()
+    private val projectAdapter by lazy { UserProjectRVAdapter(vm) }
 
     private val logoutDialog by lazy {
         LogoutDialog(vm)
@@ -40,7 +42,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
     }
 
 
-    private fun getUserInfo(){
+    private fun getUserInfo() {
         vm.run {
             getUserInfo()
         }
@@ -48,21 +50,27 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        vm.getProjectInfo()
+        binding.userRv.adapter = projectAdapter
         getUserInfo()
         observeEvent()
 
     }
 
-     override fun observeEvent() {
-         binding.run {
-             binding.logoutTv.setOnClickListener{
-                 showLogoutDialog
-             }
+    override fun observeEvent() {
+        binding.run {
+            binding.logoutTv.setOnClickListener {
+                showLogoutDialog
+            }
 
-             binding.changePwTv.setOnClickListener {
-                 showChangePasswordDialog
-             }
-         }
+            binding.changePwTv.setOnClickListener {
+                showChangePasswordDialog
+            }
+        }
+        vm.run {
+            projects.observe(viewLifecycleOwner, {
+                projectAdapter.setItem(//TODO )
+            })
+        }
     }
 }
