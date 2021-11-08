@@ -2,23 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <variable
-            name="vm"
-            type="com.example.project_flow_android.viewmodel.mypage.MyPageViewModel" />
-
-        <variable
-            name="project_name"
-            type="String" />
-
-        <variable
-            name="project_content"
-            type="String" />
-
-
-    </data>
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
     android:layout_height="80dp">
