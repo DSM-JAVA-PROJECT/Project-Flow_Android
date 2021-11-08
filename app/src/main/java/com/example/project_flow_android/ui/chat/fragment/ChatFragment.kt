@@ -57,6 +57,7 @@ class ChatFragment : Fragment() {
         val galleryHelper = GalleryHelper(requireActivity(), startForResult)
 
         val layoutManager = LinearLayoutManager(requireContext())
+        layoutManager.stackFromEnd = true
         chat_rv.layoutManager = layoutManager
 
         socket.chatReceive()
@@ -75,12 +76,15 @@ class ChatFragment : Fragment() {
         }
 
         chat_send_iv.setOnClickListener{
-            val message = chat_input_et.text.toString().trim()
-            socket.send(message)
-            chat_input_et.setText("")
+            if(chat_input_et.text.toString() != ""){
+                val message = chat_input_et.text.toString().trim()
+                socket.send(message)
+                chat_input_et.setText("")
+            }
         }
 
         chat_input_et.setOnClickListener{
+            chat_rv.scrollToPosition(chat_rv.adapter!!.itemCount - 1)
             view_more.visibility = View.GONE
         }
 
@@ -115,5 +119,6 @@ class ChatFragment : Fragment() {
     private fun adapterInit(data: ChatMessageResponse){
         adapter = ChatRVAdapter(data)
         chat_rv.adapter = adapter
+        chat_rv.scrollToPosition(chat_rv.adapter!!.itemCount - 1)
     }
 }
