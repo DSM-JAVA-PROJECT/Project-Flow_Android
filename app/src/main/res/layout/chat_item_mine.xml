@@ -9,8 +9,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="wrap_content"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
         android:layout_margin="15dp"
+        android:layout_marginStart="100dp"
         android:backgroundTint="@color/color_flow"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,9 +25,9 @@
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:fontFamily="@font/font_roboto_regular"
-            android:maxLength="20"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
+            android:maxWidth="260dp"
             android:textColor="@color/white" />
 
     </androidx.cardview.widget.CardView>

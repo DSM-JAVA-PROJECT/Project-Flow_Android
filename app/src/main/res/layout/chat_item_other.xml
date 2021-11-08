@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:maxLength="20"
+            android:maxWidth="260dp"
             android:textColor="@color/black"
             android:fontFamily="@font/font_roboto_regular"/>
 
