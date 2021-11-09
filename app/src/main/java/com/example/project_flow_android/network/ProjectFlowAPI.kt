@@ -4,6 +4,7 @@ import com.example.project_flow_android.feature.*
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import retrofit2.http.*
+import java.io.File
 
 
 interface ProjectFlowAPI {
@@ -25,6 +26,10 @@ interface ProjectFlowAPI {
 
     @PATCH("/auth/password")
     fun changePassword(@Header("Authorization") token :String,@Body password : NewPasswordRequest) : Single<Response<Void>>
+
+    @Multipart
+    @PATCH("/auth/image")
+    fun changeProfileImage(@Header("Authorization") token: String,@Part ("file") file : File) : Single<Response<Void>>
 
 
 
