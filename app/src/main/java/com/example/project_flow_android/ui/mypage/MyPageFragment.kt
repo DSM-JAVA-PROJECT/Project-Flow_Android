@@ -52,6 +52,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         super.onViewCreated(view, savedInstanceState)
         vm.getProjectInfo()
         binding.userRv.adapter = projectAdapter
+        binding.userRv.addItemDecoration(VerticalItemDecorator(20))
         getUserInfo()
         observeEvent()
 

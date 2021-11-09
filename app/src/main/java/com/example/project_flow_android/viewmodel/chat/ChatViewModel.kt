@@ -1,100 +1,76 @@
 package com.example.project_flow_android.viewmodel.chat
 
-import android.annotation.SuppressLint
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.project_flow_android.data.chat.ProjectMemberResponse
 import com.example.project_flow_android.data.chat.RoomListResponse
+import com.example.project_flow_android.data.model.sign.chat.ChatMessageResponse
+import com.example.project_flow_android.data.model.sign.chat.RoomMemberResponse
 import com.example.project_flow_android.data.remote.chat.ChatRepositoryImpl
 import kotlinx.coroutines.launch
-import org.json.JSONObject
-import ua.naiksoftware.stomp.Stomp
-import ua.naiksoftware.stomp.dto.LifecycleEvent
-import ua.naiksoftware.stomp.dto.StompHeader
 
 class ChatViewModel : ViewModel() {
-    private val TAG = "StompClient"
-    private val URL = "ws://54.180.224.67:8080/websocket"
-    private val access_token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzQyODMzMjMsImlkIjoiNjE2N2JhNTQyNjdjYTEwZWI1NDkwNGE5IiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.Y_smWBnm1RrvToFW9kB9pHhnmgZIu0O73OZH4Cy3iZ4"
-    private val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, URL)
-    private var chatRoomId = 0
-    private var projectId = "616c247724ffea704e117e6e"
+    private val access_token =
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzQyODMzMjMsImlkIjoiNjE2N2JhNTQyNjdjYTEwZWI1NDkwNGE5IiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.Y_smWBnm1RrvToFW9kB9pHhnmgZIu0O73OZH4Cy3iZ4"
+    private val sub_access = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzU5ODgxMjUsImlkIjoiNjE4MzMyOTU0MzliNGU1Y2VhMjNhNjg0IiwiZW1haWwiOiJhYmgwOTIwb25lQG5hdmVyLmNvbSJ9.gO6C_afNJvyQoKTC5CN-cvhZuZaQRC5dHg9ptssTBag"
+    private var projectId = "618333504aa95ded53f3b359"
 
     private val chatRepository = ChatRepositoryImpl()
-    private val _chatLiveData : MutableLiveData<ProjectMemberResponse> = MutableLiveData()
-    private val _chatRoomLiveData : MutableLiveData<RoomListResponse> = MutableLiveData()
+    private val _chatLiveData: MutableLiveData<ProjectMemberResponse> = MutableLiveData()
+    private val _chatRoomLiveData: MutableLiveData<RoomListResponse> = MutableLiveData()
+    private val _roomMemberLiveData: MutableLiveData<RoomMemberResponse> = MutableLiveData()
+    private val _messageListLiveData: MutableLiveData<ChatMessageResponse> = MutableLiveData()
     val chatLiveData = _chatLiveData
     val chatRoomLiveData = _chatRoomLiveData
+    val roomMemberLiveData = _roomMemberLiveData
+    val messageListLiveData = _messageListLiveData
 
-    fun connect(){
-        Thread {
-            val headerList = ArrayList<StompHeader>()
-            headerList.add(StompHeader("Authorization", access_token))
-
-            stompClient.lifecycle().subscribe{
-                when(it.type){
-                    LifecycleEvent.Type.OPENED -> Log.d(TAG, "stomp connection opened")
-                    LifecycleEvent.Type.ERROR -> Log.d(TAG, "stomp connection error")
-                    LifecycleEvent.Type.CLOSED -> Log.d(TAG, "stomp connection closed")
-                    LifecycleEvent.Type.FAILED_SERVER_HEARTBEAT -> Log.d(TAG, "stomp failed server heartbeat")
-                }
-            }
-            stompClient.connect(headerList)
-        }.start()
-    }
-
-    fun send(message: String){
-        val data = JSONObject()
-        data.put("message", message)
-        stompClient.send("/chat/$chatRoomId/send", data.toString()).subscribe()
-    }
-
-    @SuppressLint("CheckResult")
-    fun subscribe(destinationPath: String){
-        stompClient.topic(destinationPath).subscribe({
-            Log.i(TAG, it.payload)
-        }) {throwable -> Log.e(TAG,"Error on subscribe topic", throwable)}
-    }
-
-    fun createRoom(emails : ArrayList<String>){
-        val data = JSONObject()
-        data.put("emails", emails)
-        stompClient.send("/create/chatroom/$projectId", data.toString()).subscribe()
-    }
-
-    fun disconnect(){
-        stompClient.disconnect()
-    }
-
-    fun getProjectUser(){
+    fun getProjectUser() {
         viewModelScope.launch {
             val response = chatRepository.getProjectUser(access_token, projectId)
-            if(response.isSuccessful){
-                if(response.code() == 200){
+            if (response.isSuccessful) {
+                if (response.code() == 200) {
                     _chatLiveData.postValue(response.body())
                 }
             }
         }
     }
 
-    fun getRoomList(){
+    fun getRoomList() {
         viewModelScope.launch {
             val response = chatRepository.getRoomList(access_token, projectId)
-            if(response.isSuccessful){
-                if(response.code() == 200){
+            if (response.isSuccessful) {
+                if (response.code() == 200) {
                     _chatRoomLiveData.postValue(response.body())
                 }
             }
         }
     }
 
-    fun setChatRoomId(chatRoomId: Int){
-        this.chatRoomId = chatRoomId
+    fun getRoomMember(chatRoomId: String) {
+        viewModelScope.launch {
+            val response = chatRepository.getRoomMember(access_token, chatRoomId)
+            if(response.isSuccessful) {
+                if(response.code() == 200){
+                    _roomMemberLiveData.postValue(response.body())
+                }
+            }
+        }
     }
 
-    fun setProjectId(projectId: String){
+    fun getChatList(chatRoomId: String, page: Int, size: Int){
+        viewModelScope.launch {
+            val response = chatRepository.getChatList(access_token, chatRoomId, page, size)
+            if(response.isSuccessful) {
+                if(response.code() == 200) {
+                    _messageListLiveData.postValue(response.body())
+                }
+            }
+        }
+    }
+
+    fun setProjectId(projectId: String) {
         this.projectId = projectId
     }
 
