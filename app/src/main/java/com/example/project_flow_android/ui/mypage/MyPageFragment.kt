@@ -27,14 +27,14 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         ChangePasswordDialog(cv)
     }
 
-    private val showLogoutDialog by lazy {
+    private fun showLogoutDialog(){
         logoutDialog.show(
             requireActivity().supportFragmentManager,
             "logoutDialog"
         )
     }
 
-    private val showChangePasswordDialog by lazy {
+    private fun showChangePasswordDialog(){
         changepasswordDialog.show(
             requireActivity().supportFragmentManager,
             "changePasswordDialog"
@@ -60,16 +60,21 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
     override fun observeEvent() {
         binding.run {
             binding.logoutTv.setOnClickListener {
-                showLogoutDialog
+                showLogoutDialog()
             }
 
             binding.changePwTv.setOnClickListener {
-                showChangePasswordDialog
+                showChangePasswordDialog()
             }
         }
         vm.run {
             projects.observe(viewLifecycleOwner, {
-                projectAdapter.setItem(//TODO )
+                projectAdapter.setItem(it.projects)
+            })
+        }
+        vm.run {
+            successChange.observe(viewLifecycleOwner,{
+
             })
         }
     }
