@@ -52,7 +52,8 @@ class ChatListFragment: Fragment() {
 
     private fun itemClick(v: View, position: Int) {
         socket.setChatRoomId(chatViewModel.chatRoomLiveData.value!!.responses[position].id)
-        socket.setChatImage(chatViewModel.chatRoomLiveData.value!!.responses[position].chatRoomImage)
+        if(chatViewModel.chatRoomLiveData.value!!.responses[position].chatRoomImage != null)
+            socket.setChatImage(chatViewModel.chatRoomLiveData.value!!.responses[position].chatRoomImage)
         (activity as ChatActivity).replace(ChatFragment())
     }
 }
