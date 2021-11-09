@@ -21,7 +21,8 @@ class ProjectFlowApplication : Application() {
                     chatViewModelModule,
                     finishRegisterModule,
                     aboutProjectmodule,
-                    mypageModule
+                    mypageModule,
+                    flowModule
                 )
             )
         }
