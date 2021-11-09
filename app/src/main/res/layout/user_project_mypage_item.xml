@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="vm"
@@ -14,18 +15,20 @@
             type="String" />
 
         <variable
+            name="project_end"
+            type="String" />
+        <variable
             name="project_image"
             type="String" />
 
     </data>
 
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="80dp">
 
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_info_item_profile_iv"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -33,7 +36,7 @@
             android:layout_marginStart="25dp"
             android:background="@drawable/profile_radius"
             android:elevation="10dp"
-            app:glide_image_load="@->{projectImage}"
+            app:glide_image_load="@{project_image}"
             app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
@@ -61,19 +64,16 @@
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/user_info_end_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_roboto_regular"
+                android:text="@{project_end}"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
 
-        <co.lujun.androidtagview.TagContainerLayout
-            android:id="@+id/user_info_tag"
-            android:layout_width="70dp"
-            android:layout_height="20dp"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="80dp"
-            android:padding="10dp"
-            app:container_enable_drag="false"
-            app:horizontal_interval="10dp"
-            app:tag_clickable="false"
-            app:vertical_interval="10dp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/user_info_success_tv"
