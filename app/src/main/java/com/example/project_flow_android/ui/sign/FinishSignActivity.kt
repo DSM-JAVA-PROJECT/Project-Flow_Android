@@ -1,4 +1,4 @@
-package com.example.project_flow_android.ui.sign.ui
+package com.example.project_flow_android.ui.sign
 
 
 import android.content.Intent
@@ -31,7 +31,7 @@ class FinishSignActivity : BaseActivity<ActivityFinishSignBinding>(R.layout.acti
         }
 
         binding.successRegisterBtn.setOnClickListener{
-            val intent = Intent(this@FinishSignActivity,LoginActivity::class.java)
+            val intent = Intent(this@FinishSignActivity, LoginActivity::class.java)
             startActivity(intent)
         }
     }

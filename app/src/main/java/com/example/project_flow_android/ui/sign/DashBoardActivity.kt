@@ -1,15 +1,10 @@
-package com.example.project_flow_android.ui.sign.ui
+package com.example.project_flow_android.ui.sign
 
-import android.content.ActivityNotFoundException
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
-import androidx.lifecycle.ViewModel
 import com.example.project_flow_android.R
-import com.example.project_flow_android.base.BaseActivity
-import com.example.project_flow_android.ui.main.MainActivity
 
 
 class DashBoardActivity : AppCompatActivity() {
@@ -23,7 +18,7 @@ class DashBoardActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
             finish()
-        },DURATION)
+        }, DURATION)
 
     }
     companion object {
