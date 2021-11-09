@@ -8,6 +8,7 @@
         android:id="@+id/cardView2"
         android:layout_width="250dp"
         android:layout_height="125dp"
+        android:layout_margin="15dp"
         android:backgroundTint="@color/color_flow"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
