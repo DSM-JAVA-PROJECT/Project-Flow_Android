@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="250dp"
+        android:layout_height="125dp"
+        android:backgroundTint="@color/color_flow"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:fontFamily="@font/font_roboto_bold"
+            android:text="@string/chat_plan_item_title"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/plan_item_other_iv"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/plan_image_radius"
+            android:elevation="10dp" />
+
+        <TextView
+            android:id="@+id/plan_item_other_content_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="77dp"
+            android:layout_marginTop="45dp"
+            android:fontFamily="@font/font_roboto_bold"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/plan_item_other_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="77dp"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/font_roboto_regular"
+            android:textColor="@color/white"
+            android:textSize="8sp" />
+
+        <Button
+            android:layout_width="160dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="77dp"
+            android:layout_marginTop="75dp"
+            android:backgroundTint="@color/white"
+            android:elevation="10dp"
+            android:fontFamily="@font/font_roboto_bold"
+            android:gravity="center"
+            android:text="@string/chat_plan_item_join"
+            android:textColor="@color/black"
+            android:textSize="8sp"
+            android:textStyle="bold" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/plan_item_other_time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginStart="5dp"
+        android:textColor="@color/black"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cardView2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
