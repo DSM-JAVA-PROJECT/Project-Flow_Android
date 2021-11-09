@@ -47,6 +47,7 @@ class ChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        socket.rejoin()
         chatViewModel.getChatList(socket.getChatRoomId(), getPage(), SIZE)
         chatViewModel.messageListLiveData.observe(viewLifecycleOwner, {
             adapterInit(chatViewModel.messageListLiveData.value!!)
@@ -115,6 +116,10 @@ class ChatFragment : Fragment() {
     }
 
     private fun getPage() = page++
+
+    fun setPage(page: Int) {
+        this.page = page
+    }
 
     private fun adapterInit(data: ChatMessageResponse){
         adapter = ChatRVAdapter(data)
