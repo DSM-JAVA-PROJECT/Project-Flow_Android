@@ -12,8 +12,10 @@ import com.example.project_flow_android.ui.chat.fragment.ChatListFragment
 import com.example.project_flow_android.ui.flow.AddProjectFragment
 import com.example.project_flow_android.ui.flow.FlowFragment
 import com.example.project_flow_android.ui.mypage.MyPageFragment
+import com.example.project_flow_android.ui.sign.LoginActivity
 import com.example.project_flow_android.viewmodel.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_login.*
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
@@ -39,6 +41,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         supportFragmentManager.beginTransaction().hide(vm.activeFragment ?: calendarFragment)
             .show(fragment).commit()
         vm.activeFragment = fragment
+    }
+    fun startLogin(){
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
     }
 
     private val flowFragment = FlowFragment()

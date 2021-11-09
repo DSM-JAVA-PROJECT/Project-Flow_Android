@@ -13,10 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectFlow_Android"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.sign.ui.FinishSignActivity" />
-        <activity android:name=".ui.sign.ui.CertificationActivity" />
-        <activity android:name=".ui.sign.ui.EditPasswordActivity" />
-        <activity android:name=".ui.sign.ui.DashBoardActivity">
+        <activity android:name=".ui.sign.FinishSignActivity" />
+        <activity android:name=".ui.sign.CertificationActivity" />
+        <activity android:name=".ui.sign.EditPasswordActivity" />
+        <activity android:name=".ui.sign.DashBoardActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
@@ -24,8 +24,8 @@
         </intent-filter>
     </activity>
         <activity android:name=".ui.chat.ChatActivity" />
-        <activity android:name=".ui.sign.ui.RegisterActivity" />
-        <activity android:name=".ui.sign.ui.LoginActivity" />
+        <activity android:name=".ui.sign.RegisterActivity" />
+        <activity android:name=".ui.sign.LoginActivity" />
         <activity android:name=".ui.main.MainActivity" />
     </application>
 

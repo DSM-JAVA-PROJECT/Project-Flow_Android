@@ -9,6 +9,7 @@ import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
+import java.io.File
 
 class MyPageApiImpl {
 
@@ -25,6 +26,11 @@ class MyPageApiImpl {
         password: NewPasswordRequest
     ): @NonNull Single<Response<Void>> =
         providerMypageApi().changePassword(token, password)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+
+    fun changeImage(token: String,image : File): @NonNull Single<Response<Void>> =
+        providerMypageApi().changeProfileImage(token, image)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 

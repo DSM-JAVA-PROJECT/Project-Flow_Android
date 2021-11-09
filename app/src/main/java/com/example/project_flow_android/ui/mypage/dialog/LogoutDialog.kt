@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseDialog
 import com.example.project_flow_android.databinding.DialogLogoutBinding
+import com.example.project_flow_android.ui.main.MainActivity
 import com.example.project_flow_android.viewmodel.mypage.MyPageViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -18,13 +19,10 @@ class LogoutDialog(override val vm: MyPageViewModel) :
 
         vm.run {
             binding.checkLogoutTv.setOnClickListener {
-                if (successLogout.value!!) {
-                    doLogout()
-                    dismiss()
-                }
+                dismiss()
             }
             binding.checkCancelTv.setOnClickListener {
-                dismiss()
+                (requireActivity() as MainActivity).startLogin()
             }
         }
 

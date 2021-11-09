@@ -1,4 +1,4 @@
-package com.example.project_flow_android.ui.sign.ui
+package com.example.project_flow_android.ui.sign
 
 import android.content.Intent
 import android.os.Bundle

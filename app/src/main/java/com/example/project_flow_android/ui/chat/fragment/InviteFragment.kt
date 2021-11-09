@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.project_flow_android.R
+import com.example.project_flow_android.ui.chat.ChatActivity
 import kotlinx.android.synthetic.main.fragment_invite.*
 
 class InviteFragment : Fragment() {
@@ -22,9 +23,7 @@ class InviteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         invite_prev_iv.setOnClickListener{
-            val fragmentManager = requireActivity().supportFragmentManager
-            fragmentManager.beginTransaction().remove(ScheduleFragment()).commit()
-            fragmentManager.popBackStack()
+            (activity as ChatActivity).popBackStack(InviteFragment())
         }
     }
 }

@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.project_flow_android.R
+import com.example.project_flow_android.network.SocketApplication
+import com.example.project_flow_android.ui.chat.ChatActivity
 import com.example.project_flow_android.ui.chat.CreateRVAdapter
 import com.example.project_flow_android.viewmodel.chat.ChatViewModel
 import kotlinx.android.synthetic.main.chat_create_user_item.view.*
@@ -15,6 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChatCreateFragment : Fragment() {
     private val chatViewModel : ChatViewModel by viewModel()
+    private val socket = SocketApplication.getSocket()
     private val userState = HashMap<Int, Boolean>()
     private val userList = ArrayList<String>()
     private val userEmail = ArrayList<String>()
@@ -45,7 +48,8 @@ class ChatCreateFragment : Fragment() {
         })
 
         chat_create_btn.setOnClickListener{
-            chatViewModel.createRoom(userEmail)
+            socket.createRoom(userEmail)
+            (activity as ChatActivity).replace(ChatListFragment())
         }
     }
 
@@ -66,7 +70,7 @@ class ChatCreateFragment : Fragment() {
     private fun itemSelected(v: View, position: Int){
         userState[position] = true
         userList.add(v.create_user_item_name_tv.text.toString())
-        userEmail.add(chatViewModel.chatLiveData.value!!.responses[position].email)
+        userEmail.add(chatViewModel.chatLiveData.value!!.responses[position].id)
         val user = userList.joinToString(" ")
 
         v.create_user_cv.setBackgroundColor(resources.getColor(R.color.color_flow, null))
@@ -77,7 +81,7 @@ class ChatCreateFragment : Fragment() {
     private fun itemDeselected(v: View, position: Int){
         userState[position] = false
         userList.remove(v.create_user_item_name_tv.text.toString())
-        userEmail.remove(chatViewModel.chatLiveData.value!!.responses[position].email)
+        userEmail.remove(chatViewModel.chatLiveData.value!!.responses[position].id)
         val user = userList.joinToString(" ")
 
         v.create_user_cv.setBackgroundColor(resources.getColor(R.color.white, null))

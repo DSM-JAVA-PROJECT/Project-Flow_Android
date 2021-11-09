@@ -46,6 +46,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chat_rv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -57,7 +58,7 @@
     <ImageView
         android:id="@+id/test_iv"
         android:layout_width="300dp"
-        android:layout_height="300dp"/>
+        android:layout_height="wrap_content"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -82,7 +83,7 @@
 
         <EditText
             android:id="@+id/chat_input_et"
-            android:layout_width="345dp"
+            android:layout_width="315dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:background="@drawable/chat_et_radius"
@@ -98,11 +99,11 @@
             android:id="@+id/chat_send_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
             android:src="@drawable/ic_chat_send"
-            app:layout_constraintBottom_toBottomOf="@+id/chat_input_et"
-            app:layout_constraintEnd_toEndOf="@+id/chat_input_et"
-            app:layout_constraintTop_toTopOf="@+id/chat_input_et" />
+            android:layout_marginEnd="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
