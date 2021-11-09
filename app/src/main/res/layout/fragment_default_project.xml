@@ -3,13 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
-        <variable
-            name="vm"
-            type="com.example.project_flow_android.viewmodel.flow.ProjectViewModel"
-            />
-    </data>
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -40,9 +33,9 @@
                 android:id="@+id/nim_project"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
                 android:text="@string/who_project"
                 android:textSize="20sp"
-                android:layout_marginTop="50sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/user_name"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -51,14 +44,25 @@
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@={vm.user}"
                 android:layout_marginStart="70sp"
-                android:layout_marginTop="50sp"
+                android:layout_marginTop="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/go_add_peoject_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_add_24" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </FrameLayout>
 </layout>

@@ -1,4 +1,4 @@
-package com.example.project_flow_android.data.model.sign.chat
+package com.example.project_flow_android.data.chat
 
 data class RoomListResponse(val responses: ArrayList<ChatRoomResponse>) {
     data class ChatRoomResponse(

@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project_flow_android.R
-import com.example.project_flow_android.data.model.sign.chat.ProjectMemberResponse
+import com.example.project_flow_android.data.chat.ProjectMemberResponse
 import kotlinx.android.synthetic.main.chat_create_user_item.view.*
 
 class CreateRVAdapter(private val items : ProjectMemberResponse) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -39,7 +39,7 @@ class CreateRVAdapter(private val items : ProjectMemberResponse) : RecyclerView.
         fun bind(item: ProjectMemberResponse.User){
             view.create_user_item_name_tv.text = item.name
 
-            val position = absoluteAdapterPosition
+            //val position = absoluteAdapterPosition
             if(position != RecyclerView.NO_POSITION){
                 itemView.setOnClickListener{
                     itemClickListener?.onItemClick(itemView, position)

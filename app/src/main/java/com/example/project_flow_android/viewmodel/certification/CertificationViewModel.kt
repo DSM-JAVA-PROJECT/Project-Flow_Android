@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.project_flow_android.data.SharedPreferenceStorage
-import com.example.project_flow_android.data.remote.CertificationApiImpl
-import com.example.project_flow_android.data.remote.SignApiImpl
+import com.example.project_flow_android.data.remote.sign.CertificationApiImpl
+import com.example.project_flow_android.data.remote.sign.SignApiImpl
 import com.example.project_flow_android.feature.CertificationRequest
 import com.example.project_flow_android.feature.PostCertificationRequest
 import com.example.project_flow_android.feature.RegisterRequest

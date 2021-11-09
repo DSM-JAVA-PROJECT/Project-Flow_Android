@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.project_flow_android.data.SharedPreferenceStorage
-import com.example.project_flow_android.data.remote.SignApiImpl
-import com.example.project_flow_android.feature.RegisterRequest
 
 class RegisterViewModel(
     private val sharedPrefenceStorage: SharedPreferenceStorage

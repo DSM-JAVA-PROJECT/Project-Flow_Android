@@ -1,5 +1,6 @@
 package com.example.project_flow_android.network
 
+import android.app.TaskStackBuilder.create
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,7 +15,9 @@ object ApiProvider {
     private const val WRITE_TIME_OUT: Long = 15
     private const val READ_TIME_OUT: Long = 15
     private var chatRetrofitBuilder : Retrofit
+    private var retrofirBuilder : Retrofit
     private var chatApi : ChatApi
+    private var Api : ProjectFlowAPI
 
     private val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
@@ -32,7 +35,18 @@ object ApiProvider {
         client(okHttpClient)
         addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         addConverterFactory(GsonConverterFactory.create())
+
     }.build()
+
+    init{
+        retrofirBuilder = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+
+        Api = retrofirBuilder.create(ProjectFlowAPI::class.java)
+    }
 
     init {
         chatRetrofitBuilder = Retrofit.Builder()
@@ -45,4 +59,6 @@ object ApiProvider {
     }
 
     fun getChatAPI() = chatApi
+    fun getAPI() = Api
+
 }

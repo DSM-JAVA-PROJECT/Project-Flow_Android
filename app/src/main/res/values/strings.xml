@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Project-Flow_Android</string>
-
-    <!--  Chatting  -->
     <string name="chat_manage_text">방 관리</string>
     <string name="chat_input_text">메시지를 입력하세요</string>
     <string name="chat_photo">앨범</string>
@@ -75,7 +73,24 @@
     <string name="editfinal">마감날짜</string>
     <string name="add_member">팀원 추가하기</string>
     <string name="project_image">프로젝트 이미지 추가</string>
+    <string name="add_member_email">초대할 팀원의 이메일을 입력해주세요</string>
+    <string name="started_project">프로젝트 시작하기</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_main_image">프로젝트 대표 이미지를 넣어주세요</string>
     <string name="upload_project_name">프로젝트명을 입력해주세요</string>
+    <string name="mypage_title">마이페이지</string>
+    <string name="change_password">비밀번호 변경</string>
+    <string name="logout">로그아웃</string>
+    <string name="my_project">나의 프로젝트</string>
+    <string name="show_all_project">나의 모든 프로젝트를 확인할 수 있습니다</string>
+    <string name="explain_project_im">프로젝트 설명을 입력해주세요 (선택)</string>
+    <string name="menu_calendar">캘린더</string>
+    <string name="explain_project">프로젝트 설명을 입력해주세요 (선택)</string>
+    <string name="per_project">프로젝트 기간</string>
+    <string name="exp_project">프로젝트 설명을 입력해주세요 (선택)</string>
+    <string name="exp_name">프로젝트 이름을 입력해주세요</string>
+    <string name="logout_second">프플에서 로그아웃 하시겠습니까?</string>
+    <string name="logout_yes">네</string>
+    <string name="logout_no">아니요</string>
+    <string name="change_password_edit">변경할 비밀번호를 설정해주세요</string>
 </resources>

@@ -2,9 +2,9 @@ package com.example.project_flow_android.network
 
 import com.example.project_flow_android.feature.*
 import io.reactivex.rxjava3.core.Single
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
+import java.io.File
 
 
 interface ProjectFlowAPI {
@@ -21,8 +21,16 @@ interface ProjectFlowAPI {
     @POST("/email/verifyCode")
     fun checkCertification(@Body request: PostCertificationRequest): Single<Response<Void>>
 
-    @POST("/project")
-    fun addProject(@Body request: AddProjectRequest): Single<Response<Void>>
+    @GET("/auth/myPage")
+    fun getuserInfo(@Header("Authorization") token: String): Single<Response<GetUserInfoResponse>>
+
+    @PATCH("/auth/password")
+    fun changePassword(@Header("Authorization") token :String,@Body password : NewPasswordRequest) : Single<Response<Void>>
+
+    @Multipart
+    @PATCH("/auth/image")
+    fun changeProfileImage(@Header("Authorization") token: String,@Part ("file") file : File) : Single<Response<Void>>
+
 
 
 }

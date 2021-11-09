@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.project_flow_android.R
-import com.example.project_flow_android.data.model.sign.chat.RoomListResponse
+import com.example.project_flow_android.data.chat.RoomListResponse
 import kotlinx.android.synthetic.main.chat_list_item.view.*
 
 class RoomRVAdapter(private val items : RoomListResponse, private val activity: Activity) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

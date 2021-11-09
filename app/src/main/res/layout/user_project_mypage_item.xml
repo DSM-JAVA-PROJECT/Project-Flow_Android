@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="vm"
+            type="com.example.project_flow_android.viewmodel.mypage.MyPageViewModel" />
+
+        <variable
+            name="project_name"
+            type="String" />
+
+        <variable
+            name="project_content"
+            type="String" />
+
+        <variable
+            name="project_end"
+            type="String" />
+        <variable
+            name="project_image"
+            type="String" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_info_item_profile_iv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="25dp"
+            android:background="@drawable/profile_radius"
+            android:elevation="10dp"
+            app:glide_image_load="@{project_image}"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="100dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/user_info_item_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_roboto_regular"
+                android:text="@{project_name}"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/user_info_term_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_roboto_regular"
+                android:text="@{project_content}"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/user_info_end_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_roboto_regular"
+                android:text="@{project_end}"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/user_info_success_tv"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/user_info_success_radius"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:text="@string/user_info_finish"
+            android:textColor="@color/white" />
+
+    </androidx.cardview.widget.CardView>
+</layout>

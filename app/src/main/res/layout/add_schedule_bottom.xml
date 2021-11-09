@@ -81,7 +81,7 @@
         app:layout_constraintTop_toBottomOf="@+id/add_schedule_content_et" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/startdate_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"

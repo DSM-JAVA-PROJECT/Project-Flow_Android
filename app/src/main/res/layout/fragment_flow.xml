@@ -5,7 +5,7 @@
     <data>
         <variable
             name="vm"
-            type="com.example.project_flow_android.viewmodel.flow.ProjectViewModel"
+            type="com.example.project_flow_android.viewmodel.flow.FlowViewModel"
             />
     </data>
 
