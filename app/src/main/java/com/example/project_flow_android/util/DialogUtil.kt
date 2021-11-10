@@ -21,7 +21,7 @@ class DialogUtil(private val context: Context) {
         datePicker.show()
     }
 
-    fun shoBottomSheet() : BottomSheetDialog{
+    fun showBottomSheet() : BottomSheetDialog{
         val bottom = BottomSheetDialog(context)
         bottom.setContentView(R.layout.add_schedule_bottom)
         return bottom
