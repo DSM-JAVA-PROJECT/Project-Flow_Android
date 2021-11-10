@@ -14,20 +14,11 @@ class MyPageViewModel(
 ) : ViewModel() {
 
     val userName = MutableLiveData<String>()
-
     val profileImage = MutableLiveData<File>()
-
-    private val _clearAll = MutableLiveData<Boolean>()
-    val clearAll: LiveData<Boolean> get() = _clearAll
-
-    private val _successLogout = MutableLiveData<Boolean>()
-    val successLogout: LiveData<Boolean> get() = _successLogout
 
     private val _projects = MutableLiveData<GetUserInfoResponse>()
     val projects: LiveData<GetUserInfoResponse> get() = _projects
 
-    private val _successGet = MutableLiveData<Boolean>()
-    val successGet: LiveData<Boolean> get() = _successGet
 
     private val _successChange = MutableLiveData<Boolean>()
     val successChange: LiveData<Boolean> get() = _successChange
