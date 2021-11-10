@@ -1,80 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
         <variable
             name="vm"
-            type="com.example.project_flow_android.viewmodel.flow.FlowViewModel" />
+            type="com.example.project_flow_android.viewmodel.flow.FlowViewModel"
+            />
     </data>
 
-
-    <FrameLayout
-        android:id="@+id/fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/empty_project_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/flow_empty_project" />
-
-        <TextView
-            android:id="@+id/empty_project_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="70sp"
-            android:fontFamily="@font/nanumgothic_regular"
-            android:text="@string/empty_project" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/nim_project"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:fontFamily="@font/nanumgothic_regular"
-                android:text="@string/who_project"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/input_user_name"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/input_user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50sp"
-                android:layout_marginTop="50dp"
-                android:fontFamily="@font/nanumgothic_regular"
-                android:text="@={vm.inputName}"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addproject_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="330dp"
-            android:layout_marginBottom="40dp"
-            android:backgroundTint="@color/blue_main"
-            android:clickable="true"
-            app:srcCompat="@drawable/ic_baseline_add_24" />
+<FrameLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.flow.FlowFragment"
+    android:orientation="vertical">
 
 
-    </FrameLayout>
-
+</FrameLayout>
 </layout>

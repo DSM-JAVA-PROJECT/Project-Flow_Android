@@ -26,11 +26,11 @@ class SocketApplication {
         }
     }
     private val url = "http://54.89.202.59:8081"
-    private val access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzY0MzQyNDYsImlkIjoiNjE4OWZlOTcwYzliZmQyYjk4MDRmZjg2IiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.6cNSlsTiL4UG4arInBRPaJjV4MeemeXmDiMZiDxXKVQ"
-    private val sub_access = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzY0MzQyNjMsImlkIjoiNjE4OWZlYTMwYzliZmQyYjk4MDRmZjg3IiwiZW1haWwiOiJhYmgwOTIwb25lQG5hdmVyLmNvbSJ9.lklPsE4KpZRqSxi5EYahxxTeXigL47eYxbE3UL7ZtMY"
+    private val access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzQyODMzMjMsImlkIjoiNjE2N2JhNTQyNjdjYTEwZWI1NDkwNGE5IiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.Y_smWBnm1RrvToFW9kB9pHhnmgZIu0O73OZH4Cy3iZ4"
+    private val sub_access = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzU5ODgxMjUsImlkIjoiNjE4MzMyOTU0MzliNGU1Y2VhMjNhNjg0IiwiZW1haWwiOiJhYmgwOTIwb25lQG5hdmVyLmNvbSJ9.gO6C_afNJvyQoKTC5CN-cvhZuZaQRC5dHg9ptssTBag"
     private lateinit var socket : Socket
     private var chatRoomId = ""
-    private var projectId = "618a002c0c9bfd2b9804ff8a"
+    private var projectId = "618333504aa95ded53f3b359"
     private var chatImage = ""
     private val _receiveLiveData : MutableLiveData<ChatMessageResponse.ChatReceiveResponse> = MutableLiveData()
     val receiveLiveData = _receiveLiveData
@@ -71,19 +71,14 @@ class SocketApplication {
 
     fun send(message: String){
         val data = JSONObject()
-        data.put("chatRoomId", chatRoomId)
         data.put("message", message)
+        data.put("chatRoomId", chatRoomId)
+        socket.emit("chatroom.rejoin", data)
         socket.emit("message", data)
     }
 
     fun chatReceive(){
         socket.on("message", onMassage)
-    }
-
-    fun rejoin(){
-        val data = JSONObject()
-        data.put("chatRoomId", chatRoomId)
-        socket.emit("chatroom.rejoin", data)
     }
 
     fun setChatRoomId(chatRoomId: String){
