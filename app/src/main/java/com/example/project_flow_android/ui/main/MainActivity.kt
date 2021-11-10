@@ -9,7 +9,8 @@ import com.example.project_flow_android.base.BaseActivity
 import com.example.project_flow_android.databinding.ActivityMainBinding
 import com.example.project_flow_android.ui.calendar.CalendarFragment
 import com.example.project_flow_android.ui.chat.fragment.ChatListFragment
-import com.example.project_flow_android.ui.flow.DefaultProjectFragment
+import com.example.project_flow_android.ui.flow.AddProjectFragment
+import com.example.project_flow_android.ui.flow.FlowFragment
 import com.example.project_flow_android.ui.mypage.MyPageFragment
 import com.example.project_flow_android.ui.sign.LoginActivity
 import com.example.project_flow_android.viewmodel.MainViewModel
@@ -36,22 +37,21 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         initFragment()
     }
 
+    private fun changeFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().hide(vm.activeFragment ?: calendarFragment)
+            .show(fragment).commit()
+        vm.activeFragment = fragment
+    }
     fun startLogin(){
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
 
-
-    private val flowFragment = DefaultProjectFragment()
+    private val flowFragment = FlowFragment()
     private val calendarFragment = CalendarFragment()
     private val chatFragment = ChatListFragment()
     private val myPageFragment = MyPageFragment()
 
-    private fun changeFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().hide(vm.activeFragment ?: flowFragment)
-            .show(fragment).commit()
-        vm.activeFragment = fragment
-    }
 
     private val itemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
