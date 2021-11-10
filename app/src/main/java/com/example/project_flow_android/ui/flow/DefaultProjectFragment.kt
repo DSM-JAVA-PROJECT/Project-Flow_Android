@@ -6,32 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.project_flow_android.R
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AddProjectFragment : Fragment() {
-
+class DefaultProjectFragment : Fragment(){
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-
-        goFlowPage()
-
-        return inflater.inflate(R.layout.fragment_add_project, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    private fun goFlowPage() {
-
+        return inflater.inflate(R.layout.fragment_default_project, container, false)
     }
 
      fun observeEvent() {
         TODO("Not yet implemented")
     }
-
 
 }
