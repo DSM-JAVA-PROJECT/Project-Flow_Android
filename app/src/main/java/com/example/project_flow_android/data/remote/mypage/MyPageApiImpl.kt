@@ -23,7 +23,7 @@ class MyPageApiImpl {
 
     fun changePassword(
         token: String,
-        password: String,
+        password: NewPasswordRequest,
     ): @NonNull Single<Response<Void>> =
         providerMypageApi().changePassword(token, password)
             .observeOn(AndroidSchedulers.mainThread())
