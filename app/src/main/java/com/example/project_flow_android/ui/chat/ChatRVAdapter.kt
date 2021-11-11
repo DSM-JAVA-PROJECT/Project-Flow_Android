@@ -24,7 +24,17 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
     private val MINE_TALK = 0
     private val OTHER_TALK = 1
     private val PLAN_ADD = 2
-    private val OTHER_PLAN = 3
+    private val MINE_JOIN_PLAN = 3
+    private val OTHER_JOIN_PLAN = 4
+
+    interface OnBtnClickListener{
+        fun onBtnClick(v: View, position: Int)
+    }
+    private var btnClickListener: OnBtnClickListener? = null
+
+    fun setOnBtnClickListener(btnClickListener: OnBtnClickListener){
+        this.btnClickListener = btnClickListener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -67,11 +77,11 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
     override fun getItemCount() = items.oldChatMessageResponses.size
 
     override fun getItemViewType(position: Int): Int {
-//        return if (items.oldChatMessageResponses[position].mine) MINE else OTHER
         return when(items.oldChatMessageResponses[position].mine){
             true -> {
                 when(items.oldChatMessageResponses[position].type){
                     "MESSAGE" -> MINE_TALK
+                    "PLAN_JOIN" -> MINE_JOIN_PLAN
                     else -> throw RuntimeException("알 수 없는 타입")
                 }
             }
@@ -79,6 +89,7 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
                 when(items.oldChatMessageResponses[position].type){
                     "MESSAGE" -> OTHER_TALK
                     "PLAN" -> PLAN_ADD
+                    "PLAN_JOIN" -> OTHER_JOIN_PLAN
                     else -> throw RuntimeException("알 수 없는 타입")
                 }
             }
@@ -112,8 +123,17 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
             view.plan_item_mine_content_tv.text = item.planName
             view.plan_item_mine_date_tv.text = "${item.startDate} ~ ${item.endDate}"
             dateFormat(item.createdAt, view.plan_item_mine_time_tv)
+
+            val position = absoluteAdapterPosition
+            if(position != RecyclerView.NO_POSITION){
+                itemView.setOnClickListener{
+                    btnClickListener?.onBtnClick(itemView, position)
+                }
+            }
         }
     }
+
+    
 
     inner class MineImage(v: View) : RecyclerView.ViewHolder(v) {
         val view = v
