@@ -78,12 +78,22 @@ class SocketApplication {
 
     fun chatReceive(){
         socket.on("message", onMassage)
+        socket.on("plan.create", onPlan)
     }
 
     fun rejoin(){
         val data = JSONObject()
         data.put("chatRoomId", chatRoomId)
         socket.emit("chatroom.rejoin", data)
+    }
+
+    fun addPlan(planName: String, startDate: String, endDate: String){
+        val data = JSONObject()
+        data.put("chatRoomId", chatRoomId)
+        data.put("planName", planName)
+        data.put("planEndDate", endDate)
+        data.put("planStartDate", startDate)
+        socket.emit("plan.create", data)
     }
 
     fun setChatRoomId(chatRoomId: String){
@@ -109,5 +119,12 @@ class SocketApplication {
         val json = args[0].toString()
         val message = Gson().fromJson(json, ChatMessageResponse.ChatReceiveResponse::class.java)
         _receiveLiveData.postValue(message)
+    }
+
+    private val onPlan = Emitter.Listener { args ->
+        Log.i("Plan payload", args[0].toString())
+        val json = args[0].toString()
+        val plan = Gson().fromJson(json, ChatMessageResponse.ChatReceiveResponse::class.java)
+        _receiveLiveData.postValue(plan)
     }
 }

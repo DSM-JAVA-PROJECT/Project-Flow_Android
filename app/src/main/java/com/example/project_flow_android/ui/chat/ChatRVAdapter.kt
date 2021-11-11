@@ -1,22 +1,30 @@
 package com.example.project_flow_android.ui.chat
 
+import android.app.Activity
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.project_flow_android.R
 import com.example.project_flow_android.data.model.sign.chat.ChatMessageResponse
 import kotlinx.android.synthetic.main.chat_item_mine.view.*
 import kotlinx.android.synthetic.main.chat_item_other.view.*
+import kotlinx.android.synthetic.main.chat_item_other.view.chat_other_name_tv
+import kotlinx.android.synthetic.main.chat_item_other.view.chat_other_profile_iv
+import kotlinx.android.synthetic.main.chat_plan_item_mine.view.*
 import java.lang.RuntimeException
 import java.text.ParseException
 import java.text.SimpleDateFormat
 
-class ChatRVAdapter(private val items: ChatMessageResponse) :
+class ChatRVAdapter(private val items: ChatMessageResponse, private val activity: Activity) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val MINE_TALK = 0
     private val OTHER_TALK = 1
+    private val PLAN_ADD = 2
+    private val OTHER_PLAN = 3
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -29,6 +37,11 @@ class ChatRVAdapter(private val items: ChatMessageResponse) :
                 val inflateView = LayoutInflater.from(parent.context)
                     .inflate(R.layout.chat_item_other, parent, false)
                 OtherViewHolder(inflateView)
+            }
+            PLAN_ADD -> {
+                val inflateView = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.chat_plan_item_mine, parent, false)
+                PlanAddViewHolder(inflateView)
             }
             else -> throw RuntimeException("알 수 없는 viewType")
         }
@@ -44,20 +57,38 @@ class ChatRVAdapter(private val items: ChatMessageResponse) :
             holder.apply {
                 bind(item)
             }
+        } else if(holder is PlanAddViewHolder){
+            holder.apply {
+                bind(item)
+            }
         }
     }
 
     override fun getItemCount() = items.oldChatMessageResponses.size
 
     override fun getItemViewType(position: Int): Int {
-        return if (items.oldChatMessageResponses[position].mine) MINE_TALK else OTHER_TALK
+//        return if (items.oldChatMessageResponses[position].mine) MINE else OTHER
+        return when(items.oldChatMessageResponses[position].mine){
+            true -> {
+                when(items.oldChatMessageResponses[position].type){
+                    "MESSAGE" -> MINE_TALK
+                    else -> throw RuntimeException("알 수 없는 타입")
+                }
+            }
+            false -> {
+                when(items.oldChatMessageResponses[position].type){
+                    "MESSAGE" -> OTHER_TALK
+                    "PLAN" -> PLAN_ADD
+                    else -> throw RuntimeException("알 수 없는 타입")
+                }
+            }
+        }
     }
 
     inner class MineViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val view = v
         fun bind(item: ChatMessageResponse.ChatReceiveResponse) {
             view.chat_mine_content_tv.text = item.message
-            //view.chat_mine_time_tv.text = item.createdAt
             dateFormat(item.createdAt, view.chat_mine_time_tv)
         }
     }
@@ -65,9 +96,22 @@ class ChatRVAdapter(private val items: ChatMessageResponse) :
     inner class OtherViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val view = v
         fun bind(item: ChatMessageResponse.ChatReceiveResponse) {
+            view.chat_other_name_tv.text = item.senderName
             view.chat_other_content_tv.text = item.message
-            //view.chat_other_time_tv.text = item.createdAt
+            if(item.senderImage != null){
+                view.chat_other_profile_iv.clipToOutline = true
+                Glide.with(activity).load(Uri.parse(item.senderImage)).into(view.chat_other_profile_iv)
+            }
             dateFormat(item.createdAt, view.chat_other_time_tv)
+        }
+    }
+
+    inner class PlanAddViewHolder(v: View) : RecyclerView.ViewHolder(v){
+        val view = v
+        fun bind(item: ChatMessageResponse.ChatReceiveResponse) {
+            view.plan_item_mine_content_tv.text = item.planName
+            view.plan_item_mine_date_tv.text = "${item.startDate} ~ ${item.endDate}"
+            dateFormat(item.createdAt, view.plan_item_mine_time_tv)
         }
     }
 

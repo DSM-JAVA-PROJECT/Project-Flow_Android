@@ -100,13 +100,26 @@ class ChatFragment : Fragment() {
             (activity as ChatActivity).replace(ManageFragment())
         }
         chat_add_schedule_tv.setOnClickListener{
-            val bottom = dialogUtil.shoBottomSheet()
+            view_more.visibility = View.GONE
+            val bottom = dialogUtil.showBottomSheet()
             bottom.show()
             bottom.add_schedule_start_et.setOnClickListener{
                 dialogUtil.showDatePicker(bottom.add_schedule_start_et)
             }
             bottom.add_schedule_end_et.setOnClickListener{
                 dialogUtil.showDatePicker(bottom.add_schedule_end_et)
+            }
+            bottom.add_schedule_btn.setOnClickListener{
+                if(bottom.add_schedule_content_et.text.toString() != "" &&
+                        bottom.add_schedule_start_et.text.toString() != "" &&
+                        bottom.add_schedule_end_et.text.toString() != ""){
+                    socket.addPlan(
+                        bottom.add_schedule_content_et.text.toString(),
+                        bottom.add_schedule_start_et.text.toString(),
+                        bottom.add_schedule_end_et.text.toString()
+                    )
+                    bottom.dismiss()
+                }
             }
         }
         chat_prev_btn.setOnClickListener{
@@ -122,7 +135,7 @@ class ChatFragment : Fragment() {
     }
 
     private fun adapterInit(data: ChatMessageResponse){
-        adapter = ChatRVAdapter(data)
+        adapter = ChatRVAdapter(data, requireActivity())
         chat_rv.adapter = adapter
         chat_rv.scrollToPosition(chat_rv.adapter!!.itemCount - 1)
     }
