@@ -31,6 +31,14 @@ interface ProjectFlowAPI {
     @PATCH("/auth/image")
     fun changeProfileImage(@Header("Authorization") token: String,@Part ("file") file : File) : Single<Response<Void>>
 
+    @GET("/main")
+    fun getMainInfo(@Header("Authorization") token: String) : Single<Response<GetUserInfoResponse>>
+
+    @POST("/project")
+    fun addProject(@Body request: AddProjectRequest) : Single<Response<Void>>
+
+
+
 
 
 }
