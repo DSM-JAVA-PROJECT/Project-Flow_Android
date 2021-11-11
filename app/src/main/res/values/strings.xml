@@ -36,7 +36,10 @@
     <string name="add_schedule_bottom_date_hint">날짜를 선택하세요</string>
     <string name="chat_list_my_chat">나의 채팅</string>
     <string name="chat_plan_item_title">일정이 추가되었습니다.</string>
+    <string name="chat_join_plan_title">일정에 참여했습니다.</string>
     <string name="chat_plan_item_join">참여하기</string>
+    <string name="chat_join_plan_item_view">일정보기</string>
+    <string name="chat_join_plan_item_exit">제외하기</string>
 
     <string name="start_project">프로젝트 관리는</string>
     <string name="start_project_se">프로젝트 플로우에서</string>
