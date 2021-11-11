@@ -56,6 +56,7 @@
             android:textSize="8sp" />
 
         <Button
+            android:id="@+id/plan_item_mine_join_btn"
             android:layout_width="165dp"
             android:layout_height="30dp"
             android:layout_marginStart="73dp"
