@@ -1,21 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="vm"
-            type="com.example.project_flow_android.viewmodel.flow.FlowViewModel"
-            />
+            type="com.example.project_flow_android.viewmodel.flow.FlowViewModel" />
     </data>
 
-<FrameLayout
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.flow.FlowFragment"
-    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/empty_project_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:src="@drawable/flow_empty_project" />
+
+        <TextView
+            android:id="@+id/empty_project_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:layout_marginTop="70sp"
+            android:fontFamily="@font/nanumgothic_regular"
+            android:text="@string/empty_project" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/nim_project"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/who_project"
+                android:textSize="20sp"
+                android:fontFamily="@font/font_roboto_bold"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/user_name"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/user_name"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@={vm.getUserName}"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/font_roboto_bold"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                />
+
+            <ImageView
+                android:id="@+id/go_add_peoject_btn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_add_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="20dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_project_btn"
+            android:layout_width="wrap_content"
+            android:layout_gravity="bottom||right"
+            android:backgroundTint="@color/blue_main"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:srcCompat="@drawable/ic_baseline_add_24" />
 
 
-</FrameLayout>
+    </FrameLayout>
 </layout>

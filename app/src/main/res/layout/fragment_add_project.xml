@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+        <variable
+            name="vm"
+            type="com.example.project_flow_android.viewmodel.flow.FlowViewModel"
+            />
+    </data>
 
 <FrameLayout
     android:layout_width="match_parent"
