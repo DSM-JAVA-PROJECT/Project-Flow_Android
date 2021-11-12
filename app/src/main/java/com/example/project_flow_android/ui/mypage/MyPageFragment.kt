@@ -75,7 +75,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         }
         vm.run {
             successChange.observe(viewLifecycleOwner,{
-
+                //TODO image 업로드 성공시에
             })
         }
     }
