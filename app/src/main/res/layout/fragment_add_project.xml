@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.example.project_flow_android.viewmodel.flow.FlowViewModel"
+            type="com.example.project_flow_android.viewmodel.flow.AddProjectViewModel"
             />
     </data>
 
@@ -42,7 +42,7 @@
                 android:background="@color/color_light_gray"
                 android:fontFamily="@font/nanumgothic_regular"
                 android:singleLine="true"
-                android:text="" />
+                android:text="@={vm.projectName}" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -68,7 +68,7 @@
                 android:textSize="14sp"
                 android:fontFamily="@font/nanumgothic_regular"
                 android:singleLine="true"
-                android:text="" />
+                android:text="@={vm.projectExplanation}" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -201,6 +201,7 @@
             android:hint="@string/add_schedule_bottom_date_hint"
             android:textColor="@color/black"
             android:textSize="14sp"
+            android:text="@={vm.startDate}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/period_project_tv" />
@@ -230,6 +231,7 @@
             android:hint="@string/add_schedule_bottom_date_hint"
             android:textColor="@color/black"
             android:textSize="14sp"
+            android:text="@={vm.endDate}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

@@ -79,7 +79,7 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_project_btn"
             android:layout_width="wrap_content"
-            android:layout_gravity="bottom||right"
+            android:layout_gravity="bottom"
             android:backgroundTint="@color/blue_main"
             android:layout_marginBottom="20dp"
             android:layout_marginRight="20dp"
