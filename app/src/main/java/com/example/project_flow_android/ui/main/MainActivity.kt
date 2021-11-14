@@ -9,7 +9,8 @@ import com.example.project_flow_android.base.BaseActivity
 import com.example.project_flow_android.databinding.ActivityMainBinding
 import com.example.project_flow_android.ui.calendar.CalendarFragment
 import com.example.project_flow_android.ui.chat.fragment.ChatListFragment
-import com.example.project_flow_android.ui.flow.DefaultProjectFragment
+import com.example.project_flow_android.ui.flow.AddProjectFragment
+import com.example.project_flow_android.ui.flow.FlowFragment
 import com.example.project_flow_android.ui.mypage.MyPageFragment
 import com.example.project_flow_android.ui.sign.LoginActivity
 import com.example.project_flow_android.viewmodel.MainViewModel
@@ -36,18 +37,25 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         initFragment()
     }
 
+    fun addProject(){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.show(addProjectFragment)
+        transaction.hide(flowFragment)
+        transaction.commit()
+    }
+
     fun startLogin(){
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
 
-
-    private val flowFragment = DefaultProjectFragment()
+    private val flowFragment = FlowFragment()
     private val calendarFragment = CalendarFragment()
     private val chatFragment = ChatListFragment()
     private val myPageFragment = MyPageFragment()
+    private val addProjectFragment = AddProjectFragment()
 
-    private fun changeFragment(fragment: Fragment) {
+     fun changeFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().hide(vm.activeFragment ?: flowFragment)
             .show(fragment).commit()
         vm.activeFragment = fragment
@@ -98,5 +106,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 }
             })
         }
+    }
+
+    override fun onStop() {
+        supportFragmentManager.beginTransaction().run {
+            remove(flowFragment)
+            remove(calendarFragment)
+            remove(chatFragment)
+            remove(myPageFragment)
+        }.commit()
+        super.onStop()
     }
 }

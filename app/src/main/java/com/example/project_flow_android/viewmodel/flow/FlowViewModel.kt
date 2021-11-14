@@ -22,7 +22,7 @@ class FlowViewModel(private val myPageApiImpl: MyPageApiImpl,private val sharedP
             if (response.isSuccessful) {
                 getUserName.value = response.body()!!.name
                 //TODO 우선 response body에 project가 없는 경우에 empty 프로젝트 넣어주기
-                    if(response.body()!!.projects.size == 0){
+                    if(response.body()!!.projects.isEmpty()){
                     _emptyProject.value=true
                 }
             } else {
