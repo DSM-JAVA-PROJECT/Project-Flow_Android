@@ -94,4 +94,7 @@
     <string name="logout_no">아니요</string>
     <string name="change_password_edit">변경할 비밀번호를 설정해주세요</string>
     <string name="connect_date">~</string>
+    <string name="finish_project">프로젝트 마감하기</string>
+    <string name="project_progress">프로젝트 진행도</string>
+    <string name="nim_progress">님의 진행도</string>
 </resources>
