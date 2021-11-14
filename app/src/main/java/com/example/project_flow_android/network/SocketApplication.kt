@@ -30,7 +30,7 @@ class SocketApplication {
     private val sub_access = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzY0MzQyNjMsImlkIjoiNjE4OWZlYTMwYzliZmQyYjk4MDRmZjg3IiwiZW1haWwiOiJhYmgwOTIwb25lQG5hdmVyLmNvbSJ9.lklPsE4KpZRqSxi5EYahxxTeXigL47eYxbE3UL7ZtMY"
     private lateinit var socket : Socket
     private var chatRoomId = ""
-    private var projectId = "618a002c0c9bfd2b9804ff8a"
+    private var projectId = "6190b87202140f2fb20d6ee7"
     private var chatImage = ""
     private val _receiveLiveData : MutableLiveData<ChatMessageResponse.ChatReceiveResponse> = MutableLiveData()
     val receiveLiveData = _receiveLiveData
@@ -78,7 +78,8 @@ class SocketApplication {
 
     fun chatReceive(){
         socket.on("message", onMassage)
-        socket.on("plan.create", onPlan)
+        socket.on("plan.create", onAddPlan)
+        socket.on("plan.join", onJoinPlan)
     }
 
     fun rejoin(){
@@ -94,6 +95,13 @@ class SocketApplication {
         data.put("planEndDate", endDate)
         data.put("planStartDate", startDate)
         socket.emit("plan.create", data)
+    }
+
+    fun joinPlan(planId: String) {
+        val data = JSONObject()
+        data.put("chatRoomId", chatRoomId)
+        data.put("planId", planId)
+        socket.emit("plan.join", data)
     }
 
     fun setChatRoomId(chatRoomId: String){
@@ -121,10 +129,17 @@ class SocketApplication {
         _receiveLiveData.postValue(message)
     }
 
-    private val onPlan = Emitter.Listener { args ->
+    private val onAddPlan = Emitter.Listener { args ->
         Log.i("Plan payload", args[0].toString())
         val json = args[0].toString()
         val plan = Gson().fromJson(json, ChatMessageResponse.ChatReceiveResponse::class.java)
         _receiveLiveData.postValue(plan)
+    }
+
+    private val onJoinPlan = Emitter.Listener { args ->
+        Log.i("JoinPlan payload", args[0].toString())
+        val json = args[0].toString()
+        val joinPlan = Gson().fromJson(json, ChatMessageResponse.ChatReceiveResponse::class.java)
+        _receiveLiveData.postValue(joinPlan)
     }
 }

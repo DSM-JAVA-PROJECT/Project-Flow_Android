@@ -5,7 +5,7 @@ data class ChatMessageResponse(
 ){
     data class ChatReceiveResponse(
         val type: String,
-        val id: String?,
+        val id: String,
         val planId: String?,
         val planName: String?,
         val startDate: String?,
