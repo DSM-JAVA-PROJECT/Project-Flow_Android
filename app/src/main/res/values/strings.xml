@@ -97,4 +97,8 @@
     <string name="finish_project">프로젝트 마감하기</string>
     <string name="project_progress">프로젝트 진행도</string>
     <string name="nim_progress">님의 진행도</string>
+    <string name="finished_project">프로젝트 마감</string>
+    <string name="cancle">취소</string>
+    <string name="finished">마감</string>
+    <string name="info_finished_project">마감 후에는 프로젝트 진행이 불가능 합니다</string>
 </resources>
