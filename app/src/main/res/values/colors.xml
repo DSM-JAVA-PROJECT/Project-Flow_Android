@@ -14,10 +14,11 @@
     <color name="color_chat_item_mine">#D5DCF2</color>
     <color name="color_chat_more_tint">#D2D9F2</color>
     <color name="color_chat_red">#FF5151</color>
+    <color name="color_resign_plan">#FF7979</color>
     <color name="color_calendar_current">#829EFD</color>
     <color name="color_gray">#C4C4C4</color>
     <color name="blue_main">#1F43C2</color>
     <color name="main">#1F43C2</color>
     <color name="red">#FF5151</color>
-
+    
 </resources>

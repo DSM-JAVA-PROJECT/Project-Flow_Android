@@ -37,7 +37,9 @@
     <string name="chat_list_my_chat">나의 채팅</string>
     <string name="chat_plan_item_title">일정이 추가되었습니다.</string>
     <string name="chat_join_plan_title">일정에 참여했습니다.</string>
+    <string name="chat_resign_plan_title">일정에서 제외되었습니다.</string>
     <string name="chat_plan_item_join">참여하기</string>
+    <string name="chat_resign_plan_rejoin">다시 참여하기</string>
     <string name="chat_join_plan_item_view">일정보기</string>
     <string name="chat_join_plan_item_exit">제외하기</string>
 
