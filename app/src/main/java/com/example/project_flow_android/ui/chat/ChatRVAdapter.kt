@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.chat_item_other.view.chat_other_profile_iv
 import kotlinx.android.synthetic.main.chat_join_plan_item_mine.view.*
 import kotlinx.android.synthetic.main.chat_join_plan_item_other.view.*
 import kotlinx.android.synthetic.main.chat_plan_item_mine.view.*
+import kotlinx.android.synthetic.main.chat_resign_plan_item_mine.view.*
 import java.lang.RuntimeException
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -28,23 +29,41 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
     private val PLAN_ADD = 2
     private val MINE_JOIN_PLAN = 3
     private val OTHER_JOIN_PLAN = 4
+    private val MINE_RESIGN_PLAN = 5
+    private val OTHER_RESIGN_PLAN = 6
 
     interface OnJoinClickListener{
         fun onJoinClick(v: View, position: Int)
     }
+    interface OnReJoinClickListener{
+        fun onReJoinClick(v: View, position: Int)
+    }
     interface OnShowClickListener{
         fun onShowClick(v: View, position: Int)
     }
+    interface OnResignClickListener{
+        fun onResignClick(v: View, position: Int)
+    }
 
     private var joinClickListener: OnJoinClickListener? = null
+    private var reJoinClickListener: OnReJoinClickListener? = null
     private var showClickListener: OnShowClickListener? = null
+    private var resignClickListener: OnResignClickListener? = null
 
     fun setOnJoinClickListener(joinClickListener : OnJoinClickListener){
         this.joinClickListener = joinClickListener
     }
 
+    fun setOnReJoinClickListener(reJoinClickListener : OnReJoinClickListener){
+        this.reJoinClickListener = reJoinClickListener
+    }
+
     fun setOnShowClickListener(showClickListener: OnShowClickListener){
         this.showClickListener = showClickListener
+    }
+
+    fun setOnResignClickListener(resignClickListener: OnResignClickListener){
+        this.resignClickListener = resignClickListener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -74,32 +93,24 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
                     .inflate(R.layout.chat_join_plan_item_other, parent, false)
                 JoinPlanOtherViewHolder(inflateView)
             }
+            MINE_RESIGN_PLAN -> {
+                val inflateView = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.chat_resign_plan_item_mine, parent, false)
+                ResignPlanMineViewHolder(inflateView)
+            }
             else -> throw RuntimeException("알 수 없는 viewType")
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items.oldChatMessageResponses[position]
-        if (holder is MineViewHolder) {
-            holder.apply {
-                bind(item)
-            }
-        } else if (holder is OtherViewHolder) {
-            holder.apply {
-                bind(item)
-            }
-        } else if(holder is AddPlanViewHolder){
-            holder.apply {
-                bind(item)
-            }
-        } else if(holder is JoinPlanMineViewHolder){
-            holder.apply {
-                 bind(item)
-            }
-        } else if(holder is JoinPlanOtherViewHolder){
-            holder.apply {
-                bind(item)
-            }
+        when(holder){
+            is MineViewHolder -> holder.apply { bind(item) }
+            is OtherViewHolder -> holder.apply { bind(item) }
+            is AddPlanViewHolder -> holder.apply { bind(item) }
+            is JoinPlanMineViewHolder -> holder.apply { bind(item) }
+            is JoinPlanOtherViewHolder -> holder.apply { bind(item) }
+            is ResignPlanMineViewHolder -> holder.apply { bind(item) }
         }
     }
 
@@ -112,6 +123,7 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
                     "MESSAGE" -> MINE_TALK
                     "PLAN" -> PLAN_ADD
                     "JOIN_PLAN" -> MINE_JOIN_PLAN
+                    "RESIGN_PLAN" -> MINE_RESIGN_PLAN
                     else -> throw RuntimeException("알 수 없는 타입")
                 }
             }
@@ -120,6 +132,7 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
                     "MESSAGE" -> OTHER_TALK
                     "PLAN" -> PLAN_ADD
                     "JOIN_PLAN" -> OTHER_JOIN_PLAN
+                    "RESIGN_PLAN" -> OTHER_RESIGN_PLAN
                     else -> throw RuntimeException("알 수 없는 타입")
                 }
             }
@@ -173,10 +186,10 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
             val position = absoluteAdapterPosition
             if(position != RecyclerView.NO_POSITION){
                 itemView.join_plan_item_mine_join_btn.setOnClickListener{
-                    joinClickListener?.onJoinClick(itemView, position)
+                    showClickListener?.onShowClick(itemView, position)
                 }
                 itemView.join_plan_item_mine_exit_btn.setOnClickListener{
-                    showClickListener?.onShowClick(itemView, position)
+                    resignClickListener?.onResignClick(itemView, position)
                 }
             }
         }
@@ -197,6 +210,26 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
             if(position != RecyclerView.NO_POSITION){
                 itemView.join_plan_item_other_btn.setOnClickListener{
                     showClickListener?.onShowClick(itemView, position)
+                }
+            }
+        }
+    }
+
+    inner class ResignPlanMineViewHolder(v: View) : RecyclerView.ViewHolder(v){
+        val view = v
+        fun bind(item: ChatMessageResponse.ChatReceiveResponse) {
+            view.resign_plan_item_mine_content_tv.text = item.planName
+            view.resign_plan_item_mine_date_tv.text = "${item.startDate} ~ ${item.endDate}"
+            dateFormat(item.createdAt, view.resign_plan_item_mine_time_tv)
+            if(item.senderImage != null){
+                view.resign_plan_item_mine_iv.clipToOutline = true
+                Glide.with(activity).load(Uri.parse(item.senderImage)).into(view.resign_plan_item_mine_iv)
+            }
+
+            val position = absoluteAdapterPosition
+            if(position != RecyclerView.NO_POSITION){
+                itemView.resign_plan_item_mine_join_btn.setOnClickListener{
+                    reJoinClickListener?.onReJoinClick(itemView, position)
                 }
             }
         }

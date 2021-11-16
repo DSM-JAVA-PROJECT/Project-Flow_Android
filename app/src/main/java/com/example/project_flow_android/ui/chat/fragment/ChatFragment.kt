@@ -148,5 +148,20 @@ class ChatFragment : Fragment() {
                 socket.joinPlan(planId)
             }
         })
+        adapter.setOnResignClickListener(object : ChatRVAdapter.OnResignClickListener{
+            override fun onResignClick(v: View, position: Int) {
+                val planId =
+                    chatViewModel.messageListLiveData.value!!.oldChatMessageResponses[position].planId!!
+                socket.resignPlan(planId)
+            }
+        })
+        adapter.setOnReJoinClickListener(object : ChatRVAdapter.OnReJoinClickListener{
+            override fun onReJoinClick(v: View, position: Int) {
+                val planId =
+                    chatViewModel.messageListLiveData.value!!.oldChatMessageResponses[position].planId!!
+                socket.joinPlan(planId)
+            }
+
+        })
     }
 }

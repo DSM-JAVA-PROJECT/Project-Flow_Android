@@ -30,7 +30,7 @@ class SocketApplication {
     private val sub_access = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzY0MzQyNjMsImlkIjoiNjE4OWZlYTMwYzliZmQyYjk4MDRmZjg3IiwiZW1haWwiOiJhYmgwOTIwb25lQG5hdmVyLmNvbSJ9.lklPsE4KpZRqSxi5EYahxxTeXigL47eYxbE3UL7ZtMY"
     private lateinit var socket : Socket
     private var chatRoomId = ""
-    private var projectId = "6190b87202140f2fb20d6ee7"
+    private var projectId = "6191bb9602140f2fb20d6eef"
     private var chatImage = ""
     private val _receiveLiveData : MutableLiveData<ChatMessageResponse.ChatReceiveResponse> = MutableLiveData()
     val receiveLiveData = _receiveLiveData
@@ -80,6 +80,7 @@ class SocketApplication {
         socket.on("message", onMassage)
         socket.on("plan.create", onAddPlan)
         socket.on("plan.join", onJoinPlan)
+        socket.on("plan.resign", onResignPlan)
     }
 
     fun rejoin(){
@@ -102,6 +103,13 @@ class SocketApplication {
         data.put("chatRoomId", chatRoomId)
         data.put("planId", planId)
         socket.emit("plan.join", data)
+    }
+
+    fun resignPlan(planId: String) {
+        val data = JSONObject()
+        data.put("chatRoomId", chatRoomId)
+        data.put("planId", planId)
+        socket.emit("plan.resign", data)
     }
 
     fun setChatRoomId(chatRoomId: String){
@@ -141,5 +149,12 @@ class SocketApplication {
         val json = args[0].toString()
         val joinPlan = Gson().fromJson(json, ChatMessageResponse.ChatReceiveResponse::class.java)
         _receiveLiveData.postValue(joinPlan)
+    }
+
+    private val onResignPlan = Emitter.Listener { args ->
+        Log.i("ResignPlan payload", args[0].toString())
+        val json = args[0].toString()
+        val resignPlan = Gson().fromJson(json, ChatMessageResponse.ChatReceiveResponse::class.java)
+        _receiveLiveData.postValue(resignPlan)
     }
 }
