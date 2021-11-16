@@ -2,7 +2,6 @@ package com.example.project_flow_android.ui.mypage
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.LifecycleOwner
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseFragment
 import com.example.project_flow_android.databinding.FragmentMyPageBinding
@@ -51,6 +50,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vm.getProjectInfo()
+        //binding.projectImage = vm.getUserImage.value!!
         binding.userRv.adapter = projectAdapter
         binding.userRv.addItemDecoration(VerticalItemDecorator(20))
         getUserInfo()
@@ -59,23 +59,18 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
     }
 
     override fun observeEvent() {
-        binding.run {
+        vm.run {
             binding.logoutTv.setOnClickListener {
                 showLogoutDialog()
             }
-
             binding.changePwTv.setOnClickListener {
                 showChangePasswordDialog()
             }
-        }
-        vm.run {
             projects.observe(viewLifecycleOwner, {
                 projectAdapter.setItem(it.projects)
             })
-        }
-        vm.run {
-            successChange.observe(viewLifecycleOwner,{
-
+            successChange.observe(viewLifecycleOwner, {
+                //TODO 프로필 사진 변경
             })
         }
     }
