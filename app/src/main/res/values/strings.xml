@@ -42,6 +42,7 @@
     <string name="chat_resign_plan_rejoin">다시 참여하기</string>
     <string name="chat_join_plan_item_view">일정보기</string>
     <string name="chat_join_plan_item_exit">제외하기</string>
+    <string name="already_plan_participate">이미 참여한 일정입니다.</string>
 
     <string name="start_project">프로젝트 관리는</string>
     <string name="start_project_se">프로젝트 플로우에서</string>

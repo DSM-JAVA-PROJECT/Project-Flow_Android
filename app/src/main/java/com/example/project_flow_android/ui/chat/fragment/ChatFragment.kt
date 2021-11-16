@@ -1,6 +1,7 @@
 package com.example.project_flow_android.ui.chat.fragment
 
 import android.app.Activity
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,6 +21,7 @@ import com.example.project_flow_android.util.KeyboardUtil
 import com.example.project_flow_android.viewmodel.chat.ChatViewModel
 import kotlinx.android.synthetic.main.add_schedule_bottom.*
 import kotlinx.android.synthetic.main.fragment_chat.*
+import org.aviran.cookiebar2.CookieBar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChatFragment : Fragment() {
@@ -33,6 +35,7 @@ class ChatFragment : Fragment() {
 
     private val chatViewModel: ChatViewModel by viewModel()
     private val socket = SocketApplication.getSocket()
+    private var planName = ""
     private val SIZE = 10
     private var page = 0
     private lateinit var adapter: ChatRVAdapter
@@ -66,6 +69,9 @@ class ChatFragment : Fragment() {
         socket.receiveLiveData.observe(viewLifecycleOwner, {
             chatViewModel.messageListLiveData.value!!.oldChatMessageResponses.add(socket.receiveLiveData.value!!)
             adapterInit(chatViewModel.messageListLiveData.value!!)
+        })
+        socket.errorLiveData.observe(viewLifecycleOwner, {
+            errorHandler(socket.errorLiveData.value!!)
         })
 
         chat_more_iv.setOnClickListener {
@@ -146,6 +152,7 @@ class ChatFragment : Fragment() {
                 val planId =
                     chatViewModel.messageListLiveData.value!!.oldChatMessageResponses[position].planId!!
                 socket.joinPlan(planId)
+                planName = chatViewModel.messageListLiveData.value!!.oldChatMessageResponses[position].planName!!
             }
         })
         adapter.setOnResignClickListener(object : ChatRVAdapter.OnResignClickListener{
@@ -161,7 +168,19 @@ class ChatFragment : Fragment() {
                     chatViewModel.messageListLiveData.value!!.oldChatMessageResponses[position].planId!!
                 socket.joinPlan(planId)
             }
-
         })
+    }
+
+    private fun errorHandler(status: Int){
+        when(status){
+            409 -> {
+                CookieBar.build(requireActivity())
+                    .setTitle(planName)
+                    .setMessage(R.string.already_plan_participate)
+                    .setTitleColor(R.color.white)
+                    .setBackgroundColor(R.color.color_resign_plan)
+                    .show()
+            }
+        }
     }
 }

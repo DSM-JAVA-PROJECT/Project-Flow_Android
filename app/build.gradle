@@ -118,5 +118,6 @@ dependencies {
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
-
+    //cookieBar2
+    implementation 'org.aviran.cookiebar2:cookiebar2:1.1.4'
 }
