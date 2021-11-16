@@ -37,6 +37,9 @@ interface ProjectFlowAPI {
     @POST("/project")
     fun addProject(@Body request: AddProjectRequest) : Single<Response<Void>>
 
+    @PATCH("/project/close/{id}")
+    fun finishProject(@Body projectId : String) : Single<Response<Void>>
+
 
 
 

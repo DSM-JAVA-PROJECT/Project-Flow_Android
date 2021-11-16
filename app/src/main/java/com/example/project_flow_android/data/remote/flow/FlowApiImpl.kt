@@ -23,4 +23,12 @@ class FlowApiImpl {
             .subscribeOn(Schedulers.io())
 
 
+    fun finishProject(ProjectId : String
+    ): @NonNull Single<Response<Void>> =
+        providerFlowApi().finishProject(ProjectId)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+
+
+
 }
