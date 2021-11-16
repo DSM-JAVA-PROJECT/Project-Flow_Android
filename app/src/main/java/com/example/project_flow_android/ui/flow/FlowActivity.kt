@@ -2,15 +2,14 @@ package com.example.project_flow_android.ui.flow
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import com.example.project_flow_android.R
+import com.example.project_flow_android.network.SocketApplication
 import com.example.project_flow_android.ui.chat.fragment.ChatListFragment
+import com.example.project_flow_android.viewmodel.chat.ChatViewModel
+import com.example.project_flow_android.viewmodel.flow.FlowViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FlowActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_flow)
 
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.flow_frame_container, FlowFragment()).commit()
-    }
 }
