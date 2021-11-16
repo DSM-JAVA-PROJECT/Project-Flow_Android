@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.data.remote.flow.FlowApiImpl
 import com.example.project_flow_android.feature.AddProjectRequest
+import com.example.project_flow_android.ui.chat.ChatActivity
+import com.example.project_flow_android.ui.chat.fragment.ChatListFragment
+import com.example.project_flow_android.ui.main.MainActivity
 
 class AddProjectViewModel(
     private val flowApiImpl: FlowApiImpl,
@@ -14,7 +17,7 @@ class AddProjectViewModel(
 
     val token = sharedPreferenceStorage.getInfo("access_token")
 
-    val projectName  = MutableLiveData<String>()
+    val projectName = MutableLiveData<String>()
     val projectExplanation = MutableLiveData<String>()
     val projectTeammember = MutableLiveData<List<String>>()
 
@@ -26,11 +29,12 @@ class AddProjectViewModel(
 
 
     fun addProject() {
-//        flowApiImpl.addProject(AddProjectRequest(projectName.value!!,projectExplanation.value!!,startDate.value!!,endDate.value!!,
-//            List(projectTeammember.value!!))).subscribe({
+        //TODO 팀원 초대 배열은 어떻게 넣어야 하는지
+//        flowApiImpl.addProject(AddProjectRequest(projectName.value!!,projectExplanation.value!!,startDate.value!!,endDate.value!!,List<AddProjectRequest(projectTeammember.value!!)>)).subscribe({
 //            if(it.isSuccessful){
 //                //TODO 프로젝트 생성 성공
 //                _successAddProject.value!!
+//
 //            }
 //            else {
 //            }
