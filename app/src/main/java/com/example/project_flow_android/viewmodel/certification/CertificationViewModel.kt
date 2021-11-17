@@ -65,7 +65,7 @@ class CertificationViewModel(
             }
     }
 
-    fun doRegister(){
+    private fun doRegister(){
         val leaveUserName = sharedPreferenceStorage.getInfo("userName")
         val leaveUserEmail = sharedPreferenceStorage.getInfo("userEmail")
         val leaveUserPassword = sharedPreferenceStorage.getInfo("userPassword")

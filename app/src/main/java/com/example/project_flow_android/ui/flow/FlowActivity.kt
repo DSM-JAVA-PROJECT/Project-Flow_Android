@@ -10,6 +10,4 @@ import com.example.project_flow_android.viewmodel.chat.ChatViewModel
 import com.example.project_flow_android.viewmodel.flow.FlowViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FlowActivity : AppCompatActivity() {
-
-}
+class FlowActivity : AppCompatActivity()

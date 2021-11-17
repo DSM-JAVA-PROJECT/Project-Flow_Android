@@ -7,6 +7,4 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.project_flow_android.R
 
-class CalendarFragment : Fragment() {
-
-}
+class CalendarFragment : Fragment()

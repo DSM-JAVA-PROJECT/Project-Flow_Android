@@ -14,12 +14,6 @@ class AddProjectFragment :
 
     override val vm: AddProjectViewModel by viewModel()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-    }
-
     override fun observeEvent() {
         vm.run {
             successAddProject.observe(viewLifecycleOwner, {

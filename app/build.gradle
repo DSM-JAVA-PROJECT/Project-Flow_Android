@@ -129,4 +129,10 @@ dependencies {
     //CircleImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    //calendar library
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    //calendarView
+    implementation 'com.github.prolificinteractive:material-calendarview:1.4.3'
+
 }
