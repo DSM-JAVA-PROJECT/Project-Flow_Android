@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -94,6 +95,18 @@
             android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/join_plan_item_other_cnt_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/font_roboto_regular"
+        android:textColor="@color/color_flow"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/join_plan_item_other_time_tv"
+        app:layout_constraintStart_toEndOf="@+id/cardView2" />
 
     <TextView
         android:id="@+id/join_plan_item_other_time_tv"

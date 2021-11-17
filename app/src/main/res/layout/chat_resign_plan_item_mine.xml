@@ -73,6 +73,17 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
+        android:id="@+id/resign_plan_item_mine_cnt_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:fontFamily="@font/font_roboto_regular"
+        android:textColor="@color/color_flow"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/resign_plan_item_mine_time_tv"
+        app:layout_constraintEnd_toStartOf="@+id/cardView2" />
+
+    <TextView
         android:id="@+id/resign_plan_item_mine_time_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
