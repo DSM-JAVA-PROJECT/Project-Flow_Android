@@ -18,6 +18,8 @@ import kotlinx.android.synthetic.main.chat_join_plan_item_mine.view.*
 import kotlinx.android.synthetic.main.chat_join_plan_item_other.view.*
 import kotlinx.android.synthetic.main.chat_plan_item_mine.view.*
 import kotlinx.android.synthetic.main.chat_resign_plan_item_mine.view.*
+import kotlinx.android.synthetic.main.chat_resign_plan_item_mine.view.resign_plan_item_mine_content_tv
+import kotlinx.android.synthetic.main.chat_resign_plan_item_other.view.*
 import java.lang.RuntimeException
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -98,6 +100,11 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
                     .inflate(R.layout.chat_resign_plan_item_mine, parent, false)
                 ResignPlanMineViewHolder(inflateView)
             }
+            OTHER_RESIGN_PLAN -> {
+                val inflateView = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.chat_resign_plan_item_other, parent, false)
+                ResignPlanOtherViewHolder(inflateView)
+            }
             else -> throw RuntimeException("알 수 없는 viewType")
         }
     }
@@ -111,6 +118,7 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
             is JoinPlanMineViewHolder -> holder.apply { bind(item) }
             is JoinPlanOtherViewHolder -> holder.apply { bind(item) }
             is ResignPlanMineViewHolder -> holder.apply { bind(item) }
+            is ResignPlanOtherViewHolder -> holder.apply { bind(item) }
         }
     }
 
@@ -230,6 +238,25 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
             if(position != RecyclerView.NO_POSITION){
                 itemView.resign_plan_item_mine_join_btn.setOnClickListener{
                     reJoinClickListener?.onReJoinClick(itemView, position)
+                }
+            }
+        }
+    }
+
+    inner class ResignPlanOtherViewHolder(v: View) : RecyclerView.ViewHolder(v){
+        val view = v
+        fun bind(item: ChatMessageResponse.ChatReceiveResponse) {
+            view.resign_plan_item_other_content_tv.text = item.planName
+            view.resign_plan_item_other_date_tv.text = "${item.startDate} ~ ${item.endDate}"
+            dateFormat(item.createdAt, view.resign_plan_item_other_time_tv)
+            if(item.senderImage != null){
+                view.resign_plan_item_other_iv.clipToOutline = true
+                Glide.with(activity).load(Uri.parse(item.senderImage)).into(view.resign_plan_item_other_iv)
+            }
+
+            val position = absoluteAdapterPosition
+            if(position != RecyclerView.NO_POSITION){
+                itemView.resign_plan_item_other_btn.setOnClickListener{
                 }
             }
         }
