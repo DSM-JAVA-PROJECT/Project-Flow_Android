@@ -15,10 +15,10 @@ class MyPageViewModel(
 
     val userName = MutableLiveData<String>()
     val profileImage = MutableLiveData<File>()
+    val getUserImage = MutableLiveData<String>()
 
     private val _projects = MutableLiveData<GetUserInfoResponse>()
     val projects: LiveData<GetUserInfoResponse> get() = _projects
-
 
     private val _successChange = MutableLiveData<Boolean>()
     val successChange: LiveData<Boolean> get() = _successChange
@@ -28,6 +28,7 @@ class MyPageViewModel(
         myPageApiImpl.getUserInfo(token).subscribe({ response ->
             if (response.isSuccessful) {
                 userName.value = response.body()!!.name
+                getUserImage.value = response.body()!!.profileImage
             } else {
                 userName.value = "로딩 실패"
             }

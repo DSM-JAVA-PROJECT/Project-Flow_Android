@@ -2,14 +2,18 @@ package com.example.project_flow_android.ui.mypage
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.LifecycleOwner
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseFragment
 import com.example.project_flow_android.databinding.FragmentMyPageBinding
+import com.example.project_flow_android.databinding.UserProjectMypageItemBinding
+import com.example.project_flow_android.feature.GetUserInfoResponse
 import com.example.project_flow_android.ui.mypage.dialog.ChangePasswordDialog
 import com.example.project_flow_android.ui.mypage.dialog.LogoutDialog
 import com.example.project_flow_android.viewmodel.mypage.ChangePasswordViewModel
 import com.example.project_flow_android.viewmodel.mypage.MyPageViewModel
+import kotlinx.android.synthetic.main.activity_dash_borad.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -59,23 +63,21 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
     }
 
     override fun observeEvent() {
-        binding.run {
+        vm.run {
             binding.logoutTv.setOnClickListener {
                 showLogoutDialog()
             }
-
             binding.changePwTv.setOnClickListener {
                 showChangePasswordDialog()
             }
-        }
-        vm.run {
             projects.observe(viewLifecycleOwner, {
                 projectAdapter.setItem(it.projects)
             })
-        }
-        vm.run {
-            successChange.observe(viewLifecycleOwner,{
-
+            successChange.observe(viewLifecycleOwner, {
+                //TODO 프로필 사진 변경
+            })
+            getUserImage.observe(viewLifecycleOwner,{
+                binding.projectImage = it
             })
         }
     }
