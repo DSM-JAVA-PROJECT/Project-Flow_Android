@@ -51,8 +51,9 @@ class ChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        socket.rejoin()
         chatViewModel.getChatList(socket.getChatRoomId(), getPage(), SIZE)
+        socket.chatReceive()
+        socket.rejoin()
         chatViewModel.messageListLiveData.observe(viewLifecycleOwner, {
             adapterInit(chatViewModel.messageListLiveData.value!!)
         })
@@ -65,10 +66,18 @@ class ChatFragment : Fragment() {
         layoutManager.stackFromEnd = true
         chat_rv.layoutManager = layoutManager
 
-        socket.chatReceive()
         socket.receiveLiveData.observe(viewLifecycleOwner, {
             chatViewModel.messageListLiveData.value!!.oldChatMessageResponses.add(socket.receiveLiveData.value!!)
             adapterInit(chatViewModel.messageListLiveData.value!!)
+
+            socket.readLiveData.observe(viewLifecycleOwner, {
+                val size = chatViewModel.messageListLiveData.value!!.oldChatMessageResponses.size
+                for (i in 0 until size) {
+                    val reader = socket.readLiveData.value
+                    chatViewModel.messageListLiveData.value!!.oldChatMessageResponses[i].readerList.remove(reader)
+                    adapter.notifyDataSetChanged()
+                }
+            })
         })
         socket.errorLiveData.observe(viewLifecycleOwner, {
             errorHandler(socket.errorLiveData.value!!)
@@ -152,17 +161,18 @@ class ChatFragment : Fragment() {
                 val planId =
                     chatViewModel.messageListLiveData.value!!.oldChatMessageResponses[position].planId!!
                 socket.joinPlan(planId)
-                planName = chatViewModel.messageListLiveData.value!!.oldChatMessageResponses[position].planName!!
+                planName =
+                    chatViewModel.messageListLiveData.value!!.oldChatMessageResponses[position].planName!!
             }
         })
-        adapter.setOnResignClickListener(object : ChatRVAdapter.OnResignClickListener{
+        adapter.setOnResignClickListener(object : ChatRVAdapter.OnResignClickListener {
             override fun onResignClick(v: View, position: Int) {
                 val planId =
                     chatViewModel.messageListLiveData.value!!.oldChatMessageResponses[position].planId!!
                 socket.resignPlan(planId)
             }
         })
-        adapter.setOnReJoinClickListener(object : ChatRVAdapter.OnReJoinClickListener{
+        adapter.setOnReJoinClickListener(object : ChatRVAdapter.OnReJoinClickListener {
             override fun onReJoinClick(v: View, position: Int) {
                 val planId =
                     chatViewModel.messageListLiveData.value!!.oldChatMessageResponses[position].planId!!
@@ -171,8 +181,8 @@ class ChatFragment : Fragment() {
         })
     }
 
-    private fun errorHandler(status: Int){
-        when(status){
+    private fun errorHandler(status: Int) {
+        when (status) {
             409 -> {
                 CookieBar.build(requireActivity())
                     .setTitle(planName)

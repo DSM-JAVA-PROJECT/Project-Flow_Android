@@ -2,6 +2,7 @@ package com.example.project_flow_android.network
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.project_flow_android.data.model.sign.chat.ChatErrorResponse
 import com.example.project_flow_android.data.model.sign.chat.ChatMessageResponse
 import com.example.project_flow_android.data.model.sign.chat.ChatReceiveResponse
 import com.google.gson.Gson
@@ -30,10 +31,14 @@ class SocketApplication {
     private val sub_access = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzY0MzQyNjMsImlkIjoiNjE4OWZlYTMwYzliZmQyYjk4MDRmZjg3IiwiZW1haWwiOiJhYmgwOTIwb25lQG5hdmVyLmNvbSJ9.lklPsE4KpZRqSxi5EYahxxTeXigL47eYxbE3UL7ZtMY"
     private lateinit var socket : Socket
     private var chatRoomId = ""
-    private var projectId = "6191bb9602140f2fb20d6eef"
+    private var projectId = "6194967186cfc21756269e3c"
     private var chatImage = ""
     private val _receiveLiveData : MutableLiveData<ChatMessageResponse.ChatReceiveResponse> = MutableLiveData()
+    private val _errorLiveData : MutableLiveData<Int> = MutableLiveData()
+    private val _readLiveData : MutableLiveData<String> = MutableLiveData()
     val receiveLiveData = _receiveLiveData
+    val errorLiveData = _errorLiveData
+    val readLiveData = _readLiveData
 
     fun connect(){
         Thread {
@@ -81,6 +86,8 @@ class SocketApplication {
         socket.on("plan.create", onAddPlan)
         socket.on("plan.join", onJoinPlan)
         socket.on("plan.resign", onResignPlan)
+        socket.on("rejoin", onReJoin)
+        socket.on("error", onError)
     }
 
     fun rejoin(){
@@ -156,5 +163,18 @@ class SocketApplication {
         val json = args[0].toString()
         val resignPlan = Gson().fromJson(json, ChatMessageResponse.ChatReceiveResponse::class.java)
         _receiveLiveData.postValue(resignPlan)
+    }
+
+    private val onError = Emitter.Listener { args ->
+        Log.i("Error payload", args[0].toString())
+        val json = args[0].toString()
+        val error = Gson().fromJson(json, ChatErrorResponse::class.java)
+        _errorLiveData.postValue(error.status)
+    }
+
+    private val onReJoin = Emitter.Listener { args ->
+        Log.i("Rejoin payload", args[0].toString())
+        val json = args[0].toString()
+        readLiveData.postValue(json)
     }
 }

@@ -14,6 +14,7 @@ data class ChatMessageResponse(
         val senderName: String,
         val senderImage: String,
         val readerList: ArrayList<String>,
+        val size : Int,
         val createdAt: String,
         val mine: Boolean
     )
