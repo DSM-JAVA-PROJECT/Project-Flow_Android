@@ -19,7 +19,7 @@ class AddProjectViewModel(
 
     val projectName = MutableLiveData<String>()
     val projectExplanation = MutableLiveData<String>()
-    val projectTeammember = MutableLiveData<List<String>>()
+    val projectTeammember = MutableLiveData(ArrayList<String>())
 
     val startDate = MutableLiveData<String>()
     val endDate = MutableLiveData<String>()
@@ -29,16 +29,14 @@ class AddProjectViewModel(
 
 
     fun addProject() {
-        //TODO 팀원 초대 배열은 어떻게 넣어야 하는지
-//        flowApiImpl.addProject(AddProjectRequest(projectName.value!!,projectExplanation.value!!,startDate.value!!,endDate.value!!,List<AddProjectRequest(projectTeammember.value!!)>)).subscribe({
-//            if(it.isSuccessful){
-//                //TODO 프로젝트 생성 성공
-//                _successAddProject.value!!
-//
-//            }
-//            else {
-//            }
-//        },{
-//        })
+        flowApiImpl.addProject(AddProjectRequest(projectName.value!!,projectExplanation.value!!,startDate.value!!,endDate.value!!,projectTeammember.value!!)).subscribe({
+            if(it.isSuccessful){
+                _successAddProject.value!!
+
+            }
+            else {
+            }
+        },{
+        })
     }
 }

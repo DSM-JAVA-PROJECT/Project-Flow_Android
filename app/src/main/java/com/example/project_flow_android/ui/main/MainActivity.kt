@@ -39,8 +39,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     fun addProject(){
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.show(addProjectFragment)
-        transaction.hide(flowFragment)
+        transaction.replace(R.id.main_container,addProjectFragment)
         transaction.commit()
     }
 

@@ -19,8 +19,6 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
     override val vm: FlowViewModel by viewModel()
     private val addProject = AddProjectFragment()
 
-    lateinit var bind: UserProjectProgressBinding
-
     private val finishProjectDialog by lazy {
         FinishProjectDialog(vm)
     }
@@ -47,13 +45,8 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
                 binding.emptyProjectTv.visibility
             })
             binding.addProjectBtn.setOnClickListener {
-                //(activity as MainActivity).addProject()
-                (activity as MainActivity).changeFragment(addProject)
-            }
-
-            //TODO 삭제 눌렀을 때
-            bind.button.setOnClickListener {
-                showLogoutDialog()
+                (activity as MainActivity).addProject()
+                //(activity as MainActivity).changeFragment(addProject)
             }
         }
     }

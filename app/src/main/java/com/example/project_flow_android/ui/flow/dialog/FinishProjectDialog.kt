@@ -18,7 +18,7 @@ class FinishProjectDialog(override val vm: FlowViewModel) :
         super.onViewCreated(view, savedInstanceState)
 
         binding.cancleTv.setOnClickListener {
-            vm.finishProject()
+            //vm.finishProject()
         }
 
         binding.confirmTv.setOnClickListener {
