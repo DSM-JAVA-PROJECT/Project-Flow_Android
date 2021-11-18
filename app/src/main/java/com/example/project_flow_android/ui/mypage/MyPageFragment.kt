@@ -56,7 +56,6 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         super.onViewCreated(view, savedInstanceState)
         vm.getProjectInfo()
         binding.userRv.adapter = projectAdapter
-        binding.projectImage = vm.getUserImage.value
         binding.userRv.addItemDecoration(VerticalItemDecorator(20))
         getUserInfo()
         observeEvent()
@@ -76,6 +75,9 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
             })
             successChange.observe(viewLifecycleOwner, {
                 //TODO 프로필 사진 변경
+            })
+            getUserImage.observe(viewLifecycleOwner,{
+                binding.projectImage = it
             })
         }
     }

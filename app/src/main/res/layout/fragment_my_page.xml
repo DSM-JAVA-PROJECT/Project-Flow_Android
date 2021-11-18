@@ -78,11 +78,10 @@
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="10dp"
-            app:glide_image_load="@{project_image}"
-            android:background="@drawable/ic_baseline_account_circle_24"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="12dp"
             app:civ_border_color="@color/color_gray"
+            app:glide_image_load="@{project_image}"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mypage_title_tv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
