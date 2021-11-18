@@ -85,7 +85,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/aouth_btn"
+            android:id="@+id/oauth_btn"
             android:layout_width="0dp"
             android:layout_height="66dp"
             android:layout_marginLeft="30dp"
@@ -193,9 +193,19 @@
             android:text="@{vm.changeComment}"
             android:textColor="@color/red"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/aouth_btn"
+            app:layout_constraintBottom_toTopOf="@+id/oauth_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <WebView
+            android:id="@+id/web_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
