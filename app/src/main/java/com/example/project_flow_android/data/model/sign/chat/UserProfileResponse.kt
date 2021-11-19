@@ -5,7 +5,7 @@ data class UserProfileResponse(
     val userEmail: String,
     val phoneNumber: String,
     val profileImage: String,
-    val projectResponse: ArrayList<ProjectResponse>
+    val projectResponses: ArrayList<ProjectResponse>
 ){
     data class ProjectResponse(
         val projectImage: String,

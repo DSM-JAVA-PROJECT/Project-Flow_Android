@@ -32,7 +32,7 @@ interface ChatApi {
         @Query("size") size: Int
     ) : Response<ChatMessageResponse>
 
-    @GET("/chatroom/profile/{userId")
+    @GET("/chatroom/profile/{userId}")
     suspend fun getUserProfile(
         @Header("Authorization") header: String,
         @Path("userId") userId: String
