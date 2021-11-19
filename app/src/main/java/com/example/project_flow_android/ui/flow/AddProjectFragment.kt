@@ -17,8 +17,11 @@ class AddProjectFragment :
     override fun observeEvent() {
         vm.run {
             successAddProject.observe(viewLifecycleOwner, {
-                (activity as MainActivity).changeFragment(FlowFragment())
+                (activity as MainActivity).backFragment()
             })
+            binding.goProjectImg.setOnClickListener{
+                (activity as MainActivity).backFragment()
+            }
         }
 
     }

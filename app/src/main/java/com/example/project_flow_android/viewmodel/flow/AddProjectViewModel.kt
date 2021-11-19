@@ -19,7 +19,8 @@ class AddProjectViewModel(
 
     val projectName = MutableLiveData<String>()
     val projectExplanation = MutableLiveData<String>()
-    val projectTeammember = MutableLiveData(ArrayList<String>())
+
+    val projectMember = MutableLiveData<String>()
 
     val startDate = MutableLiveData<String>()
     val endDate = MutableLiveData<String>()
@@ -29,10 +30,12 @@ class AddProjectViewModel(
 
 
     fun addProject() {
-        flowApiImpl.addProject(AddProjectRequest(projectName.value!!,projectExplanation.value!!,startDate.value!!,endDate.value!!,projectTeammember.value!!)).subscribe({
+        val member : String =  projectMember.value!!
+        val splitArray = member.split(",")
+
+        flowApiImpl.addProject(token,AddProjectRequest(projectName.value!!,projectExplanation.value!!,startDate.value!!,endDate.value!!,splitArray)).subscribe({
             if(it.isSuccessful){
                 _successAddProject.value!!
-
             }
             else {
             }

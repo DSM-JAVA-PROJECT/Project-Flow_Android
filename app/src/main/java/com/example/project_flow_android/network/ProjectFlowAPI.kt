@@ -35,7 +35,7 @@ interface ProjectFlowAPI {
     fun getMainInfo(@Header("Authorization") token: String) : Single<Response<GetUserInfoResponse>>
 
     @POST("/project")
-    fun addProject(@Body request: AddProjectRequest) : Single<Response<Void>>
+    fun addProject(@Header("Authorization") token: String,@Body request: AddProjectRequest) : Single<Response<Void>>
 
     @PATCH("/project/close/{id}")
     fun finishProject(@Body projectId : String) : Single<Response<Void>>

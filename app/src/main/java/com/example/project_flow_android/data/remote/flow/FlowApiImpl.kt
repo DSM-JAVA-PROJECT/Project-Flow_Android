@@ -16,9 +16,9 @@ class FlowApiImpl {
     private fun providerFlowApi(): ProjectFlowAPI = ApiProvider.RetroFitBuilder.create(
         ProjectFlowAPI::class.java)
 
-    fun addProject(request : AddProjectRequest
+    fun addProject(token : String, request : AddProjectRequest
     ): @NonNull Single<Response<Void>> =
-        providerFlowApi().addProject(request)
+        providerFlowApi().addProject(token,request)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
