@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.project_flow_android.R
 import com.example.project_flow_android.data.model.sign.chat.RoomMemberResponse
-import kotlinx.android.synthetic.main.chat_list_item.view.*
-import kotlinx.android.synthetic.main.fragment_manage.view.*
 import kotlinx.android.synthetic.main.manage_item.view.*
 
 class ManageRVAdapter(private val items: RoomMemberResponse, private val activity: Activity) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

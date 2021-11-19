@@ -3,6 +3,7 @@ package com.example.project_flow_android.data.remote.chat
 import com.example.project_flow_android.data.model.sign.chat.*
 import com.example.project_flow_android.network.ApiProvider
 import com.example.project_flow_android.network.SafeApiRequest
+import org.json.JSONObject
 import retrofit2.Response
 
 class ChatRepositoryImpl : ChatRepository, SafeApiRequest() {
@@ -38,5 +39,13 @@ class ChatRepositoryImpl : ChatRepository, SafeApiRequest() {
         userId: String,
     ): Response<UserProfileResponse> {
         return safeApiCall { ApiProvider.getChatAPI().getUserProfile(header, userId) }
+    }
+
+    override suspend fun modifyRoomName(
+        header: String,
+        chatRoomId: String,
+        name: JSONObject,
+    ): Response<Unit> {
+        return safeApiCall { ApiProvider.getChatAPI().modifyRoomName(header, chatRoomId, name) }
     }
 }

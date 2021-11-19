@@ -1,6 +1,7 @@
 package com.example.project_flow_android.data.remote.chat
 
 import com.example.project_flow_android.data.model.sign.chat.*
+import org.json.JSONObject
 import retrofit2.Response
 
 interface ChatRepository{
@@ -9,4 +10,5 @@ interface ChatRepository{
     suspend fun getRoomMember(header: String, chatRoomId: String) : Response<RoomMemberResponse>
     suspend fun getChatList(header: String, chatRoomId: String, page: Int, size: Int) : Response<ChatMessageResponse>
     suspend fun getUserProfile(header: String, userId: String) : Response<UserProfileResponse>
+    suspend fun modifyRoomName(header: String, chatRoomId: String, name: JSONObject) : Response<Unit>
 }
