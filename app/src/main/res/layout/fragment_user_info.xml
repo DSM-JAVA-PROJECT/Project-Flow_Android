@@ -63,6 +63,7 @@
         android:fontFamily="@font/font_nanumgothic_bold"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/user_info_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"/>
