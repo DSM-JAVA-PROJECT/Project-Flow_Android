@@ -1,9 +1,6 @@
 package com.example.project_flow_android.network
 
-import com.example.project_flow_android.data.chat.ProjectMemberResponse
-import com.example.project_flow_android.data.chat.RoomListResponse
-import com.example.project_flow_android.data.model.sign.chat.ChatMessageResponse
-import com.example.project_flow_android.data.model.sign.chat.RoomMemberResponse
+import com.example.project_flow_android.data.model.sign.chat.*
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -34,4 +31,10 @@ interface ChatApi {
         @Query("page") page: Int,
         @Query("size") size: Int
     ) : Response<ChatMessageResponse>
+
+    @GET("/chatroom/profile/{userId}")
+    suspend fun getUserProfile(
+        @Header("Authorization") header: String,
+        @Path("userId") userId: String
+    ) : Response<UserProfileResponse>
 }

@@ -10,6 +10,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.project_flow_android.R
+import com.example.project_flow_android.data.model.sign.chat.RoomMemberResponse
 import com.example.project_flow_android.network.SocketApplication
 import com.example.project_flow_android.ui.chat.ChatActivity
 import com.example.project_flow_android.ui.chat.ManageRVAdapter
@@ -22,6 +23,7 @@ class ManageFragment : Fragment() {
 
     private val chatViewModel : ChatViewModel by viewModel()
     private val socket = SocketApplication.getSocket()
+    private lateinit var adapter : ManageRVAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,8 +43,7 @@ class ManageFragment : Fragment() {
         manage_rv.layoutManager = layoutManager
 
         chatViewModel.roomMemberLiveData.observe(viewLifecycleOwner, {
-            val adapter = ManageRVAdapter(chatViewModel.roomMemberLiveData.value!!, requireActivity())
-            manage_rv.adapter = adapter
+            adapterInit(chatViewModel.roomMemberLiveData.value!!)
         })
 
         manage_prev_iv.setOnClickListener{
@@ -61,5 +62,21 @@ class ManageFragment : Fragment() {
     private fun imageLoad(image: String, iv: ImageView){
         iv.clipToOutline = true
         Glide.with(requireActivity()).load(Uri.parse(image)).into(iv)
+    }
+
+    private fun adapterInit(data: RoomMemberResponse) {
+        adapter = ManageRVAdapter(data, requireActivity())
+        manage_rv.adapter = adapter
+
+        adapter.setOnItemClickListener(object: ManageRVAdapter.OnItemClickListener{
+            override fun onItemClick(v: View, position: Int) {
+                val userId = data.responses[position].id
+                val fragment = UserInfoFragment()
+                val bundle = Bundle()
+                bundle.putString("userId", userId)
+                fragment.arguments = bundle
+                (activity as ChatActivity).replace(fragment)
+            }
+        })
     }
 }
