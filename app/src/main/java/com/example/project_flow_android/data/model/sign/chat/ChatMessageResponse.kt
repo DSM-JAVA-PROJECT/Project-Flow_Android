@@ -4,11 +4,17 @@ data class ChatMessageResponse(
     val oldChatMessageResponses : ArrayList<ChatReceiveResponse>
 ){
     data class ChatReceiveResponse(
+        val type: String,
         val id: String,
-        val message: String,
+        val planId: String?,
+        val planName: String?,
+        val startDate: String?,
+        val endDate: String?,
+        val message: String?,
         val senderName: String,
         val senderImage: String,
         val readerList: ArrayList<String>,
+        val size : Int,
         val createdAt: String,
         val mine: Boolean
     )

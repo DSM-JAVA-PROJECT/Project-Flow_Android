@@ -129,4 +129,6 @@ dependencies {
     //CircleImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    //cookieBar2
+    implementation 'org.aviran.cookiebar2:cookiebar2:1.1.4'
 }
