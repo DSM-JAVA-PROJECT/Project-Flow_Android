@@ -22,7 +22,6 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/add_project_name_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -49,7 +48,6 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/add_project_explain_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
@@ -63,6 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
+                android:background="@color/color_light_gray"
                 android:hint="@string/explain_project_im"
                 android:gravity="end"
                 android:textSize="14sp"
@@ -128,6 +127,7 @@
             android:backgroundTint="@color/blue_main"
             android:fontFamily="@font/nanumgothic_regular"
             android:text="@string/make_project"
+            android:onClick="@{()->vm.addProject()}"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -244,6 +244,7 @@
             android:layout_marginEnd="16sp"
             android:backgroundTint="@color/color_flow"
             android:gravity="end"
+            android:text="@={vm.projectMember}"
             android:hint="@string/add_member_email"
             android:textColor="@color/black"
             android:textSize="14sp"

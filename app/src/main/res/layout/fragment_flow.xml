@@ -80,6 +80,7 @@
             android:id="@+id/add_project_btn"
             android:layout_width="wrap_content"
             android:layout_gravity="end"
+            android:elevation="20dp"
             android:backgroundTint="@color/blue_main"
             android:layout_marginBottom="20dp"
             android:layout_marginEnd="20dp"
