@@ -46,7 +46,6 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
             })
             binding.addProjectBtn.setOnClickListener {
                 (activity as MainActivity).addProject()
-                //(activity as MainActivity).changeFragment(addProject)
             }
         }
     }

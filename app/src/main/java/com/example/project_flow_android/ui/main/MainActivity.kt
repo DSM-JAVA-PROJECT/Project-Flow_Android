@@ -43,6 +43,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         transaction.commit()
     }
 
+    fun backFragment(){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.main_container,flowFragment)
+        transaction.commit()
+    }
+
     fun startLogin(){
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
