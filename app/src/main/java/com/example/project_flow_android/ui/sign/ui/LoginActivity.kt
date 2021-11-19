@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.core.view.isInvisible
 import androidx.lifecycle.ViewModelProvider
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseActivity
@@ -38,6 +39,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         val webView = findViewById<WebView>(R.id.web_view)
         webView.webViewClient = WebViewClient()
         webView.loadUrl("http://18.210.203.222:8080/auth/oauth")
+        binding.oauthBtn.isInvisible
+        binding.registerBtn.isInvisible
 
     }
 
