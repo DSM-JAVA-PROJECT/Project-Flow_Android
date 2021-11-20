@@ -102,4 +102,6 @@
     <string name="finished">마감</string>
     <string name="calendar_info">일정</string>
     <string name="info_finished_project">마감 후에는 프로젝트 진행이 불가능 합니다</string>
+    <string name="projec">프로젝트</string>
+    <string name="join_project">프로젝트 참가하기</string>
 </resources>
