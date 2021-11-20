@@ -20,6 +20,7 @@
             android:id="@+id/chat_prev_btn"
             android:layout_width="25dp"
             android:layout_height="25dp"
+            android:background="?attr/selectableItemBackground"
             android:src="@drawable/ic_baseline_arrow_back_ios_new_24" />
 
         <TextView
@@ -34,6 +35,7 @@
             android:id="@+id/chat_manage_tv"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:background="?attr/selectableItemBackground"
             android:layout_gravity="end"
             android:layout_marginEnd="20dp"
             android:gravity="center"
@@ -76,6 +78,7 @@
             android:layout_height="25dp"
             android:layout_marginStart="15dp"
             android:src="@drawable/ic_chat_add"
+            android:background="?attr/selectableItemBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -100,6 +103,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_chat_send"
             android:layout_marginEnd="12dp"
+            android:background="?attr/selectableItemBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
