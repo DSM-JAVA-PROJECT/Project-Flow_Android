@@ -27,7 +27,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:text="프플(Project-Flow)"
             android:textColor="@color/black"
             android:fontFamily="@font/font_nanumgothic_bold"/>
 
