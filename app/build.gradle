@@ -135,4 +135,7 @@ dependencies {
     //calendarView
     implementation 'com.github.prolificinteractive:material-calendarview:1.4.3'
 
+    //camera
+    implementation "gun0912.ted:tedpermission:2.1.0"
+
 }
