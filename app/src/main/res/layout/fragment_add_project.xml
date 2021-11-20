@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+        <variable
+            name="vm"
+            type="com.example.project_flow_android.viewmodel.flow.AddProjectViewModel"
+            />
+    </data>
 
 <FrameLayout
     android:layout_width="match_parent"
@@ -16,7 +22,6 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/add_project_name_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -36,14 +41,13 @@
                 android:background="@color/color_light_gray"
                 android:fontFamily="@font/nanumgothic_regular"
                 android:singleLine="true"
-                android:text="" />
+                android:text="@={vm.projectName}" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/add_project_explain_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
@@ -57,12 +61,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
+                android:background="@color/color_light_gray"
                 android:hint="@string/explain_project_im"
                 android:gravity="end"
                 android:textSize="14sp"
                 android:fontFamily="@font/nanumgothic_regular"
                 android:singleLine="true"
-                android:text="" />
+                android:text="@={vm.projectExplanation}" />
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -190,11 +195,11 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16sp"
             android:backgroundTint="@color/color_flow"
-            android:focusable="false"
             android:gravity="end"
             android:hint="@string/add_schedule_bottom_date_hint"
             android:textColor="@color/black"
             android:textSize="14sp"
+            android:text="@={vm.startDate}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/period_project_tv" />
@@ -218,12 +223,11 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/color_flow"
-            android:clickable="false"
-            android:focusable="false"
             android:gravity="end"
             android:hint="@string/add_schedule_bottom_date_hint"
             android:textColor="@color/black"
             android:textSize="14sp"
+            android:text="@={vm.endDate}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -238,8 +242,8 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16sp"
             android:backgroundTint="@color/color_flow"
-            android:focusable="false"
             android:gravity="end"
+            android:text="@={vm.projectMember}"
             android:hint="@string/add_member_email"
             android:textColor="@color/black"
             android:textSize="14sp"

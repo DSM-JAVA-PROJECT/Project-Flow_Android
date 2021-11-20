@@ -73,8 +73,10 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
             projects.observe(viewLifecycleOwner, {
                 projectAdapter.setItem(it.projects)
             })
-            successChange.observe(viewLifecycleOwner, {
-                //TODO 프로필 사진 변경
+        }
+        vm.run {
+            successChange.observe(viewLifecycleOwner,{
+                //TODO image 업로드 성공시에
             })
             getUserImage.observe(viewLifecycleOwner,{
                 binding.projectImage = it

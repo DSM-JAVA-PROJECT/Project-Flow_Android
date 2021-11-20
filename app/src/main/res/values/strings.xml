@@ -107,4 +107,14 @@
     <string name="logout_no">아니요</string>
     <string name="change_password_edit">변경할 비밀번호를 설정해주세요</string>
     <string name="connect_date">~</string>
+    <string name="finish_project">프로젝트 마감하기</string>
+    <string name="project_progress">프로젝트 진행도</string>
+    <string name="nim_progress">님의 진행도</string>
+    <string name="finished_project">프로젝트 마감</string>
+    <string name="cancle">취소</string>
+    <string name="finished">마감</string>
+    <string name="calendar_info">일정</string>
+    <string name="info_finished_project">마감 후에는 프로젝트 진행이 불가능 합니다</string>
+    <string name="projec">프로젝트</string>
+    <string name="join_project">프로젝트 참가하기</string>
 </resources>

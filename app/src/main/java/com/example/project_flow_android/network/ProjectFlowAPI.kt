@@ -25,11 +25,22 @@ interface ProjectFlowAPI {
     fun getuserInfo(@Header("Authorization") token: String): Single<Response<GetUserInfoResponse>>
 
     @PATCH("/auth/password")
-    fun changePassword(@Header("Authorization") token :String, @Query("password") password : String) : Single<Response<Void>>
+    fun changePassword(@Header("Authorization") token :String,@Body password : NewPasswordRequest) : Single<Response<Void>>
 
     @Multipart
     @PATCH("/auth/image")
     fun changeProfileImage(@Header("Authorization") token: String,@Part ("file") file : File) : Single<Response<Void>>
+
+    @GET("/main")
+    fun getMainInfo(@Header("Authorization") token: String) : Single<Response<GetUserInfoResponse>>
+
+    @POST("/project")
+    fun addProject(@Header("Authorization") token: String,@Body request: AddProjectRequest) : Single<Response<Void>>
+
+    @PATCH("/project/close/{id}")
+    fun finishProject(@Body projectId : String) : Single<Response<Void>>
+
+
 
 
 

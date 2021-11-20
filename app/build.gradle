@@ -131,4 +131,13 @@ dependencies {
 
     //cookieBar2
     implementation 'org.aviran.cookiebar2:cookiebar2:1.1.4'
+    //calendar library
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    //calendarView
+    implementation 'com.github.prolificinteractive:material-calendarview:1.4.3'
+
+    //camera
+    implementation "gun0912.ted:tedpermission:2.1.0"
+
 }

@@ -56,10 +56,9 @@
             android:textSize="8sp" />
 
         <Button
-            android:id="@+id/plan_item_mine_join_btn"
-            android:layout_width="165dp"
+            android:layout_width="160dp"
             android:layout_height="30dp"
-            android:layout_marginStart="73dp"
+            android:layout_marginStart="77dp"
             android:layout_marginTop="75dp"
             android:backgroundTint="@color/white"
             android:elevation="10dp"
@@ -71,17 +70,6 @@
             android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/plan_item_mine_cnt_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:fontFamily="@font/font_roboto_regular"
-        android:textColor="@color/color_flow"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/plan_item_mine_time_tv"
-        app:layout_constraintEnd_toStartOf="@+id/cardView2" />
 
     <TextView
         android:id="@+id/plan_item_mine_time_tv"

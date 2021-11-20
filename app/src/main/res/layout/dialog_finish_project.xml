@@ -3,18 +3,18 @@
     <data>
         <variable
             name="vm"
-            type="com.example.project_flow_android.viewmodel.mypage.ChangePasswordViewModel"
+            type="com.example.project_flow_android.viewmodel.flow.FlowViewModel"
             />
     </data>
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="10dp"
         app:cardCornerRadius="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <View
@@ -38,11 +38,10 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/nanumgothic_bold"
                 android:gravity="center"
-                android:hint="@string/change_password_edit"
+                android:hint="@string/info_finished_project"
                 android:inputType="text"
                 android:maxLength="13"
                 android:singleLine="true"
-                android:text="@={vm.changePassword}"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +57,8 @@
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/nanumgothic_regular"
                 android:gravity="center"
-                android:text="@string/logout_no"
+                android:text="@string/finished"
+                android:textColor="@color/red"
                 android:textSize="@dimen/dialog_text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -73,7 +73,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/nanumgothic_regular"
                 android:gravity="center"
-                android:text="@string/logout_yes"
+                android:text="@string/cancle"
                 android:textSize="@dimen/dialog_text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +88,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/nanumgothic_bold"
                 android:gravity="center"
-                android:text="@string/change_password"
+                android:text="@string/finished_project"
                 android:textColor="@color/blue_main"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
