@@ -114,6 +114,7 @@ class ChatFragment : Fragment() {
             (activity as ChatActivity).replace(ScheduleFragment())
         }
         chat_manage_tv.setOnClickListener {
+            page = 0
             (activity as ChatActivity).replace(ManageFragment())
         }
         chat_add_schedule_tv.setOnClickListener {
@@ -147,10 +148,6 @@ class ChatFragment : Fragment() {
     }
 
     private fun getPage() = page++
-
-    fun setPage(page: Int) {
-        this.page = page
-    }
 
     private fun adapterInit(data: ChatMessageResponse) {
         adapter = ChatRVAdapter(data, requireActivity())
