@@ -3,6 +3,8 @@ package com.example.project_flow_android.network
 import com.example.project_flow_android.data.model.sign.chat.*
 import org.json.JSONObject
 import retrofit2.Response
+import com.example.project_flow_android.data.chat.ProjectMemberResponse
+import com.example.project_flow_android.data.chat.RoomListResponse
 import retrofit2.http.*
 
 interface ChatApi {

@@ -3,6 +3,8 @@ package com.example.project_flow_android.viewmodel.chat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.project_flow_android.data.chat.ProjectMemberResponse
+import com.example.project_flow_android.data.chat.RoomListResponse
 import com.example.project_flow_android.data.model.sign.chat.*
 import com.example.project_flow_android.data.remote.chat.ChatRepositoryImpl
 import kotlinx.coroutines.launch
