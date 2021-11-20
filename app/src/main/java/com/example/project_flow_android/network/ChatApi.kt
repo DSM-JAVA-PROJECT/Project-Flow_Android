@@ -40,6 +40,6 @@ interface ChatApi {
     suspend fun modifyRoomName(
         @Header("Authorization") header: String,
         @Path("chatRoomId") chatRoomId: String,
-        @Body name: JSONObject
+        @Body name: ModifyNameRequest
     ) : Response<Unit>
 }

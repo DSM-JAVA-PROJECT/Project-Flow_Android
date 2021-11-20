@@ -10,5 +10,5 @@ interface ChatRepository{
     suspend fun getRoomMember(header: String, chatRoomId: String) : Response<RoomMemberResponse>
     suspend fun getChatList(header: String, chatRoomId: String, page: Int, size: Int) : Response<ChatMessageResponse>
     suspend fun getUserProfile(header: String, userId: String) : Response<UserProfileResponse>
-    suspend fun modifyRoomName(header: String, chatRoomId: String, name: JSONObject) : Response<Unit>
+    suspend fun modifyRoomName(header: String, chatRoomId: String, name: ModifyNameRequest) : Response<Unit>
 }

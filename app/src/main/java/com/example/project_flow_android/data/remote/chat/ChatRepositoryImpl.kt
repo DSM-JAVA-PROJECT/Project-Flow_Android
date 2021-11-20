@@ -44,7 +44,7 @@ class ChatRepositoryImpl : ChatRepository, SafeApiRequest() {
     override suspend fun modifyRoomName(
         header: String,
         chatRoomId: String,
-        name: JSONObject,
+        name: ModifyNameRequest,
     ): Response<Unit> {
         return safeApiCall { ApiProvider.getChatAPI().modifyRoomName(header, chatRoomId, name) }
     }
