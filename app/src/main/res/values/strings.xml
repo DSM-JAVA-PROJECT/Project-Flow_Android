@@ -42,6 +42,9 @@
     <string name="chat_join_plan_item_view">일정보기</string>
     <string name="chat_join_plan_item_exit">제외하기</string>
     <string name="already_plan_participate">이미 참여한 일정입니다.</string>
+    <string name="modify_room_name_title">채팅방 이름이 변경되었습니다.</string>
+    <string name="cant_modify_room_name_title">채팅방 이름을 변경할 수 없습니다.</string>
+    <string name="cant_modify_room_name_content">이름 변경란을 채워주세요.</string>
 
     <string name="start_project">프로젝트 관리는</string>
     <string name="start_project_se">프로젝트 플로우에서</string>

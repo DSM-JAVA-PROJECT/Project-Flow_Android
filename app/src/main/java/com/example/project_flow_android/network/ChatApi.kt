@@ -1,11 +1,9 @@
 package com.example.project_flow_android.network
 
 import com.example.project_flow_android.data.model.sign.chat.*
+import org.json.JSONObject
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ChatApi {
     @GET("/project/{projectId}/member")
@@ -37,4 +35,11 @@ interface ChatApi {
         @Header("Authorization") header: String,
         @Path("userId") userId: String
     ) : Response<UserProfileResponse>
+
+    @PATCH("/chatroom/name/{chatRoomId}")
+    suspend fun modifyRoomName(
+        @Header("Authorization") header: String,
+        @Path("chatRoomId") chatRoomId: String,
+        @Body name: ModifyNameRequest
+    ) : Response<Unit>
 }

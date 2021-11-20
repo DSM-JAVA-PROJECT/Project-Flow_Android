@@ -46,6 +46,7 @@ class ManageFragment : Fragment() {
             adapterInit(chatViewModel.roomMemberLiveData.value!!)
         })
 
+        manage_name_tv.text = socket.getRoomName()
         manage_prev_iv.setOnClickListener{
             (activity as ChatActivity).popBackStack(ManageFragment())
         }

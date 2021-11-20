@@ -83,6 +83,7 @@ class ChatFragment : Fragment() {
             errorHandler(socket.errorLiveData.value!!)
         })
 
+        chat_title_tv.text = socket.getRoomName()
         chat_more_iv.setOnClickListener {
             if (view_more.visibility == View.VISIBLE)
                 view_more.visibility = View.GONE
@@ -113,6 +114,7 @@ class ChatFragment : Fragment() {
             (activity as ChatActivity).replace(ScheduleFragment())
         }
         chat_manage_tv.setOnClickListener {
+            page = 0
             (activity as ChatActivity).replace(ManageFragment())
         }
         chat_add_schedule_tv.setOnClickListener {
@@ -146,10 +148,6 @@ class ChatFragment : Fragment() {
     }
 
     private fun getPage() = page++
-
-    fun setPage(page: Int) {
-        this.page = page
-    }
 
     private fun adapterInit(data: ChatMessageResponse) {
         adapter = ChatRVAdapter(data, requireActivity())

@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.project_flow_android.data.model.sign.chat.*
 import com.example.project_flow_android.data.remote.chat.ChatRepositoryImpl
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 
 class ChatViewModel : ViewModel() {
     private val access_token =
@@ -20,11 +21,13 @@ class ChatViewModel : ViewModel() {
     private val _roomMemberLiveData: MutableLiveData<RoomMemberResponse> = MutableLiveData()
     private val _messageListLiveData: MutableLiveData<ChatMessageResponse> = MutableLiveData()
     private val _userProfileLiveData: MutableLiveData<UserProfileResponse> = MutableLiveData()
+    private val _modifyLiveData: MutableLiveData<Int> = MutableLiveData()
     val chatLiveData = _chatLiveData
     val chatRoomLiveData = _chatRoomLiveData
     val roomMemberLiveData = _roomMemberLiveData
     val messageListLiveData = _messageListLiveData
     val userProfileLiveData = _userProfileLiveData
+    val modifyLiveData = _modifyLiveData
 
     fun getProjectUser() {
         viewModelScope.launch {
@@ -76,6 +79,17 @@ class ChatViewModel : ViewModel() {
             if (response.isSuccessful) {
                 if (response.code() == 200) {
                     _userProfileLiveData.postValue(response.body())
+                }
+            }
+        }
+    }
+
+    fun modifyRoomName(chatRoomId: String, name: ModifyNameRequest) {
+        viewModelScope.launch {
+            val response = chatRepository.modifyRoomName(access_token, chatRoomId, name)
+            if (response.isSuccessful) {
+                if (response.code() == 200) {
+                    _modifyLiveData.postValue(response.code())
                 }
             }
         }

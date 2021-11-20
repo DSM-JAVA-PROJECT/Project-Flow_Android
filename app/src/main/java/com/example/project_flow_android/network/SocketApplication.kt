@@ -33,6 +33,7 @@ class SocketApplication {
     private var chatRoomId = ""
     private var projectId = "6194967186cfc21756269e3c"
     private var chatImage = ""
+    private var roomName = ""
     private val _receiveLiveData : MutableLiveData<ChatMessageResponse.ChatReceiveResponse> = MutableLiveData()
     private val _errorLiveData : MutableLiveData<Int> = MutableLiveData()
     private val _readLiveData : MutableLiveData<String> = MutableLiveData()
@@ -132,11 +133,17 @@ class SocketApplication {
         this.chatImage = chatImage
     }
 
+    fun setRoomName(roomName: String){
+        this.roomName = roomName
+    }
+
     fun getProjectId() = projectId
 
     fun getChatRoomId() = chatRoomId
 
     fun getChatImage() = chatImage
+
+    fun getRoomName() = roomName
 
     private val onMassage = Emitter.Listener { args ->
         Log.i("Message payload", args[0].toString())

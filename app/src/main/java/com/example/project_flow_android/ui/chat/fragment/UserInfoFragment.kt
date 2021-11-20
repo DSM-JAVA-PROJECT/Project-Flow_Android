@@ -14,7 +14,6 @@ import com.example.project_flow_android.ui.chat.ChatActivity
 import com.example.project_flow_android.ui.chat.UserProjectRVAdapter
 import com.example.project_flow_android.viewmodel.chat.ChatViewModel
 import kotlinx.android.synthetic.main.fragment_user_info.*
-import kotlinx.android.synthetic.main.manage_item.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UserInfoFragment : Fragment() {
