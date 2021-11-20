@@ -83,6 +83,7 @@ class ChatFragment : Fragment() {
             errorHandler(socket.errorLiveData.value!!)
         })
 
+        chat_title_tv.text = socket.getRoomName()
         chat_more_iv.setOnClickListener {
             if (view_more.visibility == View.VISIBLE)
                 view_more.visibility = View.GONE
