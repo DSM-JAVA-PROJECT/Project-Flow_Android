@@ -28,7 +28,6 @@ class AddProjectViewModel(
     private val _successAddProject = MutableLiveData<Boolean>()
     val successAddProject: LiveData<Boolean> get() = _successAddProject
 
-
     fun addProject() {
         val member : String =  projectMember.value!!
         val splitArray = member.split(",")
