@@ -17,6 +17,6 @@ data class ChatMessageResponse(
         val senderImage: String,
         val readerList: ArrayList<String>,
         val createdAt: String,
-        val mine: Boolean,
+        val mine: Boolean
     )
 }
