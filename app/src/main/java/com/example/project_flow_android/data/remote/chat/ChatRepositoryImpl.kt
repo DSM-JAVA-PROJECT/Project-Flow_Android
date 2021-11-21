@@ -3,6 +3,7 @@ package com.example.project_flow_android.data.remote.chat
 import com.example.project_flow_android.data.model.sign.chat.*
 import com.example.project_flow_android.network.ApiProvider
 import com.example.project_flow_android.network.SafeApiRequest
+import okhttp3.MultipartBody
 import org.json.JSONObject
 import retrofit2.Response
 
@@ -47,5 +48,16 @@ class ChatRepositoryImpl : ChatRepository, SafeApiRequest() {
         name: ModifyNameRequest,
     ): Response<Unit> {
         return safeApiCall { ApiProvider.getChatAPI().modifyRoomName(header, chatRoomId, name) }
+    }
+
+    override suspend fun fileUpload(
+        header: String,
+        file: MultipartBody.Part,
+    ): Response<FileResponse> {
+        return safeApiCall { ApiProvider.getChatAPI().fileUpload(header, file) }
+    }
+
+    override suspend fun imageUpdate(header: String, imageUrl: ImageUpdateRequest): Response<Unit> {
+        return safeApiCall { ApiProvider.getChatAPI().imageUpdate(header, imageUrl) }
     }
 }
