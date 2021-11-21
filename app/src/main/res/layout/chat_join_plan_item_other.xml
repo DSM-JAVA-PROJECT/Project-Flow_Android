@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/chat_other_profile_iv"
+        android:id="@+id/join_chat_other_profile_iv"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="15dp"
@@ -16,14 +16,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/chat_other_name_tv"
+        android:id="@+id/join_chat_other_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginStart="10dp"
         android:textColor="@color/black"
         android:fontFamily="@font/font_roboto_regular"
-        app:layout_constraintStart_toEndOf="@+id/chat_other_profile_iv"
+        app:layout_constraintStart_toEndOf="@+id/join_chat_other_profile_iv"
         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -36,8 +36,8 @@
         android:backgroundTint="@color/color_flow"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/chat_other_profile_iv"
-        app:layout_constraintTop_toBottomOf="@+id/chat_other_name_tv">
+        app:layout_constraintStart_toEndOf="@+id/join_chat_other_profile_iv"
+        app:layout_constraintTop_toBottomOf="@+id/join_chat_other_name_tv">
 
         <TextView
             android:layout_width="wrap_content"
