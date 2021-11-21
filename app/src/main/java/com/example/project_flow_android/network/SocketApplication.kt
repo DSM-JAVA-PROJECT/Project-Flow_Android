@@ -182,6 +182,6 @@ class SocketApplication {
     private val onReJoin = Emitter.Listener { args ->
         Log.i("Rejoin payload", args[0].toString())
         val json = args[0].toString()
-        readLiveData.postValue(json)
+        _readLiveData.postValue(json)
     }
 }
