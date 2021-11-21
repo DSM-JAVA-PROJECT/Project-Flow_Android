@@ -1,7 +1,9 @@
 package com.example.project_flow_android.data.model.sign.chat
 
 data class ChatMessageResponse(
-    val oldChatMessageResponses : ArrayList<ChatReceiveResponse>
+    val oldChatMessageResponses : ArrayList<ChatReceiveResponse>,
+    val size : Int,
+    val hasNextPage: Boolean
 ){
     data class ChatReceiveResponse(
         val type: String,
@@ -14,8 +16,7 @@ data class ChatMessageResponse(
         val senderName: String,
         val senderImage: String,
         val readerList: ArrayList<String>,
-        val size : Int,
         val createdAt: String,
-        val mine: Boolean
+        val mine: Boolean,
     )
 }
