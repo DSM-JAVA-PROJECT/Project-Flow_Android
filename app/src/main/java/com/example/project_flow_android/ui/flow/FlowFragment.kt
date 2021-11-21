@@ -6,7 +6,6 @@ import androidx.lifecycle.LifecycleOwner
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseFragment
 import com.example.project_flow_android.databinding.FragmentFlowBinding
-import com.example.project_flow_android.databinding.UserProjectProgressBinding
 import com.example.project_flow_android.ui.flow.dialog.FinishProjectDialog
 import com.example.project_flow_android.ui.main.MainActivity
 import com.example.project_flow_android.ui.mypage.dialog.ChangePasswordDialog

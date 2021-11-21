@@ -1,5 +1,7 @@
 package com.example.project_flow_android.viewmodel.flow
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.data.remote.flow.FlowApiImpl
@@ -14,7 +16,7 @@ class FlowViewModel(private val myPageApiImpl: MyPageApiImpl,private val flowApi
 
     //TODO 프로젝트 여부 검사 후 메인 이미지 visibltiy
 
-    val getUserName  = MutableLiveData<String>()
+    val getUserName = MutableLiveData<String>()
 
     //TODO 프로젝트 정보 가져오기
     val projectName = MutableLiveData<String>()

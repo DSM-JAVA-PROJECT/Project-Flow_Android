@@ -9,6 +9,7 @@ import com.example.project_flow_android.base.BaseActivity
 import com.example.project_flow_android.databinding.ActivityMainBinding
 import com.example.project_flow_android.ui.calendar.CalendarFragment
 import com.example.project_flow_android.ui.chat.fragment.ChatListFragment
+import com.example.project_flow_android.ui.flow.AddProjectFragment
 import com.example.project_flow_android.ui.flow.DefaultProjectFragment
 import com.example.project_flow_android.ui.mypage.MyPageFragment
 import com.example.project_flow_android.ui.sign.LoginActivity
