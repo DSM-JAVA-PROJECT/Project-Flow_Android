@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.project_flow_android.R
 import com.example.project_flow_android.data.model.sign.chat.ChatMessageResponse
+import kotlinx.android.synthetic.main.chat_forced_plan_item_mine.view.*
 import kotlinx.android.synthetic.main.chat_item_mine.view.*
 import kotlinx.android.synthetic.main.chat_item_other.view.*
 import kotlinx.android.synthetic.main.chat_item_other.view.chat_other_name_tv
@@ -33,6 +34,7 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
     private val OTHER_JOIN_PLAN = 4
     private val MINE_RESIGN_PLAN = 5
     private val OTHER_RESIGN_PLAN = 6
+    private val FORCED_PLAN = 7
 
     interface OnJoinClickListener{
         fun onJoinClick(v: View, position: Int)
@@ -105,6 +107,11 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
                     .inflate(R.layout.chat_resign_plan_item_other, parent, false)
                 ResignPlanOtherViewHolder(inflateView)
             }
+            FORCED_PLAN -> {
+                val inflateView = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.chat_forced_plan_item_mine, parent, false)
+                ForcedPlanViewHolder(inflateView)
+            }
             else -> throw RuntimeException("알 수 없는 viewType")
         }
     }
@@ -119,6 +126,7 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
             is JoinPlanOtherViewHolder -> holder.apply { bind(item) }
             is ResignPlanMineViewHolder -> holder.apply { bind(item) }
             is ResignPlanOtherViewHolder -> holder.apply { bind(item) }
+            is ForcedPlanViewHolder -> holder.apply { bind(item) }
         }
     }
 
@@ -132,6 +140,7 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
                     "PLAN" -> PLAN_ADD
                     "JOIN_PLAN" -> MINE_JOIN_PLAN
                     "RESIGN_PLAN" -> MINE_RESIGN_PLAN
+                    "FORCED_PLAN" -> FORCED_PLAN
                     else -> throw RuntimeException("알 수 없는 타입")
                 }
             }
@@ -175,7 +184,6 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
         fun bind(item: ChatMessageResponse.ChatReceiveResponse) {
             view.plan_item_mine_content_tv.text = item.planName
             view.plan_item_mine_date_tv.text = "${item.startDate} ~ ${item.endDate}"
-            view.plan_item_mine_cnt_tv.text = item.readerList.size.toString()
             dateFormat(item.createdAt, view.plan_item_mine_time_tv)
 
             val position = absoluteAdapterPosition
@@ -215,8 +223,8 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
             view.join_plan_item_other_cnt_tv.text = item.readerList.size.toString()
             dateFormat(item.createdAt, view.join_plan_item_other_time_tv)
             if(item.senderImage != null){
-                view.join_plan_item_other_iv.clipToOutline = true
-                Glide.with(activity).load(Uri.parse(item.senderImage)).into(view.join_plan_item_other_iv)
+                view.join_chat_other_profile_iv.clipToOutline = true
+                Glide.with(activity).load(Uri.parse(item.senderImage)).into(view.join_chat_other_profile_iv)
             }
 
             val position = absoluteAdapterPosition
@@ -235,10 +243,6 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
             view.resign_plan_item_mine_date_tv.text = "${item.startDate} ~ ${item.endDate}"
             view.resign_plan_item_mine_cnt_tv.text = item.readerList.size.toString()
             dateFormat(item.createdAt, view.resign_plan_item_mine_time_tv)
-            if(item.senderImage != null){
-                view.resign_plan_item_mine_iv.clipToOutline = true
-                Glide.with(activity).load(Uri.parse(item.senderImage)).into(view.resign_plan_item_mine_iv)
-            }
 
             val position = absoluteAdapterPosition
             if(position != RecyclerView.NO_POSITION){
@@ -257,8 +261,8 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
             view.resign_plan_item_other_cnt_tv.text = item.readerList.size.toString()
             dateFormat(item.createdAt, view.resign_plan_item_other_time_tv)
             if(item.senderImage != null){
-                view.resign_plan_item_other_iv.clipToOutline = true
-                Glide.with(activity).load(Uri.parse(item.senderImage)).into(view.resign_plan_item_other_iv)
+                view.resign_chat_other_profile_iv.clipToOutline = true
+                Glide.with(activity).load(Uri.parse(item.senderImage)).into(view.resign_chat_other_profile_iv)
             }
 
             val position = absoluteAdapterPosition
@@ -266,6 +270,15 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
                 itemView.resign_plan_item_other_btn.setOnClickListener{
                 }
             }
+        }
+    }
+
+    inner class ForcedPlanViewHolder(v: View) : RecyclerView.ViewHolder(v){
+        val view = v
+        fun bind(item: ChatMessageResponse.ChatReceiveResponse) {
+            view.forced_plan_item_mine_content_tv.text = item.planName
+            view.forced_plan_item_mine_date_tv.text = "${item.startDate} ~ ${item.endDate}"
+            dateFormat(item.createdAt, view.forced_plan_item_mine_time_tv)
         }
     }
 
