@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.project_flow_android.data.model.sign.chat.*
 import com.example.project_flow_android.data.remote.chat.ChatRepositoryImpl
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import org.json.JSONObject
 
 class ChatViewModel : ViewModel() {
@@ -22,12 +23,16 @@ class ChatViewModel : ViewModel() {
     private val _messageListLiveData: MutableLiveData<ChatMessageResponse> = MutableLiveData()
     private val _userProfileLiveData: MutableLiveData<UserProfileResponse> = MutableLiveData()
     private val _modifyLiveData: MutableLiveData<Int> = MutableLiveData()
+    private val _fileUploadLiveData: MutableLiveData<FileResponse> = MutableLiveData()
+    private val _imageUpdateLiveData: MutableLiveData<Int> = MutableLiveData()
     val chatLiveData = _chatLiveData
     val chatRoomLiveData = _chatRoomLiveData
     val roomMemberLiveData = _roomMemberLiveData
     val messageListLiveData = _messageListLiveData
     val userProfileLiveData = _userProfileLiveData
     val modifyLiveData = _modifyLiveData
+    val fileUpdateLiveData = _fileUploadLiveData
+    val imageUpdateLiveData = _imageUpdateLiveData
 
     fun getProjectUser() {
         viewModelScope.launch {
@@ -91,6 +96,24 @@ class ChatViewModel : ViewModel() {
                 if (response.code() == 200) {
                     _modifyLiveData.postValue(response.code())
                 }
+            }
+        }
+    }
+
+    fun fileUpload(file: MultipartBody.Part) {
+        viewModelScope.launch {
+            val response = chatRepository.fileUpload(access_token, file)
+            if (response.isSuccessful) {
+                _fileUploadLiveData.postValue(response.body())
+            }
+        }
+    }
+
+    fun imageUpdate(imageUrl: ImageUpdateRequest) {
+        viewModelScope.launch {
+            val response = chatRepository.imageUpdate(access_token, imageUrl)
+            if(response.isSuccessful) {
+                _imageUpdateLiveData.postValue(response.code())
             }
         }
     }
