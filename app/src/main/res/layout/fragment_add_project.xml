@@ -24,7 +24,7 @@
             android:id="@+id/add_project_name_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline14"
@@ -33,7 +33,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/add_project_name_et"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:drawablePadding="10dp"
                 android:hint="@string/exp_name"
                 android:gravity="end"
@@ -59,7 +59,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/add_project_explain_et"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:drawablePadding="10dp"
                 android:background="@color/color_light_gray"
                 android:hint="@string/explain_project_im"
