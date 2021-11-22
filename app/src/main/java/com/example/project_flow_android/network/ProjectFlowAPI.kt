@@ -32,13 +32,14 @@ interface ProjectFlowAPI {
     fun changeProfileImage(@Header("Authorization") token: String,@Part ("file") file : File) : Single<Response<Void>>
 
     @GET("/main")
-    fun getMainInfo(@Header("Authorization") token: String) : Single<Response<GetUserInfoResponse>>
+    fun getMainInfo(@Header("Authorization") token: String) : Single<Response<GetMainInfoResponse>>
 
     @POST("/project")
     fun addProject(@Header("Authorization") token: String,@Body request: AddProjectRequest) : Single<Response<GetProjectsId>>
 
     @PATCH("/project/close/{id}")
     fun finishProject(@Body projectId : String) : Single<Response<Void>>
+
 
 
 
