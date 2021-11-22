@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 
 object ApiProvider {
     private const val BASE_URL: String = "http://18.210.203.222:8080"
-    private const val BASE_URL_CHAT = "http://54.89.202.59:8080"
+    private const val BASE_URL_CHAT = "http://3.80.121.3:8080"
     private const val CONNECT_TIME_OUT: Long = 15
     private const val WRITE_TIME_OUT: Long = 15
     private const val READ_TIME_OUT: Long = 15
