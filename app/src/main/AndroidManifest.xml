@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".di.module.ProjectFlowApplication"
@@ -11,9 +13,9 @@
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ProjectFlow_Android"
+        android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.sign.ui.FinishSignActivity" />
+    <activity android:name=".ui.sign.ui.FinishSignActivity" />
         <activity android:name=".ui.sign.ui.CertificationActivity" />
         <activity android:name=".ui.sign.ui.EditPasswordActivity" />
         <activity android:name=".ui.chat.ChatActivity">
