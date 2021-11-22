@@ -7,12 +7,21 @@
         <variable
             name="vm"
             type="com.example.project_flow_android.viewmodel.flow.FlowViewModel" />
+
+        <variable
+            name="schedule_content"
+            type="String" />
+
+        <variable
+            name="schedule_period"
+            type="String" />
+
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="5dp"
         app:cardElevation="20dp">
 
 
@@ -40,7 +49,8 @@
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:textColor="@color/white"
+                android:text="@{schedule_content}"
                 app:layout_constraintStart_toStartOf="@+id/guideline21"
                 app:layout_constraintTop_toTopOf="@+id/guideline18" />
 
@@ -48,7 +58,8 @@
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:textColor="@color/white"
+                android:text="@{schedule_period}"
                 app:layout_constraintStart_toStartOf="@+id/guideline21"
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
         </androidx.constraintlayout.widget.ConstraintLayout>
