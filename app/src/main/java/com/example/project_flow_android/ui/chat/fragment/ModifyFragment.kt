@@ -12,6 +12,7 @@ import com.example.project_flow_android.R
 import com.example.project_flow_android.data.model.sign.chat.ModifyNameRequest
 import com.example.project_flow_android.network.SocketApplication
 import com.example.project_flow_android.ui.chat.ChatActivity
+import com.example.project_flow_android.util.DialogUtil
 import com.example.project_flow_android.util.KeyboardUtil
 import com.example.project_flow_android.viewmodel.chat.ChatViewModel
 import kotlinx.android.synthetic.main.fragment_modify.*
@@ -22,6 +23,7 @@ class ModifyFragment : Fragment() {
 
     private val chatViewModel: ChatViewModel by viewModel()
     private val socket = SocketApplication.getSocket()
+    private val dialogUtil = DialogUtil(requireActivity())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,42 +70,19 @@ class ModifyFragment : Fragment() {
     private fun notify(status: Int) {
         when (status) {
             0 -> {
-                cookieBarBuilder(R.string.cant_modify_room_name_title,
+                dialogUtil.cookieBarBuilder(R.string.cant_modify_room_name_title,
                     null,
                     R.string.cant_modify_room_name_content,
                     R.color.color_resign_plan)
             }
             200 -> {
                 val name = modify_name_et.text.toString()
-                cookieBarBuilder(R.string.modify_room_name_title,
+                dialogUtil.cookieBarBuilder(R.string.modify_room_name_title,
                     name,
                     null,
                     R.color.color_calendar_current)
                 socket.setRoomName(name)
             }
-        }
-    }
-
-    private fun cookieBarBuilder(
-        title: Int,
-        message: String?,
-        res_message: Int?,
-        backgroundColor: Int,
-    ) {
-        if (message != null) {
-            CookieBar.build(requireActivity())
-                .setTitle(title)
-                .setMessage(message)
-                .setTitleColor(R.color.white)
-                .setBackgroundColor(backgroundColor)
-                .show()
-        } else {
-            CookieBar.build(requireActivity())
-                .setTitle(title)
-                .setMessage(res_message!!)
-                .setTitleColor(R.color.white)
-                .setBackgroundColor(backgroundColor)
-                .show()
         }
     }
 }
