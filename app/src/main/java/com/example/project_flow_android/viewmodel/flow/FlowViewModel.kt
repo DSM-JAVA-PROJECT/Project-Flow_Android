@@ -27,27 +27,34 @@ class FlowViewModel(
     val personalProgress = MutableLiveData<String>()
     val projectProgress = MutableLiveData<String>()
 
+    val dialogContext = MutableLiveData<String>()
+
     private val _emptyProject = MutableLiveData<Boolean>()
     val emptyProject: LiveData<Boolean> get() = _emptyProject
 
     private val _successRemove = MutableLiveData<Boolean>()
     val successRemove: LiveData<Boolean> get() = _successRemove
 
-//
-//    //TODO 프로젝트 마감
-//    fun finishProject(){
-//        val token = sharedPreferenceStorage.getInfo("access_token")
-//        //TODO 프로젝트 ID를 받는가?
-//        //만약에 request로 보내는 거 아니면 다른 방법 사용해야 함
-//        flowApiImpl.finishProject().subscribe({ response ->
-//            if(response.isSuccessful){
-//                //성공했을 때
-//                _successRemove.value!!
-//            }
-//        })
-//
-//    }
+    val projectsId = sharedPreferenceStorage.getInfo("projectId")
+    val token = sharedPreferenceStorage.getInfo("access_token")
 
+    fun finishProject(){
+        flowApiImpl.finishProject(projectsId).subscribe({ response ->
+            if(response.isSuccessful){
+                _successRemove.value!!
+            }
+        })
+
+    }
+
+
+    fun inputDialogProjectName(){
+        myPageApiImpl.getUserInfo(token).subscribe({ it ->
+            if(it.isSuccessful){
+                dialogContext.value = it.body()!!.projects[0].projectName
+            }
+        })
+    }
     fun getMainUserInfo() {
         val token = sharedPreferenceStorage.getInfo("access_token")
         myPageApiImpl.getUserInfo(token).subscribe({ response ->

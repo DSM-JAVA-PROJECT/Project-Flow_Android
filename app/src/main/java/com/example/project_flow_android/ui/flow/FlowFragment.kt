@@ -23,7 +23,7 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
         FinishProjectDialog(vm)
     }
 
-    private fun showLogoutDialog() {
+    private fun finishProjectDialog() {
         finishProjectDialog.show(
             requireActivity().supportFragmentManager,
             "finishDialog"
@@ -48,6 +48,10 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
                 (activity as MainActivity).addProject()
             }
             getProjectInfo()
+            binding.button.setOnClickListener{
+                finishProjectDialog()
+            }
+            vm.inputDialogProjectName()
         }
     }
 
