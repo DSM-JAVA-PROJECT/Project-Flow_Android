@@ -59,8 +59,8 @@
 
                 <ImageView
                     android:id="@+id/project_img"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     app:glide_image_load="@{vm.projectImage}"
                     app:layout_constraintStart_toStartOf="@+id/guideline15"
                     app:layout_constraintTop_toBottomOf="@+id/project_name_tv" />
@@ -270,6 +270,56 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="320dp"
+            android:orientation="horizontal" >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/first_rv"
+                android:layout_width="140dp"
+                android:layout_height="match_parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/second_rv"
+                android:layout_width="140dp"
+                android:layout_height="match_parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/third_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/ready_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="290dp"
+            android:fontFamily="@font/font_roboto_bold"
+            android:layout_marginStart="10dp"
+            android:text="@string/ready" />
+
+        <TextView
+            android:id="@+id/ready2_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="290dp"
+            android:fontFamily="@font/font_roboto_bold"
+            android:layout_marginStart="150dp"
+            android:text="@string/process" />
+
+        <TextView
+            android:id="@+id/ready3_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="290dp"
+            android:fontFamily="@font/font_roboto_bold"
+            android:layout_marginStart="290dp"
+            android:text="@string/finish" />
+
 
     </FrameLayout>
 </layout>

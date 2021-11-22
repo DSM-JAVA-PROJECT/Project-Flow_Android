@@ -30,7 +30,7 @@
             app:layout_constraintStart_toStartOf="@+id/guideline14"
             app:layout_constraintTop_toBottomOf="@+id/textView9">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/add_project_name_et"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
