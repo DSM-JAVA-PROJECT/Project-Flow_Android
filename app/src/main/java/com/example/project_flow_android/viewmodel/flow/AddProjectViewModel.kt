@@ -34,6 +34,7 @@ class AddProjectViewModel(
 
         flowApiImpl.addProject(token,AddProjectRequest(projectName.value!!,projectExplanation.value!!,startDate.value!!,endDate.value!!,splitArray)).subscribe({
             if(it.isSuccessful){
+                sharedPreferenceStorage.saveInfo(it.body()!!.projectsId, "projectsId")
                 _successAddProject.value!!
             }
             else {
