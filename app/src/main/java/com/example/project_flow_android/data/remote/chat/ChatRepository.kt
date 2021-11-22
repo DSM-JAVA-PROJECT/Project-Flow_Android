@@ -13,5 +13,5 @@ interface ChatRepository{
     suspend fun getUserProfile(header: String, userId: String) : Response<UserProfileResponse>
     suspend fun modifyRoomName(header: String, chatRoomId: String, name: ModifyNameRequest) : Response<Unit>
     suspend fun fileUpload(header: String, file: MultipartBody.Part) : Response<FileResponse>
-    suspend fun imageUpdate(header: String, imageUrl: ImageUpdateRequest) : Response<Unit>
+    suspend fun imageUpdate(header: String, chatRoomId: String, imageUrl: ImageUpdateRequest) : Response<Unit>
 }

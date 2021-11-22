@@ -57,7 +57,7 @@ class ChatRepositoryImpl : ChatRepository, SafeApiRequest() {
         return safeApiCall { ApiProvider.getChatAPI().fileUpload(header, file) }
     }
 
-    override suspend fun imageUpdate(header: String, imageUrl: ImageUpdateRequest): Response<Unit> {
-        return safeApiCall { ApiProvider.getChatAPI().imageUpdate(header, imageUrl) }
+    override suspend fun imageUpdate(header: String, chatRoomId: String, imageUrl: ImageUpdateRequest): Response<Unit> {
+        return safeApiCall { ApiProvider.getChatAPI().imageUpdate(header, chatRoomId, imageUrl) }
     }
 }

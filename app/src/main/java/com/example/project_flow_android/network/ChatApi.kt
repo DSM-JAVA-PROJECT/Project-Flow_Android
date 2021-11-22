@@ -53,7 +53,8 @@ interface ChatApi {
 
     @PATCH("/chatroom/image/{chatRoomId}")
     suspend fun imageUpdate(
-        @Header("Authorizaiton") header: String,
+        @Header("Authorization") header: String,
+        @Path("chatRoomId") chatRoomId: String,
         @Body imageUrl: ImageUpdateRequest
     ) : Response<Unit>
 }
