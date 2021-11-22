@@ -1,5 +1,5 @@
 package com.example.project_flow_android.data.model.sign.chat
 
 data class FileResponse(
-    val file: String
+    val imageUrl: String
 )
