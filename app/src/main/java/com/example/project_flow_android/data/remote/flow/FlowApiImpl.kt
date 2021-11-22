@@ -13,19 +13,28 @@ class FlowApiImpl {
     private fun providerFlowApi(): ProjectFlowAPI = ApiProvider.RetroFitBuilder.create(
         ProjectFlowAPI::class.java)
 
-    fun addProject(token : String, request : AddProjectRequest
+    fun addProject(
+        token: String, request: AddProjectRequest,
     ): @NonNull Single<Response<GetProjectsId>> =
-        providerFlowApi().addProject(token,request)
+        providerFlowApi().addProject(token, request)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
 
-    fun finishProject(ProjectId : String
+    fun finishProject(
+        ProjectId: String,
     ): @NonNull Single<Response<Void>> =
         providerFlowApi().finishProject(ProjectId)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
+
+    fun getMainInfo(
+        token: String,
+    ): @NonNull Single<Response<GetMainInfoResponse>> =
+        providerFlowApi().getMainInfo(token)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
 
 
 }
