@@ -107,4 +107,6 @@
     <string name="ready">준비중</string>
     <string name="process">진행중</string>
     <string name="finish">완료</string>
+    <string name="finished_schedule">마감하기</string>
+    <string name="explain_finish_project">일정에 참여한 인원이 모두 마감해야 일정이 완료됩니다.</string>
 </resources>
