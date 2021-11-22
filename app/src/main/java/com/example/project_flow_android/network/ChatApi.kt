@@ -1,6 +1,7 @@
 package com.example.project_flow_android.network
 
 import com.example.project_flow_android.data.model.sign.chat.*
+import okhttp3.MultipartBody
 import org.json.JSONObject
 import retrofit2.Response
 import com.example.project_flow_android.data.chat.ProjectMemberResponse
@@ -43,5 +44,19 @@ interface ChatApi {
         @Header("Authorization") header: String,
         @Path("chatRoomId") chatRoomId: String,
         @Body name: ModifyNameRequest
+    ) : Response<Unit>
+
+    @Multipart
+    @POST("/file")
+    suspend fun fileUpload(
+        @Header("Authorization") header: String,
+        @Part file: MultipartBody.Part
+    ) : Response<FileResponse>
+
+    @PATCH("/chatroom/image/{chatRoomId}")
+    suspend fun imageUpdate(
+        @Header("Authorization") header: String,
+        @Path("chatRoomId") chatRoomId: String,
+        @Body imageUrl: ImageUpdateRequest
     ) : Response<Unit>
 }

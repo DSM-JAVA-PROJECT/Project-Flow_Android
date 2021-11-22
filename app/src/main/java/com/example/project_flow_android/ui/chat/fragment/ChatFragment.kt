@@ -1,14 +1,17 @@
 package com.example.project_flow_android.ui.chat.fragment
 
 import android.app.Activity
-import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.project_flow_android.R
 import com.example.project_flow_android.data.model.sign.chat.ChatMessageResponse
@@ -26,7 +29,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChatFragment : Fragment() {
 
-    private val startForResult =
+    private val photoSelect =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == Activity.RESULT_OK) {
                 Glide.with(requireContext()).load(it.data?.data).into(test_iv)
@@ -38,6 +41,7 @@ class ChatFragment : Fragment() {
     private var planName = ""
     private val SIZE = 10
     private var page = 0
+    private var isLoading = false
     private lateinit var adapter: ChatRVAdapter
 
     override fun onCreateView(
@@ -52,6 +56,7 @@ class ChatFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         chatViewModel.getChatList(socket.getChatRoomId(), getPage(), SIZE)
+        getChatListMore()
         socket.chatReceive()
         socket.rejoin()
         chatViewModel.messageListLiveData.observe(viewLifecycleOwner, {
@@ -59,25 +64,26 @@ class ChatFragment : Fragment() {
         })
 
         val keyboardUtil = KeyboardUtil(requireContext())
-        val dialogUtil = DialogUtil(requireContext())
-        val galleryHelper = GalleryHelper(requireActivity(), startForResult)
+        val dialogUtil = DialogUtil(requireActivity())
+        val galleryHelper = GalleryHelper(requireActivity())
 
         val layoutManager = LinearLayoutManager(requireContext())
         layoutManager.stackFromEnd = true
         chat_rv.layoutManager = layoutManager
 
         socket.receiveLiveData.observe(viewLifecycleOwner, {
-            chatViewModel.messageListLiveData.value!!.oldChatMessageResponses.add(socket.receiveLiveData.value!!)
+            Log.i("it", it.toString())
+            chatViewModel.messageListLiveData.value!!.oldChatMessageResponses.add(it)
             adapterInit(chatViewModel.messageListLiveData.value!!)
 
-            socket.readLiveData.observe(viewLifecycleOwner, {
-                val size = chatViewModel.messageListLiveData.value!!.oldChatMessageResponses.size
-                for (i in 0 until size) {
-                    val reader = socket.readLiveData.value
-                    chatViewModel.messageListLiveData.value!!.oldChatMessageResponses[i].readerList.remove(reader)
-                    adapter.notifyDataSetChanged()
-                }
-            })
+//            socket.readLiveData.observe(viewLifecycleOwner, {
+//                val size = chatViewModel.messageListLiveData.value!!.oldChatMessageResponses.size
+//                for (i in 0 until size) {
+//                    val reader = socket.readLiveData.value
+//                    chatViewModel.messageListLiveData.value!!.oldChatMessageResponses[i].readerList.remove(reader)
+//                    adapter.notifyDataSetChanged()
+//                }
+//            })
         })
         socket.errorLiveData.observe(viewLifecycleOwner, {
             errorHandler(socket.errorLiveData.value!!)
@@ -107,7 +113,7 @@ class ChatFragment : Fragment() {
         }
 
         chat_photo_tv.setOnClickListener {
-            galleryHelper.selectGallery()
+            galleryHelper.selectPhoto(photoSelect)
         }
 
         chat_schedule_tv.setOnClickListener {
@@ -135,7 +141,8 @@ class ChatFragment : Fragment() {
                     socket.addPlan(
                         bottom.add_schedule_content_et.text.toString(),
                         bottom.add_schedule_start_et.text.toString(),
-                        bottom.add_schedule_end_et.text.toString()
+                        bottom.add_schedule_end_et.text.toString(),
+                        bottom.add_schedule_switch.isChecked
                     )
                     bottom.dismiss()
                 }
@@ -175,6 +182,26 @@ class ChatFragment : Fragment() {
                 val planId =
                     chatViewModel.messageListLiveData.value!!.oldChatMessageResponses[position].planId!!
                 socket.joinPlan(planId)
+            }
+        })
+    }
+
+    private fun getChatListMore() {
+        chat_rv.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if(!isLoading && chatViewModel.messageListLiveData.value!!.hasNextPage) {
+                    if(!chat_rv.canScrollVertically(-1)){
+                        requireActivity().runOnUiThread{
+                            val handler = Handler(Looper.getMainLooper())
+                            handler.postDelayed({
+                                isLoading = true
+                                chatViewModel.getChatList(socket.getChatRoomId(), getPage(), SIZE)
+                            }, 100)
+                        }
+                    }
+                }
             }
         })
     }

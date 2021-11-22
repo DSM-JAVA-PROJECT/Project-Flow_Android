@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/chat_other_profile_iv"
+        android:id="@+id/resign_chat_other_profile_iv"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="15dp"
@@ -22,7 +22,7 @@
         android:layout_marginStart="10dp"
         android:textColor="@color/black"
         android:fontFamily="@font/font_roboto_regular"
-        app:layout_constraintStart_toEndOf="@+id/chat_other_profile_iv"
+        app:layout_constraintStart_toEndOf="@+id/resign_chat_other_profile_iv"
         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -34,7 +34,7 @@
         android:backgroundTint="@color/color_resign_plan"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/chat_other_profile_iv"
+        app:layout_constraintStart_toEndOf="@+id/resign_chat_other_profile_iv"
         app:layout_constraintTop_toBottomOf="@+id/resign_plan_item_other_name_tv">
 
         <TextView

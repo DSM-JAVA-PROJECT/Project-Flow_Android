@@ -26,9 +26,9 @@ class SocketApplication {
             return socketApplication!!
         }
     }
-    private val url = "http://54.89.202.59:8081"
-    private val access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzQyODMzMjMsImlkIjoiNjE2N2JhNTQyNjdjYTEwZWI1NDkwNGE5IiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.Y_smWBnm1RrvToFW9kB9pHhnmgZIu0O73OZH4Cy3iZ4"
-    private val sub_access = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzU5ODgxMjUsImlkIjoiNjE4MzMyOTU0MzliNGU1Y2VhMjNhNjg0IiwiZW1haWwiOiJhYmgwOTIwb25lQG5hdmVyLmNvbSJ9.gO6C_afNJvyQoKTC5CN-cvhZuZaQRC5dHg9ptssTBag"
+    private val url = "http://3.80.121.3:8081"
+    private val access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzY0MzQyNDYsImlkIjoiNjE4OWZlOTcwYzliZmQyYjk4MDRmZjg2IiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.6cNSlsTiL4UG4arInBRPaJjV4MeemeXmDiMZiDxXKVQ"
+    private val sub_access = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzY0MzQyNjMsImlkIjoiNjE4OWZlYTMwYzliZmQyYjk4MDRmZjg3IiwiZW1haWwiOiJhYmgwOTIwb25lQG5hdmVyLmNvbSJ9.lklPsE4KpZRqSxi5EYahxxTeXigL47eYxbE3UL7ZtMY"
     private lateinit var socket : Socket
     private var chatRoomId = ""
     private var projectId = "6194967186cfc21756269e3c"
@@ -98,12 +98,13 @@ class SocketApplication {
         socket.emit("chatroom.rejoin", data)
     }
 
-    fun addPlan(planName: String, startDate: String, endDate: String){
+    fun addPlan(planName: String, startDate: String, endDate: String, forced: Boolean){
         val data = JSONObject()
         data.put("chatRoomId", chatRoomId)
         data.put("planName", planName)
         data.put("planEndDate", endDate)
         data.put("planStartDate", startDate)
+        data.put("isForced", forced)
         socket.emit("plan.create", data)
     }
 
@@ -183,6 +184,6 @@ class SocketApplication {
     private val onReJoin = Emitter.Listener { args ->
         Log.i("Rejoin payload", args[0].toString())
         val json = args[0].toString()
-        readLiveData.postValue(json)
+        _readLiveData.postValue(json)
     }
 }
