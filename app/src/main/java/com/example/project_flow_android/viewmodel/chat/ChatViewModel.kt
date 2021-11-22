@@ -109,9 +109,9 @@ class ChatViewModel : ViewModel() {
         }
     }
 
-    fun imageUpdate(imageUrl: ImageUpdateRequest) {
+    fun imageUpdate(chatRoomId: String, imageUrl: ImageUpdateRequest) {
         viewModelScope.launch {
-            val response = chatRepository.imageUpdate(access_token, imageUrl)
+            val response = chatRepository.imageUpdate(access_token, chatRoomId, imageUrl)
             if(response.isSuccessful) {
                 _imageUpdateLiveData.postValue(response.code())
             }
