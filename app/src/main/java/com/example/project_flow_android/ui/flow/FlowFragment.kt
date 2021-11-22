@@ -48,10 +48,16 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
                 (activity as MainActivity).addProject()
             }
             getProjectInfo()
+            getProjectDetailInfo()
             binding.button.setOnClickListener{
                 finishProjectDialog()
             }
             vm.inputDialogProjectName()
+//            val percent : Int = vm.personalProgress.value.toString()
+//            val teamPercent = vm.projectProgress.value.toString()
+//            binding.progressBar.setProgress(percent.toInt())
+//            binding.progressBar2.setProgress(teamPercent.toInt())
+
         }
     }
 
