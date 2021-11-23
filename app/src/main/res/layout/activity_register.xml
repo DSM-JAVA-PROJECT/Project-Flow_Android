@@ -79,7 +79,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline8" />
 
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/register_btn"
             android:layout_width="0dp"
             android:layout_height="66dp"
@@ -93,7 +93,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-        </androidx.appcompat.widget.AppCompatButton>
+        </com.google.android.material.button.MaterialButton>
 
         <TextView
             android:id="@+id/register_title_fi_tv"

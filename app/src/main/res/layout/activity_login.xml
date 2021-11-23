@@ -67,7 +67,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/register_btn"
             android:layout_width="0dp"
             android:layout_height="66dp"
@@ -83,7 +83,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-        </androidx.appcompat.widget.AppCompatButton>
+        </com.google.android.material.button.MaterialButton>
 
         <TextView
             android:id="@+id/id_tv"
