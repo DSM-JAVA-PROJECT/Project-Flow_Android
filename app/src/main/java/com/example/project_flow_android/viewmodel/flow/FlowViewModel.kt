@@ -20,8 +20,6 @@ class FlowViewModel(
 
     val getUserName = MutableLiveData<String>()
 
-    val getUserName = MutableLiveData<String>()
-
     //TODO 프로젝트 정보 가져오기
     val projectName = MutableLiveData<String>()
     val projectImage = MutableLiveData<String>()
