@@ -149,9 +149,13 @@ class ChatFragment : Fragment() {
             }
         }
         chat_prev_btn.setOnClickListener {
-            socket.setChatRoomId("")
             (activity as ChatActivity).popBackStack(ChatFragment())
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        socket.resignRoom(socket.getChatRoomId())
     }
 
     private fun getPage() = page++
