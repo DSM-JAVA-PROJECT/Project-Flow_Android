@@ -10,6 +10,7 @@ import com.example.project_flow_android.R
 import com.example.project_flow_android.network.SocketApplication
 import com.example.project_flow_android.ui.chat.ChatActivity
 import com.example.project_flow_android.ui.chat.CreateRVAdapter
+import com.example.project_flow_android.util.DialogUtil
 import com.example.project_flow_android.viewmodel.chat.ChatViewModel
 import kotlinx.android.synthetic.main.chat_create_user_item.view.*
 import kotlinx.android.synthetic.main.fragment_chat_create.*
@@ -33,6 +34,7 @@ class ChatCreateFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         getProjectUser()
+        val dialogUtil = DialogUtil(requireActivity())
         val layoutManager = LinearLayoutManager(requireContext())
         chat_create_user_rv.layoutManager = layoutManager
 
@@ -49,6 +51,12 @@ class ChatCreateFragment : Fragment() {
 
         chat_create_btn.setOnClickListener{
             socket.createRoom(userEmail)
+            dialogUtil.cookieBarBuilder(
+                R.string.chat_room_create_title,
+                "${getString(R.string.chat_room_create_content)} ${userEmail.size + 1}명",
+                null,
+                R.color.color_calendar_current
+            )
             (activity as ChatActivity).replace(ChatListFragment())
         }
     }

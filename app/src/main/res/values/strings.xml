@@ -49,6 +49,8 @@
     <string name="cant_modify_room_name_content">이름 변경란을 채워주세요.</string>
     <string name="chat_forced_plan_item_title">필수 일정이 추가되었습니다.</string>
     <string name="chat_room_image_change_title">채팅방 이미지가 변경되었습니다.</string>
+    <string name="chat_room_create_title">채팅방이 생성되었습니다.</string>
+    <string name="chat_room_create_content">참여인원 </string>
 
     <string name="start_project">프로젝트 관리는</string>
     <string name="start_project_se">프로젝트 플로우에서</string>
