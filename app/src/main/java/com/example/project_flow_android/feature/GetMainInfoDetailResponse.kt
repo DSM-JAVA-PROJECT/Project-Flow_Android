@@ -9,7 +9,7 @@ data class GetMainInfoDetailResponse(
     val personalProgress: String,
     val projectProgress: String,
     val remainingDays : String,
-    val before : List<String>,
-    val ongoing : List<String>,
-    val after : List<String>
+    val before : List<GetProjectScheduleDetailResponse>,
+    val ongoing : List<GetProjectScheduleDetailResponse>,
+    val after : List<GetProjectScheduleDetailResponse>
 )

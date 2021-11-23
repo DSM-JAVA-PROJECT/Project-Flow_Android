@@ -80,7 +80,8 @@ class FlowViewModel(
         })
     }
 
-    fun getProjectDetailInfo() {
+
+    fun getProjectDetailInfo(position:Int) {
         val token = sharedPreferenceStorage.getInfo("access_token")
         flowApiImpl.getMainInfo(token).subscribe({
             if (it.isSuccessful) {
@@ -88,12 +89,12 @@ class FlowViewModel(
                 val formatter = DateTimeFormatter.ofPattern("MM월 dd일")
                 val formatted = current.format(formatter)
 
-                sharedPreferenceStorage.saveInfo(it.body()!!.getProject[0].id, "projectId")
-                projectName.value = it.body()!!.getProject[0].name
+                sharedPreferenceStorage.saveInfo(it.body()!!.getProject[position].id, "projectId")
+                projectName.value = it.body()!!.getProject[position].name
                 today.value = formatted.toString()
-                projectLastDate.value = it.body()!!.getProject[0].endDate
-                projectProgress.value = it.body()!!.getProject[0].projectProgress
-                personalProgress.value = it.body()!!.getProject[0].personalProgress
+                projectLastDate.value = it.body()!!.getProject[position].endDate
+                projectProgress.value = it.body()!!.getProject[position].projectProgress
+                personalProgress.value = it.body()!!.getProject[position].personalProgress
 
             } else {
 
