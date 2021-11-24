@@ -10,8 +10,9 @@
             />
 
         <variable
-            name="project_image"
+            name="profile_image"
             type="String" />
+
     </data>
 
 
@@ -74,13 +75,12 @@
             app:layout_constraintTop_toBottomOf="@+id/username_tv" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_img"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:id="@+id/imageView7"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="12dp"
-            app:civ_border_color="@color/color_gray"
-            app:glide_image_load="@{project_image}"
+            app:glide_image_load="@{profile_image}"
+            android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mypage_title_tv" />
 

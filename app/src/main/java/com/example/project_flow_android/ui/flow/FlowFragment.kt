@@ -1,5 +1,6 @@
 package com.example.project_flow_android.ui.flow
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.LifecycleOwner
@@ -45,16 +46,19 @@ class FlowFragment :BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow){
                 binding.emptyProjectImg.visibility
                 binding.emptyProjectTv.visibility
             })
+            //fragment -> activity
             binding.addProjectBtn.setOnClickListener {
-                (activity as MainActivity).addProject()
+                (activity as MainActivity).goAddProject()
             }
             getProjectInfo()
             getProjectDetailInfo(1)
-            binding.button.setOnClickListener{
-                finishProjectDialog()
-            }
-            binding.firstRv.adapter = preparingProjectRVAdapter
-            vm.inputDialogProjectName()
+
+                //item 에서 처리 해야 하는 것들
+//            binding.button.setOnClickListener{
+//                finishProjectDialog()
+//            }
+//            binding.firstRv.adapter = preparingProjectRVAdapter
+//            vm.inputDialogProjectName()
 //            val percent : Int = vm.personalProgress.value.toString()
 //            val teamPercent = vm.projectProgress.value.toString()
 //            binding.progressBar.setProgress(percent.toInt())

@@ -1,5 +1,6 @@
 package com.example.project_flow_android.viewmodel.flow
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +10,7 @@ import com.example.project_flow_android.feature.AddProjectRequest
 import com.example.project_flow_android.ui.chat.ChatActivity
 import com.example.project_flow_android.ui.chat.fragment.ChatListFragment
 import com.example.project_flow_android.ui.main.MainActivity
+import java.io.File
 
 class AddProjectViewModel(
     private val flowApiImpl: FlowApiImpl,
@@ -25,11 +27,15 @@ class AddProjectViewModel(
     private val _successAddProject = MutableLiveData<Boolean>()
     val successAddProject: LiveData<Boolean> get() = _successAddProject
 
+
+    lateinit var imagePath: String
+
     fun addProject() {
+
         val member : String =  projectMember.value!!
         val splitArray = member.split(",")
         val token = sharedPreferenceStorage.getInfo("access_token")
-        flowApiImpl.addProject(token,AddProjectRequest(projectName.value!!,projectExplanation.value!!,startDate.value!!,endDate.value!!,splitArray)).subscribe({
+        flowApiImpl.addProject(token,AddProjectRequest(projectName.value!!,projectExplanation.value!!,startDate.value!!,endDate.value!!,splitArray),File(imagePath)).subscribe({
             if(it.isSuccessful){
                 sharedPreferenceStorage.saveInfo(it.body()!!.projectId, "projectsId")
                 _successAddProject.value!!

@@ -1,5 +1,6 @@
 package com.example.project_flow_android.data.remote.mypage
 
+import com.example.project_flow_android.data.remote.toMultipartPart
 import com.example.project_flow_android.feature.GetUserInfoResponse
 import com.example.project_flow_android.feature.NewPasswordRequest
 import com.example.project_flow_android.network.ApiProvider
@@ -29,8 +30,8 @@ class MyPageApiImpl {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
-    fun changeImage(token: String,image : File): @NonNull Single<Response<Void>> =
-        providerMypageApi().changeProfileImage(token, image)
+    fun changeImage(token: String,file : File): @NonNull Single<Response<Void>> =
+        providerMypageApi().changeProfileImage(token, file.toMultipartPart())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 

@@ -2,6 +2,7 @@ package com.example.project_flow_android.network
 
 import com.example.project_flow_android.feature.*
 import io.reactivex.rxjava3.core.Single
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
 import java.io.File
@@ -34,11 +35,15 @@ interface ProjectFlowAPI {
     @GET("/main")
     fun getMainInfo(@Header("Authorization") token: String) : Single<Response<GetMainInfoResponse>>
 
+    @Multipart
     @POST("/project")
-    fun addProject(@Header("Authorization") token: String,@Body request: AddProjectRequest) : Single<Response<GetProjectsId>>
+    fun addProject(@Header("Authorization") token: String, @Body request: AddProjectRequest, @Part("file") file: MultipartBody.Part) : Single<Response<GetProjectsId>>
 
     @PATCH("/project/close/{id}")
     fun finishProject(@Body projectId : String) : Single<Response<Void>>
+
+    @PATCH("/auth/image")
+    fun changeProfileImage(@Header("Authorization") token: String,@Body file : MultipartBody.Part):Single<Response<Void>>
 
 
 

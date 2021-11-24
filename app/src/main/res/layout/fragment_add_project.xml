@@ -59,7 +59,7 @@
             tools:layout_editor_absoluteX="0dp" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/get_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60sp"
@@ -73,10 +73,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/group"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-            app:layout_constraintEnd_toEndOf="@+id/imageView5"
-            app:layout_constraintStart_toStartOf="@+id/imageView5"
-            app:layout_constraintTop_toTopOf="@+id/imageView5" />
+            app:layout_constraintBottom_toBottomOf="@+id/get_img"
+            app:layout_constraintEnd_toEndOf="@+id/get_img"
+            app:layout_constraintStart_toStartOf="@+id/get_img"
+            app:layout_constraintTop_toTopOf="@+id/get_img" />
 
         <TextView
             android:id="@+id/textView9"
@@ -87,7 +87,7 @@
             android:text="@string/add_main_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline14"
-            app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+            app:layout_constraintTop_toBottomOf="@+id/get_img" />
 
 
         <TextView

@@ -15,6 +15,10 @@ class MyPageViewModel(
 
     val userName = MutableLiveData<String>()
 
+    val lastImage =MutableLiveData<String>()
+
+    lateinit var imagePath: String
+
     val profileImage = MutableLiveData<File>()
     val getUserImage = MutableLiveData<String>()
 
@@ -33,6 +37,10 @@ class MyPageViewModel(
     private val _successChange = MutableLiveData<Boolean>()
     val successChange: LiveData<Boolean> get() = _successChange
 
+    private val _successImage = MutableLiveData<Boolean>()
+    val successImage: LiveData<Boolean> get() = _successImage
+
+
     fun getUserInfo() {
         val token = sharedPreferenceStorage.getInfo("access_token")
         myPageApiImpl.getUserInfo(token).subscribe({ response ->
@@ -44,6 +52,17 @@ class MyPageViewModel(
             }
         }, {
             userName.value = "로딩 실패"
+        })
+    }
+
+    fun postProfileImage() {
+        val token = sharedPreferenceStorage.getInfo("access_token")
+        myPageApiImpl.changeImage(token, File(imagePath)).subscribe({ response ->
+            if (response.isSuccessful) {
+                _successImage.value!!
+            } else {
+            }
+        }, {
         })
     }
 
@@ -62,9 +81,10 @@ class MyPageViewModel(
 
     fun loadImage() {
         val token = sharedPreferenceStorage.getInfo("access_token")
-        myPageApiImpl.changeImage(token, profileImage.value!!).subscribe { response ->
+        myPageApiImpl.getUserInfo(token).subscribe { response ->
             if (response.isSuccessful) {
                 _successChange.value = true
+                 lastImage.value = response.body()!!.profileImage
             } else {
 
             }

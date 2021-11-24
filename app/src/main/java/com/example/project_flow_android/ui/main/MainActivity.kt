@@ -9,6 +9,7 @@ import com.example.project_flow_android.base.BaseActivity
 import com.example.project_flow_android.databinding.ActivityMainBinding
 import com.example.project_flow_android.ui.calendar.CalendarFragment
 import com.example.project_flow_android.ui.chat.fragment.ChatListFragment
+import com.example.project_flow_android.ui.flow.AddProjectActivity
 import com.example.project_flow_android.ui.flow.AddProjectFragment
 import com.example.project_flow_android.ui.flow.FlowFragment
 import com.example.project_flow_android.ui.mypage.MyPageFragment
@@ -47,6 +48,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.main_container,flowFragment)
         transaction.commit()
+    }
+
+    fun goAddProject(){
+        val intent = Intent(this,AddProjectActivity::class.java)
+        startActivity(intent)
     }
 
     fun startLogin(){
