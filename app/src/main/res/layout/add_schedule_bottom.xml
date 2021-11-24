@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/finish_project_tv"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -28,10 +28,10 @@
         android:textColor="@color/color_flow"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/finish_project_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
-        android:id="@+id/remove_schedule_content_et"
+        android:id="@+id/add_schedule_content_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -56,7 +56,7 @@
         android:textColor="@color/color_flow"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/remove_schedule_content_et" />
+        app:layout_constraintTop_toBottomOf="@+id/add_schedule_content_et" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/add_schedule_switch"
@@ -66,7 +66,7 @@
         android:layout_marginEnd="16dp"
         android:theme="@style/Switch"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/remove_schedule_content_et" />
+        app:layout_constraintTop_toBottomOf="@+id/add_schedule_content_et" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -78,10 +78,10 @@
         android:textSize="14sp"
         android:fontFamily="@font/font_nanumgothic_bold"
         app:layout_constraintEnd_toStartOf="@+id/add_schedule_switch"
-        app:layout_constraintTop_toBottomOf="@+id/remove_schedule_content_et" />
+        app:layout_constraintTop_toBottomOf="@+id/add_schedule_content_et" />
 
     <TextView
-        android:id="@+id/startdate_tv"
+        android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -139,7 +139,7 @@
         app:layout_constraintTop_toBottomOf="@+id/add_schedule_start_et" />
 
     <Button
-        android:id="@+id/remove_schedule_btn"
+        android:id="@+id/add_schedule_btn"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="19dp"
