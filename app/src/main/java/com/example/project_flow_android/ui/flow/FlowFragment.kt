@@ -46,14 +46,13 @@ class FlowFragment :BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow){
                 binding.emptyProjectImg.visibility
                 binding.emptyProjectTv.visibility
             })
-            //fragment -> activity
             binding.addProjectBtn.setOnClickListener {
-                (activity as MainActivity).goAddProject()
+                (activity as MainActivity).addProject()
             }
             getProjectInfo()
             getProjectDetailInfo(1)
 
-                //item 에서 처리 해야 하는 것들
+//                item 에서 처리 해야 하는 것들
 //            binding.button.setOnClickListener{
 //                finishProjectDialog()
 //            }

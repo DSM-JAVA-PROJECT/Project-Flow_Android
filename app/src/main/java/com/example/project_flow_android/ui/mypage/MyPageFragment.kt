@@ -83,6 +83,9 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
             binding.changePwTv.setOnClickListener {
                 showChangePasswordDialog()
             }
+            binding.imageView7.setOnClickListener{
+                getImage()
+            }
             projects.observe(viewLifecycleOwner, {
                 projectAdapter.setItem(it.projects)
             })
@@ -95,7 +98,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
                 //TODO image 업로드 성공시에
             })
             getUserImage.observe(viewLifecycleOwner,{
-                binding.projectImage = it
+//                binding.projectImage = it
             })
         }
     }
