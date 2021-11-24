@@ -14,9 +14,6 @@ class AddProjectViewModel(
     private val flowApiImpl: FlowApiImpl,
     private val sharedPreferenceStorage: SharedPreferenceStorage,
 ) : ViewModel() {
-
-    val token = sharedPreferenceStorage.getInfo("access_token")
-
     val projectName = MutableLiveData<String>()
     val projectExplanation = MutableLiveData<String>()
 
@@ -31,10 +28,10 @@ class AddProjectViewModel(
     fun addProject() {
         val member : String =  projectMember.value!!
         val splitArray = member.split(",")
-
+        val token = sharedPreferenceStorage.getInfo("access_token")
         flowApiImpl.addProject(token,AddProjectRequest(projectName.value!!,projectExplanation.value!!,startDate.value!!,endDate.value!!,splitArray)).subscribe({
             if(it.isSuccessful){
-                sharedPreferenceStorage.saveInfo(it.body()!!.projectsId, "projectsId")
+                sharedPreferenceStorage.saveInfo(it.body()!!.projectId, "projectsId")
                 _successAddProject.value!!
             }
             else {

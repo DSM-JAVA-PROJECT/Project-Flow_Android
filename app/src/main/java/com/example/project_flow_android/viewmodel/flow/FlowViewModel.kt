@@ -6,21 +6,16 @@ import androidx.lifecycle.ViewModel
 import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.data.remote.flow.FlowApiImpl
 import com.example.project_flow_android.data.remote.mypage.MyPageApiImpl
-import kotlinx.coroutines.flow.flow
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 class FlowViewModel(
     private val myPageApiImpl: MyPageApiImpl,
     private val flowApiImpl: FlowApiImpl,
-    private val sharedPreferenceStorage: SharedPreferenceStorage,
+    private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
 
     val getUserName = MutableLiveData<String>()
-
-    //TODO 프로젝트 정보 가져오기
     val projectName = MutableLiveData<String>()
     val projectImage = MutableLiveData<String>()
     val today = MutableLiveData<String>()
@@ -39,23 +34,22 @@ class FlowViewModel(
     val projectsId = sharedPreferenceStorage.getInfo("projectId")
     val token = sharedPreferenceStorage.getInfo("access_token")
 
-    fun finishProject(){
-        flowApiImpl.finishProject(projectsId).subscribe({ response ->
-            if(response.isSuccessful){
+    fun finishProject() {
+        flowApiImpl.finishProject(projectsId).subscribe { response ->
+            if (response.isSuccessful) {
                 _successRemove.value!!
             }
-        })
-
+        }
     }
 
-
-    fun inputDialogProjectName(){
-        myPageApiImpl.getUserInfo(token).subscribe({ it ->
-            if(it.isSuccessful){
+    fun inputDialogProjectName() {
+        myPageApiImpl.getUserInfo(token).subscribe { it ->
+            if (it.isSuccessful) {
                 dialogContext.value = it.body()!!.projects[0].projectName
             }
-        })
+        }
     }
+
     fun getMainUserInfo() {
         val token = sharedPreferenceStorage.getInfo("access_token")
         myPageApiImpl.getUserInfo(token).subscribe({ response ->
@@ -74,25 +68,39 @@ class FlowViewModel(
 
     fun getProjectInfo() {
         val token = sharedPreferenceStorage.getInfo("access_token")
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("MM월 dd일")
-        val formatted = current.format(formatter)
-
-        myPageApiImpl.getUserInfo(token).subscribe({ response ->
-            if (response.isSuccessful) {
-                getUserName.value = response.body()!!.name
-                projectName.value = response.body()!!.projects[0].projectName
-                projectImage.value = response.body()!!.projects[0].logoImage
-                today.value = formatted.toString()
-                projectLastDate.value = response.body()!!.projects[0].remainingDays
-                projectProgress.value = response.body()!!.projects[0].projectProgress
-                personalProgress.value = response.body()!!.projects[0].personalProgress
-
+        myPageApiImpl.getUserInfo(token).subscribe({
+            if (it.isSuccessful) {
+                getUserName.value = it.body()!!.name
+                projectImage.value = it.body()!!.profileImage
             } else {
-                getUserName.value = "로딩 실패"
+
             }
         }, {
-            getUserName.value = "로딩 실패"
+
+        })
+    }
+
+
+    fun getProjectDetailInfo(position:Int) {
+        val token = sharedPreferenceStorage.getInfo("access_token")
+        flowApiImpl.getMainInfo(token).subscribe({
+            if (it.isSuccessful) {
+                val current = LocalDateTime.now()
+                val formatter = DateTimeFormatter.ofPattern("MM월 dd일")
+                val formatted = current.format(formatter)
+
+                sharedPreferenceStorage.saveInfo(it.body()!!.getProject[position].id, "projectId")
+                projectName.value = it.body()!!.getProject[position].name
+                today.value = formatted.toString()
+                projectLastDate.value = it.body()!!.getProject[position].endDate
+                projectProgress.value = it.body()!!.getProject[position].projectProgress
+                personalProgress.value = it.body()!!.getProject[position].personalProgress
+
+            } else {
+
+            }
+        }, {
+
         })
     }
 }

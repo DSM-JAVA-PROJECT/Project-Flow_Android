@@ -18,6 +18,7 @@ class FlowFragment :BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow){
 
     override val vm: FlowViewModel by viewModel()
     private val addProject = AddProjectFragment()
+    private val preparingProjectRVAdapter by lazy { PreparingProjectRVAdapter(vm) }
 
     private val finishProjectDialog by lazy {
         FinishProjectDialog(vm)
@@ -48,10 +49,17 @@ class FlowFragment :BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow){
                 (activity as MainActivity).addProject()
             }
             getProjectInfo()
+            getProjectDetailInfo(1)
             binding.button.setOnClickListener{
                 finishProjectDialog()
             }
+            binding.firstRv.adapter = preparingProjectRVAdapter
             vm.inputDialogProjectName()
+//            val percent : Int = vm.personalProgress.value.toString()
+//            val teamPercent = vm.projectProgress.value.toString()
+//            binding.progressBar.setProgress(percent.toInt())
+//            binding.progressBar2.setProgress(teamPercent.toInt())
+
         }
     }
 
