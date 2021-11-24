@@ -49,7 +49,7 @@
             android:layout_marginTop="18dp"
             android:text="@={vm.userName}"
             android:textSize="22sp"
-            app:layout_constraintStart_toEndOf="@+id/profile_img"
+            app:layout_constraintStart_toEndOf="@+id/mypage_title_tv"
             app:layout_constraintTop_toBottomOf="@+id/mypage_title_tv" />
 
         <TextView
@@ -60,7 +60,7 @@
             android:layout_marginTop="20dp"
             android:text="@string/change_password"
             android:textColor="@color/blue_main"
-            app:layout_constraintStart_toEndOf="@+id/profile_img"
+            app:layout_constraintStart_toEndOf="@+id/imageView7"
             app:layout_constraintTop_toBottomOf="@+id/username_tv" />
 
         <TextView
@@ -76,8 +76,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageView7"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginStart="28dp"
             app:glide_image_load="@{profile_image}"
             android:layout_marginTop="10dp"
