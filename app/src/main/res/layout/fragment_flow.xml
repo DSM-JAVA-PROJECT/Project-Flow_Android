@@ -22,7 +22,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="250dp"
             android:src="@drawable/flow_empty_project"
-            android:visibility="visible"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
@@ -73,6 +73,8 @@
             android:backgroundTint="@color/blue_main"
             android:clickable="true"
             android:elevation="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_baseline_add_24" />
@@ -84,7 +86,7 @@
             android:layout_gravity="center"
             android:fontFamily="@font/nanumgothic_regular"
             android:text="@string/empty_project"
-            android:visibility="visible"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/empty_project_img" />
@@ -92,12 +94,28 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/main_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="600dp"
+            android:layoutDirection="rtl"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/dots_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollIndicators="none"
+            app:layout_constraintTop_toBottomOf="@id/main_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:dotsColor="@color/color_light_gray"
+            app:dotsCornerRadius="8dp"
+            app:tabBackground="@drawable/selector_indicator"
+            app:tabGravity="center"
+            app:tabIndicator="@null"
+            app:tabPaddingEnd="@dimen/dot_padding"
+            app:tabPaddingStart="@dimen/dot_padding" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

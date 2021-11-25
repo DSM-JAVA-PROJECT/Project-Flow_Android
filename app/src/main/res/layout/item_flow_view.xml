@@ -7,6 +7,32 @@
         <variable
             name="vm"
             type="com.example.project_flow_android.viewmodel.flow.FlowViewModel" />
+
+        <variable
+            name="projectName"
+            type="String" />
+
+        <variable
+            name="userName"
+            type="String" />
+
+        <variable
+            name="projectImage"
+            type="String" />
+
+        <variable
+            name="today"
+            type="String" />
+
+        <variable
+            name="projectLastDate"
+            type="String" />
+
+        <variable
+            name="personalProgress"
+            type="String" />
+
+
     </data>
 
     <FrameLayout
@@ -100,7 +126,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="@={vm.getUserName}"
+                    android:text="@{userName}"
                     app:layout_constraintStart_toStartOf="@+id/guideline19"
                     app:layout_constraintTop_toTopOf="@+id/guideline17" />
 
@@ -176,7 +202,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="@={vm.projectProgress}"
                     app:layout_constraintEnd_toStartOf="@+id/guideline16"
                     app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
