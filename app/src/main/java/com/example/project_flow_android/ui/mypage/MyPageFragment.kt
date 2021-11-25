@@ -1,24 +1,17 @@
 package com.example.project_flow_android.ui.mypage
 
-import android.app.Activity
+
 import android.os.Bundle
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseFragment
 import com.example.project_flow_android.data.remote.toRealPath
 import com.example.project_flow_android.databinding.FragmentMyPageBinding
-import com.example.project_flow_android.ui.main.MainActivity
 import com.example.project_flow_android.ui.mypage.dialog.ChangePasswordDialog
 import com.example.project_flow_android.ui.mypage.dialog.LogoutDialog
-import com.example.project_flow_android.util.GalleryHelper
 import com.example.project_flow_android.viewmodel.mypage.ChangePasswordViewModel
 import com.example.project_flow_android.viewmodel.mypage.MyPageViewModel
 import gun0912.tedimagepicker.builder.TedRxImagePicker
-import kotlinx.android.synthetic.main.activity_dash_borad.*
-import kotlinx.android.synthetic.main.fragment_my_page.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -66,8 +59,8 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
                 vm.imagePath = imagePath
                 binding.profileImg.setImageURI(uri)
             }, Throwable::printStackTrace)
-
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -76,9 +69,6 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         binding.userRv.addItemDecoration(VerticalItemDecorator(20))
         getUserInfo()
         observeEvent()
-        binding.addProfileImg.setOnClickListener{
-            getImage()
-        }
 
 
     }
@@ -94,6 +84,9 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
             projects.observe(viewLifecycleOwner, {
                 projectAdapter.setItem(it.projects)
             })
+            binding.addProfileImg.setOnClickListener{
+                getImage()
+            }
         }
         vm.run {
             successChange.observe(viewLifecycleOwner,{

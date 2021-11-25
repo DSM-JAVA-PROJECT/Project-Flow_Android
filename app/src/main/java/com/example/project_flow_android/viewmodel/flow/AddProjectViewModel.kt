@@ -27,11 +27,9 @@ class AddProjectViewModel(
     private val _successAddProject = MutableLiveData<Boolean>()
     val successAddProject: LiveData<Boolean> get() = _successAddProject
 
-
     lateinit var imagePath: String
 
     fun addProject() {
-
         val member : String =  projectMember.value!!
         val splitArray = member.split(",")
         val token = sharedPreferenceStorage.getInfo("access_token")
