@@ -6,13 +6,15 @@ import androidx.lifecycle.ViewModel
 import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.data.remote.flow.FlowApiImpl
 import com.example.project_flow_android.data.remote.mypage.MyPageApiImpl
+import com.example.project_flow_android.feature.GetMainInfoDetailResponse
+import com.example.project_flow_android.feature.GetMainInfoResponse
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class FlowViewModel(
     private val myPageApiImpl: MyPageApiImpl,
     private val flowApiImpl: FlowApiImpl,
-    private val sharedPreferenceStorage: SharedPreferenceStorage
+    private val sharedPreferenceStorage: SharedPreferenceStorage,
 ) : ViewModel() {
 
     val getUserName = MutableLiveData<String>()
@@ -28,24 +30,37 @@ class FlowViewModel(
     private val _emptyProject = MutableLiveData<Boolean>()
     val emptyProject: LiveData<Boolean> get() = _emptyProject
 
+    private val _getMainInfo = MutableLiveData<GetMainInfoResponse>()
+    val getMainInfo: LiveData<GetMainInfoResponse> get() = _getMainInfo
+
     private val _successRemove = MutableLiveData<Boolean>()
     val successRemove: LiveData<Boolean> get() = _successRemove
+
+    private val _checkCheckBox = MutableLiveData<Boolean>()
+    val checkCheckBox: LiveData<Boolean> get() = _checkCheckBox
+
+    private val _checkInfo = MutableLiveData<String>()
+    val checkInfo: LiveData<String> get() = _checkInfo
 
     val projectsId = sharedPreferenceStorage.getInfo("projectId")
     val token = sharedPreferenceStorage.getInfo("access_token")
 
     fun finishProject() {
-        flowApiImpl.finishProject(projectsId).subscribe { response ->
-            if (response.isSuccessful) {
-                _successRemove.value!!
-            }
-        }
+//        flowApiImpl.finishProject(projectsId).subscribe { response ->
+//            if (response.isSuccessful) {
+//                if(checkCheckBox.value ==false)
+//                {
+//                    _checkCheckBox.value = "마감하시려면 체크를 눌러주세요"
+//                }
+//                _successRemove.value!!
+//            }
+//        }
     }
 
-    fun inputDialogProjectName() {
+    fun inputDialogProjectName(position: Int) {
         myPageApiImpl.getUserInfo(token).subscribe { it ->
             if (it.isSuccessful) {
-                dialogContext.value = it.body()!!.projects[0].projectName
+                dialogContext.value = it.body()!!.projects[position].projectName
             }
         }
     }
@@ -54,10 +69,11 @@ class FlowViewModel(
         val token = sharedPreferenceStorage.getInfo("access_token")
         myPageApiImpl.getUserInfo(token).subscribe({ response ->
             if (response.isSuccessful) {
-                getUserName.value = response.body()!!.name
-                if (response.body()!!.projects.isEmpty()) {
+                if (response.body()!!.projects.size == 0) {
                     _emptyProject.value = true
-                }
+                    getUserName.value = response.body()!!.name
+                } else
+                    getUserName.value = response.body()!!.name
             } else {
                 getUserName.value = "로딩 실패"
             }
@@ -66,35 +82,12 @@ class FlowViewModel(
         })
     }
 
-    fun getProjectInfo() {
-        val token = sharedPreferenceStorage.getInfo("access_token")
-        myPageApiImpl.getUserInfo(token).subscribe({
-            if (it.isSuccessful) {
-                getUserName.value = it.body()!!.name
-                projectImage.value = it.body()!!.profileImage
-            } else {
 
-            }
-        }, {
-
-        })
-    }
-
-
-    fun getProjectDetailInfo(position:Int) {
+    fun getProjectDetailInfo() {
         val token = sharedPreferenceStorage.getInfo("access_token")
         flowApiImpl.getMainInfo(token).subscribe({
             if (it.isSuccessful) {
-                val current = LocalDateTime.now()
-                val formatter = DateTimeFormatter.ofPattern("MM월 dd일")
-                val formatted = current.format(formatter)
-
-                sharedPreferenceStorage.saveInfo(it.body()!!.getProject[position].id, "projectId")
-                projectName.value = it.body()!!.getProject[position].name
-                today.value = formatted.toString()
-                projectLastDate.value = it.body()!!.getProject[position].endDate
-                projectProgress.value = it.body()!!.getProject[position].projectProgress
-                personalProgress.value = it.body()!!.getProject[position].personalProgress
+                _getMainInfo.value = it.body()
 
             } else {
 

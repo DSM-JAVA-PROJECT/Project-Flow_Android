@@ -33,7 +33,6 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding>(R.layout.acti
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         observeEvent()
     }
 

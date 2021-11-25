@@ -1,25 +1,29 @@
 package com.example.project_flow_android.ui.mypage
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseFragment
 import com.example.project_flow_android.data.remote.toRealPath
 import com.example.project_flow_android.databinding.FragmentMyPageBinding
-import com.example.project_flow_android.databinding.UserProjectMypageItemBinding
-import com.example.project_flow_android.feature.GetUserInfoResponse
+import com.example.project_flow_android.ui.main.MainActivity
 import com.example.project_flow_android.ui.mypage.dialog.ChangePasswordDialog
 import com.example.project_flow_android.ui.mypage.dialog.LogoutDialog
+import com.example.project_flow_android.util.GalleryHelper
 import com.example.project_flow_android.viewmodel.mypage.ChangePasswordViewModel
 import com.example.project_flow_android.viewmodel.mypage.MyPageViewModel
 import gun0912.tedimagepicker.builder.TedRxImagePicker
 import kotlinx.android.synthetic.main.activity_dash_borad.*
+import kotlinx.android.synthetic.main.fragment_my_page.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
+
 
     override val vm: MyPageViewModel by viewModel()
     private val cv: ChangePasswordViewModel by viewModel()
@@ -60,7 +64,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
             .subscribe({ uri ->
                 val imagePath = uri.toRealPath(requireContext())
                 vm.imagePath = imagePath
-                binding.imageView7.setImageURI(uri)
+                binding.profileImg.setImageURI(uri)
             }, Throwable::printStackTrace)
 
     }
@@ -72,6 +76,10 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         binding.userRv.addItemDecoration(VerticalItemDecorator(20))
         getUserInfo()
         observeEvent()
+        binding.addProfileImg.setOnClickListener{
+            getImage()
+        }
+
 
     }
 
@@ -83,9 +91,6 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
             binding.changePwTv.setOnClickListener {
                 showChangePasswordDialog()
             }
-            binding.imageView7.setOnClickListener{
-                getImage()
-            }
             projects.observe(viewLifecycleOwner, {
                 projectAdapter.setItem(it.projects)
             })
@@ -93,12 +98,6 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         vm.run {
             successChange.observe(viewLifecycleOwner,{
                 binding.profileImage = lastImage.value!!
-            })
-            successImage.observe(viewLifecycleOwner,{
-                //TODO image 업로드 성공시에
-            })
-            getUserImage.observe(viewLifecycleOwner,{
-//                binding.projectImage = it
             })
         }
     }

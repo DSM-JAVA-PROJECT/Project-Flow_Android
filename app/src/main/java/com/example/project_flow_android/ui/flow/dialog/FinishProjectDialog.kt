@@ -17,16 +17,15 @@ class FinishProjectDialog(override val vm: FlowViewModel) :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.cancleTv.setOnClickListener {
-           vm.finishProject()
+        vm.run {
+//            binding.cancleTv.setOnClickListener {
+//                successRemove.observe(this@FinishProjectDialog, {
+//                    vm.finishProject()
+//                })
+//            }
+            binding.confirmTv.setOnClickListener {
+                dismiss()
+            }
         }
-
-        binding.confirmTv.setOnClickListener {
-            dismiss()
-        }
-
-        vm.successRemove.observe(viewLifecycleOwner,{
-            dismiss()
-        })
     }
 }

@@ -2,10 +2,12 @@ package com.example.project_flow_android.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseActivity
+import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.databinding.ActivityMainBinding
 import com.example.project_flow_android.ui.calendar.CalendarFragment
 import com.example.project_flow_android.ui.chat.fragment.ChatListFragment
@@ -18,7 +20,7 @@ import com.example.project_flow_android.viewmodel.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_login.*
 
-class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+class MainActivity() : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override val vm: MainViewModel by viewModels()
 
@@ -39,9 +41,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     fun addProject(){
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.main_container,addProjectFragment)
-        transaction.commit()
+        val intent = Intent(this,AddProjectActivity::class.java)
+        startActivity(intent)
     }
 
     fun backFragment(){
@@ -50,16 +51,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         transaction.commit()
     }
 
-    fun goAddProject(){
-        val intent = Intent(this,AddProjectActivity::class.java)
-        startActivity(intent)
-    }
-
     fun startLogin(){
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
-
 
     private val flowFragment = FlowFragment()
     private val calendarFragment = CalendarFragment()
