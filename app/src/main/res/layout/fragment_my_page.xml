@@ -85,13 +85,6 @@
             app:layout_constraintTop_toBottomOf="@+id/mypage_title_tv" />
 
         <ImageView
-            android:id="@+id/test_imv"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
             android:id="@+id/add_profile_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

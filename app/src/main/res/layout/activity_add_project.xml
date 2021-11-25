@@ -60,8 +60,8 @@
 
             <ImageView
                 android:id="@+id/get_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="60sp"
                 android:src="@drawable/rectangle182"
                 app:layout_constraintEnd_toEndOf="parent"
