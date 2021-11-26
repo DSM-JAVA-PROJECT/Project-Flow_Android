@@ -21,7 +21,6 @@
             android:layout_gravity="center"
             android:layout_marginTop="250dp"
             android:src="@drawable/flow_empty_project"
-            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
@@ -85,7 +84,7 @@
             android:layout_gravity="center"
             android:fontFamily="@font/nanumgothic_regular"
             android:text="@string/empty_project"
-            android:visibility="invisible"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/empty_project_img" />
