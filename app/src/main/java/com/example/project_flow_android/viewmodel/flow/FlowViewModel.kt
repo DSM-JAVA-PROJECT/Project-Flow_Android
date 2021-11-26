@@ -6,10 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.data.remote.flow.FlowApiImpl
 import com.example.project_flow_android.data.remote.mypage.MyPageApiImpl
-import com.example.project_flow_android.feature.GetMainInfoDetailResponse
 import com.example.project_flow_android.feature.GetMainInfoResponse
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class FlowViewModel(
     private val myPageApiImpl: MyPageApiImpl,
@@ -26,10 +23,7 @@ class FlowViewModel(
     val projectProgress = MutableLiveData<String>()
 
     val dialogContext = MutableLiveData<String>()
-
-    private val _emptyProject = MutableLiveData<Boolean>()
-    val emptyProject: LiveData<Boolean> get() = _emptyProject
-
+    
     private val _getMainInfo = MutableLiveData<GetMainInfoResponse>()
     val getMainInfo: LiveData<GetMainInfoResponse> get() = _getMainInfo
 
@@ -44,6 +38,22 @@ class FlowViewModel(
 
     val projectsId = sharedPreferenceStorage.getInfo("projectId")
     val token = sharedPreferenceStorage.getInfo("access_token")
+
+    fun getMainUserInfo() {
+        val token = sharedPreferenceStorage.getInfo("access_token")
+        myPageApiImpl.getUserInfo(token).subscribe({ response ->
+            if (response.isSuccessful) {
+                if (response.body()!!.projects.size == 0) {
+                    getUserName.value = response.body()!!.name
+                } else
+                    getUserName.value = response.body()!!.name
+            } else {
+                getUserName.value = "로딩 실패"
+            }
+        }, {
+            getUserName.value = "로딩 실패"
+        })
+    }
 
     fun finishProject() {
 //        flowApiImpl.finishProject(projectsId).subscribe { response ->
@@ -65,30 +75,11 @@ class FlowViewModel(
         }
     }
 
-    fun getMainUserInfo() {
-        val token = sharedPreferenceStorage.getInfo("access_token")
-        myPageApiImpl.getUserInfo(token).subscribe({ response ->
-            if (response.isSuccessful) {
-                if (response.body()!!.projects.size == 0) {
-                    _emptyProject.value = true
-                    getUserName.value = response.body()!!.name
-                } else
-                    getUserName.value = response.body()!!.name
-            } else {
-                getUserName.value = "로딩 실패"
-            }
-        }, {
-            getUserName.value = "로딩 실패"
-        })
-    }
-
-
     fun getProjectDetailInfo() {
         val token = sharedPreferenceStorage.getInfo("access_token")
         flowApiImpl.getMainInfo(token).subscribe({
             if (it.isSuccessful) {
                 _getMainInfo.value = it.body()
-
             } else {
 
             }
