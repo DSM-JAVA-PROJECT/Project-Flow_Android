@@ -1,5 +1,6 @@
 package com.example.project_flow_android.viewmodel.mypage
 
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,6 +15,10 @@ import retrofit2.Callback
 class ChangePasswordViewModel(val myPageApiImpl: MyPageApiImpl, private val sharedPreferenceStorage: SharedPreferenceStorage):ViewModel() {
 
     val changePassword = MutableLiveData<String>()
+
+    val _toastContent = MutableLiveData<String>()
+    private val toastContent : LiveData<String> get() = _toastContent
+
     val token = sharedPreferenceStorage.getInfo("access_Token")
 
     val successChange: LiveData<Boolean> get() = _successChange
@@ -21,13 +26,15 @@ class ChangePasswordViewModel(val myPageApiImpl: MyPageApiImpl, private val shar
 
     fun changePassword(){
         val token = sharedPreferenceStorage.getInfo("access_token")
-        myPageApiImpl.changePassword(token, NewPasswordRequest(changePassword.value!!)).subscribe({
-            if(it.isSuccessful){
+        myPageApiImpl.changePassword(token, changePassword.value!!).subscribe({
+            if(it.message()=="Changed"){
                 _successChange.value!!
+                _toastContent.value = "변경에 성공하였습니다"
             }
             else {
             }
         },{
         })
+        _toastContent.value = "새로운 비밀번호를 입력해주세요"
     }
 }

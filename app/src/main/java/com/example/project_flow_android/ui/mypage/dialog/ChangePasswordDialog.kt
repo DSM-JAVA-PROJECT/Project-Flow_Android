@@ -6,6 +6,7 @@ import android.widget.Toast
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseDialog
 import com.example.project_flow_android.databinding.DialogChangepasswordBinding
+import com.example.project_flow_android.ui.flow.FlowFragment
 import com.example.project_flow_android.viewmodel.mypage.ChangePasswordViewModel
 
 class ChangePasswordDialog(override val vm: ChangePasswordViewModel) :
@@ -14,19 +15,16 @@ class ChangePasswordDialog(override val vm: ChangePasswordViewModel) :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.confirmTv.setOnClickListener {
-                vm.changePassword()
-        }
-
-        binding.cancleTv.setOnClickListener {
-            dismiss()
-        }
-
-        vm.successChange.observe(viewLifecycleOwner, {
-            if(it) {
+        vm.run {
+            binding.cancleTv.setOnClickListener {
                 dismiss()
             }
-        })
+
+            successChange.observe(viewLifecycleOwner, {
+                //Toast.makeText(requireContext(),"비밀번호 변경 성공",Toast.LENGTH_SHORT).show()
+                dismiss()
+            })
+        }
     }
 
 }

@@ -13,10 +13,9 @@ class MyPageViewModel(
     private val sharedPreferenceStorage: SharedPreferenceStorage,
 ) : ViewModel() {
 
-    val getUserImage = MutableLiveData<String>()
     val userName = MutableLiveData<String>()
-
     val profileImage = MutableLiveData<File>()
+
     lateinit var imagePath: String
 
     private val _clearAll = MutableLiveData<Boolean>()
@@ -37,13 +36,16 @@ class MyPageViewModel(
     private val _successImage = MutableLiveData<Boolean>()
     val successImage: LiveData<Boolean> get() = _successImage
 
+    private val _getUserImage = MutableLiveData<String>()
+    val getUserImage : LiveData<String> get() = _getUserImage
 
     fun getUserInfo() {
         val token = sharedPreferenceStorage.getInfo("access_token")
         myPageApiImpl.getUserInfo(token).subscribe({ response ->
             if (response.isSuccessful) {
+                _successGet.value = true
                 userName.value = response.body()!!.name
-                getUserImage.value = response.body()!!.profileImage
+                _getUserImage.value = response.body()!!.profileImage
             } else {
                 userName.value = "로딩 실패"
             }
