@@ -45,12 +45,6 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
     }
 
 
-    private fun getUserInfo() {
-        vm.run {
-            getUserInfo()
-        }
-    }
-
     private fun getImage() {
         TedRxImagePicker.with(requireContext())
             .start()
@@ -64,13 +58,9 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        vm.getProjectInfo()
         binding.userRv.adapter = projectAdapter
         binding.userRv.addItemDecoration(VerticalItemDecorator(20))
-        getUserInfo()
         observeEvent()
-
-
     }
 
     override fun observeEvent() {
@@ -87,11 +77,8 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
             binding.addProfileImg.setOnClickListener{
                 getImage()
             }
-        }
-        vm.run {
-            successChange.observe(viewLifecycleOwner,{
-                binding.profileImage = lastImage.value!!
-            })
+            getUserInfo()
+            getProjectInfo()
         }
     }
 }
