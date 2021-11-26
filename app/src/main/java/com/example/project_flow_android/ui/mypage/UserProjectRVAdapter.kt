@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.project_flow_android.databinding.UserProjectMypageItemBinding
 import com.example.project_flow_android.feature.Projects
 import com.example.project_flow_android.viewmodel.mypage.MyPageViewModel
+import kotlinx.android.synthetic.main.user_info_item.view.*
 
 class UserProjectRVAdapter(private val viewModel: MyPageViewModel) :
     RecyclerView.Adapter<UserProjectRVAdapter.ProjectViewHolder>() {
@@ -17,8 +18,7 @@ class UserProjectRVAdapter(private val viewModel: MyPageViewModel) :
         fun bind(position: Int) {
             binding.projectName = userProjectList[position].projectName
             binding.projectImage = userProjectList[position].logoImage
-            binding.projectContent = userProjectList[position].startDate
-            binding.projectEnd = userProjectList[position].endDate
+            binding.projectContent = "${userProjectList[position].startDate} ~ ${userProjectList[position].endDate}"
             binding.vm = viewModel
             binding.notifyChange()
         }
