@@ -39,6 +39,7 @@ class MyPageViewModel(
     private val _getUserImage = MutableLiveData<String>()
     val getUserImage : LiveData<String> get() = _getUserImage
 
+
     fun getUserInfo() {
         val token = sharedPreferenceStorage.getInfo("access_token")
         myPageApiImpl.getUserInfo(token).subscribe({ response ->

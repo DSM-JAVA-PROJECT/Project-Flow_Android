@@ -39,8 +39,8 @@ class FlowFragment() :BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow){
 
         val dotsIndicator = binding.dotsIndicator
 
-//        TabLayoutMediator(dotsIndicator, viewPager) {_, _ ->
-//        }.attach()
+        TabLayoutMediator(dotsIndicator, binding.mainView) {_, _ ->
+        }.attach()
         observeEvent()
         binding.addProjectBtn.setOnClickListener{
             (activity as MainActivity).addProject()
@@ -53,7 +53,7 @@ class FlowFragment() :BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow){
             getProjectDetailInfo()
             vm.run {
                 getMainInfo.observe(viewLifecycleOwner,{
-                    mainFlowViewPagerRVAdapter.setItem(it.getProject)
+                    mainFlowViewPagerRVAdapter.setItem(it.projects)
                 })
             }
 

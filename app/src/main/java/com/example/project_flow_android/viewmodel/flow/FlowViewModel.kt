@@ -21,6 +21,7 @@ class FlowViewModel(
     val projectLastDate = MutableLiveData<String>()
     val personalProgress = MutableLiveData<String>()
     val projectProgress = MutableLiveData<String>()
+     val info = MutableLiveData<String>()
 
     val dialogContext = MutableLiveData<String>()
     
@@ -84,7 +85,7 @@ class FlowViewModel(
 
             }
         }, {
-
+            it
         })
     }
 }

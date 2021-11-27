@@ -12,7 +12,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class MainFlowAdapter(private val viewModel: FlowViewModel) :RecyclerView.Adapter<MainFlowAdapter.MainFlowViewHolder>(){
-        private var userProjectList = ArrayList<GetMainInfoDetailResponse>()
+        private var userProjectList = ArrayList<GetMainInfoResponse>()
 
         inner class MainFlowViewHolder(private val binding: ItemFlowViewBinding) :
             RecyclerView.ViewHolder(binding.root) {
@@ -22,16 +22,16 @@ class MainFlowAdapter(private val viewModel: FlowViewModel) :RecyclerView.Adapte
                 val formatter = DateTimeFormatter.ofPattern("MM월 dd일")
                 val formatted = current.format(formatter)
                 binding.today = formatted
-                binding.projectLastDate = userProjectList[position].remainingDays
-                binding.projectName = userProjectList[position].name
-                binding.projectImage = userProjectList[position].logoIamge
+                binding.projectLastDate = userProjectList[position].projects[position].endDate
+                binding.projectName = userProjectList[position].projects[position].name
+                binding.projectImage = userProjectList[position].projects[position].logoImage
                 binding.vm = viewModel
                 binding.notifyChange()
             }
         }
 
         fun setItem(projects: List<GetMainInfoDetailResponse>) {
-            this.userProjectList = projects as ArrayList<GetMainInfoDetailResponse>
+            this.userProjectList = projects as ArrayList<GetMainInfoResponse>
             notifyDataSetChanged()
         }
 

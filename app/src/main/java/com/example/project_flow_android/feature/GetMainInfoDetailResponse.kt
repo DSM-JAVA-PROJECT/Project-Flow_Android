@@ -3,7 +3,7 @@ package com.example.project_flow_android.feature
 data class GetMainInfoDetailResponse(
     val id: String,
     val name: String,
-    val logoIamge: String,
+    val logoImage: String,
     val startDate: String,
     val endDate: String,
     val personalProgress: String,
