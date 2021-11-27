@@ -3,6 +3,7 @@ package com.example.project_flow_android.ui.flow
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.viewpager2.widget.ViewPager2
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseFragment
 import com.example.project_flow_android.databinding.FragmentFlowBinding
@@ -34,12 +35,13 @@ class FlowFragment() :BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = MainFlowAdapter(vm)
+        binding.mainView.adapter = mainFlowViewPagerRVAdapter
+        binding.mainView.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
         val dotsIndicator = binding.dotsIndicator
-        val viewPager = binding.mainView
-        viewPager.adapter = adapter
-        TabLayoutMediator(dotsIndicator, viewPager) {_, _ ->
-        }.attach()
+
+//        TabLayoutMediator(dotsIndicator, viewPager) {_, _ ->
+//        }.attach()
         observeEvent()
         binding.addProjectBtn.setOnClickListener{
             (activity as MainActivity).addProject()
