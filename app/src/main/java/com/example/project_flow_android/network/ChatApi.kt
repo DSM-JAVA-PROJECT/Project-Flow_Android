@@ -57,4 +57,11 @@ interface ChatApi {
         @Path("chatRoomId") chatRoomId: String,
         @Body imageUrl: ImageUpdateRequest
     ) : Response<Unit>
+
+    @GET("/project/{projectId}/member/{chatRoomId}")
+    suspend fun getNonParticipate(
+        @Header("Authorization") header: String,
+        @Path("projectId") projectId: String,
+        @Path("chatRoomId") chatRoomId: String
+    ) : Response<NonParticipateResponse>
 }

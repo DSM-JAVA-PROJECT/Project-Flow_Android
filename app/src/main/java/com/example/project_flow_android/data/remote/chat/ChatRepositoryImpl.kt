@@ -60,4 +60,12 @@ class ChatRepositoryImpl : ChatRepository, SafeApiRequest() {
     override suspend fun imageUpdate(header: String, chatRoomId: String, imageUrl: ImageUpdateRequest): Response<Unit> {
         return safeApiCall { ApiProvider.getChatAPI().imageUpdate(header, chatRoomId, imageUrl) }
     }
+
+    override suspend fun getNonParticipate(
+        header: String,
+        projectId: String,
+        chatRoomId: String,
+    ): Response<NonParticipateResponse> {
+        return safeApiCall { ApiProvider.getChatAPI().getNonParticipate(header, projectId, chatRoomId) }
+    }
 }
