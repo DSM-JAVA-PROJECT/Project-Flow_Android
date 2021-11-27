@@ -32,7 +32,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:background="@color/color_gray">
+            android:background="#809CFF">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline18"

@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:fontFamily="@font/font_roboto_bold"
-                    android:text="@={vm.projectName}"
+                    android:text="@{projectName}"
                     app:layout_constraintStart_toStartOf="@+id/guideline15"
                     app:layout_constraintTop_toTopOf="@+id/guideline17" />
 
@@ -97,7 +97,7 @@
                     android:id="@+id/project_period_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="19dp"
-                    android:text="@={vm.today}"
+                    android:text="@{today}"
                     app:layout_constraintEnd_toStartOf="@+id/guideline13"
                     app:layout_constraintStart_toStartOf="@+id/guideline15"
                     app:layout_constraintTop_toBottomOf="@+id/project_img" />
@@ -107,7 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="@={vm.projectLastDate}"
+                    android:text="@{projectLastDate}"
                     android:textColor="@color/red"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toStartOf="@+id/guideline13"
@@ -167,6 +167,7 @@
                     android:backgroundTint="@color/blue_main"
                     android:fontFamily="@font/font_roboto_bold"
                     android:text="@string/finish_project"
+                    android:textColor="@color/white"
                     android:textSize="10sp"
                     app:layout_constraintEnd_toStartOf="@+id/guideline16"
                     app:layout_constraintStart_toStartOf="@+id/guideline19"
@@ -193,7 +194,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="@={vm.personalProgress}"
+                    android:text="@{personalProgress}"
                     app:layout_constraintEnd_toStartOf="@+id/guideline16"
                     app:layout_constraintTop_toTopOf="@+id/guideline17" />
 

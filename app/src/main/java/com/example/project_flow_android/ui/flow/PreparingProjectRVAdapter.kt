@@ -5,27 +5,27 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project_flow_android.databinding.UserProjectPlanItemBinding
 import com.example.project_flow_android.feature.GetMainInfoDetailResponse
+import com.example.project_flow_android.feature.GetProjectScheduleDetailResponse
 import com.example.project_flow_android.feature.Projects
 import com.example.project_flow_android.viewmodel.flow.FlowViewModel
 
 class PreparingProjectRVAdapter(private val viewModel: FlowViewModel) :
     RecyclerView.Adapter<PreparingProjectRVAdapter.ProjectViewHolder>() {
-    private var projectList = ArrayList<GetMainInfoDetailResponse>()
+    private var projectList = ArrayList<GetProjectScheduleDetailResponse>()
 
     inner class ProjectViewHolder(private val binding: UserProjectPlanItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(position: Int) {
-            binding.scheduleContent = projectList[position].before[position].name
-            binding.scheduleStartPeriod = projectList[position].before[position].startDate
-            binding.scheduleEndPeriod = projectList[position].before[position].endDate
+            binding.scheduleContent = projectList[position].name
+            binding.scheduleStartPeriod = projectList[position].startDate
             binding.vm = viewModel
             binding.notifyChange()
         }
     }
 
     fun setItem(projects: List<Projects>) {
-        this.projectList = projects as ArrayList<GetMainInfoDetailResponse>
+        this.projectList = projects as ArrayList<GetProjectScheduleDetailResponse>
         notifyDataSetChanged()
     }
 

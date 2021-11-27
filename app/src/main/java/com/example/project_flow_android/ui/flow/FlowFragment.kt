@@ -18,7 +18,6 @@ class FlowFragment() :BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow){
 
     override val vm: FlowViewModel by viewModel()
     private val addProject = AddProjectFragment()
-    private val preparingProjectRVAdapter by lazy { PreparingProjectRVAdapter(vm) }
     private val mainFlowViewPagerRVAdapter by lazy { MainFlowAdapter(vm) }
 
     private val finishProjectDialog by lazy {
