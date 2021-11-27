@@ -85,8 +85,8 @@
             android:id="@+id/add_profile_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_img"
             app:layout_constraintStart_toStartOf="@+id/guideline26"
-            app:layout_constraintTop_toTopOf="@+id/guideline27"
             app:srcCompat="@drawable/ic_baseline_add_circle_24" />
 
         <androidx.constraintlayout.widget.Guideline
