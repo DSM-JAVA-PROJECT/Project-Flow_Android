@@ -25,6 +25,7 @@ class ChatViewModel : ViewModel() {
     private val _modifyLiveData: MutableLiveData<Int> = MutableLiveData()
     private val _fileUploadLiveData: MutableLiveData<FileResponse> = MutableLiveData()
     private val _imageUpdateLiveData: MutableLiveData<Int> = MutableLiveData()
+    private val _participateLiveData: MutableLiveData<NonParticipateResponse> = MutableLiveData()
     val chatLiveData = _chatLiveData
     val chatRoomLiveData = _chatRoomLiveData
     val roomMemberLiveData = _roomMemberLiveData
@@ -33,6 +34,7 @@ class ChatViewModel : ViewModel() {
     val modifyLiveData = _modifyLiveData
     val fileUpdateLiveData = _fileUploadLiveData
     val imageUpdateLiveData = _imageUpdateLiveData
+    val participateLiveData = _participateLiveData
 
     fun getProjectUser() {
         viewModelScope.launch {
@@ -114,6 +116,15 @@ class ChatViewModel : ViewModel() {
             val response = chatRepository.imageUpdate(access_token, chatRoomId, imageUrl)
             if(response.isSuccessful) {
                 _imageUpdateLiveData.postValue(response.code())
+            }
+        }
+    }
+
+    fun getNonParticipate(chatRoomId: String) {
+        viewModelScope.launch {
+            val response = chatRepository.getNonParticipate(access_token, projectId, chatRoomId)
+            if(response.isSuccessful) {
+                _participateLiveData.postValue(response.body())
             }
         }
     }
