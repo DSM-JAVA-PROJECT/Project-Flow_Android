@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.chat_plan_item_mine.view.*
 import kotlinx.android.synthetic.main.chat_resign_plan_item_mine.view.*
 import kotlinx.android.synthetic.main.chat_resign_plan_item_mine.view.resign_plan_item_mine_content_tv
 import kotlinx.android.synthetic.main.chat_resign_plan_item_other.view.*
+import kotlinx.android.synthetic.main.room_status_item.view.*
 import java.lang.RuntimeException
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -35,6 +36,8 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
     private val MINE_RESIGN_PLAN = 5
     private val OTHER_RESIGN_PLAN = 6
     private val FORCED_PLAN = 7
+    private val INVITE = 8
+    private val LEAVE = 9
 
     interface OnJoinClickListener{
         fun onJoinClick(v: View, position: Int)
@@ -127,25 +130,34 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
             is ResignPlanMineViewHolder -> holder.apply { bind(item) }
             is ResignPlanOtherViewHolder -> holder.apply { bind(item) }
             is ForcedPlanViewHolder -> holder.apply { bind(item) }
+            is InviteRoomViewHolder -> holder.apply { bind(item) }
+            is LeaveRoomViewHolder -> holder.apply { bind(item) }
         }
     }
 
     override fun getItemCount() = items.oldChatMessageResponses.size
 
     override fun getItemViewType(position: Int): Int {
-        return when(items.oldChatMessageResponses[position].mine){
+        val item = items.oldChatMessageResponses[position]
+        return when(item.mine){
             true -> {
-                when(items.oldChatMessageResponses[position].type){
+                when(item.type){
                     "MESSAGE" -> MINE_TALK
                     "PLAN" -> PLAN_ADD
                     "JOIN_PLAN" -> MINE_JOIN_PLAN
                     "RESIGN_PLAN" -> MINE_RESIGN_PLAN
                     "FORCED_PLAN" -> FORCED_PLAN
+                    "CHATROOM" -> {
+                        if(item.profileImage == null){
+                            INVITE
+                        }else
+                            LEAVE
+                    }
                     else -> throw RuntimeException("알 수 없는 타입")
                 }
             }
             false -> {
-                when(items.oldChatMessageResponses[position].type){
+                when(item.type){
                     "MESSAGE" -> OTHER_TALK
                     "PLAN" -> PLAN_ADD
                     "JOIN_PLAN" -> OTHER_JOIN_PLAN
@@ -200,7 +212,6 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
         fun bind(item: ChatMessageResponse.ChatReceiveResponse){
             view.join_plan_item_mine_content_tv.text = item.planName
             view.join_plan_item_mine_date_tv.text = "${item.startDate} ~ ${item.endDate}"
-            view.join_plan_item_mine_cnt_tv.text = item.readerList.size.toString()
             dateFormat(item.createdAt, view.join_plan_item_mine_time_tv)
 
             val position = absoluteAdapterPosition
@@ -279,6 +290,20 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
             view.forced_plan_item_mine_content_tv.text = item.planName
             view.forced_plan_item_mine_date_tv.text = "${item.startDate} ~ ${item.endDate}"
             dateFormat(item.createdAt, view.forced_plan_item_mine_time_tv)
+        }
+    }
+
+    inner class InviteRoomViewHolder(v: View) : RecyclerView.ViewHolder(v){
+        val view = v
+        fun bind(item: ChatMessageResponse.ChatReceiveResponse) {
+            view.room_status_tv.text = "${item.userName}님이 채팅방에 입장했습니다."
+        }
+    }
+
+    inner class LeaveRoomViewHolder(v: View) : RecyclerView.ViewHolder(v){
+        val view = v
+        fun bind(item: ChatMessageResponse.ChatReceiveResponse) {
+            view.room_status_tv.text = "${item.userName}님이 나가셨습니다."
         }
     }
 

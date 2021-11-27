@@ -127,6 +127,19 @@ class SocketApplication {
         socket.emit("chatroom.out", data)
     }
 
+    fun inviteRoom(chatRoomId: String, users: ArrayList<String>) {
+        val data = JSONObject()
+        data.put("chatRoomId", chatRoomId)
+        data.put("users", users)
+        socket.emit("chatroom.participate")
+    }
+
+    fun leaveRoom(chatRoomId: String) {
+        val data = JSONObject()
+        data.put("chatRoomId", chatRoomId)
+        socket.emit("chatroom.resign", data)
+    }
+
     fun setChatRoomId(chatRoomId: String){
         this.chatRoomId = chatRoomId
     }
@@ -190,5 +203,19 @@ class SocketApplication {
         Log.i("Rejoin payload", args[0].toString())
         val json = args[0].toString()
         _readLiveData.postValue(json)
+    }
+
+    private val inviteRoom = Emitter.Listener { args ->
+        Log.i("Invite payload", args[0].toString())
+        val json = args[0].toString()
+        val invite = Gson().fromJson(json, ChatMessageResponse.ChatReceiveResponse::class.java)
+        _receiveLiveData.postValue(invite)
+    }
+
+    private val onLeave = Emitter.Listener { args ->
+        Log.i("Leave payload", args[0].toString())
+        val json = args[0].toString()
+        val leave = Gson().fromJson(json, ChatMessageResponse.ChatReceiveResponse::class.java)
+        _receiveLiveData.postValue(leave)
     }
 }
