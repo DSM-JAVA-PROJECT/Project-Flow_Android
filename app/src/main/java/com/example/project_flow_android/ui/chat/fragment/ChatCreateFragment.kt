@@ -39,7 +39,7 @@ class ChatCreateFragment : Fragment() {
         chat_create_user_rv.layoutManager = layoutManager
 
         chatViewModel.chatLiveData.observe(viewLifecycleOwner, {
-            val adapter = CreateRVAdapter(chatViewModel.chatLiveData.value!!)
+            val adapter = CreateRVAdapter(requireActivity() ,chatViewModel.chatLiveData.value!!)
             chat_create_user_rv.adapter = adapter
 
             adapter.setOnItemClickListener(object : CreateRVAdapter.OnItemClickListener{
