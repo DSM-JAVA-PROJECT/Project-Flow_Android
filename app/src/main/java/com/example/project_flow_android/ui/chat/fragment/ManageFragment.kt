@@ -1,6 +1,7 @@
 package com.example.project_flow_android.ui.chat.fragment
 
 import android.app.Activity
+import android.app.Dialog
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -25,6 +26,7 @@ import com.example.project_flow_android.viewmodel.chat.ChatViewModel
 import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.fragment_manage.*
 import kotlinx.android.synthetic.main.fragment_modify.*
+import kotlinx.android.synthetic.main.room_exit_dialog.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.launch
@@ -107,6 +109,18 @@ class ManageFragment : Fragment() {
         }
         manage_project_iv.setOnClickListener {
             galleryHelper.selectPhoto(photoSelect)
+        }
+        manage_exit_room_tv.setOnClickListener {
+            val dialog = Dialog(requireActivity())
+            dialog.setContentView(R.layout.room_exit_dialog)
+            dialog.show()
+            dialog.exit_positive.setOnClickListener{
+                socket.leaveRoom(socket.getChatRoomId())
+                dialog.dismiss()
+            }
+            dialog.exit_negative.setOnClickListener{
+                dialog.dismiss()
+            }
         }
     }
 
