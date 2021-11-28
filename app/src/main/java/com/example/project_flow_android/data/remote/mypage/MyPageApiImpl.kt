@@ -9,6 +9,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
+import okhttp3.MultipartBody
 import retrofit2.Response
 import java.io.File
 
@@ -30,8 +31,8 @@ class MyPageApiImpl {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
-    fun changeImage(token: String,file : File): @NonNull Single<Response<Void>> =
-        providerMypageApi().changeProfileImage(token, file.toMultipartPart())
+    fun changeImage(token: String,file : MultipartBody.Part): @NonNull Single<Response<Void>> =
+        providerMypageApi().changeProfileImage(token, file)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 

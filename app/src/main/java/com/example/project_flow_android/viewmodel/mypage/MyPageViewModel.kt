@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.data.remote.mypage.MyPageApiImpl
 import com.example.project_flow_android.feature.GetUserInfoResponse
+import okhttp3.MultipartBody
 import java.io.File
 
 class MyPageViewModel(
@@ -55,11 +56,12 @@ class MyPageViewModel(
         })
     }
 
-    fun postProfileImage() {
+    fun postProfileImage(file: MultipartBody.Part) {
         val token = sharedPreferenceStorage.getInfo("access_token")
-        myPageApiImpl.changeImage(token, File(imagePath)).subscribe({ response ->
+        myPageApiImpl.changeImage(token,file).subscribe({ response ->
             if (response.isSuccessful) {
                 _successImage.value!!
+                response
             } else {
             }
         }, {
