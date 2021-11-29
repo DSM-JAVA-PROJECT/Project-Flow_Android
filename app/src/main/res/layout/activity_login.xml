@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -73,13 +73,27 @@
             android:layout_height="66dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginBottom="30dp"
-            android:textColor="@color/white"
+            android:layout_marginBottom="28dp"
             android:backgroundTint="@color/blue_main"
-            android:text="@string/login"
-            android:onClick="@{()->vm.doLogin()}"
             android:fontFamily="@font/nanumgothic_regular"
+            android:onClick="@{()->vm.doLogin()}"
+            android:text="@string/login"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/oauth_btn"
+            android:layout_width="0dp"
+            android:layout_height="66dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:backgroundTint="@color/color_git"
+            android:fontFamily="@font/nanumgothic_regular"
+            android:text="@string/git"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/register_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -174,13 +188,14 @@
             android:id="@+id/comment2_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textColor="@color/red"
             android:fontFamily="@font/nanumgothic_regular"
             android:text="@{vm.changeComment}"
-            app:layout_constraintBottom_toTopOf="@+id/register_btn"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/oauth_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

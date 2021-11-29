@@ -91,6 +91,7 @@
     <string name="add_member_email">초대할 팀원의 이메일을 입력해주세요</string>
     <string name="started_project">프로젝트 시작하기</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="git">깃허브로 로그인</string>
     <string name="add_main_image">프로젝트 대표 이미지를 넣어주세요</string>
     <string name="upload_project_name">프로젝트명을 입력해주세요</string>
     <string name="mypage_title">마이페이지</string>
