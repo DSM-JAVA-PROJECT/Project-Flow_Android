@@ -226,8 +226,9 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/first_rv"
                 android:layout_width="140dp"
-                tools:listitem="@layout/user_project_plan_item"
-                android:layout_height="match_parent" />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/user_project_plan_item" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/second_rv"
@@ -249,6 +250,7 @@
             android:text="@string/ready"
             android:fontFamily="@font/nanumgothic_bold"
             android:textColor="@color/black"
+            android:layout_marginStart="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline31" />
 
@@ -280,6 +282,7 @@
             android:text="@string/process"
             android:fontFamily="@font/nanumgothic_bold"
             android:textColor="@color/black"
+            android:layout_marginStart="10dp"
             app:layout_constraintStart_toStartOf="@+id/guideline32"
             app:layout_constraintTop_toTopOf="@+id/guideline31" />
 
@@ -288,6 +291,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/finish"
+            android:layout_marginStart="10dp"
             android:fontFamily="@font/nanumgothic_bold"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@+id/guideline33"

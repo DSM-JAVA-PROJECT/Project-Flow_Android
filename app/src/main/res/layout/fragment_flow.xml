@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -100,19 +101,18 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/dots_indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="54dp"
             android:scrollIndicators="none"
-            app:layout_constraintTop_toBottomOf="@id/main_view"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:dotsColor="@color/color_light_gray"
             app:dotsCornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:tabBackground="@drawable/selector_indicator"
             app:tabGravity="center"
-            app:tabIndicator="@null"
-            app:tabPaddingEnd="@dimen/dot_padding"
-            app:tabPaddingStart="@dimen/dot_padding" />
+            app:tabIndicator="@null" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
