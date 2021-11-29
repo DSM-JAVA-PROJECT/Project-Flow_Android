@@ -1,14 +1,12 @@
 package com.example.project_flow_android.network
 
+import com.example.project_flow_android.data.model.sign.chat.*
+import okhttp3.MultipartBody
+import org.json.JSONObject
+import retrofit2.Response
 import com.example.project_flow_android.data.chat.ProjectMemberResponse
 import com.example.project_flow_android.data.chat.RoomListResponse
-import com.example.project_flow_android.data.model.sign.chat.ChatMessageResponse
-import com.example.project_flow_android.data.model.sign.chat.RoomMemberResponse
-import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ChatApi {
     @GET("/project/{projectId}/member")
@@ -34,4 +32,31 @@ interface ChatApi {
         @Query("page") page: Int,
         @Query("size") size: Int
     ) : Response<ChatMessageResponse>
+
+    @GET("/chatroom/profile/{userId}")
+    suspend fun getUserProfile(
+        @Header("Authorization") header: String,
+        @Path("userId") userId: String
+    ) : Response<UserProfileResponse>
+
+    @PATCH("/chatroom/name/{chatRoomId}")
+    suspend fun modifyRoomName(
+        @Header("Authorization") header: String,
+        @Path("chatRoomId") chatRoomId: String,
+        @Body name: ModifyNameRequest
+    ) : Response<Unit>
+
+    @Multipart
+    @POST("/file")
+    suspend fun fileUpload(
+        @Header("Authorization") header: String,
+        @Part file: MultipartBody.Part
+    ) : Response<FileResponse>
+
+    @PATCH("/chatroom/image/{chatRoomId}")
+    suspend fun imageUpdate(
+        @Header("Authorization") header: String,
+        @Path("chatRoomId") chatRoomId: String,
+        @Body imageUrl: ImageUpdateRequest
+    ) : Response<Unit>
 }

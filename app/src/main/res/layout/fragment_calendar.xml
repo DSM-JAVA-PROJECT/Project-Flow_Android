@@ -1,131 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/calendar_month_tv"
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline29"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="?android:attr/selectableItemBackground"
-            android:padding="5dp"
-            android:textColor="@color/color_gray"
-            android:textSize="22sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="2021년7월" />
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="30dp" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/calendar_before_btn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
-            app:layout_constraintBottom_toBottomOf="@id/calendar_month_tv"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/calendar_month_tv" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/meal_next_btn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="20dp"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-            app:layout_constraintBottom_toBottomOf="@id/calendar_month_tv"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/calendar_month_tv" />
-
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/calendar_shimmer_container"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline30"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/calendar_month_tv">
-
-            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-                android:id="@+id/calendar_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:mcv_arrowColor="@color/black"
-                app:mcv_selectionColor="@color/blue_main" />
-        </com.facebook.shimmer.ShimmerFrameLayout>
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="35dp" />
 
         <TextView
-            android:id="@+id/calendar_helper_tv"
+            android:id="@+id/textView22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            android:background="?android:attr/selectableItemBackground"
-            android:drawablePadding="3dp"
-            android:padding="5dp"
-            android:text="@string/calendar_info"
-            android:textColor="@color/color_gray"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/calendar_shimmer_container" />
+            android:text="@string/my_git"
+            android:fontFamily="@font/nanumgothic_bold"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline30"
+            app:layout_constraintTop_toTopOf="@+id/guideline29" />
 
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="5dp"
+            android:fontFamily="@font/nanumgothic_regular"
+            android:text="나의 OOO 정보를 확인할 수 있습니다"
+            app:layout_constraintStart_toStartOf="@+id/guideline30"
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/calendar_helper_tv">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/color_gray">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/calendar_event_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:paddingHorizontal="15dp"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="일정" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/calendar_date_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="right"
-                    android:gravity="right"
-                    android:padding="15dp"
-                    android:textColor="@color/color_gray"
-                    android:textSize="13sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="RtlHardcoded" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-
+            app:layout_constraintTop_toBottomOf="@+id/textView23" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -31,7 +31,7 @@
             android:fontFamily="@font/nanumgothic_bold"
             android:text="@string/mypage_title"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,44 +40,89 @@
             android:id="@+id/username_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="18dp"
             android:text="@={vm.userName}"
             android:textSize="22sp"
-            app:layout_constraintStart_toEndOf="@+id/imageView7"
-            app:layout_constraintTop_toBottomOf="@+id/mypage_title_tv" />
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/font_nanumgothic_bold"
+            app:layout_constraintStart_toStartOf="@+id/guideline24"
+            app:layout_constraintTop_toTopOf="@+id/guideline28" />
 
         <TextView
             android:id="@+id/change_pw_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
             android:text="@string/change_password"
+            android:fontFamily="@font/nanumgothic_regular"
+            android:textSize="12dp"
             android:textColor="@color/blue_main"
-            app:layout_constraintStart_toEndOf="@+id/imageView7"
-            app:layout_constraintTop_toBottomOf="@+id/username_tv" />
+            app:layout_constraintBottom_toTopOf="@+id/guideline27"
+            app:layout_constraintStart_toStartOf="@+id/guideline24" />
 
         <TextView
             android:id="@+id/logout_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
             android:text="@string/logout"
+            android:fontFamily="@font/nanumgothic_regular"
+            android:textSize="12dp"
             android:textColor="@color/blue_main"
-            app:layout_constraintStart_toEndOf="@+id/change_pw_tv"
-            app:layout_constraintTop_toBottomOf="@+id/username_tv" />
+            app:layout_constraintBottom_toTopOf="@+id/guideline27"
+            app:layout_constraintStart_toEndOf="@+id/change_pw_tv" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/profile_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginStart="28dp"
+            app:glide_image_load="@{vm.getUserImage}"
             android:layout_marginTop="10dp"
-            android:src="@drawable/ic_baseline_account_circle_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mypage_title_tv" />
+
+        <ImageView
+            android:id="@+id/add_profile_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_img"
+            app:layout_constraintStart_toStartOf="@+id/guideline26"
+            app:srcCompat="@drawable/ic_baseline_add_circle_24" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="28dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="84dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="153dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="136dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="71dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -88,7 +133,7 @@
         android:background="@color/color_gray"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_height="4dp" />
+        android:layout_height="2dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -114,6 +159,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="2dp"
+            android:fontFamily="@font/nanumgothic_regular"
+            android:textSize="12dp"
             android:text="@string/show_all_project"
             android:textColor="@color/blue_main"
             app:layout_constraintStart_toStartOf="parent"

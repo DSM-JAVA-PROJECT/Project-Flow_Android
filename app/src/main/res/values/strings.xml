@@ -12,6 +12,7 @@
     <string name="manage_exit_room">방 나가기</string>
     <string name="user_info_attend_project">참여한 프로젝트</string>
     <string name="user_info_finish">완료</string>
+    <string name="user_info_fail">미완료</string>
     <string name="new_chatting">새로운 채팅</string>
     <string name="chat_create_project">프로젝트</string>
     <string name="chat_create_user">참여원</string>
@@ -33,6 +34,20 @@
     <string name="add_schedule_bottom_btn">추가하기</string>
     <string name="add_schedule_bottom_date_hint">날짜를 선택하세요</string>
     <string name="chat_list_my_chat">나의 채팅</string>
+    <string name="chat_plan_item_title">일정이 추가되었습니다.</string>
+    <string name="chat_join_plan_title">일정에 참여했습니다.</string>
+    <string name="chat_resign_plan_title">일정에서 제외되었습니다.</string>
+    <string name="chat_plan_item_join">참여하기</string>
+    <string name="chat_resign_plan_rejoin">다시 참여하기</string>
+    <string name="chat_join_plan_item_view">일정보기</string>
+    <string name="chat_join_plan_item_exit">제외하기</string>
+    <string name="already_plan_participate">이미 참여한 일정입니다.</string>
+    <string name="modify_room_name_title">채팅방 이름이 변경되었습니다.</string>
+    <string name="cant_modify_room_name_title">채팅방 이름을 변경할 수 없습니다.</string>
+    <string name="cant_modify_room_name_content">이름 변경란을 채워주세요.</string>
+    <string name="chat_forced_plan_item_title">필수 일정이 추가되었습니다.</string>
+    <string name="chat_room_image_change_title">채팅방 이미지가 변경되었습니다.</string>
+
     <string name="start_project">프로젝트 관리는</string>
     <string name="start_project_se">프로젝트 플로우에서</string>
     <string name="comment_1">프로젝트 플로우는 개발자의</string>
@@ -109,4 +124,5 @@
     <string name="finish">완료</string>
     <string name="finished_schedule">마감하기</string>
     <string name="explain_finish_project">일정에 참여한 인원이 모두 마감해야 일정이 완료됩니다.</string>
+    <string name="my_git">나의 깃허브 정보</string>
 </resources>

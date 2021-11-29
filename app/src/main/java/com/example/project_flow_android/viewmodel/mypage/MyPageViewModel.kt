@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.data.remote.mypage.MyPageApiImpl
 import com.example.project_flow_android.feature.GetUserInfoResponse
+import okhttp3.MultipartBody
 import java.io.File
 
 class MyPageViewModel(
@@ -14,8 +15,9 @@ class MyPageViewModel(
 ) : ViewModel() {
 
     val userName = MutableLiveData<String>()
-
     val profileImage = MutableLiveData<File>()
+
+    lateinit var imagePath: String
 
     private val _clearAll = MutableLiveData<Boolean>()
     val clearAll: LiveData<Boolean> get() = _clearAll
@@ -32,16 +34,38 @@ class MyPageViewModel(
     private val _successChange = MutableLiveData<Boolean>()
     val successChange: LiveData<Boolean> get() = _successChange
 
+    private val _successImage = MutableLiveData<Boolean>()
+    val successImage: LiveData<Boolean> get() = _successImage
+
+    private val _getUserImage = MutableLiveData<String>()
+    val getUserImage : LiveData<String> get() = _getUserImage
+
+
     fun getUserInfo() {
         val token = sharedPreferenceStorage.getInfo("access_token")
         myPageApiImpl.getUserInfo(token).subscribe({ response ->
             if (response.isSuccessful) {
+                _successGet.value = true
                 userName.value = response.body()!!.name
+                _getUserImage.value = response.body()!!.profileImage
             } else {
                 userName.value = "로딩 실패"
             }
         }, {
             userName.value = "로딩 실패"
+        })
+    }
+
+    fun postProfileImage(file: MultipartBody.Part) {
+        val token = sharedPreferenceStorage.getInfo("access_token")
+        myPageApiImpl.changeImage(token,file).subscribe({ response ->
+            if (response.isSuccessful) {
+                _successImage.value!!
+                response
+            } else {
+                response
+            }
+        }, {
         })
     }
 
@@ -56,16 +80,5 @@ class MyPageViewModel(
         }, {
 
         })
-    }
-
-    fun loadImage() {
-        val token = sharedPreferenceStorage.getInfo("access_token")
-        myPageApiImpl.changeImage(token, profileImage.value!!).subscribe { response ->
-            if (response.isSuccessful) {
-                _successChange.value = true
-            } else {
-
-            }
-        }
     }
 }

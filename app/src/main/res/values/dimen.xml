@@ -3,4 +3,6 @@
     <dimen name="dialog_text">14dp</dimen>
     <dimen name="title_bar_size">55dp</dimen>
     <dimen name="title_bar_text_size">23sp</dimen>
+    <dimen name="dot_size">3dp</dimen>
+    <dimen name="dot_padding">8dp</dimen>
 </resources>

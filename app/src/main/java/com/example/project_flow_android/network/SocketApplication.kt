@@ -2,6 +2,7 @@ package com.example.project_flow_android.network
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.project_flow_android.data.model.sign.chat.ChatErrorResponse
 import com.example.project_flow_android.data.model.sign.chat.ChatMessageResponse
 import com.example.project_flow_android.data.model.sign.chat.ChatReceiveResponse
 import com.google.gson.Gson
@@ -25,15 +26,20 @@ class SocketApplication {
             return socketApplication!!
         }
     }
-    private val url = "http://54.89.202.59:8081"
-    private val access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzQyODMzMjMsImlkIjoiNjE2N2JhNTQyNjdjYTEwZWI1NDkwNGE5IiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.Y_smWBnm1RrvToFW9kB9pHhnmgZIu0O73OZH4Cy3iZ4"
-    private val sub_access = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzU5ODgxMjUsImlkIjoiNjE4MzMyOTU0MzliNGU1Y2VhMjNhNjg0IiwiZW1haWwiOiJhYmgwOTIwb25lQG5hdmVyLmNvbSJ9.gO6C_afNJvyQoKTC5CN-cvhZuZaQRC5dHg9ptssTBag"
+    private val url = "http://3.80.121.3:8081"
+    private val access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzY0MzQyNDYsImlkIjoiNjE4OWZlOTcwYzliZmQyYjk4MDRmZjg2IiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.6cNSlsTiL4UG4arInBRPaJjV4MeemeXmDiMZiDxXKVQ"
+    private val sub_access = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzY0MzQyNjMsImlkIjoiNjE4OWZlYTMwYzliZmQyYjk4MDRmZjg3IiwiZW1haWwiOiJhYmgwOTIwb25lQG5hdmVyLmNvbSJ9.lklPsE4KpZRqSxi5EYahxxTeXigL47eYxbE3UL7ZtMY"
     private lateinit var socket : Socket
     private var chatRoomId = ""
-    private var projectId = "618333504aa95ded53f3b359"
+    private var projectId = "6194967186cfc21756269e3c"
     private var chatImage = ""
+    private var roomName = ""
     private val _receiveLiveData : MutableLiveData<ChatMessageResponse.ChatReceiveResponse> = MutableLiveData()
+    private val _errorLiveData : MutableLiveData<Int> = MutableLiveData()
+    private val _readLiveData : MutableLiveData<String> = MutableLiveData()
     val receiveLiveData = _receiveLiveData
+    val errorLiveData = _errorLiveData
+    val readLiveData = _readLiveData
 
     fun connect(){
         Thread {
@@ -79,6 +85,41 @@ class SocketApplication {
 
     fun chatReceive(){
         socket.on("message", onMassage)
+        socket.on("plan.create", onAddPlan)
+        socket.on("plan.join", onJoinPlan)
+        socket.on("plan.resign", onResignPlan)
+        socket.on("rejoin", onReJoin)
+        socket.on("error", onError)
+    }
+
+    fun rejoin(){
+        val data = JSONObject()
+        data.put("chatRoomId", chatRoomId)
+        socket.emit("chatroom.rejoin", data)
+    }
+
+    fun addPlan(planName: String, startDate: String, endDate: String, forced: Boolean){
+        val data = JSONObject()
+        data.put("chatRoomId", chatRoomId)
+        data.put("planName", planName)
+        data.put("planEndDate", endDate)
+        data.put("planStartDate", startDate)
+        data.put("isForced", forced)
+        socket.emit("plan.create", data)
+    }
+
+    fun joinPlan(planId: String) {
+        val data = JSONObject()
+        data.put("chatRoomId", chatRoomId)
+        data.put("planId", planId)
+        socket.emit("plan.join", data)
+    }
+
+    fun resignPlan(planId: String) {
+        val data = JSONObject()
+        data.put("chatRoomId", chatRoomId)
+        data.put("planId", planId)
+        socket.emit("plan.resign", data)
     }
 
     fun setChatRoomId(chatRoomId: String){
@@ -93,16 +134,56 @@ class SocketApplication {
         this.chatImage = chatImage
     }
 
+    fun setRoomName(roomName: String){
+        this.roomName = roomName
+    }
+
     fun getProjectId() = projectId
 
     fun getChatRoomId() = chatRoomId
 
     fun getChatImage() = chatImage
 
+    fun getRoomName() = roomName
+
     private val onMassage = Emitter.Listener { args ->
         Log.i("Message payload", args[0].toString())
         val json = args[0].toString()
         val message = Gson().fromJson(json, ChatMessageResponse.ChatReceiveResponse::class.java)
         _receiveLiveData.postValue(message)
+    }
+
+    private val onAddPlan = Emitter.Listener { args ->
+        Log.i("Plan payload", args[0].toString())
+        val json = args[0].toString()
+        val plan = Gson().fromJson(json, ChatMessageResponse.ChatReceiveResponse::class.java)
+        _receiveLiveData.postValue(plan)
+    }
+
+    private val onJoinPlan = Emitter.Listener { args ->
+        Log.i("JoinPlan payload", args[0].toString())
+        val json = args[0].toString()
+        val joinPlan = Gson().fromJson(json, ChatMessageResponse.ChatReceiveResponse::class.java)
+        _receiveLiveData.postValue(joinPlan)
+    }
+
+    private val onResignPlan = Emitter.Listener { args ->
+        Log.i("ResignPlan payload", args[0].toString())
+        val json = args[0].toString()
+        val resignPlan = Gson().fromJson(json, ChatMessageResponse.ChatReceiveResponse::class.java)
+        _receiveLiveData.postValue(resignPlan)
+    }
+
+    private val onError = Emitter.Listener { args ->
+        Log.i("Error payload", args[0].toString())
+        val json = args[0].toString()
+        val error = Gson().fromJson(json, ChatErrorResponse::class.java)
+        _errorLiveData.postValue(error.status)
+    }
+
+    private val onReJoin = Emitter.Listener { args ->
+        Log.i("Rejoin payload", args[0].toString())
+        val json = args[0].toString()
+        _readLiveData.postValue(json)
     }
 }

@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="290dp"
+        android:layout_height="250dp"
         android:orientation="vertical">
 
         <ImageView
@@ -35,23 +35,15 @@
             android:textColor="@color/black"
             android:fontFamily="@font/font_roboto_bold" />
 
-        <Spinner
-            android:id="@+id/major_sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
         <TextView
             android:id="@+id/user_info_tel_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/font_nanumgothic_bold"
-            android:layout_gravity="center_horizontal"/>
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -71,6 +63,7 @@
         android:fontFamily="@font/font_nanumgothic_bold"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/user_info_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"/>
