@@ -26,22 +26,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         super.onCreate(savedInstanceState)
         successfulLogin()
 
-        binding.oauthBtn.setOnClickListener {
-            web_view.apply {
-                getOauth()
-            }
-        }
-
-    }
-
-    private fun getOauth() {
-        binding.webView.visibility
-        val webView = findViewById<WebView>(R.id.web_view)
-        webView.webViewClient = WebViewClient()
-        webView.loadUrl("http://18.210.203.222:8080/auth/oauth")
-        binding.oauthBtn.isInvisible
-        binding.registerBtn.isInvisible
-
     }
 
     private fun successfulLogin() {
@@ -51,6 +35,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
                     binding.comment2Tv.text = vm.changeComment.value
+                }
+
+                binding.oauthBtn.setOnClickListener{
+                    val intent = Intent(this@LoginActivity,LoginOauthActivity::class.java)
+                    startActivity(intent)
                 }
                 binding.comment2Tv.text = vm.changeComment.value
             })
