@@ -2,7 +2,9 @@ package com.example.project_flow_android.ui.flow
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
 import androidx.viewpager2.widget.ViewPager2
 import com.example.project_flow_android.R
@@ -19,13 +21,17 @@ import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class FlowFragment :BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow){
+class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
 
     override val vm: FlowViewModel by viewModel()
     private val addProject = AddProjectActivity()
     private val mainFlowViewPagerRVAdapter by lazy { MainFlowAdapter(vm) }
+    private val preparingProjectRVAdapter by lazy { PreparingProjectRVAdapter(vm) }
+    private val oningProjectRVAdapter by lazy { OningProjectRVAdapter(vm) }
+    private val finishProjectRVAdapter by lazy { FinishProjectRVAdapter(vm) }
 
-//    lateinit var binding_item: ItemFlowViewBinding
+
+    lateinit var binding_item: ItemFlowViewBinding
 //    val dialogUtil = DialogUtil(requireActivity())
 
     private val finishProjectDialog by lazy {
@@ -46,41 +52,55 @@ class FlowFragment :BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        showRV()
+        finishSchdule()
+        observeEvent()
+        goAddProject()
+
+
+    }
+
+    private fun goAddProject() {
+
+        binding.addProjectBtn.setOnClickListener {
+            (activity as MainActivity).addProject()
+        }
+    }
+
+    private fun showRV() {
         binding.mainView.adapter = mainFlowViewPagerRVAdapter
         binding.mainView.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-//
-//        val dotsIndicator = binding.dotsIndicator
+        val dotsIndicator = binding.dotsIndicator
+        TabLayoutMediator(dotsIndicator, binding.mainView) { _, _ ->
+        }.attach()
+    }
 
-//        binding_item.button.setOnClickListener(){
+    private fun finishSchdule() {
+//        binding_item.button.setOnClickListener() {
 //            val bottom = dialogUtil.showBottomSheet()
 //            dialogUtil.showBottomSheet()
 //            bottom.show()
 //            finishProjectDialog()
 //        }
 
-//        TabLayoutMediator(dotsIndicator, binding.mainView) {_, _ ->
-//        }.attach()
-        observeEvent()
-        binding.addProjectBtn.setOnClickListener{
-            (activity as MainActivity).addProject()
-        }
-
     }
-
 
     override fun observeEvent() {
         vm.run {
-
-
             getMainUserInfo()
             getProjectDetailInfo()
             vm.run {
-                getMainInfo.observe(viewLifecycleOwner,{
+                getMainInfo.observe(viewLifecycleOwner, {
                     mainFlowViewPagerRVAdapter.setItem(it.projects)
+                    preparingProjectRVAdapter.setItem(it.projects)
+                })
+                emptyProject.observe(viewLifecycleOwner, {
+                    binding.userName.isInvisible
+                    binding.emptyProjectTv.isVisible
+                    binding.emptyProjectImg.isVisible
+                    binding.nimProject.isVisible
                 })
             }
-
         }
     }
-
 }
