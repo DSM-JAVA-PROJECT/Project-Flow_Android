@@ -20,6 +20,7 @@
             android:id="@+id/chat_prev_btn"
             android:layout_width="25dp"
             android:layout_height="25dp"
+            android:background="?attr/selectableItemBackground"
             android:src="@drawable/ic_baseline_arrow_back_ios_new_24" />
 
         <TextView
@@ -27,7 +28,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:text="프플(Project-Flow)"
             android:textColor="@color/black"
             android:fontFamily="@font/font_nanumgothic_bold"/>
 
@@ -35,6 +35,7 @@
             android:id="@+id/chat_manage_tv"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:background="?attr/selectableItemBackground"
             android:layout_gravity="end"
             android:layout_marginEnd="20dp"
             android:gravity="center"
@@ -46,6 +47,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chat_rv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -57,7 +59,7 @@
     <ImageView
         android:id="@+id/test_iv"
         android:layout_width="300dp"
-        android:layout_height="300dp"/>
+        android:layout_height="wrap_content"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -76,13 +78,14 @@
             android:layout_height="25dp"
             android:layout_marginStart="15dp"
             android:src="@drawable/ic_chat_add"
+            android:background="?attr/selectableItemBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/chat_input_et"
-            android:layout_width="345dp"
+            android:layout_width="315dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:background="@drawable/chat_et_radius"
@@ -98,11 +101,12 @@
             android:id="@+id/chat_send_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
             android:src="@drawable/ic_chat_send"
-            app:layout_constraintBottom_toBottomOf="@+id/chat_input_et"
-            app:layout_constraintEnd_toEndOf="@+id/chat_input_et"
-            app:layout_constraintTop_toTopOf="@+id/chat_input_et" />
+            android:layout_marginEnd="12dp"
+            android:background="?attr/selectableItemBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -2,9 +2,10 @@ package com.example.project_flow_android.network
 
 import com.example.project_flow_android.feature.*
 import io.reactivex.rxjava3.core.Single
-import retrofit2.Call
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
+import java.io.File
 
 
 interface ProjectFlowAPI {
@@ -21,8 +22,51 @@ interface ProjectFlowAPI {
     @POST("/email/verifyCode")
     fun checkCertification(@Body request: PostCertificationRequest): Single<Response<Void>>
 
+    @GET("/auth/myPage")
+    fun getuserInfo(@Header("Authorization") token: String): Single<Response<GetUserInfoResponse>>
+
+    @PATCH("/auth/password")
+    fun changePassword(@Header("Authorization") token :String, @Query("password") password : String) : Single<Response<Void>>
+
+    @Multipart
+    @PATCH("/auth/image")
+    fun changeProfileImage(@Header("Authorization") token: String,@Part ("file") file : File) : Single<Response<Void>>
+
+    @GET("/main")
+    fun getMainInfo(@Header("Authorization") token: String) : Single<Response<GetMainInfoResponse>>
+
+    @Multipart
     @POST("/project")
-    fun addProject(@Body request: AddProjectRequest): Single<Response<Void>>
+    fun addProject(@Header("Authorization") token: String, @Body request: AddProjectRequest, @Part("file") file: MultipartBody.Part) : Single<Response<GetProjectsId>>
+
+    @PATCH("/project/close/{id}")
+    fun finishProject(@Body projectId : String) : Single<Response<Void>>
+
+    @PATCH("/auth/image")
+    fun changeProfileImage(
+        @Header("Authorization") token: String,
+        @Body file: MultipartBody.Part,
+    ): Single<Response<Void>>
+
+    @Multipart
+    @POST("/project")
+    fun addProjectQuery(
+        @Header("Authorization") token: String,
+        @Query("projectName") projectName: String,
+        @Query("explanation") explanation:String,
+        @Query("startDate") startDate : String,
+        @Query("endDate") endDate : String,
+        @Query("file") file: MultipartBody.Part,
+        @Query("emails") emails : List<String>
+    //만약 안돼면 ArrayList 말고 리스트
+    ): Single<Response<GetProjectsId>>
+
+
+
+
+
+
+
 
 
 }

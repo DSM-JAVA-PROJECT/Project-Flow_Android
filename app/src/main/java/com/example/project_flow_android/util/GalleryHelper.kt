@@ -9,9 +9,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
-class GalleryHelper(private val activity : Activity, private val startForResult : ActivityResultLauncher<Intent>) {
+class GalleryHelper(private val activity : Activity) {
 
-    fun selectGallery() {
+    fun selectPhoto(startForResult: ActivityResultLauncher<Intent>) {
         val writePermission =
             ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
         val readPermission =

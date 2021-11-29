@@ -25,9 +25,7 @@ class ScheduleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         schedule_prev_btn.setOnClickListener{
-            val fragmentManager = requireActivity().supportFragmentManager
-            fragmentManager.beginTransaction().remove(ScheduleFragment()).commit()
-            fragmentManager.popBackStack()
+            (activity as ChatActivity).popBackStack(ScheduleFragment())
         }
     }
 }

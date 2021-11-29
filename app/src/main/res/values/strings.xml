@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Project-Flow_Android</string>
-
-    <!--  Chatting  -->
     <string name="chat_manage_text">방 관리</string>
     <string name="chat_input_text">메시지를 입력하세요</string>
     <string name="chat_photo">앨범</string>
@@ -14,6 +12,7 @@
     <string name="manage_exit_room">방 나가기</string>
     <string name="user_info_attend_project">참여한 프로젝트</string>
     <string name="user_info_finish">완료</string>
+    <string name="user_info_fail">미완료</string>
     <string name="new_chatting">새로운 채팅</string>
     <string name="chat_create_project">프로젝트</string>
     <string name="chat_create_user">참여원</string>
@@ -35,6 +34,20 @@
     <string name="add_schedule_bottom_btn">추가하기</string>
     <string name="add_schedule_bottom_date_hint">날짜를 선택하세요</string>
     <string name="chat_list_my_chat">나의 채팅</string>
+    <string name="chat_plan_item_title">일정이 추가되었습니다.</string>
+    <string name="chat_join_plan_title">일정에 참여했습니다.</string>
+    <string name="chat_resign_plan_title">일정에서 제외되었습니다.</string>
+    <string name="chat_plan_item_join">참여하기</string>
+    <string name="chat_resign_plan_rejoin">다시 참여하기</string>
+    <string name="chat_join_plan_item_view">일정보기</string>
+    <string name="chat_join_plan_item_exit">제외하기</string>
+    <string name="already_plan_participate">이미 참여한 일정입니다.</string>
+    <string name="modify_room_name_title">채팅방 이름이 변경되었습니다.</string>
+    <string name="cant_modify_room_name_title">채팅방 이름을 변경할 수 없습니다.</string>
+    <string name="cant_modify_room_name_content">이름 변경란을 채워주세요.</string>
+    <string name="chat_forced_plan_item_title">필수 일정이 추가되었습니다.</string>
+    <string name="chat_room_image_change_title">채팅방 이미지가 변경되었습니다.</string>
+
     <string name="start_project">프로젝트 관리는</string>
     <string name="start_project_se">프로젝트 플로우에서</string>
     <string name="comment_1">프로젝트 플로우는 개발자의</string>
@@ -67,6 +80,50 @@
     <string name="menu_flow">나의 Flow</string>
     <string name="menu_chat">채팅</string>
     <string name="menu_mypage">마이페이지</string>
+    <string name="empty_project">현재 프로젝트가 하나도 없습니다</string>
+    <string name="who_project">님의 프로젝트</string>
+    <string name="make_project">프로젝트 생성</string>
+    <string name="editname">프로젝트명</string>
+    <string name="editday">시작날</string>
+    <string name="editfinal">마감날짜</string>
+    <string name="add_member">팀원 추가하기</string>
+    <string name="project_image">프로젝트 이미지 추가</string>
+    <string name="add_member_email">초대할 팀원의 이메일을 입력해주세요</string>
+    <string name="started_project">프로젝트 시작하기</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="git">깃허브로 로그인</string>
+    <string name="add_main_image">프로젝트 대표 이미지를 넣어주세요</string>
+    <string name="upload_project_name">프로젝트명을 입력해주세요</string>
+    <string name="mypage_title">마이페이지</string>
+    <string name="change_password">비밀번호 변경</string>
+    <string name="logout">로그아웃</string>
+    <string name="my_project">나의 프로젝트</string>
+    <string name="show_all_project">나의 모든 프로젝트를 확인할 수 있습니다</string>
+    <string name="explain_project_im">프로젝트 설명을 입력해주세요 (선택)</string>
+    <string name="menu_calendar">캘린더</string>
+    <string name="explain_project">프로젝트 설명을 입력해주세요 (선택)</string>
+    <string name="per_project">프로젝트 기간</string>
+    <string name="exp_project">프로젝트 설명을 입력해주세요 (선택)</string>
+    <string name="exp_name">프로젝트명을 입력해주세요</string>
+    <string name="logout_second">프플에서 로그아웃 하시겠습니까?</string>
+    <string name="logout_yes">네</string>
+    <string name="logout_no">아니요</string>
+    <string name="change_password_edit">변경할 비밀번호를 설정해주세요</string>
+    <string name="connect_date">~</string>
+    <string name="finish_project">프로젝트 마감하기</string>
+    <string name="project_progress">프로젝트 진행도</string>
+    <string name="nim_progress">님의 진행도</string>
+    <string name="finished_project">프로젝트 마감</string>
+    <string name="cancle">취소</string>
+    <string name="finished">마감</string>
+    <string name="calendar_info">일정</string>
+    <string name="info_finished_project">마감 후에는 프로젝트 진행이 불가능 합니다</string>
+    <string name="projec">프로젝트</string>
+    <string name="join_project">프로젝트 참가하기</string>
+    <string name="ready">준비중</string>
+    <string name="process">진행중</string>
+    <string name="finish">완료</string>
+    <string name="finished_schedule">마감하기</string>
+    <string name="explain_finish_project">일정에 참여한 인원이 모두 마감해야 일정이 완료됩니다.</string>
+    <string name="my_git">나의 깃허브 정보</string>
 </resources>

@@ -25,11 +25,13 @@
         android:layout_height="35dp"
         android:layout_marginEnd="25dp"
         android:layout_marginTop="25dp"
+        android:background="?attr/selectableItemBackground"
         android:src="@drawable/ic_baseline_add_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chat_list_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="90dp"

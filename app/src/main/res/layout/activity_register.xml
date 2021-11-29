@@ -79,7 +79,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline8" />
 
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/register_btn"
             android:layout_width="0dp"
             android:layout_height="66dp"
@@ -87,13 +87,14 @@
             android:text="@string/next"
             android:onClick="@{()->vm.addInfo()}"
             android:backgroundTint="@color/blue_main"
+            android:textColor="@color/white"
             android:layout_marginLeft="34dp"
             android:layout_marginRight="34dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-        </com.google.android.material.button.MaterialButton>
+        </Button>
 
         <TextView
             android:id="@+id/register_title_fi_tv"

@@ -10,7 +10,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.sign.ui.CertificationActivity">
+    tools:context=".ui.sign.CertificationActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline10"
@@ -78,7 +78,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline10" />
 
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/success_register_btn"
         android:layout_width="0dp"
         android:layout_height="66dp"
@@ -91,7 +91,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintStart_toStartOf="@+id/guideline10">
 
-    </com.google.android.material.button.MaterialButton>
+    </Button>
 
     <TextView
         android:id="@+id/return_tv"
