@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -32,191 +33,189 @@
             name="personalProgress"
             type="String" />
 
+        <variable
+            name="teamProgress"
+            type="String" />
+
+
 
     </data>
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="20dp">
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline15"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="40dp" />
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_begin="40dp" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="360dp" />
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_begin="360dp" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="40dp" />
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_begin="40dp" />
-
-                <TextView
-                    android:id="@+id/project_name_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/font_roboto_bold"
-                    android:text="@{projectName}"
-                    app:layout_constraintStart_toStartOf="@+id/guideline15"
-                    app:layout_constraintTop_toTopOf="@+id/guideline17" />
+            <TextView
+                android:id="@+id/project_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_roboto_bold"
+                android:text="@{projectName}"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/guideline15"
+                app:layout_constraintTop_toTopOf="@+id/guideline17" />
 
 
-                <ImageView
-                    android:id="@+id/project_img"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    app:glide_image_load="@{vm.projectImage}"
-                    app:layout_constraintStart_toStartOf="@+id/guideline15"
-                    app:layout_constraintTop_toBottomOf="@+id/project_name_tv" />
+            <ImageView
+                android:id="@+id/project_img"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:glide_image_load="@{projectImage}"
+                app:layout_constraintStart_toStartOf="@+id/guideline15"
+                app:layout_constraintTop_toBottomOf="@+id/project_name_tv" />
 
 
-                <TextView
-                    android:id="@+id/project_period_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="19dp"
-                    android:text="@{today}"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline13"
-                    app:layout_constraintStart_toStartOf="@+id/guideline15"
-                    app:layout_constraintTop_toBottomOf="@+id/project_img" />
+            <TextView
+                android:id="@+id/project_period_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:text="@{today}"
+                app:layout_constraintEnd_toStartOf="@+id/guideline13"
+                app:layout_constraintStart_toStartOf="@+id/guideline15"
+                app:layout_constraintTop_toBottomOf="@+id/project_img" />
 
-                <TextView
-                    android:id="@+id/project_last_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@{projectLastDate}"
-                    android:textColor="@color/red"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline13"
-                    app:layout_constraintStart_toStartOf="@+id/guideline15"
-                    app:layout_constraintTop_toBottomOf="@+id/project_period_tv" />
+            <TextView
+                android:id="@+id/project_last_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{projectLastDate}"
+                android:textColor="@color/red"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline13"
+                app:layout_constraintStart_toStartOf="@+id/guideline15"
+                app:layout_constraintTop_toBottomOf="@+id/project_period_tv" />
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline19"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_begin="190dp" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="190dp" />
 
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="@{userName}"
-                    app:layout_constraintStart_toStartOf="@+id/guideline19"
-                    app:layout_constraintTop_toTopOf="@+id/guideline17" />
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@{userName}"
+                app:layout_constraintStart_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toTopOf="@+id/guideline17" />
 
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline16"
-                    app:layout_constraintStart_toStartOf="@+id/guideline19"
-                    app:layout_constraintTop_toBottomOf="@+id/textView14" />
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline16"
+                app:layout_constraintStart_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
-                <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/project_progress"
-                    app:layout_constraintStart_toStartOf="@+id/guideline19"
-                    app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/project_progress"
+                app:layout_constraintStart_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
-                <ProgressBar
-                    android:id="@+id/progressBar2"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline16"
-                    app:layout_constraintStart_toStartOf="@+id/guideline19"
-                    app:layout_constraintTop_toBottomOf="@+id/textView15" />
+            <ProgressBar
+                android:id="@+id/progressBar2"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline16"
+                app:layout_constraintStart_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
-                <Button
-                    android:id="@+id/button"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/blue_main"
-                    android:fontFamily="@font/font_roboto_bold"
-                    android:text="@string/finish_project"
-                    android:textColor="@color/white"
-                    android:textSize="10sp"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline16"
-                    app:layout_constraintStart_toStartOf="@+id/guideline19"
-                    app:layout_constraintTop_toBottomOf="@+id/progressBar2" />
+            <Button
+                android:id="@+id/button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/blue_main"
+                android:fontFamily="@font/font_roboto_bold"
+                android:text="@string/finish_project"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline16"
+                app:layout_constraintStart_toStartOf="@+id/guideline19"
+                app:layout_constraintTop_toBottomOf="@+id/progressBar2" />
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_begin="260dp" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="0dp" />
 
-                <TextView
-                    android:id="@+id/textView16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/nim_progress"
-                    app:layout_constraintStart_toEndOf="@+id/textView14"
-                    app:layout_constraintTop_toTopOf="@+id/guideline17" />
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/nim_progress"
+                app:layout_constraintStart_toEndOf="@+id/textView14"
+                app:layout_constraintTop_toTopOf="@+id/guideline17" />
 
-                <TextView
-                    android:id="@+id/textView17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="@{personalProgress}"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline16"
-                    app:layout_constraintTop_toTopOf="@+id/guideline17" />
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@{personalProgress}"
+                app:layout_constraintEnd_toStartOf="@+id/guideline16"
+                app:layout_constraintTop_toTopOf="@+id/guideline17" />
 
-                <TextView
-                    android:id="@+id/textView18"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline16"
-                    app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@{teamProgress}"
+                app:layout_constraintEnd_toStartOf="@+id/guideline16"
+                app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_begin="140dp" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </androidx.cardview.widget.CardView>
-
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="140dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -227,46 +226,73 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/first_rv"
                 android:layout_width="140dp"
+                tools:listitem="@layout/user_project_plan_item"
                 android:layout_height="match_parent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/second_rv"
                 android:layout_width="140dp"
+                tools:listitem="@layout/user_project_oning_item"
                 android:layout_height="match_parent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/third_rv"
                 android:layout_width="match_parent"
+                tools:listitem="@layout/user_project_finish_item"
                 android:layout_height="match_parent" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/ready_tv"
+            android:id="@+id/textView19"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="290dp"
-            android:fontFamily="@font/font_roboto_bold"
-            android:text="@string/ready" />
+            android:text="@string/ready"
+            android:fontFamily="@font/nanumgothic_bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline31" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="278dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="139dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="281dp" />
 
         <TextView
-            android:id="@+id/ready2_tv"
+            android:id="@+id/textView20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="290dp"
-            android:fontFamily="@font/font_roboto_bold"
-            android:text="@string/process" />
+            android:text="@string/process"
+            android:fontFamily="@font/nanumgothic_bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/guideline32"
+            app:layout_constraintTop_toTopOf="@+id/guideline31" />
 
         <TextView
-            android:id="@+id/ready3_tv"
+            android:id="@+id/textView21"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="290dp"
-            android:layout_marginTop="290dp"
-            android:fontFamily="@font/font_roboto_bold"
-            android:text="@string/finish" />
+            android:text="@string/finish"
+            android:fontFamily="@font/nanumgothic_bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/guideline33"
+            app:layout_constraintTop_toTopOf="@+id/guideline31" />
 
 
-    </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

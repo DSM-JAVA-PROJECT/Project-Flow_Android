@@ -32,18 +32,20 @@ class AddProjectViewModel(
         val member: String = projectMember.value!!
         val splitArray = member.split(",")
         val token = sharedPreferenceStorage.getInfo("access_token")
-        flowApiImpl.addProjectQuery(token,
+        flowApiImpl.addProject(token,AddProjectRequest(
             projectName.value!!,
             projectExplanation.value!!,
             startDate.value!!,
             endDate.value!!,
-            File(imagePath),
-            splitArray).subscribe({
+            splitArray),
+            File(imagePath)).subscribe({
             if (it.isSuccessful) {
-                _successAddProject.value!!
+                it
             } else {
+                it
             }
         }, {
+            it.message
         })
     }
 }

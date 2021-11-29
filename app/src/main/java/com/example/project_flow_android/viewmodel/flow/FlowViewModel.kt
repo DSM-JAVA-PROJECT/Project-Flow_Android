@@ -41,12 +41,8 @@ class FlowViewModel(
     val token = sharedPreferenceStorage.getInfo("access_token")
 
     fun getMainUserInfo() {
-        val token = sharedPreferenceStorage.getInfo("access_token")
         myPageApiImpl.getUserInfo(token).subscribe({ response ->
             if (response.isSuccessful) {
-                if (response.body()!!.projects.size == 0) {
-                    getUserName.value = response.body()!!.name
-                } else
                     getUserName.value = response.body()!!.name
             } else {
                 getUserName.value = "로딩 실패"
@@ -56,16 +52,16 @@ class FlowViewModel(
         })
     }
 
-    fun finishProject() {
-//        flowApiImpl.finishProject(projectsId).subscribe { response ->
-//            if (response.isSuccessful) {
-//                if(checkCheckBox.value ==false)
-//                {
-//                    _checkCheckBox.value = "마감하시려면 체크를 눌러주세요"
-//                }
-//                _successRemove.value!!
-//            }
-//        }
+    fun finishProject(projectId : String) {
+        flowApiImpl.finishProject(projectId).subscribe { response ->
+            if (response.isSuccessful) {
+                if(checkCheckBox.value == false)
+                {
+                    _checkInfo.value = "마감하시려면 체크를 눌러주세요"
+                }
+                _successRemove.value!!
+            }
+        }
     }
 
     fun inputDialogProjectName(position: Int) {
@@ -77,12 +73,11 @@ class FlowViewModel(
     }
 
     fun getProjectDetailInfo() {
-        val token = sharedPreferenceStorage.getInfo("access_token")
         flowApiImpl.getMainInfo(token).subscribe({
             if (it.isSuccessful) {
                 _getMainInfo.value = it.body()
             } else {
-
+                it
             }
         }, {
             it

@@ -28,7 +28,7 @@ class LoginViewModel(
                 _successLogin.value = true
                 sharedPreferenceStorage.saveInfo("userEmail", userEmail.value!!)
                 sharedPreferenceStorage.saveInfo("userPassword", userPassword.value!!)
-                sharedPreferenceStorage.saveInfo(it.body()!!.accessToken, "access_token")
+                sharedPreferenceStorage.saveInfo("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzgxNzcwNzYsImV4cCI6MTYzODI2MzQ3NiwiaWQiOiI2MTljOTQzMzhkNmUyNjczNGI1MTFjY2QiLCJlbWFpbCI6InduZHVmMDQwNV9AbmF2ZXIuY29tIn0.ovevh3CFd9N7p1hK028bLnPdCPb45jJne7SL651XCu8", "access_token")
                 sharedPreferenceStorage.saveInfo(it.body()!!.refreshToken, "refresh_token")
             } else {
                 _changeComment.value = "로그인에 실패하였습니다"

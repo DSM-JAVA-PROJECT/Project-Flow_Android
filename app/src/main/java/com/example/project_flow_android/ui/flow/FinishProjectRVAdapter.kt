@@ -19,7 +19,7 @@ class FinishProjectRVAdapter(private val viewModel: FlowViewModel) :
         fun bind(position: Int) {
             binding.scheduleContent = projectList[position].after[position].name
             binding.scheduleStartPeriod = projectList[position].after[position].startDate
-            binding.scheduleEndPeriod = projectList[position].after[position].endDate
+            binding.scheduleStartPeriod ="${projectList[position].startDate} ~ ${projectList[position].endDate}"
             binding.vm = viewModel
             binding.notifyChange()
         }

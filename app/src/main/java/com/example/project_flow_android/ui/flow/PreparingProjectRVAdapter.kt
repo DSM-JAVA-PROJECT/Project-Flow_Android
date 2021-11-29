@@ -18,12 +18,11 @@ class PreparingProjectRVAdapter(private val viewModel: FlowViewModel) :
 
         fun bind(position: Int) {
             binding.scheduleContent = projectList[position].name
-            binding.scheduleStartPeriod = projectList[position].startDate
+            binding.scheduleStartPeriod = "${projectList[position].startDate} ~ ${projectList[position].endDate}"
             binding.vm = viewModel
             binding.notifyChange()
         }
     }
-
     fun setItem(projects: List<Projects>) {
         this.projectList = projects as ArrayList<GetProjectScheduleDetailResponse>
         notifyDataSetChanged()

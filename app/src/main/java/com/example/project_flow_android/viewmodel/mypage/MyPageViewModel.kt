@@ -63,6 +63,7 @@ class MyPageViewModel(
                 _successImage.value!!
                 response
             } else {
+                response
             }
         }, {
         })

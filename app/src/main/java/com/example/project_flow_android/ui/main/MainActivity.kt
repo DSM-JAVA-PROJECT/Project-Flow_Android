@@ -60,7 +60,7 @@ class MainActivity() : BaseActivity<ActivityMainBinding>(R.layout.activity_main)
     private val calendarFragment = CalendarFragment()
     private val chatFragment = ChatListFragment()
     private val myPageFragment = MyPageFragment()
-    private val addProjectFragment = AddProjectFragment()
+
 
      fun changeFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().hide(vm.activeFragment ?: flowFragment)
