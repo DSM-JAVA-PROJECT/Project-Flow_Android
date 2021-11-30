@@ -48,11 +48,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nanumgothic_regular"
-            android:text="나의 OOO 정보를 확인할 수 있습니다"
+            android:text="나의 issue 정보를 확인할 수 있습니다"
             app:layout_constraintStart_toStartOf="@+id/guideline30"
             app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
@@ -60,5 +61,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="깃허브 로그인 진행 후에 가능합니다"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/recyclerView"
+            app:layout_constraintTop_toTopOf="@+id/recyclerView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
