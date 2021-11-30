@@ -81,15 +81,18 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/font_roboto_bold"
                 android:text="@{projectName}"
-                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline15"
                 app:layout_constraintTop_toTopOf="@+id/guideline17" />
 
 
             <ImageView
                 android:id="@+id/project_img"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
                 app:glide_image_load="@{projectImage}"
                 app:layout_constraintStart_toStartOf="@+id/guideline15"
                 app:layout_constraintTop_toBottomOf="@+id/project_name_tv" />
@@ -102,19 +105,18 @@
                 android:text="@{today}"
                 app:layout_constraintEnd_toStartOf="@+id/guideline13"
                 app:layout_constraintStart_toStartOf="@+id/guideline15"
-                app:layout_constraintTop_toBottomOf="@+id/project_img" />
+                app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
             <TextView
                 android:id="@+id/project_last_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:text="@{projectLastDate}"
                 android:textColor="@color/red"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline13"
                 app:layout_constraintStart_toStartOf="@+id/guideline15"
-                app:layout_constraintTop_toBottomOf="@+id/project_period_tv" />
+                app:layout_constraintTop_toBottomOf="@+id/textView28" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline19"
@@ -171,6 +173,8 @@
                 android:text="@string/finish_project"
                 android:textColor="@color/white"
                 android:textSize="10sp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline16"
                 app:layout_constraintStart_toStartOf="@+id/guideline19"
                 app:layout_constraintTop_toBottomOf="@+id/progressBar2" />
@@ -215,6 +219,27 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_begin="140dp" />
+
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오늘날짜"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nanumgothic_regular"
+                android:textSize="10dp"
+                app:layout_constraintStart_toStartOf="@+id/guideline15"
+                app:layout_constraintTop_toBottomOf="@+id/project_img" />
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="남은 날"
+                android:textSize="10dp"
+                android:fontFamily="@font/nanumgothic_regular"
+                app:layout_constraintStart_toStartOf="@+id/guideline15"
+                app:layout_constraintTop_toBottomOf="@+id/project_period_tv" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
