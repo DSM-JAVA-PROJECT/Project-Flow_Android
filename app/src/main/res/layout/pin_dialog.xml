@@ -4,6 +4,7 @@
     android:layout_height="?attr/actionBarSize">
 
     <TextView
+        android:id="@+id/pin_tv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingStart="40dp"
