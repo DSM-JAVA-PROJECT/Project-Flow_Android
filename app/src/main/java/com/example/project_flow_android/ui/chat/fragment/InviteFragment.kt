@@ -10,6 +10,7 @@ import com.example.project_flow_android.R
 import com.example.project_flow_android.network.SocketApplication
 import com.example.project_flow_android.ui.chat.ChatActivity
 import com.example.project_flow_android.ui.chat.InviteRVAdapter
+import com.example.project_flow_android.util.DialogUtil
 import com.example.project_flow_android.viewmodel.chat.ChatViewModel
 import kotlinx.android.synthetic.main.chat_create_user_item.view.*
 import kotlinx.android.synthetic.main.fragment_chat_create.*
@@ -22,6 +23,7 @@ class InviteFragment : Fragment() {
     private val socket = SocketApplication.getSocket()
     private val userState = HashMap<Int, Boolean>()
     private val userEmail = ArrayList<String>()
+    private val userName = ArrayList<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +36,7 @@ class InviteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val dialogUtil = DialogUtil(requireActivity())
         val layoutInflater = LinearLayoutManager(requireContext())
         invite_rv.layoutManager = layoutInflater
         chatViewModel.getNonParticipate(socket.getChatRoomId())
@@ -53,6 +56,12 @@ class InviteFragment : Fragment() {
         }
         invite_btn.setOnClickListener{
             socket.inviteRoom(socket.getChatRoomId(), userEmail)
+            dialogUtil.cookieBarBuilder(
+                R.string.invite_user_title,
+                userName.joinToString(" "),
+                null,
+                R.color.color_flow
+            )
             (activity as ChatActivity).popBackStack(InviteFragment())
         }
     }
@@ -67,16 +76,20 @@ class InviteFragment : Fragment() {
     }
 
     private fun itemSelected(v: View, position: Int){
+        val user = chatViewModel.participateLiveData.value!!.responses[position]
         userState[position] = true
-        userEmail.add(chatViewModel.participateLiveData.value!!.responses[position].email)
+        userEmail.add(user.email)
+        userName.add(user.name)
 
         v.create_user_cv.setBackgroundColor(resources.getColor(R.color.color_flow, null))
         v.create_user_item_name_tv.setTextColor(resources.getColor(R.color.white, null))
     }
 
     private fun itemDeselected(v: View, position: Int){
+        val user = chatViewModel.participateLiveData.value!!.responses[position]
         userState[position] = false
-        userEmail.remove(chatViewModel.participateLiveData.value!!.responses[position].email)
+        userEmail.remove(user.email)
+        userName.add(user.name)
 
         v.create_user_cv.setBackgroundColor(resources.getColor(R.color.white, null))
         v.create_user_item_name_tv.setTextColor(resources.getColor(R.color.black, null))
