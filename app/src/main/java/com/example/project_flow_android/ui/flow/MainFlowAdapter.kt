@@ -30,6 +30,8 @@ class MainFlowAdapter(private val viewModel: FlowViewModel) :
             binding.projectLastDate = item.remainingDays
             binding.projectName = item.name
             binding.projectImage = item.logoImage
+            binding.progressBar.setProgress(item.personalProgress)
+            binding.progressBar2.setProgress(item.projectProgress)
             binding.personalProgress = "${item.personalProgress}%"
             binding.teamProgress = "${item.projectProgress}%"
             binding.userName = viewModel.getUserName.value!!

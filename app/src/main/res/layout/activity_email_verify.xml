@@ -86,6 +86,7 @@
         android:backgroundTint="@color/blue_main"
         android:fontFamily="@font/nanumgothic_regular"
         android:text="@string/next"
+        android:textColor="@color/white"
         android:onClick="@{()->vm.checkCertifcation()}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline12"

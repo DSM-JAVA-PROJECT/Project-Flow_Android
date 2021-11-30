@@ -27,8 +27,6 @@ class AddProjectViewModel(
 
     val token = sharedPreferenceStorage.getInfo("access_token")
 
-    val addProjecInterface = ApiProvider.RetroFitBuilder.create(FlowApiImpl::class.java)
-
 
     val projectName = MutableLiveData<String>()
     val projectExplanation = MutableLiveData<String>()

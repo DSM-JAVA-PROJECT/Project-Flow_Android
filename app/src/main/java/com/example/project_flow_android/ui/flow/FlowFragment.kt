@@ -45,6 +45,7 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
         )
     }
 
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -56,8 +57,6 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
         finishSchdule()
         observeEvent()
         goAddProject()
-
-
     }
 
     private fun goAddProject() {
@@ -85,11 +84,6 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
 
     }
 
-    private fun getProjectId(){
-        val ProjectId = vm.getMainInfo.value!!
-        ProjectId.projects[0].id
-    }
-
     override fun observeEvent() {
         vm.run {
             getMainUserInfo()
@@ -109,11 +103,6 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
                         binding.nimProject.isVisible
                     }
                 })
-//                binding_item.button.setOnClickListener{
-//                    getMainInfo.observe(viewLifecycleOwner,{
-//                        getProjectId()
-//                    })
-//                }
             }
         }
     }
