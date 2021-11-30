@@ -70,4 +70,8 @@ class ChatRepositoryImpl : ChatRepository, SafeApiRequest() {
     ): Response<NonParticipateResponse> {
         return safeApiCall { ApiProvider.getChatAPI().getNonParticipate(header, projectId, chatRoomId) }
     }
+
+    override suspend fun getPin(header: String, chatRoomId: String): Response<GetPinResponse> {
+        return safeApiCall { ApiProvider.getChatAPI().getPin(header, chatRoomId) }
+    }
 }

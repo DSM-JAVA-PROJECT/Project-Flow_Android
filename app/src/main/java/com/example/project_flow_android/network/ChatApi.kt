@@ -66,4 +66,10 @@ interface ChatApi {
         @Path("projectId") projectId: String,
         @Path("chatRoomId") chatRoomId: String
     ) : Response<NonParticipateResponse>
+
+    @GET("/pin/{chatRoomId}")
+    suspend fun getPin(
+        @Header("Authorization") header: String,
+        @Path("chatRoomId") chatRoomId: String
+    ) : Response<GetPinResponse>
 }

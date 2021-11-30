@@ -17,4 +17,5 @@ interface ChatRepository{
     suspend fun fileUpload(header: String, file: MultipartBody.Part) : Response<FileResponse>
     suspend fun imageUpdate(header: String, chatRoomId: String, imageUrl: ImageUpdateRequest) : Response<Unit>
     suspend fun getNonParticipate(header:String, projectId: String, chatRoomId: String) : Response<NonParticipateResponse>
+    suspend fun getPin(header: String, chatRoomId: String) : Response<GetPinResponse>
 }
