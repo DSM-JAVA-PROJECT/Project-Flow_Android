@@ -116,7 +116,15 @@ class ManageFragment : Fragment() {
             dialog.show()
             dialog.exit_positive.setOnClickListener{
                 socket.leaveRoom(socket.getChatRoomId())
+                dialogUtil.cookieBarBuilder(
+                    R.string.leave_room_title,
+                    socket.getRoomName(),
+                    null,
+                    R.color.color_flow
+                )
                 dialog.dismiss()
+
+                (activity as ChatActivity).replace(ChatListFragment())
             }
             dialog.exit_negative.setOnClickListener{
                 dialog.dismiss()
