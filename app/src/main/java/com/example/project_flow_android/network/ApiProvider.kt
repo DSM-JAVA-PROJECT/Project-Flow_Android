@@ -26,13 +26,13 @@ object ApiProvider {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
+
     private val okHttpClient: OkHttpClient = OkHttpClient().newBuilder().apply {
         addInterceptor(httpLoggingInterceptor)
         connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS)
         writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS)
         readTimeout(READ_TIME_OUT, TimeUnit.SECONDS)
     }.build()
-
     val RetroFitBuilder: Retrofit = Retrofit.Builder().apply {
         baseUrl(BASE_URL)
         client(okHttpClient)

@@ -77,12 +77,13 @@
         android:id="@+id/invite_btn"
         android:layout_width="380dp"
         android:layout_height="55dp"
-        android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/blue_main"
+        android:fontFamily="@font/font_roboto_regular"
         android:text="@string/chat_invite_user2"
         android:textColor="@color/white"
-        android:textSize="16sp"
-        android:fontFamily="@font/font_nanumgothic_bold"/>
+        android:textSize="16sp" />
 
 
 

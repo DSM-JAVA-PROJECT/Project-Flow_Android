@@ -12,11 +12,13 @@ import okhttp3.MultipartBody
 import org.json.JSONObject
 
 class ChatViewModel : ViewModel() {
-    private val access_token =
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzY0MzQyNDYsImlkIjoiNjE4OWZlOTcwYzliZmQyYjk4MDRmZjg2IiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.6cNSlsTiL4UG4arInBRPaJjV4MeemeXmDiMZiDxXKVQ"
+    //private val access_token =
+    //    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2Mzc2NTAyODgsImlkIjoiNjE5YzhmNjk4ZDZlMjY3MzRiNTExY2M5IiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.kZkCt0TiXeWjT-zPwnDOENmLA3WB_NQg7yd4zAo2R1Q"
+    private val access_token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzgxNzcwNzYsImV4cCI6MTYzODI2MzQ3NiwiaWQiOiI2MTljOTQzMzhkNmUyNjczNGI1MTFjY2QiLCJlbWFpbCI6InduZHVmMDQwNV9AbmF2ZXIuY29tIn0.ovevh3CFd9N7p1hK028bLnPdCPb45jJne7SL651XCu8"
     private val sub_access =
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzY0MzQyNjMsImlkIjoiNjE4OWZlYTMwYzliZmQyYjk4MDRmZjg3IiwiZW1haWwiOiJhYmgwOTIwb25lQG5hdmVyLmNvbSJ9.lklPsE4KpZRqSxi5EYahxxTeXigL47eYxbE3UL7ZtMY"
-    private var projectId = "6194967186cfc21756269e3c"
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2Mzc2NTAzMDQsImlkIjoiNjE5YzhmNWU4ZDZlMjY3MzRiNTExY2M4IiwiZW1haWwiOiJhYmgwOTIwb25lQG5hdmVyLmNvbSJ9.chufW3OWC_lhzHeFQUDOjJA2b_Kx_01ls6_wgi0Etow"
+    //private var projectId = "61a4d2e7b9d4a60b9a6a7ebc"
+    private var projectId = "61a4ecffb9d4a60b9a6a7ebe"
 
     private val chatRepository = ChatRepositoryImpl()
     private val _chatLiveData: MutableLiveData<ProjectMemberResponse> = MutableLiveData()
@@ -27,6 +29,7 @@ class ChatViewModel : ViewModel() {
     private val _modifyLiveData: MutableLiveData<Int> = MutableLiveData()
     private val _fileUploadLiveData: MutableLiveData<FileResponse> = MutableLiveData()
     private val _imageUpdateLiveData: MutableLiveData<Int> = MutableLiveData()
+    private val _participateLiveData: MutableLiveData<NonParticipateResponse> = MutableLiveData()
     val chatLiveData = _chatLiveData
     val chatRoomLiveData = _chatRoomLiveData
     val roomMemberLiveData = _roomMemberLiveData
@@ -35,6 +38,7 @@ class ChatViewModel : ViewModel() {
     val modifyLiveData = _modifyLiveData
     val fileUpdateLiveData = _fileUploadLiveData
     val imageUpdateLiveData = _imageUpdateLiveData
+    val participateLiveData = _participateLiveData
 
     fun getProjectUser() {
         viewModelScope.launch {
@@ -116,6 +120,15 @@ class ChatViewModel : ViewModel() {
             val response = chatRepository.imageUpdate(access_token, chatRoomId, imageUrl)
             if(response.isSuccessful) {
                 _imageUpdateLiveData.postValue(response.code())
+            }
+        }
+    }
+
+    fun getNonParticipate(chatRoomId: String) {
+        viewModelScope.launch {
+            val response = chatRepository.getNonParticipate(access_token, projectId, chatRoomId)
+            if(response.isSuccessful) {
+                _participateLiveData.postValue(response.body())
             }
         }
     }

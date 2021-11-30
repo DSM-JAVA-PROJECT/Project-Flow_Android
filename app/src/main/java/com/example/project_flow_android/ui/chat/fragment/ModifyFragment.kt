@@ -23,7 +23,7 @@ class ModifyFragment : Fragment() {
 
     private val chatViewModel: ChatViewModel by viewModel()
     private val socket = SocketApplication.getSocket()
-    private val dialogUtil = DialogUtil(requireActivity())
+    private lateinit var dialogUtil : DialogUtil
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +38,7 @@ class ModifyFragment : Fragment() {
 
         imageLoad(socket.getChatImage(), modify_project_iv)
         val keyboardUtil = KeyboardUtil(requireContext())
+        dialogUtil = DialogUtil(requireActivity())
 
         chatViewModel.modifyLiveData.observe(viewLifecycleOwner, {
             notify(chatViewModel.modifyLiveData.value!!)

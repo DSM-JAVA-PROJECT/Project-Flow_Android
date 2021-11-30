@@ -8,23 +8,24 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.project_flow_android.R
-import com.example.project_flow_android.data.chat.ProjectMemberResponse
+import com.example.project_flow_android.data.model.sign.chat.NonParticipateResponse
 import kotlinx.android.synthetic.main.chat_create_user_item.view.*
-import kotlinx.android.synthetic.main.chat_item_other.view.*
 
-class CreateRVAdapter(private val activity: Activity, private val items : ProjectMemberResponse) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class InviteRVAdapter(private val activity: Activity, private val items: NonParticipateResponse) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     interface OnItemClickListener{
         fun onItemClick(v: View, position: Int)
     }
-    private var itemClickListener: OnItemClickListener? = null
 
-    fun setOnItemClickListener(itemClickListener: OnItemClickListener){
+    private var itemClickListener: InviteRVAdapter.OnItemClickListener? = null
+
+    fun setOnItemClickListener(itemClickListener: InviteRVAdapter.OnItemClickListener){
         this.itemClickListener = itemClickListener
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val inflateView = LayoutInflater.from(parent.context).inflate(R.layout.chat_create_user_item, parent, false)
+        val inflateView = LayoutInflater.from(parent.context).inflate(R.layout.chat_create_user_item, parent,false)
         return ViewHolder(inflateView)
     }
 
@@ -36,16 +37,17 @@ class CreateRVAdapter(private val activity: Activity, private val items : Projec
         }
     }
 
-    override fun getItemCount() = items.responses.size
+    override fun getItemCount(): Int = items.responses.size
 
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v){
         val view = v
-        fun bind(item: ProjectMemberResponse.User){
+        fun bind(item : NonParticipateResponse.NonUserList){
             view.create_user_item_name_tv.text = item.name
             if(item.profileImage != null){
                 view.create_user_item_iv.clipToOutline = true
                 Glide.with(activity).load(Uri.parse(item.profileImage)).into(view.create_user_item_iv)
             }
+
             val position = absoluteAdapterPosition
             if(position != RecyclerView.NO_POSITION){
                 itemView.setOnClickListener{
