@@ -1,6 +1,7 @@
 package com.example.project_flow_android.ui.chat.fragment
 
 import android.app.Activity
+import android.app.Dialog
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -10,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -24,6 +26,7 @@ import com.example.project_flow_android.util.KeyboardUtil
 import com.example.project_flow_android.viewmodel.chat.ChatViewModel
 import kotlinx.android.synthetic.main.add_schedule_bottom.*
 import kotlinx.android.synthetic.main.fragment_chat.*
+import kotlinx.android.synthetic.main.pin_dialog.*
 import org.aviran.cookiebar2.CookieBar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -58,9 +61,15 @@ class ChatFragment : Fragment() {
         chatViewModel.getChatList(socket.getChatRoomId(), getPage(), SIZE)
         getChatListMore()
         socket.chatReceive()
-        socket.rejoin()
         chatViewModel.messageListLiveData.observe(viewLifecycleOwner, {
-            adapterInit(chatViewModel.messageListLiveData.value!!)
+            socket.rejoin()
+            Log.i("MessageLiveData", ".")
+            if(!isLoading){
+                adapterInit(chatViewModel.messageListLiveData.value!!)
+            }
+            else {
+                chatViewModel.messageListLiveData.value!!.oldChatMessageResponses.addAll(0, it.oldChatMessageResponses)
+            }
         })
 
         val keyboardUtil = KeyboardUtil(requireContext())
@@ -71,22 +80,21 @@ class ChatFragment : Fragment() {
         layoutManager.stackFromEnd = true
         chat_rv.layoutManager = layoutManager
 
-        socket.receiveLiveData.observe(viewLifecycleOwner, {
-            Log.i("it", it.toString())
-            chatViewModel.messageListLiveData.value!!.oldChatMessageResponses.add(it)
-            adapterInit(chatViewModel.messageListLiveData.value!!)
+        socket.receiveLiveData.observe(viewLifecycleOwner, { it ->
+            it.getContentIfNotHandled().let {
+                chatViewModel.messageListLiveData.value!!.oldChatMessageResponses.add(it!!)
+                adapterInit(chatViewModel.messageListLiveData.value!!)
 
-//            socket.readLiveData.observe(viewLifecycleOwner, {
-//                val size = chatViewModel.messageListLiveData.value!!.oldChatMessageResponses.size
-//                for (i in 0 until size) {
-//                    val reader = socket.readLiveData.value
-//                    chatViewModel.messageListLiveData.value!!.oldChatMessageResponses[i].readerList.remove(reader)
-//                    adapter.notifyDataSetChanged()
-//                }
-//            })
+            }
+        })
+        socket.readerLiveData.observe(viewLifecycleOwner, {
+            Log.i("ReadLiveData Value", socket.readerLiveData.value!!.toString())
+            Log.i("readLiveData", ".")
+
+            val data = chatViewModel.messageListLiveData.value!!
         })
         socket.errorLiveData.observe(viewLifecycleOwner, {
-            errorHandler(socket.errorLiveData.value!!)
+            errorHandler(socket.errorLiveData.value!!.peekContent())
         })
 
         chat_title_tv.text = socket.getRoomName()
@@ -120,7 +128,6 @@ class ChatFragment : Fragment() {
             (activity as ChatActivity).replace(ScheduleFragment())
         }
         chat_manage_tv.setOnClickListener {
-            page = 0
             (activity as ChatActivity).replace(ManageFragment())
         }
         chat_add_schedule_tv.setOnClickListener {
@@ -155,6 +162,7 @@ class ChatFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
+        page = 0
         socket.resignRoom(socket.getChatRoomId())
     }
 
@@ -174,6 +182,12 @@ class ChatFragment : Fragment() {
                     chatViewModel.messageListLiveData.value!!.oldChatMessageResponses[position].planName!!
             }
         })
+        adapter.setOnShowClickListener(object : ChatRVAdapter.OnShowClickListener {
+            override fun onShowClick(v: View, position: Int) {
+                (activity as ChatActivity).replace(ScheduleFragment())
+            }
+
+        })
         adapter.setOnResignClickListener(object : ChatRVAdapter.OnResignClickListener {
             override fun onResignClick(v: View, position: Int) {
                 val planId =
@@ -188,16 +202,29 @@ class ChatFragment : Fragment() {
                 socket.joinPlan(planId)
             }
         })
+        adapter.setOnItemLongClickListener(object : ChatRVAdapter.OnItemLongClickListener {
+            override fun onItemLongClick(v: View, position: Int) {
+                val dialog = Dialog(requireContext())
+                dialog.setContentView(R.layout.pin_dialog)
+                dialog.show()
+
+                dialog.pin_tv.setOnClickListener{
+                    val message = chatViewModel.messageListLiveData.value!!.oldChatMessageResponses[position].id
+                    socket.pin(message)
+                    dialog.dismiss()
+                }
+            }
+        })
     }
 
     private fun getChatListMore() {
-        chat_rv.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+        chat_rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                if(!isLoading && chatViewModel.messageListLiveData.value!!.hasNextPage) {
-                    if(!chat_rv.canScrollVertically(-1)){
-                        requireActivity().runOnUiThread{
+                if (!isLoading && chatViewModel.messageListLiveData.value!!.hasNextPage) {
+                    if (!chat_rv.canScrollVertically(-1)) {
+                        requireActivity().runOnUiThread {
                             val handler = Handler(Looper.getMainLooper())
                             handler.postDelayed({
                                 isLoading = true

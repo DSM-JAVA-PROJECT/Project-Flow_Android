@@ -26,6 +26,7 @@ import kotlinx.android.synthetic.main.room_status_item.view.*
 import java.lang.RuntimeException
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import kotlin.math.abs
 
 class ChatRVAdapter(private val items: ChatMessageResponse, private val activity: Activity) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -56,10 +57,15 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
         fun onResignClick(v: View, position: Int)
     }
 
+    interface OnItemLongClickListener {
+        fun onItemLongClick(v: View, position: Int)
+    }
+
     private var joinClickListener: OnJoinClickListener? = null
     private var reJoinClickListener: OnReJoinClickListener? = null
     private var showClickListener: OnShowClickListener? = null
     private var resignClickListener: OnResignClickListener? = null
+    private var onItemLongClickListener: OnItemLongClickListener? = null
 
     fun setOnJoinClickListener(joinClickListener: OnJoinClickListener) {
         this.joinClickListener = joinClickListener
@@ -75,6 +81,10 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
 
     fun setOnResignClickListener(resignClickListener: OnResignClickListener) {
         this.resignClickListener = resignClickListener
+    }
+
+    fun setOnItemLongClickListener(onItemLongClickListener: OnItemLongClickListener) {
+        this.onItemLongClickListener = onItemLongClickListener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -178,6 +188,15 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
             view.chat_mine_content_tv.text = item.message
             view.chat_mine_cnt_tv.text = item.readerList.size.toString()
             dateFormat(item.createdAt, view.chat_mine_time_tv)
+
+            itemView.setOnLongClickListener(View.OnLongClickListener {
+                val position = absoluteAdapterPosition
+                if (position != RecyclerView.NO_POSITION){
+                    onItemLongClickListener?.onItemLongClick(itemView, position)
+                }
+                return@OnLongClickListener true
+            })
+
         }
     }
 
@@ -189,6 +208,14 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
             view.chat_other_cnt_tv.text = item.readerList.size.toString()
             imageLoad(view.chat_other_profile_iv, item.senderImage)
             dateFormat(item.createdAt, view.chat_other_time_tv)
+
+            itemView.setOnLongClickListener(View.OnLongClickListener {
+                val position = absoluteAdapterPosition
+                if (position != RecyclerView.NO_POSITION){
+                    onItemLongClickListener?.onItemLongClick(itemView, position)
+                }
+                return@OnLongClickListener true
+            })
         }
     }
 
@@ -274,6 +301,7 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
             val position = absoluteAdapterPosition
             if (position != RecyclerView.NO_POSITION) {
                 itemView.resign_plan_item_other_btn.setOnClickListener {
+                    showClickListener?.onShowClick(itemView, position)
                 }
             }
         }
@@ -328,7 +356,7 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
         }
     }
 
-    private fun imageLoad(view: ImageView, image: String?){
+    private fun imageLoad(view: ImageView, image: String?) {
         if (image != null) {
             view.clipToOutline = true
             Glide.with(activity).load(Uri.parse(image))

@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.project_flow_android.data.model.sign.chat.ChatErrorResponse
 import com.example.project_flow_android.data.model.sign.chat.ChatMessageResponse
+import com.example.project_flow_android.data.model.sign.chat.PinResponse
 import com.example.project_flow_android.data.model.sign.chat.ReJoinResponse
 import com.example.project_flow_android.util.Event
 import com.google.gson.Gson
@@ -27,19 +28,23 @@ class SocketApplication {
         }
     }
     private val url = "http://3.80.121.3:8081"
-    private val access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2Mzc2NTAyODgsImlkIjoiNjE5YzhmNjk4ZDZlMjY3MzRiNTExY2M5IiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.kZkCt0TiXeWjT-zPwnDOENmLA3WB_NQg7yd4zAo2R1Q"
+    //private val access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2Mzc2NTAyODgsImlkIjoiNjE5YzhmNjk4ZDZlMjY3MzRiNTExY2M5IiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.kZkCt0TiXeWjT-zPwnDOENmLA3WB_NQg7yd4zAo2R1Q"
+    private val access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzgxNzcwNzYsImV4cCI6MTYzODI2MzQ3NiwiaWQiOiI2MTljOTQzMzhkNmUyNjczNGI1MTFjY2QiLCJlbWFpbCI6InduZHVmMDQwNV9AbmF2ZXIuY29tIn0.ovevh3CFd9N7p1hK028bLnPdCPb45jJne7SL651XCu8"
     private val sub_access = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2Mzc2NTAzMDQsImlkIjoiNjE5YzhmNWU4ZDZlMjY3MzRiNTExY2M4IiwiZW1haWwiOiJhYmgwOTIwb25lQG5hdmVyLmNvbSJ9.chufW3OWC_lhzHeFQUDOjJA2b_Kx_01ls6_wgi0Etow"
     private lateinit var socket : Socket
     private var chatRoomId = ""
-    private var projectId = "61a4d2e7b9d4a60b9a6a7ebc"
+    //private var projectId = "61a4d2e7b9d4a60b9a6a7ebc"
+    private var projectId = "61a4ecffb9d4a60b9a6a7ebe"
     private var chatImage = ""
     private var roomName = ""
     private val _receiveLiveData : MutableLiveData<Event<ChatMessageResponse.ChatReceiveResponse>> = MutableLiveData()
     private val _errorLiveData : MutableLiveData<Event<Int>> = MutableLiveData()
     private val _readerLiveData : MutableLiveData<Event<ReJoinResponse>> = MutableLiveData()
+    private val _pinLiveData : MutableLiveData<Event<PinResponse>> = MutableLiveData()
     val receiveLiveData = _receiveLiveData
     val errorLiveData = _errorLiveData
     val readerLiveData = _readerLiveData
+    val pinLiveData = _pinLiveData
 
     fun connect(){
         Thread {
@@ -82,8 +87,16 @@ class SocketApplication {
         socket.emit("message", data)
     }
 
+    fun pin(chatId: String){
+        val data = JSONObject()
+        data.put("chatId", chatId)
+        data.put("chatRoomId", chatRoomId)
+        socket.emit("pin", data)
+    }
+
     fun chatReceive(){
         socket.on("message", onMassage)
+        socket.on("pin", onPin)
         socket.on("plan.create", onAddPlan)
         socket.on("plan.join", onJoinPlan)
         socket.on("plan.resign", onResignPlan)
@@ -169,6 +182,13 @@ class SocketApplication {
         val json = args[0].toString()
         val message = Gson().fromJson(json, ChatMessageResponse.ChatReceiveResponse::class.java)
         _receiveLiveData.postValue(Event(message))
+    }
+
+    private val onPin = Emitter.Listener { args ->
+        Log.i("Pin payload", args[0].toString())
+        val json = args[0].toString()
+        val pin = Gson().fromJson(json, PinResponse::class.java)
+        _pinLiveData.postValue(Event(pin))
     }
 
     private val onAddPlan = Emitter.Listener { args ->
