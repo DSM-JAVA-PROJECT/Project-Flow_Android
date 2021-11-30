@@ -54,6 +54,8 @@
     <string name="exit_room_content">채팅방을 나가시겠습니까?</string>
     <string name="exit_room_positive">나가기</string>
     <string name="exit_room_negative">취소</string>
+    <string name="leave_room_title">채팅방 탈퇴에 성공했습니다.</string>
+    <string name="invite_user_title">유저가 초대되었습니다.</string>
 
     <string name="start_project">프로젝트 관리는</string>
     <string name="start_project_se">프로젝트 플로우에서</string>
