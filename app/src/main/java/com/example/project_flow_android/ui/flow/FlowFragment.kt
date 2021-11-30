@@ -31,7 +31,7 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
     private val finishProjectRVAdapter by lazy { FinishProjectRVAdapter(vm) }
 
 
-    lateinit var binding_item: ItemFlowViewBinding
+//    lateinit var binding_item: ItemFlowViewBinding
 //    val dialogUtil = DialogUtil(requireActivity())
 
     private val finishProjectDialog by lazy {
@@ -85,6 +85,11 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
 
     }
 
+    private fun getProjectId(){
+        val ProjectId = vm.getMainInfo.value!!
+        ProjectId.projects[0].id
+    }
+
     override fun observeEvent() {
         vm.run {
             getMainUserInfo()
@@ -93,13 +98,22 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
                 getMainInfo.observe(viewLifecycleOwner, {
                     mainFlowViewPagerRVAdapter.setItem(it.projects)
                     preparingProjectRVAdapter.setItem(it.projects)
+                    oningProjectRVAdapter.setItem(it.projects)
+                    finishProjectRVAdapter.setItem(it.projects)
                 })
                 emptyProject.observe(viewLifecycleOwner, {
-                    binding.userName.isInvisible
-                    binding.emptyProjectTv.isVisible
-                    binding.emptyProjectImg.isVisible
-                    binding.nimProject.isVisible
+                    if(emptyProject.value == true) {
+                        binding.userName.isVisible
+                        binding.emptyProjectTv.isVisible
+                        binding.emptyProjectImg.isVisible
+                        binding.nimProject.isVisible
+                    }
                 })
+//                binding_item.button.setOnClickListener{
+//                    getMainInfo.observe(viewLifecycleOwner,{
+//                        getProjectId()
+//                    })
+//                }
             }
         }
     }
