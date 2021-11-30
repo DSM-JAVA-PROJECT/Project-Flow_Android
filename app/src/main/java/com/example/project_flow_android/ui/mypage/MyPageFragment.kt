@@ -87,19 +87,23 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeEvent()
+        selectProfileImage()
+        showRV()
+    }
 
-        val galleryHelper = GalleryHelper(requireActivity())
+    private fun showRV() {
         binding.userRv.adapter = projectAdapter
         binding.userRv.addItemDecoration(VerticalItemDecorator(20))
-        observeEvent()
+    }
 
+    private fun selectProfileImage() {
+        val galleryHelper = GalleryHelper(requireActivity())
         binding.run {
             addProfileImg.setOnClickListener {
-//                  getImage()
                 galleryHelper.selectPhoto(photoSelect)
             }
         }
-
     }
 
     override fun observeEvent() {
@@ -113,7 +117,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
             projects.observe(viewLifecycleOwner, {
                 projectAdapter.setItem(it.projects)
             })
-            successImage.observe(viewLifecycleOwner,{
+            successImage.observe(viewLifecycleOwner, {
                 getUserInfo()
             })
             getUserInfo()

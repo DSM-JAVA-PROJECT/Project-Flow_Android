@@ -61,9 +61,7 @@ class MyPageViewModel(
         myPageApiImpl.changeImage(token,file).subscribe({ response ->
             if (response.isSuccessful) {
                 _successImage.value!!
-                response
             } else {
-                response
             }
         }, {
         })
