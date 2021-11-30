@@ -2,6 +2,7 @@ package com.example.project_flow_android.ui.flow
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.persistableBundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.databinding.ItemFlowViewBinding
@@ -14,6 +15,8 @@ class MainFlowAdapter(private val viewModel: FlowViewModel) :
     RecyclerView.Adapter<MainFlowAdapter.MainFlowViewHolder>() {
     private var userProjectList = ArrayList<GetMainInfoResponse.GetMainInfoDetailResponse>()
     private val preparingProjectRVAdapter = PreparingProjectRVAdapter(viewModel)
+    private val oningProjectRVAdapter = OningProjectRVAdapter(viewModel)
+    private val finishProjectRVAdapter = FinishProjectRVAdapter(viewModel)
 
     inner class MainFlowViewHolder(private val binding: ItemFlowViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -22,15 +25,19 @@ class MainFlowAdapter(private val viewModel: FlowViewModel) :
             val current = LocalDateTime.now()
             val formatter = DateTimeFormatter.ofPattern("MM월 dd일")
             val formatted = current.format(formatter)
+
             binding.today = formatted
-            binding.projectLastDate = item.endDate
+            binding.projectLastDate = item.remainingDays
             binding.projectName = item.name
             binding.projectImage = item.logoImage
-            binding.personalProgress = item.personalProgress
-            binding.teamProgress = item.projectProgress
+            binding.personalProgress = "${item.personalProgress}%"
+            binding.teamProgress = "${item.projectProgress}%"
             binding.userName = viewModel.getUserName.value!!
             binding.vm = viewModel
+
             binding.firstRv.adapter = preparingProjectRVAdapter
+            binding.secondRv.adapter = oningProjectRVAdapter
+            binding.thirdRv.adapter = finishProjectRVAdapter
             binding.notifyChange()
         }
     }

@@ -1,9 +1,11 @@
 package com.example.project_flow_android.data.remote.mypage
 
 import com.example.project_flow_android.data.remote.toMultipartPart
+import com.example.project_flow_android.feature.GetGitProjectIssue
 import com.example.project_flow_android.feature.GetUserInfoResponse
 import com.example.project_flow_android.feature.NewPasswordRequest
 import com.example.project_flow_android.network.ApiProvider
+import com.example.project_flow_android.network.GitAPI
 import com.example.project_flow_android.network.ProjectFlowAPI
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.annotations.NonNull
@@ -17,6 +19,10 @@ class MyPageApiImpl {
 
     private fun providerMypageApi(): ProjectFlowAPI = ApiProvider.RetroFitBuilder.create(
         ProjectFlowAPI::class.java)
+
+    private fun providerGitApi() : GitAPI = ApiProvider.GitRetroFitBuilder.create(
+        GitAPI::class.java
+    )
 
     fun getUserInfo(token: String): @NonNull Single<Response<GetUserInfoResponse>> =
         providerMypageApi().getuserInfo(token)
@@ -33,6 +39,11 @@ class MyPageApiImpl {
 
     fun changeImage(token: String,file : MultipartBody.Part): @NonNull Single<Response<Void>> =
         providerMypageApi().changeProfileImage(token, file)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+
+    fun getGitInfo(token : String): @NonNull Single<Response<GetGitProjectIssue>> =
+        providerGitApi().getGitInfo(token)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 

@@ -11,13 +11,16 @@ import java.util.concurrent.TimeUnit
 object ApiProvider {
     private const val BASE_URL: String = "http://18.210.203.222:8080"
     private const val BASE_URL_CHAT = "http://3.80.121.3"
+    private const val BASE_GIT = "https://api.github.com"
     private const val CONNECT_TIME_OUT: Long = 15
     private const val WRITE_TIME_OUT: Long = 15
     private const val READ_TIME_OUT: Long = 15
-    private var chatRetrofitBuilder : Retrofit
-    private var retrofirBuilder : Retrofit
-    private var chatApi : ChatApi
-    private var Api : ProjectFlowAPI
+    private var chatRetrofitBuilder: Retrofit
+    private var retrofirBuilder: Retrofit
+    private var gitRetrofitBuilder : Retrofit
+    private var chatApi: ChatApi
+    private var Api: ProjectFlowAPI
+    private var gitApi: GitAPI
 
     private val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
@@ -38,7 +41,16 @@ object ApiProvider {
 
     }.build()
 
-    init{
+    val GitRetroFitBuilder: Retrofit = Retrofit.Builder().apply {
+        baseUrl(BASE_GIT)
+        client(okHttpClient)
+        addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+        addConverterFactory(GsonConverterFactory.create())
+
+    }.build()
+
+
+    init {
         retrofirBuilder = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -58,7 +70,20 @@ object ApiProvider {
         chatApi = chatRetrofitBuilder.create(ChatApi::class.java)
     }
 
+
+    init {
+        gitRetrofitBuilder = Retrofit.Builder()
+            .baseUrl(BASE_GIT)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+
+        gitApi = gitRetrofitBuilder.create(GitAPI::class.java)
+    }
+
+
     fun getChatAPI() = chatApi
     fun getAPI() = Api
+    fun getGitAPI() = gitApi
 
 }

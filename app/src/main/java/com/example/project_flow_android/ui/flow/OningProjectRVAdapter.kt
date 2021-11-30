@@ -6,39 +6,44 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.project_flow_android.databinding.UserProjectOningItemBinding
 import com.example.project_flow_android.databinding.UserProjectPlanItemBinding
 import com.example.project_flow_android.feature.GetMainInfoDetailResponse
+import com.example.project_flow_android.feature.GetMainInfoResponse
 import com.example.project_flow_android.feature.Projects
 import com.example.project_flow_android.viewmodel.flow.FlowViewModel
 
-class OningProjectRVAdapter(private val viewModel: FlowViewModel) :
+class OningProjectRVAdapter(
+    private val viewModel: FlowViewModel
+) :
     RecyclerView.Adapter<OningProjectRVAdapter.ProjectViewHolder>() {
-        private var projectList = ArrayList<GetMainInfoDetailResponse>()
 
-        inner class ProjectViewHolder(private val binding: UserProjectOningItemBinding) :
-            RecyclerView.ViewHolder(binding.root) {
+    private var projectList = ArrayList<GetMainInfoResponse.GetMainInfoDetailResponse>()
 
-            fun bind(position: Int) {
-                binding.scheduleContent = projectList[position].ongoing[position].name
-                binding.scheduleStartPeriod ="${projectList[position].startDate} ~ ${projectList[position].endDate}"
-                binding.vm = viewModel
-                binding.notifyChange()
-            }
+    inner class ProjectViewHolder(private val binding: UserProjectOningItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(item: GetMainInfoResponse.GetMainInfoDetailResponse, position: Int) {
+            binding.scheduleContent = item.before[position].name
+            binding.scheduleStartPeriod =
+                "${item.before[position].startDate} ~ ${item.before[position].endDate}"
+            binding.vm = viewModel
+            binding.notifyChange()
         }
+    }
 
-        fun setItem(projects: List<Projects>) {
-            this.projectList = projects as ArrayList<GetMainInfoDetailResponse>
-            notifyDataSetChanged()
-        }
+    fun setItem(projects: ArrayList<GetMainInfoResponse.GetMainInfoDetailResponse>) {
+        this.projectList = projects
+        notifyDataSetChanged()
+    }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
-            val binding = UserProjectOningItemBinding.inflate(LayoutInflater.from(parent.context))
-            return ProjectViewHolder(binding)
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
+        val binding = UserProjectOningItemBinding.inflate(LayoutInflater.from(parent.context))
+        return ProjectViewHolder(binding)
+    }
 
-        override fun onBindViewHolder(holder: ProjectViewHolder, position: Int) {
-            holder.bind(position)
-        }
+    override fun onBindViewHolder(holder: ProjectViewHolder, position: Int) {
+        holder.bind(projectList[position], position)
+    }
 
-        override fun getItemCount(): Int {
-            return projectList.size
-        }
+    override fun getItemCount(): Int {
+        return projectList.size
+    }
 }

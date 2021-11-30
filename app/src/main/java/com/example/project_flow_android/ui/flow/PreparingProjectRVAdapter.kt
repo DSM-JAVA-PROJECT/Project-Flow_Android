@@ -5,26 +5,32 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project_flow_android.databinding.UserProjectPlanItemBinding
 import com.example.project_flow_android.feature.GetMainInfoDetailResponse
+import com.example.project_flow_android.feature.GetMainInfoResponse
 import com.example.project_flow_android.feature.GetProjectScheduleDetailResponse
 import com.example.project_flow_android.feature.Projects
 import com.example.project_flow_android.viewmodel.flow.FlowViewModel
 
-class PreparingProjectRVAdapter(private val viewModel: FlowViewModel) :
+class PreparingProjectRVAdapter(
+    private val viewModel: FlowViewModel
+) :
     RecyclerView.Adapter<PreparingProjectRVAdapter.ProjectViewHolder>() {
-    private var projectList = ArrayList<GetProjectScheduleDetailResponse>()
+
+    private var projectList = ArrayList<GetMainInfoResponse.GetMainInfoDetailResponse>()
 
     inner class ProjectViewHolder(private val binding: UserProjectPlanItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(position: Int) {
-            binding.scheduleContent = projectList[position].name
-            binding.scheduleStartPeriod = "${projectList[position].startDate} ~ ${projectList[position].endDate}"
+        fun bind(item: GetMainInfoResponse.GetMainInfoDetailResponse, position: Int) {
+            binding.scheduleContent = item.before[position].name
+            binding.scheduleStartPeriod =
+                "${item.before[position].startDate} ~ ${item.before[position].endDate}"
             binding.vm = viewModel
             binding.notifyChange()
         }
     }
-    fun setItem(projects: List<Projects>) {
-        this.projectList = projects as ArrayList<GetProjectScheduleDetailResponse>
+
+    fun setItem(projects: ArrayList<GetMainInfoResponse.GetMainInfoDetailResponse>) {
+        this.projectList = projects
         notifyDataSetChanged()
     }
 
@@ -34,7 +40,7 @@ class PreparingProjectRVAdapter(private val viewModel: FlowViewModel) :
     }
 
     override fun onBindViewHolder(holder: ProjectViewHolder, position: Int) {
-        holder.bind(position)
+        holder.bind(projectList[position], position)
     }
 
     override fun getItemCount(): Int {

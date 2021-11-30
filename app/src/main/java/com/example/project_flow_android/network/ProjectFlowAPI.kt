@@ -1,6 +1,7 @@
 package com.example.project_flow_android.network
 
 import com.example.project_flow_android.feature.*
+import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -28,19 +29,19 @@ interface ProjectFlowAPI {
     @PATCH("/auth/password")
     fun changePassword(@Header("Authorization") token :String, @Query("password") password : String) : Single<Response<Void>>
 
-    @Multipart
-    @PATCH("/auth/image")
-    fun changeProfileImage(@Header("Authorization") token: String,@Part ("file") file : File) : Single<Response<Void>>
-
     @GET("/main")
     fun getMainInfo(@Header("Authorization") token: String) : Single<Response<GetMainInfoResponse>>
 
     @Multipart
+    @FormUrlEncoded
     @POST("/project")
     fun addProject(@Header("Authorization") token: String, @Body request: AddProjectRequest, @Part("file") file: MultipartBody.Part) : Single<Response<GetProjectsId>>
 
     @PATCH("/project/close/{id}")
-    fun finishProject(@Body projectId : String) : Single<Response<Void>>
+    fun finishProject(@Path("id") projectId : String) : Single<Response<Void>>
+
+    @DELETE("/project/{project_id}")
+    fun deleteProject(@Path("ProjectId")projectId: String) : Single<Response<Void>>
 
     @PATCH("/auth/image")
     fun changeProfileImage(
@@ -48,18 +49,6 @@ interface ProjectFlowAPI {
         @Body file: MultipartBody.Part,
     ): Single<Response<Void>>
 
-    @Multipart
-    @POST("/project")
-    fun addProjectQuery(
-        @Header("Authorization") token: String,
-        @Query("projectName") projectName: String,
-        @Query("explanation") explanation:String,
-        @Query("startDate") startDate : String,
-        @Query("endDate") endDate : String,
-        @Query("file") file: MultipartBody.Part,
-        @Query("emails") emails : List<String>
-    //만약 안돼면 ArrayList 말고 리스트
-    ): Single<Response<GetProjectsId>>
 
 
 

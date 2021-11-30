@@ -22,7 +22,8 @@ class ProjectFlowApplication : Application() {
                     finishRegisterModule,
                     aboutProjectmodule,
                     mypageModule,
-                    flowModule
+                    flowModule,
+                    gitinfoModule
                 )
             )
         }

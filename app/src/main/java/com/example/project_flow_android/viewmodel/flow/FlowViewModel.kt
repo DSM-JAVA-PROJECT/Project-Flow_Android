@@ -17,11 +17,12 @@ class FlowViewModel(
     val getUserName = MutableLiveData<String>()
     val projectName = MutableLiveData<String>()
     val projectImage = MutableLiveData<String>()
-    val today = MutableLiveData<String>()
     val projectLastDate = MutableLiveData<String>()
     val personalProgress = MutableLiveData<String>()
-    val projectProgress = MutableLiveData<String>()
-     val info = MutableLiveData<String>()
+    val info = MutableLiveData<String>()
+
+    private val _projectId = MutableLiveData<String>()
+    val projectId: LiveData<String> get() = _projectId
 
     val dialogContext = MutableLiveData<String>()
     
@@ -37,7 +38,9 @@ class FlowViewModel(
     private val _checkInfo = MutableLiveData<String>()
     val checkInfo: LiveData<String> get() = _checkInfo
 
-    val projectsId = sharedPreferenceStorage.getInfo("projectId")
+    private val _emptyProject = MutableLiveData<Boolean>()
+    val emptyProject: LiveData<Boolean> get() = _emptyProject
+
     val token = sharedPreferenceStorage.getInfo("access_token")
 
     fun getMainUserInfo() {
@@ -76,6 +79,11 @@ class FlowViewModel(
         flowApiImpl.getMainInfo(token).subscribe({
             if (it.isSuccessful) {
                 _getMainInfo.value = it.body()
+                _projectId.value = it.body().toString()
+                val projectsId = sharedPreferenceStorage.getInfo("projectId")
+                if(it.body()!!.projects.size == 0){
+                    _emptyProject.value = true
+                }
             } else {
                 it
             }

@@ -8,22 +8,24 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Response
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.Multipart
 import java.io.File
 
 class FlowApiImpl {
     private fun providerFlowApi(): ProjectFlowAPI = ApiProvider.RetroFitBuilder.create(
         ProjectFlowAPI::class.java)
 
+    @FormUrlEncoded
+    @Multipart
     fun addProject(
         token: String, request: AddProjectRequest,file : File
     ): @NonNull Single<Response<GetProjectsId>> =
         providerFlowApi().addProject(token, request,file.toMultipartPart())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
+
 
 
     fun finishProject(
@@ -38,19 +40,6 @@ class FlowApiImpl {
         token: String,
     ): @NonNull Single<Response<GetMainInfoResponse>> =
         providerFlowApi().getMainInfo(token)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-
-    fun addProjectQuery(
-        token: String,
-        projectName: String,
-        explanation: String,
-        startDate: String,
-        endDate: String,
-        file: File,
-        emails: List<String>,
-    ): @NonNull Single<Response<GetProjectsId>> =
-        providerFlowApi().addProjectQuery(token,projectName,explanation,startDate,endDate,file.toMultipartPart(),emails)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
