@@ -30,6 +30,7 @@ class ChatViewModel : ViewModel() {
     private val _fileUploadLiveData: MutableLiveData<FileResponse> = MutableLiveData()
     private val _imageUpdateLiveData: MutableLiveData<Int> = MutableLiveData()
     private val _participateLiveData: MutableLiveData<NonParticipateResponse> = MutableLiveData()
+    private val _pinLiveData: MutableLiveData<GetPinResponse> = MutableLiveData()
     val chatLiveData = _chatLiveData
     val chatRoomLiveData = _chatRoomLiveData
     val roomMemberLiveData = _roomMemberLiveData
@@ -39,6 +40,7 @@ class ChatViewModel : ViewModel() {
     val fileUpdateLiveData = _fileUploadLiveData
     val imageUpdateLiveData = _imageUpdateLiveData
     val participateLiveData = _participateLiveData
+    val pinLiveData = _pinLiveData
 
     fun getProjectUser() {
         viewModelScope.launch {
@@ -129,6 +131,15 @@ class ChatViewModel : ViewModel() {
             val response = chatRepository.getNonParticipate(access_token, projectId, chatRoomId)
             if(response.isSuccessful) {
                 _participateLiveData.postValue(response.body())
+            }
+        }
+    }
+
+    fun getPin(chatRoomId: String) {
+        viewModelScope.launch {
+            val response = chatRepository.getPin(access_token, chatRoomId)
+            if(response.isSuccessful) {
+                _pinLiveData.postValue(response.body())
             }
         }
     }
