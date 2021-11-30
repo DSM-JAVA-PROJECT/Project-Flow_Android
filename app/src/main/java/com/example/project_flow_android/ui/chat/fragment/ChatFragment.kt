@@ -2,6 +2,7 @@ package com.example.project_flow_android.ui.chat.fragment
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -20,6 +21,7 @@ import com.example.project_flow_android.data.model.sign.chat.ChatMessageResponse
 import com.example.project_flow_android.network.SocketApplication
 import com.example.project_flow_android.ui.chat.ChatActivity
 import com.example.project_flow_android.ui.chat.ChatRVAdapter
+import com.example.project_flow_android.ui.main.MainActivity
 import com.example.project_flow_android.util.DialogUtil
 import com.example.project_flow_android.util.GalleryHelper
 import com.example.project_flow_android.util.KeyboardUtil
@@ -156,7 +158,7 @@ class ChatFragment : Fragment() {
             }
         }
         chat_prev_btn.setOnClickListener {
-            (activity as ChatActivity).popBackStack(ChatFragment())
+            requireActivity().finish()
         }
     }
 

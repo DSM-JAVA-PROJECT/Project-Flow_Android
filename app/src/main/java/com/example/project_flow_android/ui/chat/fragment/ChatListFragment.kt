@@ -1,5 +1,6 @@
 package com.example.project_flow_android.ui.chat.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -56,6 +57,7 @@ class ChatListFragment: Fragment() {
         socket.setRoomName(data.chatRoomName)
         if(data.chatRoomImage != null)
             socket.setChatImage(data.chatRoomImage)
-        (activity as ChatActivity).replace(ChatFragment())
+        val intent = Intent(requireActivity(), ChatActivity::class.java)
+        requireActivity().startActivity(intent)
     }
 }

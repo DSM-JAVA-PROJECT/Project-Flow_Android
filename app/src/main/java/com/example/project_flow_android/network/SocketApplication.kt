@@ -28,13 +28,13 @@ class SocketApplication {
         }
     }
     private val url = "http://3.80.121.3:8081"
-    //private val access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2Mzc2NTAyODgsImlkIjoiNjE5YzhmNjk4ZDZlMjY3MzRiNTExY2M5IiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.kZkCt0TiXeWjT-zPwnDOENmLA3WB_NQg7yd4zAo2R1Q"
-    private val access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzgxNzcwNzYsImV4cCI6MTYzODI2MzQ3NiwiaWQiOiI2MTljOTQzMzhkNmUyNjczNGI1MTFjY2QiLCJlbWFpbCI6InduZHVmMDQwNV9AbmF2ZXIuY29tIn0.ovevh3CFd9N7p1hK028bLnPdCPb45jJne7SL651XCu8"
+    private val access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2Mzc2NTAyODgsImlkIjoiNjE5YzhmNjk4ZDZlMjY3MzRiNTExY2M5IiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.kZkCt0TiXeWjT-zPwnDOENmLA3WB_NQg7yd4zAo2R1Q"
+    //private val access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzgxNzcwNzYsImV4cCI6MTYzODI2MzQ3NiwiaWQiOiI2MTljOTQzMzhkNmUyNjczNGI1MTFjY2QiLCJlbWFpbCI6InduZHVmMDQwNV9AbmF2ZXIuY29tIn0.ovevh3CFd9N7p1hK028bLnPdCPb45jJne7SL651XCu8"
     private val sub_access = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2Mzc2NTAzMDQsImlkIjoiNjE5YzhmNWU4ZDZlMjY3MzRiNTExY2M4IiwiZW1haWwiOiJhYmgwOTIwb25lQG5hdmVyLmNvbSJ9.chufW3OWC_lhzHeFQUDOjJA2b_Kx_01ls6_wgi0Etow"
     private lateinit var socket : Socket
     private var chatRoomId = ""
-    //private var projectId = "61a4d2e7b9d4a60b9a6a7ebc"
-    private var projectId = "61a4ecffb9d4a60b9a6a7ebe"
+    private var projectId = "61a4d2e7b9d4a60b9a6a7ebc"
+    //private var projectId = "61a4ecffb9d4a60b9a6a7ebe"
     private var chatImage = ""
     private var roomName = ""
     private val _receiveLiveData : MutableLiveData<Event<ChatMessageResponse.ChatReceiveResponse>> = MutableLiveData()

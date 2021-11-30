@@ -9,6 +9,8 @@ import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseActivity
 import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.databinding.ActivityMainBinding
+import com.example.project_flow_android.network.SocketApplication
+import com.example.project_flow_android.ui.chat.fragment.ChatFragment
 import com.example.project_flow_android.ui.calendar.CalendarFragment
 import com.example.project_flow_android.ui.chat.fragment.ChatListFragment
 import com.example.project_flow_android.ui.flow.AddProjectActivity
@@ -23,12 +25,14 @@ import kotlinx.android.synthetic.main.activity_login.*
 class MainActivity() : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override val vm: MainViewModel by viewModels()
+    private val socket = SocketApplication.getSocket()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.mainBottomNavigation.setOnNavigationItemSelectedListener(itemSelectedListener)
 
         observerEvent()
+        socket.connect()
     }
 
     override fun onBackPressed() {
