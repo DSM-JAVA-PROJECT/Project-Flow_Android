@@ -38,10 +38,10 @@ interface ProjectFlowAPI {
     fun addProject(@Header("Authorization") token: String, @Body request: AddProjectRequest, @Part("file") file: MultipartBody.Part) : Single<Response<GetProjectsId>>
 
     @PATCH("/project/close/{id}")
-    fun finishProject(@Path("id") projectId : String) : Single<Response<Void>>
+    fun finishProject(@Header("Authorization") token: String,@Path("id") projectId : String) : Single<Response<Void>>
 
     @DELETE("/project/{project_id}")
-    fun deleteProject(@Path("ProjectId")projectId: String) : Single<Response<Void>>
+    fun deleteProject(@Header("Authorization") token: String,@Path("ProjectId")projectId: String) : Single<Response<Void>>
 
     @PATCH("/auth/image")
     fun changeProfileImage(

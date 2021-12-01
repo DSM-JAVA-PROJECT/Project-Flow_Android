@@ -29,9 +29,18 @@ class FlowApiImpl {
 
 
     fun finishProject(
+        token: String,
         ProjectId: String,
     ): @NonNull Single<Response<Void>> =
-        providerFlowApi().finishProject(ProjectId)
+        providerFlowApi().finishProject(token,ProjectId)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+
+    fun deleteProject(
+        token: String,
+        ProjectId: String,
+    ): @NonNull Single<Response<Void>> =
+        providerFlowApi().deleteProject(token,ProjectId)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
