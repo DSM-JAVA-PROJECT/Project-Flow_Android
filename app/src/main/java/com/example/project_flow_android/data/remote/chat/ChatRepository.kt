@@ -18,4 +18,6 @@ interface ChatRepository{
     suspend fun imageUpdate(header: String, chatRoomId: String, imageUrl: ImageUpdateRequest) : Response<Unit>
     suspend fun getNonParticipate(header:String, projectId: String, chatRoomId: String) : Response<NonParticipateResponse>
     suspend fun getPin(header: String, chatRoomId: String) : Response<GetPinResponse>
+    suspend fun getMonthPlan(header: String, project_id: String, year: String, month: String) : Response<MonthPlanResponse>
+    suspend fun getDatePlan(header: String, project_id: String, date: String) : Response<DatePlanResponse>
 }

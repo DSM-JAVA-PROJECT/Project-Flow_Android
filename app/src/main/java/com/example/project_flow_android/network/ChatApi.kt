@@ -2,7 +2,6 @@ package com.example.project_flow_android.network
 
 import com.example.project_flow_android.data.model.sign.chat.*
 import okhttp3.MultipartBody
-import org.json.JSONObject
 import retrofit2.Response
 import com.example.project_flow_android.data.chat.ProjectMemberResponse
 import com.example.project_flow_android.data.chat.RoomListResponse
@@ -72,4 +71,19 @@ interface ChatApi {
         @Header("Authorization") header: String,
         @Path("chatRoomId") chatRoomId: String
     ) : Response<GetPinResponse>
+
+    @GET("/plan/calendar/{project_id}/{year}/{month}")
+    suspend fun getMonthPlan(
+        @Header("Authorization") header: String,
+        @Path("project_id") project_id: String,
+        @Path("year") year: String,
+        @Path("month") month: String
+    ) : Response<MonthPlanResponse>
+
+    @GET("/plan/detail/{project_id}/{date}")
+    suspend fun getDatePlan(
+        @Header("Authorization") header: String,
+        @Path("project_id") project_id: String,
+        @Path("date") date: String
+    ) : Response<DatePlanResponse>
 }

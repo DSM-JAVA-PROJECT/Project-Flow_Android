@@ -95,13 +95,6 @@ class ChatFragment : Fragment() {
                 adapterInit(chatViewModel.messageListLiveData.value!!)
             }
         })
-        socket.readerLiveData.observe(viewLifecycleOwner, { it ->
-            it.getContentIfNotHandled()?.let {
-               // val data = chatViewModel.messageListLiveData.value!!
-            }
-            Log.i("ReadLiveData Value", socket.readerLiveData.value!!.toString())
-            Log.i("readLiveData", ".")
-        })
         socket.pinLiveData.observe(viewLifecycleOwner, { it ->
             it.getContentIfNotHandled()?.let {
                 pin_layout.visibility = View.VISIBLE

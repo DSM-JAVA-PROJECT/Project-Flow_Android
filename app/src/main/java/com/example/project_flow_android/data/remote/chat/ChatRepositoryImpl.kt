@@ -74,4 +74,21 @@ class ChatRepositoryImpl : ChatRepository, SafeApiRequest() {
     override suspend fun getPin(header: String, chatRoomId: String): Response<GetPinResponse> {
         return safeApiCall { ApiProvider.getChatAPI().getPin(header, chatRoomId) }
     }
+
+    override suspend fun getMonthPlan(
+        header: String,
+        project_id: String,
+        year: String,
+        month: String,
+    ): Response<MonthPlanResponse> {
+        return safeApiCall { ApiProvider.getScheduleAPI().getMonthPlan(header, project_id, year, month) }
+    }
+
+    override suspend fun getDatePlan(
+        header: String,
+        project_id: String,
+        date: String,
+    ): Response<DatePlanResponse> {
+        return safeApiCall { ApiProvider.getScheduleAPI().getDatePlan(header, project_id, date) }
+    }
 }
