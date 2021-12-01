@@ -1,13 +1,18 @@
 package com.example.project_flow_android.ui.flow
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.persistableBundleOf
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.databinding.ItemFlowViewBinding
 import com.example.project_flow_android.feature.GetMainInfoResponse
+import com.example.project_flow_android.feature.GetProjectsId
+import com.example.project_flow_android.util.HorizontalItemDecorator
+import com.example.project_flow_android.util.VerticalItemDecorator
 import com.example.project_flow_android.viewmodel.flow.FlowViewModel
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -18,6 +23,15 @@ class MainFlowAdapter(private val viewModel: FlowViewModel) :
     private val preparingProjectRVAdapter = PreparingProjectRVAdapter(viewModel)
     private val oningProjectRVAdapter = OningProjectRVAdapter(viewModel)
     private val finishProjectRVAdapter = FinishProjectRVAdapter(viewModel)
+
+    interface ItemClickListener {
+        fun onClick(view: View, position: Int,projectId : String)
+    }
+    private lateinit var itemClickListner: ItemClickListener
+
+    fun setItemClickListener(itemClickListener: ItemClickListener) {
+        this.itemClickListner = itemClickListener
+    }
 
     inner class MainFlowViewHolder(private val binding: ItemFlowViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -41,11 +55,22 @@ class MainFlowAdapter(private val viewModel: FlowViewModel) :
             binding.firstRv.adapter = preparingProjectRVAdapter
             binding.firstRv.layoutManager = LinearLayoutManager(binding.firstRv.context)
             binding.secondRv.layoutManager = LinearLayoutManager(binding.secondRv.context)
+            binding.thirdRv.layoutManager = LinearLayoutManager(binding.thirdRv.context)
+            binding.firstRv.addItemDecoration(VerticalItemDecorator(8))
+            binding.firstRv.addItemDecoration(HorizontalItemDecorator(10))
+
+            binding.secondRv.addItemDecoration(VerticalItemDecorator(8))
+            binding.secondRv.addItemDecoration(HorizontalItemDecorator(10))
+
+            binding.thirdRv.addItemDecoration(VerticalItemDecorator(8))
+            binding.thirdRv.addItemDecoration(HorizontalItemDecorator(10))
+
             binding.secondRv.adapter = oningProjectRVAdapter
             binding.thirdRv.adapter = finishProjectRVAdapter
 
             preparingProjectRVAdapter.setItem(item.before)
             oningProjectRVAdapter.setItem(item.ongoing)
+            finishProjectRVAdapter.setItem(item.after)
 
             binding.notifyChange()
         }
@@ -63,11 +88,15 @@ class MainFlowAdapter(private val viewModel: FlowViewModel) :
 
     override fun onBindViewHolder(holder: MainFlowViewHolder, position: Int) {
         holder.bind(userProjectList[position])
+
+        holder.itemView.setOnClickListener{
+            itemClickListner.onClick(it,position,userProjectList[position].id)
+               //viewmodel의 projectId랑 연동
+        }
     }
 
     override fun getItemCount(): Int {
         return userProjectList.size
     }
-
 
 }

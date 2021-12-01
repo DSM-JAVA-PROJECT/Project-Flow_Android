@@ -44,18 +44,18 @@ class MainActivity() : BaseActivity<ActivityMainBinding>(R.layout.activity_main)
         initFragment()
     }
 
-    fun addProject(){
-        val intent = Intent(this,AddProjectActivity::class.java)
+    fun addProject() {
+        val intent = Intent(this, AddProjectActivity::class.java)
         startActivity(intent)
     }
 
-    fun backFragment(){
+    fun backFragment() {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.main_container,flowFragment)
+        transaction.replace(R.id.main_container, flowFragment)
         transaction.commit()
     }
 
-    fun startLogin(){
+    fun startLogin() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
@@ -66,7 +66,7 @@ class MainActivity() : BaseActivity<ActivityMainBinding>(R.layout.activity_main)
     private val myPageFragment = MyPageFragment()
 
 
-     fun changeFragment(fragment: Fragment) {
+    fun changeFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().hide(vm.activeFragment ?: flowFragment)
             .show(fragment).commit()
         vm.activeFragment = fragment
@@ -81,7 +81,7 @@ class MainActivity() : BaseActivity<ActivityMainBinding>(R.layout.activity_main)
     private fun initFragment() {
         supportFragmentManager.beginTransaction().run {
             add(R.id.main_container, flowFragment)
-            add(R.id.main_container,calendarFragment)
+            add(R.id.main_container, calendarFragment)
             add(R.id.main_container, chatFragment)
             add(R.id.main_container, myPageFragment)
         }.commit()
