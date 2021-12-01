@@ -1,5 +1,6 @@
 package com.example.project_flow_android.viewmodel.chat
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,6 +8,7 @@ import com.example.project_flow_android.data.chat.ProjectMemberResponse
 import com.example.project_flow_android.data.chat.RoomListResponse
 import com.example.project_flow_android.data.model.sign.chat.*
 import com.example.project_flow_android.data.remote.chat.ChatRepositoryImpl
+import com.example.project_flow_android.util.Event
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import org.json.JSONObject
@@ -31,6 +33,8 @@ class ChatViewModel : ViewModel() {
     private val _imageUpdateLiveData: MutableLiveData<Int> = MutableLiveData()
     private val _participateLiveData: MutableLiveData<NonParticipateResponse> = MutableLiveData()
     private val _pinLiveData: MutableLiveData<GetPinResponse> = MutableLiveData()
+    private val _monthPlanLiveData: MutableLiveData<Event<MonthPlanResponse>> = MutableLiveData()
+    private val _datePlanLiveData: MutableLiveData<Event<DatePlanResponse>> = MutableLiveData()
     val chatLiveData = _chatLiveData
     val chatRoomLiveData = _chatRoomLiveData
     val roomMemberLiveData = _roomMemberLiveData
@@ -41,6 +45,8 @@ class ChatViewModel : ViewModel() {
     val imageUpdateLiveData = _imageUpdateLiveData
     val participateLiveData = _participateLiveData
     val pinLiveData = _pinLiveData
+    val monthPlanLiveData : LiveData<Event<MonthPlanResponse>> get() = _monthPlanLiveData
+    val datePlanLiveData: LiveData<Event<DatePlanResponse>> get() = _datePlanLiveData
 
     fun getProjectUser() {
         viewModelScope.launch {
@@ -140,6 +146,24 @@ class ChatViewModel : ViewModel() {
             val response = chatRepository.getPin(access_token, chatRoomId)
             if(response.isSuccessful) {
                 _pinLiveData.postValue(response.body())
+            }
+        }
+    }
+
+    fun getMonthPlan(year: String, month: String){
+        viewModelScope.launch {
+            val response = chatRepository.getMonthPlan(access_token, projectId, year, month)
+            if(response.isSuccessful) {
+                _monthPlanLiveData.postValue(Event(response.body()!!))
+            }
+        }
+    }
+
+    fun getDatePlan(date: String){
+        viewModelScope.launch {
+            val response = chatRepository.getDatePlan(access_token, projectId, date)
+            if(response.isSuccessful){
+                _datePlanLiveData.postValue(Event(response.body()!!))
             }
         }
     }
