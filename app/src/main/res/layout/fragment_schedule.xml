@@ -26,10 +26,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:text="프플(Project-Flow) 일정"
-            android:textColor="@color/black"
-            android:fontFamily="@font/font_nanumgothic_bold"/>
-
+            android:text="@string/schedule_title"
+            android:textColor="@color/black"/>
     </androidx.appcompat.widget.Toolbar>
 
     <com.applikeysolutions.cosmocalendar.view.CalendarView
@@ -53,7 +51,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:text="8월 10일"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:fontFamily="@font/font_nanumgothic_bold" />
@@ -79,7 +76,6 @@
             android:text="@string/schedule_exclude"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:fontFamily="@font/font_nanumgothic_bold"
             android:backgroundTint="@color/color_flow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -93,7 +89,6 @@
             android:text="@string/schedule_delete"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:fontFamily="@font/font_nanumgothic_bold"
             android:backgroundTint="@color/color_flow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
