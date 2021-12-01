@@ -3,6 +3,7 @@ package com.example.project_flow_android.ui.flow
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.persistableBundleOf
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.databinding.ItemFlowViewBinding
@@ -38,8 +39,14 @@ class MainFlowAdapter(private val viewModel: FlowViewModel) :
             binding.vm = viewModel
 
             binding.firstRv.adapter = preparingProjectRVAdapter
+            binding.firstRv.layoutManager = LinearLayoutManager(binding.firstRv.context)
+            binding.secondRv.layoutManager = LinearLayoutManager(binding.secondRv.context)
             binding.secondRv.adapter = oningProjectRVAdapter
             binding.thirdRv.adapter = finishProjectRVAdapter
+
+            preparingProjectRVAdapter.setItem(item.before)
+            oningProjectRVAdapter.setItem(item.ongoing)
+
             binding.notifyChange()
         }
     }

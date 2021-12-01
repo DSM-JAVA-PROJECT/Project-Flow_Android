@@ -24,11 +24,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
 
     override val vm: FlowViewModel by viewModel()
-    private val addProject = AddProjectActivity()
     private val mainFlowViewPagerRVAdapter by lazy { MainFlowAdapter(vm) }
-    private val preparingProjectRVAdapter by lazy { PreparingProjectRVAdapter(vm) }
-    private val oningProjectRVAdapter by lazy { OningProjectRVAdapter(vm) }
-    private val finishProjectRVAdapter by lazy { FinishProjectRVAdapter(vm) }
 
 
 //    lateinit var binding_item: ItemFlowViewBinding
@@ -91,9 +87,6 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
             vm.run {
                 getMainInfo.observe(viewLifecycleOwner, {
                     mainFlowViewPagerRVAdapter.setItem(it.projects)
-                    preparingProjectRVAdapter.setItem(it.projects)
-                    oningProjectRVAdapter.setItem(it.projects)
-                    finishProjectRVAdapter.setItem(it.projects)
                 })
                 emptyProject.observe(viewLifecycleOwner, {
                     if(emptyProject.value == true) {
