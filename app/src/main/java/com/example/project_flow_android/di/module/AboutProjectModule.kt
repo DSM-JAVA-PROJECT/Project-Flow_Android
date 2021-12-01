@@ -5,5 +5,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val aboutProjectmodule = module {
-    viewModel{AddProjectViewModel(get(),get())}
+
+    viewModel { AddProjectViewModel(get(), get()) }
 }

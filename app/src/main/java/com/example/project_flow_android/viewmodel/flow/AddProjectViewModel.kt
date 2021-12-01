@@ -25,18 +25,15 @@ class AddProjectViewModel(
     private val sharedPreferenceStorage: SharedPreferenceStorage
 ) : ViewModel() {
 
-    val token = sharedPreferenceStorage.getInfo("access_token")
-
+    val token by lazy {
+        sharedPreferenceStorage.getInfo("access_token")
+    }
 
     val projectName = MutableLiveData<String>()
     val projectExplanation = MutableLiveData<String>()
     val projectMember = MutableLiveData<String>()
     val startDate = MutableLiveData<String>()
     val endDate = MutableLiveData<String>()
-
-    val member: String = projectMember.value!!
-    val splitArray = member.split(",")
-
 
     private val _successAddProject = MutableLiveData<Boolean>()
     val successAddProject: LiveData<Boolean> get() = _successAddProject
@@ -64,22 +61,4 @@ class AddProjectViewModel(
         })
     }
 
-//    fun addProject(successCallBack : () -> Unit){
-//        val addProject = addProjecInterface.addProject(token,AddProjectRequest(projectName.value!!, projectExplanation.value!!, startDate.value!!, endDate.value!!,splitArray),File(imagePath)))
-//        addProject.enqueue(object : Callback<Unit> {
-//            override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-//                if (response.isSuccessful) {
-//                    _
-//                } else {
-//                    try {
-//                        response.errorBody()?.let {
-//
-//                        }
-//                    } catch (e: Exception) {
-//
-//                    }
-//                }
-//            }
-//        }
-//
     }
