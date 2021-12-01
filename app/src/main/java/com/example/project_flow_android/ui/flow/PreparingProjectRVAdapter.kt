@@ -15,27 +15,27 @@ class PreparingProjectRVAdapter(
 ) :
     RecyclerView.Adapter<PreparingProjectRVAdapter.ProjectViewHolder>() {
 
-    private var projectList = ArrayList<GetMainInfoResponse.GetMainInfoDetailResponse>()
+    private var projectList = ArrayList<GetProjectScheduleDetailResponse>()
 
     inner class ProjectViewHolder(private val binding: UserProjectPlanItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: GetMainInfoResponse.GetMainInfoDetailResponse, position: Int) {
-            binding.scheduleContent = item.before[position].name
+        fun bind(item: GetProjectScheduleDetailResponse, position: Int) {
+            binding.scheduleContent = item.name
             binding.scheduleStartPeriod =
-                "${item.before[position].startDate} ~ ${item.before[position].endDate}"
+                "${item.startDate} ~ ${item.endDate}"
             binding.vm = viewModel
             binding.notifyChange()
         }
     }
 
-    fun setItem(projects: ArrayList<GetMainInfoResponse.GetMainInfoDetailResponse>) {
-        this.projectList = projects
+    fun setItem(projects: List<GetProjectScheduleDetailResponse>) {
+        this.projectList = projects as ArrayList<GetProjectScheduleDetailResponse>
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
-        val binding = UserProjectPlanItemBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = UserProjectPlanItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ProjectViewHolder(binding)
     }
 
