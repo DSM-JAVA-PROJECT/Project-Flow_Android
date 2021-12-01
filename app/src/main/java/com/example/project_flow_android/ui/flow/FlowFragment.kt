@@ -84,19 +84,14 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
         vm.run {
             getMainUserInfo()
             getProjectDetailInfo()
-            vm.run {
-                getMainInfo.observe(viewLifecycleOwner, {
-                    mainFlowViewPagerRVAdapter.setItem(it.projects)
-                })
-                emptyProject.observe(viewLifecycleOwner, {
-                    if(emptyProject.value == true) {
-                        binding.userName.isVisible
-                        binding.emptyProjectTv.isVisible
-                        binding.emptyProjectImg.isVisible
-                        binding.nimProject.isVisible
-                    }
-                })
-            }
+            getMainInfo.observe(viewLifecycleOwner, {
+                mainFlowViewPagerRVAdapter.setItem(it.projects)
+            })
+            fullProject.observe(viewLifecycleOwner, {
+                if (fullProject.value == true) {
+                    binding.isLoading = true
+                }
+            })
         }
     }
 }

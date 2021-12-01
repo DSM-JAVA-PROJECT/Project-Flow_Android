@@ -7,6 +7,7 @@ import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.data.remote.flow.FlowApiImpl
 import com.example.project_flow_android.data.remote.mypage.MyPageApiImpl
 import com.example.project_flow_android.feature.GetMainInfoResponse
+import io.reactivex.Single
 
 class FlowViewModel(
     private val myPageApiImpl: MyPageApiImpl,
@@ -20,6 +21,9 @@ class FlowViewModel(
     val projectLastDate = MutableLiveData<String>()
     val personalProgress = MutableLiveData<String>()
     val info = MutableLiveData<String>()
+
+
+    val getProjectId =MutableLiveData<String>()
 
     private val _projectId = MutableLiveData<String>()
     val projectId: LiveData<String> get() = _projectId
@@ -38,8 +42,8 @@ class FlowViewModel(
     private val _checkInfo = MutableLiveData<String>()
     val checkInfo: LiveData<String> get() = _checkInfo
 
-    private val _emptyProject = MutableLiveData<Boolean>()
-    val emptyProject: LiveData<Boolean> get() = _emptyProject
+    private val _fullProject = MutableLiveData<Boolean>()
+    val fullProject: LiveData<Boolean> get() = _fullProject
 
     val token = sharedPreferenceStorage.getInfo("access_token")
 
@@ -55,8 +59,9 @@ class FlowViewModel(
         })
     }
 
-    fun finishProject(projectId : String) {
-        flowApiImpl.finishProject(projectId).subscribe { response ->
+
+    fun finishProject() {
+        flowApiImpl.finishProject(token,getProjectId.value!!).subscribe { response ->
             if (response.isSuccessful) {
                 if(checkCheckBox.value == false)
                 {
@@ -81,8 +86,8 @@ class FlowViewModel(
                 _getMainInfo.value = it.body()
                 _projectId.value = it.body().toString()
                 val projectsId = sharedPreferenceStorage.getInfo("projectId")
-                if(it.body()!!.projects.size == 0){
-                    _emptyProject.value = true
+                if(it.body()!!.projects.size != 0) {
+                    _fullProject.value = true
                 }
             } else {
                 it

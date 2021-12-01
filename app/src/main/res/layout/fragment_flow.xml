@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isLoading"
+            type="boolean" />
+
         <variable
             name="vm"
-            type="com.example.project_flow_android.viewmodel.flow.FlowViewModel"
-            />
+            type="com.example.project_flow_android.viewmodel.flow.FlowViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="250dp"
-            android:visibility="invisible"
+            android:visibility="@{isLoading ? View.INVISIBLE : View.VISIBLE}"
             android:src="@drawable/flow_empty_project"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,8 +57,8 @@
                 android:layout_marginTop="40dp"
                 android:fontFamily="@font/font_roboto_bold"
                 android:text="@string/who_project"
-                android:visibility="invisible"
                 android:textSize="20sp"
+                android:visibility="@{isLoading ? View.INVISIBLE : View.VISIBLE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/user_name"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -65,8 +70,8 @@
                 android:layout_marginStart="50dp"
                 android:layout_marginTop="40dp"
                 android:fontFamily="@font/font_roboto_bold"
-                android:visibility="invisible"
                 android:text="@={vm.getUserName}"
+                android:visibility="@{isLoading ? View.INVISIBLE : View.VISIBLE}"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -97,8 +102,8 @@
             android:layout_gravity="center"
             android:fontFamily="@font/nanumgothic_regular"
             android:text="@string/empty_project"
+            android:visibility="@{isLoading ? View.INVISIBLE : View.VISIBLE}"
             android:layout_marginTop="20dp"
-            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/empty_project_img" />
