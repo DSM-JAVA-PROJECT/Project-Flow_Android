@@ -42,7 +42,7 @@
         app:selectedDayBackgroundColor="@color/color_calendar_current"
         app:selectedDayBackgroundEndColor="@color/color_flow"
         app:selectedDayBackgroundStartColor="@color/color_flow"
-        app:selectionType="single"
+        app:selectionType="multiple"
         app:weekendDayTextColor="@color/color_chat_red" />
 
     <TextView

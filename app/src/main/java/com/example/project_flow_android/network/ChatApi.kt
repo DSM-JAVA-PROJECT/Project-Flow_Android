@@ -72,18 +72,18 @@ interface ChatApi {
         @Path("chatRoomId") chatRoomId: String
     ) : Response<GetPinResponse>
 
-    @GET("/plan/calendar/{project_id}/{year}/{month}")
+    @GET("/plan/calendar")
     suspend fun getMonthPlan(
         @Header("Authorization") header: String,
-        @Path("project_id") project_id: String,
-        @Path("year") year: String,
-        @Path("month") month: String
+        @Query("id") project_id: String,
+        @Query("year") year: String,
+        @Query("month") month: String
     ) : Response<MonthPlanResponse>
 
     @GET("/plan/detail/{project_id}/{date}")
     suspend fun getDatePlan(
         @Header("Authorization") header: String,
-        @Path("project_id") project_id: String,
+        @Query("project_id") project_id: String,
         @Path("date") date: String
     ) : Response<DatePlanResponse>
 }
