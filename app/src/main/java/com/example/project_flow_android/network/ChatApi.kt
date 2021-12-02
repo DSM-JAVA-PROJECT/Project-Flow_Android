@@ -80,10 +80,10 @@ interface ChatApi {
         @Query("month") month: String
     ) : Response<MonthPlanResponse>
 
-    @GET("/plan/detail/{project_id}/{date}")
+    @GET("/plan/detail/")
     suspend fun getDatePlan(
         @Header("Authorization") header: String,
-        @Query("project_id") project_id: String,
-        @Path("date") date: String
+        @Query("id") project_id: String,
+        @Query("date") date: String
     ) : Response<DatePlanResponse>
 }
