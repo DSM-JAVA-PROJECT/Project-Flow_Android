@@ -7,6 +7,7 @@ import android.widget.EditText
 import com.example.project_flow_android.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.aviran.cookiebar2.CookieBar
+import java.text.SimpleDateFormat
 import java.util.*
 
 class DialogUtil(private val activity: Activity) {
@@ -18,7 +19,8 @@ class DialogUtil(private val activity: Activity) {
 
         val datePicker = DatePickerDialog(activity, R.style.DatePickerStyle,
             { view, year, month, dayOfMonth ->
-                editText.setText("${year}년 ${month+1}월 ${dayOfMonth}일")
+                val dateFormat = SimpleDateFormat("dd")
+                editText.setText("${year}년 ${month+1}월 ${dateFormat.format(dayOfMonth)}일")
             }, year, month, day)
         datePicker.show()
     }
