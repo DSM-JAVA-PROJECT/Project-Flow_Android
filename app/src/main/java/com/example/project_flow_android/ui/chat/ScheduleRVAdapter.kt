@@ -28,7 +28,7 @@ class ScheduleRVAdapter(private val items: DatePlanResponse) : RecyclerView.Adap
         val view = v
         fun bind(item: DatePlanResponse.DateResponse){
             view.schedule_plan_tv.text = item.name
-            if(!item.isFinish){
+            if(item.isFinish){
                 view.schedule_iv.setImageResource(R.drawable.ic_baseline_circle_24_finish)
             }
         }
