@@ -30,10 +30,10 @@
             android:textColor="@color/black"/>
     </androidx.appcompat.widget.Toolbar>
 
-    <com.applikeysolutions.cosmocalendar.view.CalendarView
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
         android:id="@+id/schedule_cv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="400dp"
         app:connectedDayIconPosition="top"
         app:currentDayIconRes="@drawable/ic_current_dot"
         app:currentDayTextColor="@color/color_flow"
