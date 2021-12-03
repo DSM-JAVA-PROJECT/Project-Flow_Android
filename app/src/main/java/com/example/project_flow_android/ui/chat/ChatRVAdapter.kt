@@ -22,11 +22,12 @@ import kotlinx.android.synthetic.main.chat_plan_item_mine.view.*
 import kotlinx.android.synthetic.main.chat_resign_plan_item_mine.view.*
 import kotlinx.android.synthetic.main.chat_resign_plan_item_mine.view.resign_plan_item_mine_content_tv
 import kotlinx.android.synthetic.main.chat_resign_plan_item_other.view.*
+import kotlinx.android.synthetic.main.mine_image_item.view.*
+import kotlinx.android.synthetic.main.other_image_item.view.*
 import kotlinx.android.synthetic.main.room_status_item.view.*
 import java.lang.RuntimeException
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import kotlin.math.abs
 
 class ChatRVAdapter(private val items: ChatMessageResponse, private val activity: Activity) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -40,6 +41,8 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
     private val FORCED_PLAN = 7
     private val INVITE = 8
     private val LEAVE = 9
+    private val MINE_PICTURE = 10
+    private val OTHER_PICTURE = 11
 
     interface OnJoinClickListener {
         fun onJoinClick(v: View, position: Int)
@@ -129,6 +132,11 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
                     .inflate(R.layout.chat_forced_plan_item_mine, parent, false)
                 ForcedPlanViewHolder(inflateView)
             }
+            MINE_PICTURE -> {
+                val inflateView = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.mine_image_item, parent, false)
+                MineImageViewHolder(inflateView)
+            }
             else -> throw RuntimeException("알 수 없는 viewType")
         }
     }
@@ -146,6 +154,8 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
             is ForcedPlanViewHolder -> holder.apply { bind(item) }
             is InviteRoomViewHolder -> holder.apply { bind(item) }
             is LeaveRoomViewHolder -> holder.apply { bind(item) }
+            is MineImageViewHolder -> holder.apply { bind(item) }
+            is OtherImageViewHolder -> holder.apply { bind(item) }
         }
     }
 
@@ -167,6 +177,7 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
                         } else
                             LEAVE
                     }
+                    "PICTURE" -> MINE_PICTURE
                     else -> throw RuntimeException("알 수 없는 타입")
                 }
             }
@@ -176,6 +187,7 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
                     "PLAN" -> PLAN_ADD
                     "JOIN_PLAN" -> OTHER_JOIN_PLAN
                     "RESIGN_PLAN" -> OTHER_RESIGN_PLAN
+                    "PICTURE" -> OTHER_PICTURE
                     else -> throw RuntimeException("알 수 없는 타입")
                 }
             }
@@ -325,17 +337,21 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
         }
     }
 
-    inner class MineImage(v: View) : RecyclerView.ViewHolder(v) {
+    inner class MineImageViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val view = v
-        fun bind() {
-
+        fun bind(item: ChatMessageResponse.ChatReceiveResponse) {
+            imageLoad(view.mine_image_iv, item.message)
+            dateFormat(item.createdAt, view.mine_image_tv)
         }
     }
 
-    inner class OtherImage(v: View) : RecyclerView.ViewHolder(v) {
+    inner class OtherImageViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val view = v
-        fun bind() {
-
+        fun bind(item: ChatMessageResponse.ChatReceiveResponse) {
+            view.other_image_name_tv.text = item.senderName
+            imageLoad(view.other_image_profile_iv, item.senderImage)
+            imageLoad(view.other_image_iv, item.message)
+            dateFormat(item.createdAt, view.other_image_time_tv)
         }
     }
 
