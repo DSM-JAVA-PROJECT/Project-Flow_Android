@@ -19,16 +19,17 @@ class ChangePasswordViewModel(val myPageApiImpl: MyPageApiImpl, private val shar
     val _toastContent = MutableLiveData<String>()
     private val toastContent : LiveData<String> get() = _toastContent
 
-    val token = sharedPreferenceStorage.getInfo("access_Token")
-
     val successChange: LiveData<Boolean> get() = _successChange
     private val _successChange = MutableLiveData(false)
 
+    val token by lazy {
+        sharedPreferenceStorage.getInfo("access_token")
+    }
+
     fun changePassword(){
-        val token = sharedPreferenceStorage.getInfo("access_token")
         myPageApiImpl.changePassword(token, changePassword.value!!).subscribe({
-            if(it.message()=="Changed"){
-                _successChange.value!!
+            if(it.isSuccessful){
+                _successChange.value = true
                 _toastContent.value = "변경에 성공하였습니다"
             }
             else {

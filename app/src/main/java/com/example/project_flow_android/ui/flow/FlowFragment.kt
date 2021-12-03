@@ -34,10 +34,10 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
     private val finishPlanDialog by  lazy {
         FinishPlanDialog(vm)
     }
-
-    val dialogUtil by lazy {
-        DialogUtil(requireActivity())
-    }
+//
+//    val dialogUtil by lazy {
+//        DialogUtil(requireActivity())
+//    }
 
 
     private fun finishProjectDialog() {
@@ -46,6 +46,14 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
             "finishDialog"
         )
     }
+
+    private fun finishPlanDialog() {
+        finishProjectDialog.show(
+            requireActivity().supportFragmentManager,
+            "finishPlanDialog"
+        )
+    }
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -86,9 +94,9 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
                 finishProjectDialog()
             })
             planclickFinish.observe(viewLifecycleOwner, {
-                finishPlanDialog
-                val bottom = dialogUtil.showScheduleBottomSheet()
-                bottom.show()
+                finishPlanDialog()
+//                val bottom = dialogUtil.showScheduleBottomSheet()
+//                bottom.show()
             })
 
         }
