@@ -22,8 +22,7 @@ class MyPageViewModel(
     private val _clearAll = MutableLiveData<Boolean>()
     val clearAll: LiveData<Boolean> get() = _clearAll
 
-    private val _successLogout = MutableLiveData<Boolean>()
-    val successLogout: LiveData<Boolean> get() = _successLogout
+    val successLogout = MutableLiveData<Boolean>()
 
     private val _projects = MutableLiveData<GetUserInfoResponse>()
     val projects: LiveData<GetUserInfoResponse> get() = _projects
