@@ -10,6 +10,8 @@ import com.example.project_flow_android.R
 import com.example.project_flow_android.ui.chat.ChatActivity
 import com.example.project_flow_android.ui.chat.ScheduleRVAdapter
 import com.example.project_flow_android.util.HavePlanDecorator
+import com.example.project_flow_android.util.SaturdayDecorator
+import com.example.project_flow_android.util.SundayDecorator
 import com.example.project_flow_android.viewmodel.chat.ChatViewModel
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import kotlinx.android.synthetic.main.fragment_schedule.*
@@ -42,6 +44,11 @@ class ScheduleFragment : Fragment() {
         val layoutManager = LinearLayoutManager(requireContext())
         schedule_rv.layoutManager = layoutManager
 
+        schedule_cv.apply {
+            addDecorator(SaturdayDecorator())
+            addDecorator(SundayDecorator())
+        }
+
         viewModel.getMonthPlan(year, month)
         schedule_prev_btn.setOnClickListener {
             (activity as ChatActivity).popBackStack(ScheduleFragment())
@@ -55,7 +62,9 @@ class ScheduleFragment : Fragment() {
                     val endDate = data[i].endDate
 
                     schedule_cv.addDecorator(HavePlanDecorator(singleton(CalendarDay.from(dateFormat.parse(
-                        startDate))), data[i].isFinish))
+                        startDate))), false))
+                    schedule_cv.addDecorator(HavePlanDecorator(singleton(CalendarDay.from(dateFormat.parse(
+                        endDate))), true))
                 }
             }
         })
