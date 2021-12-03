@@ -25,6 +25,7 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/user_project_cv"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:background="#809CFF">

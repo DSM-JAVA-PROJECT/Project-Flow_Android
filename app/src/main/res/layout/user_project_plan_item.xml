@@ -19,6 +19,7 @@
     </data>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/user_project_cv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="5dp">
