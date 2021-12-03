@@ -2,7 +2,6 @@ package com.example.project_flow_android.ui.chat.fragment
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -12,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -21,7 +19,6 @@ import com.example.project_flow_android.data.model.sign.chat.ChatMessageResponse
 import com.example.project_flow_android.network.SocketApplication
 import com.example.project_flow_android.ui.chat.ChatActivity
 import com.example.project_flow_android.ui.chat.ChatRVAdapter
-import com.example.project_flow_android.ui.main.MainActivity
 import com.example.project_flow_android.util.DialogUtil
 import com.example.project_flow_android.util.GalleryHelper
 import com.example.project_flow_android.util.KeyboardUtil
@@ -142,13 +139,13 @@ class ChatFragment : Fragment() {
             bottom.add_schedule_end_et.setOnClickListener {
                 dialogUtil.showDatePicker(bottom.add_schedule_end_et)
             }
-            bottom.add_schedule_btn.setOnClickListener {
-                if (bottom.add_schedule_content_et.text.toString() != "" &&
+            bottom.closing_schedule_btn.setOnClickListener {
+                if (bottom.input_schedule_content_tv.text.toString() != "" &&
                     bottom.add_schedule_start_et.text.toString() != "" &&
                     bottom.add_schedule_end_et.text.toString() != ""
                 ) {
                     socket.addPlan(
-                        bottom.add_schedule_content_et.text.toString(),
+                        bottom.input_schedule_content_tv.text.toString(),
                         bottom.add_schedule_start_et.text.toString(),
                         bottom.add_schedule_end_et.text.toString(),
                         bottom.add_schedule_switch.isChecked

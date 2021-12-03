@@ -13,6 +13,7 @@ import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.databinding.ActivityAddProjectBinding.inflate
 import com.example.project_flow_android.databinding.FragmentFlowBinding
 import com.example.project_flow_android.databinding.ItemFlowViewBinding
+import com.example.project_flow_android.ui.flow.dialog.FinishPlanDialog
 import com.example.project_flow_android.ui.flow.dialog.FinishProjectDialog
 import com.example.project_flow_android.ui.main.MainActivity
 import com.example.project_flow_android.util.DialogUtil
@@ -26,13 +27,18 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
     override val vm: FlowViewModel by viewModel()
     private val mainFlowViewPagerRVAdapter by lazy { MainFlowAdapter(vm) }
 
-
-//    lateinit var binding_item: ItemFlowViewBinding
-//    val dialogUtil = DialogUtil(requireActivity())
-
     private val finishProjectDialog by lazy {
         FinishProjectDialog(vm)
     }
+
+    private val finishPlanDialog by  lazy {
+        FinishPlanDialog(vm)
+    }
+
+    val dialogUtil by lazy {
+        DialogUtil(requireActivity())
+    }
+
 
     private fun finishProjectDialog() {
         finishProjectDialog.show(
@@ -41,22 +47,16 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
         )
     }
 
-    
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         showRV()
-        finishSchdule()
         observeEvent()
         goAddProject()
     }
 
-    private fun goAddProject() {
 
+    private fun goAddProject() {
         binding.addProjectBtn.setOnClickListener {
             (activity as MainActivity).addProject()
         }
@@ -68,16 +68,6 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
         val dotsIndicator = binding.dotsIndicator
         TabLayoutMediator(dotsIndicator, binding.mainView) { _, _ ->
         }.attach()
-    }
-
-    private fun finishSchdule() {
-//        binding_item.button.setOnClickListener() {
-//            val bottom = dialogUtil.showBottomSheet()
-//            dialogUtil.showBottomSheet()
-//            bottom.show()
-//            finishProjectDialog()
-//        }
-
     }
 
     override fun observeEvent() {
@@ -92,6 +82,15 @@ class FlowFragment : BaseFragment<FragmentFlowBinding>(R.layout.fragment_flow) {
                     binding.isLoading = true
                 }
             })
+            clickFinish.observe(viewLifecycleOwner, {
+                finishProjectDialog()
+            })
+            planclickFinish.observe(viewLifecycleOwner, {
+                finishPlanDialog
+                val bottom = dialogUtil.showScheduleBottomSheet()
+                bottom.show()
+            })
+
         }
     }
 }

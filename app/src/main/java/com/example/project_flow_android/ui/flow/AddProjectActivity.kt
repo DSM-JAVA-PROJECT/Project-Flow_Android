@@ -12,7 +12,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddProjectActivity : BaseActivity<ActivityAddProjectBinding>(R.layout.activity_add_project) {
 
-    override val vm : AddProjectViewModel by viewModel()
+    override val vm: AddProjectViewModel by viewModel()
 
     private fun getImage() {
         TedRxImagePicker.with(this)
@@ -38,6 +38,9 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding>(R.layout.acti
             })
             binding.getImg.setOnClickListener {
                 getImage()
+            }
+            binding.goProjectImg.setOnClickListener {
+                //TODO 뒤로가기 코드
             }
         }
     }

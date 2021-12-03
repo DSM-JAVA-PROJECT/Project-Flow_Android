@@ -8,7 +8,7 @@ import retrofit2.http.Header
 
 interface GitAPI {
 
-    @GET("/repos/DSM-JAVA-PROJECT/Project-Flow_Android/issues")
+    @GET("https://api.github.com/{}")
 
     fun getGitInfo(
         @Header("Authorization") token: String

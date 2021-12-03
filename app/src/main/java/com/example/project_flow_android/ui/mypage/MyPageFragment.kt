@@ -31,7 +31,6 @@ import java.io.InputStream
 
 class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
 
-
     override val vm: MyPageViewModel by viewModel()
     private val cv: ChangePasswordViewModel by viewModel()
     private val projectAdapter by lazy { UserProjectRVAdapter(vm) }
