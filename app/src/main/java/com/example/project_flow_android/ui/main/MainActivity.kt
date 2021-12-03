@@ -36,7 +36,7 @@ class MainActivity() : BaseActivity<ActivityMainBinding>(R.layout.activity_main)
     }
 
     override fun onBackPressed() {
-        // TODO: 2021/10/06  super.onBackPressed()
+        // non back press super.onBackPressed()
     }
 
     override fun onStart() {
@@ -97,6 +97,7 @@ class MainActivity() : BaseActivity<ActivityMainBinding>(R.layout.activity_main)
         }.commit()
         changeFragment(vm.activeFragment ?: flowFragment)
     }
+
 
     private fun observerEvent() {
         vm.run {

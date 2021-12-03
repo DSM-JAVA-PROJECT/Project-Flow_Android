@@ -19,6 +19,10 @@ class FinishSignActivity : BaseActivity<ActivityFinishSignBinding>(R.layout.acti
         vm.inputUserName()
     }
 
+    override fun onBackPressed() {
+        // non back press super.onBackPressed()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
