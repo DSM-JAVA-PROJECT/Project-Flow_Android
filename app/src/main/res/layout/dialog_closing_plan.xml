@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.example.project_flow_android.viewmodel.flow.FlowViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/font_nanumgothic_bold"
+            android:text="마감하기"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/font_nanumgothic_bold"
+            android:text="@string/add_schedule_bottom_content"
+            android:textColor="@color/color_flow"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/input_schedule_content_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/color_flow"
+            android:fontFamily="@font/font_nanumgothic_bold"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+
+        <Button
+            android:id="@+id/closing_schedule_btn"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="29dp"
+            android:layout_marginEnd="19dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/color_flow"
+            android:fontFamily="@font/font_nanumgothic_bold"
+            android:text="마감하기"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_schedule_content_tv" />
+
+        <TextView
+            android:id="@+id/explain_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="일정에 참여한 인원이 모두 마감해야 일정이 완료됩니다."
+            android:textSize="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_schedule_content_tv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
