@@ -4,6 +4,7 @@ data class DatePlanResponse(
     val planDetails: ArrayList<DateResponse>
 ){
     data class DateResponse(
+        val id: String,
         val name: String,
         val isFinish: Boolean
     )
