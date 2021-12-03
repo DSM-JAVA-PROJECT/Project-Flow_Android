@@ -40,7 +40,7 @@ class MainFlowAdapter(private val viewModel: FlowViewModel) :
             binding.progressBar2.setProgress(item.projectProgress)
             binding.personalProgress = "${item.personalProgress}%"
             binding.teamProgress = "${item.projectProgress}%"
-            binding.userName = viewModel.getUserName.value!!
+            binding.userName = viewModel.getUserName.value
             binding.vm = viewModel
 
             binding.firstRv.adapter = preparingProjectRVAdapter
@@ -59,13 +59,14 @@ class MainFlowAdapter(private val viewModel: FlowViewModel) :
             binding.secondRv.adapter = oningProjectRVAdapter
             binding.thirdRv.adapter = finishProjectRVAdapter
 
-            preparingProjectRVAdapter.setItem(item.before)
-            oningProjectRVAdapter.setItem(item.ongoing)
+            preparingProjectRVAdapter.setItem(item.before, item.id)
+            oningProjectRVAdapter.setItem(item.ongoing, item.id)
             finishProjectRVAdapter.setItem(item.after)
 
             binding.notifyChange()
 
             binding.button.setOnClickListener{
+                viewModel.getProjectIdForPlan.value = item.id
                 viewModel.getProjectId.value = item.id
                 viewModel.clickFinish.value = item
             }

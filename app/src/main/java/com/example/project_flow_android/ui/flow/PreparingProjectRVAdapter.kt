@@ -8,11 +8,13 @@ import com.example.project_flow_android.feature.GetProjectScheduleDetailResponse
 import com.example.project_flow_android.viewmodel.flow.FlowViewModel
 
 class PreparingProjectRVAdapter(
-    private val viewModel: FlowViewModel,
+    private val viewModel: FlowViewModel
 ) :
     RecyclerView.Adapter<PreparingProjectRVAdapter.ProjectViewHolder>() {
 
     private var projectList = ArrayList<GetProjectScheduleDetailResponse>()
+
+    lateinit var id: String
 
     inner class ProjectViewHolder(private val binding: UserProjectPlanItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -30,7 +32,8 @@ class PreparingProjectRVAdapter(
         }
     }
 
-    fun setItem(projects: List<GetProjectScheduleDetailResponse>) {
+    fun setItem(projects: List<GetProjectScheduleDetailResponse>, id: String) {
+        this.id = id
         this.projectList = projects as ArrayList<GetProjectScheduleDetailResponse>
         notifyDataSetChanged()
     }

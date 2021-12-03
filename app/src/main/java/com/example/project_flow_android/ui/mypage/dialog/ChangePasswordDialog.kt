@@ -8,10 +8,11 @@ import com.example.project_flow_android.base.BaseDialog
 import com.example.project_flow_android.databinding.DialogChangepasswordBinding
 import com.example.project_flow_android.ui.flow.FlowFragment
 import com.example.project_flow_android.viewmodel.mypage.ChangePasswordViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ChangePasswordDialog(override val vm: ChangePasswordViewModel) :
+class ChangePasswordDialog :
     BaseDialog<DialogChangepasswordBinding>(R.layout.dialog_changepassword) {
-
+    override val vm: ChangePasswordViewModel by viewModel()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -19,10 +20,8 @@ class ChangePasswordDialog(override val vm: ChangePasswordViewModel) :
             binding.cancleTv.setOnClickListener {
                 dismiss()
             }
-
             successChange.observe(viewLifecycleOwner, {
-                Toast.makeText(requireContext(),"비밀번호 변경 성공",Toast.LENGTH_SHORT).show()
-                dismiss()
+                //dismiss()
             })
         }
     }

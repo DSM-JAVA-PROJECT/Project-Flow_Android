@@ -41,6 +41,9 @@ class FlowViewModel(
     private val _successRemove = MutableLiveData<Boolean>()
     val successRemove: LiveData<Boolean> get() = _successRemove
 
+    private val _successPlanRemove = MutableLiveData<Boolean>()
+    val successPlanRemove: LiveData<Boolean> get() = _successPlanRemove
+
     private val _checkCheckBox = MutableLiveData<Boolean>()
     val checkCheckBox: LiveData<Boolean> get() = _checkCheckBox
 
@@ -80,7 +83,7 @@ class FlowViewModel(
     fun finishPlan(){
         flowApiImpl.finishPlan(token,getProjectId.value!!,getPlanId.value!!).subscribe({ it ->
             if(it.isSuccessful){
-                it
+                _successPlanRemove.value = true
             }
         },{
             it

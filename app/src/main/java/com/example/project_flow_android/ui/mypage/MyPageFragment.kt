@@ -32,7 +32,6 @@ import java.io.InputStream
 class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
 
     override val vm: MyPageViewModel by viewModel()
-    private val cv: ChangePasswordViewModel by viewModel()
     private val projectAdapter by lazy { UserProjectRVAdapter(vm) }
 
     private val logoutDialog by lazy {
@@ -40,7 +39,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
     }
 
     private val changepasswordDialog by lazy {
-        ChangePasswordDialog(cv)
+        ChangePasswordDialog()
     }
 
     private fun showLogoutDialog() {
@@ -89,6 +88,12 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         observeEvent()
         selectProfileImage()
         showRV()
+        binding.logoutTv.setOnClickListener {
+            showLogoutDialog()
+        }
+        binding.changePwTv2.setOnClickListener {
+            showChangePasswordDialog()
+        }
     }
 
     private fun showRV() {
@@ -106,22 +111,17 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
     }
 
     override fun observeEvent() {
+
         vm.run {
-            binding.logoutTv.setOnClickListener {
-                showLogoutDialog()
-            }
-            binding.changePwTv.setOnClickListener {
-                showChangePasswordDialog()
-            }
             projects.observe(viewLifecycleOwner, {
                 projectAdapter.setItem(it.projects)
             })
             successImage.observe(viewLifecycleOwner, {
                 getUserInfo()
             })
+
             getUserInfo()
             getProjectInfo()
         }
-
     }
 }

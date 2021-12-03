@@ -2,6 +2,7 @@ package com.example.project_flow_android.ui.flow.dialog
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseDialog
 import com.example.project_flow_android.databinding.DialogClosingPlanBinding
@@ -21,6 +22,12 @@ class FinishPlanDialog(override val vm: FlowViewModel) :
                 vm?.finishPlan()
                 dismiss()
             }
+
+            //TODO 일정 지우기가 성공하면
+            vm?.successPlanRemove?.observe(viewLifecycleOwner,{
+                dismiss()
+//                Toast.makeText(requireActivity(),"ddd",Toast.LENGTH_SHORT).show()
+            })
         }
     }
 }

@@ -12,10 +12,12 @@ import com.example.project_flow_android.feature.Projects
 import com.example.project_flow_android.viewmodel.flow.FlowViewModel
 
 class OningProjectRVAdapter(
-    private val viewModel: FlowViewModel,
+    private val viewModel: FlowViewModel
 ) :
     RecyclerView.Adapter<OningProjectRVAdapter.ProjectViewHolder>() {
     private var projectList = ArrayList<GetProjectScheduleDetailResponse>()
+
+    lateinit var id: String
 
     inner class ProjectViewHolder(private val binding: UserProjectOningItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -27,13 +29,15 @@ class OningProjectRVAdapter(
             binding.vm = viewModel
             binding.notifyChange()
             binding.userProjectCv.setOnClickListener {
+                viewModel.getProjectIdForPlan.value = id
                 viewModel.getPlanId.value = item.planId
                 viewModel.planclickFinish.value = item
             }
         }
     }
 
-    fun setItem(projects: List<GetProjectScheduleDetailResponse>) {
+    fun setItem(projects: List<GetProjectScheduleDetailResponse>, id: String) {
+        this.id = id
         this.projectList = projects as ArrayList<GetProjectScheduleDetailResponse>
         notifyDataSetChanged()
     }

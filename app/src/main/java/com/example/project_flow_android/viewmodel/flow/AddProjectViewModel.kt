@@ -22,7 +22,7 @@ import java.lang.Exception
 
 class AddProjectViewModel(
     private val flowApiImpl: FlowApiImpl,
-    private val sharedPreferenceStorage: SharedPreferenceStorage
+    private val sharedPreferenceStorage: SharedPreferenceStorage,
 ) : ViewModel() {
 
     val token by lazy {
@@ -43,25 +43,26 @@ class AddProjectViewModel(
     fun addProject() {
 
         val member: String = projectMember.value!!
-        val splitArray : List<String> = member.split(",")
+        val splitArray: List<String> = member.split(",")
         val numArray = splitArray.toTypedArray()
 
-        val token = sharedPreferenceStorage.getInfo("access_token")
-        flowApiImpl.addProjectQuery(token,
+        flowApiImpl.addProjectQuery(
+            token,
             projectName.value!!,
             projectExplanation.value!!,
             startDate.value!!,
             endDate.value!!,
-            File(imagePath), numArray)
-           .subscribe({
-            if (it.isSuccessful) {
-                it
-            } else {
-                it
-            }
-        }, {
-            it.message
-        })
+            File(imagePath),
+            numArray)
+            .subscribe({
+                if (it.isSuccessful) {
+                    it
+                } else {
+                    it
+                }
+            }, {
+                it.message
+            })
     }
 
-    }
+}

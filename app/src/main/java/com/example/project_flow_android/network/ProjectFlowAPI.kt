@@ -39,8 +39,7 @@ interface ProjectFlowAPI {
     @POST("/project")
     fun addProject(
         @Header("Authorization") token: String,
-        @Body request: AddProjectRequest,
-        @Part("file") file: MultipartBody.Part,
+        @Body request: AddProjectRequest
     ): Single<Response<GetProjectsId>>
 
     @PATCH("/project/close/{id}")
@@ -70,7 +69,7 @@ interface ProjectFlowAPI {
         @Query("explanation") explanation:String,
         @Query("startDate") startDate : String,
         @Query("endDate") endDate : String,
-        @Part file: MultipartBody.Part,
+        @Part("file") file: MultipartBody.Part,
         @Query("emails") emails : Array<String>
     ): Single<Response<Void>>
 
