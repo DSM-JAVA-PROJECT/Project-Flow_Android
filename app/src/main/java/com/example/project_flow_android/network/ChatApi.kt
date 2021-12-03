@@ -86,4 +86,17 @@ interface ChatApi {
         @Query("id") project_id: String,
         @Query("date") date: String
     ) : Response<DatePlanResponse>
+
+    @DELETE("/plan/{planId}")
+    suspend fun deletePlan(
+        @Header("Authorization") header: String,
+        @Path("planId") planId: String
+    ) : Response<Unit>
+
+    @DELETE("/plan/resign/{chatRoomId}/{planId}")
+    suspend fun resignPlan(
+        @Header("Authorization") header: String,
+        @Path("chatRoomId") chatRoomId: String,
+        @Path("planId") planId: String
+    ) : Response<Unit>
 }

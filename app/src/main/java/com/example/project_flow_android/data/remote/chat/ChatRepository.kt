@@ -20,4 +20,6 @@ interface ChatRepository{
     suspend fun getPin(header: String, chatRoomId: String) : Response<GetPinResponse>
     suspend fun getMonthPlan(header: String, project_id: String, year: String, month: String) : Response<MonthPlanResponse>
     suspend fun getDatePlan(header: String, project_id: String, date: String) : Response<DatePlanResponse>
+    suspend fun deletePlan(header: String, planId: String) : Response<Unit>
+    suspend fun resignPlan(header: String, chatRoomId: String, planId: String) : Response<Unit>
 }

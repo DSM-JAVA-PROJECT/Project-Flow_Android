@@ -35,6 +35,8 @@ class ChatViewModel : ViewModel() {
     private val _pinLiveData: MutableLiveData<GetPinResponse> = MutableLiveData()
     private val _monthPlanLiveData: MutableLiveData<Event<MonthPlanResponse>> = MutableLiveData()
     private val _datePlanLiveData: MutableLiveData<Event<DatePlanResponse>> = MutableLiveData()
+    private val _deletePlanLiveData: MutableLiveData<Event<Int>> = MutableLiveData()
+    private val _resignPlanLiveData: MutableLiveData<Event<Int>> = MutableLiveData()
     val chatLiveData = _chatLiveData
     val chatRoomLiveData = _chatRoomLiveData
     val roomMemberLiveData = _roomMemberLiveData
@@ -47,6 +49,8 @@ class ChatViewModel : ViewModel() {
     val pinLiveData = _pinLiveData
     val monthPlanLiveData : LiveData<Event<MonthPlanResponse>> get() = _monthPlanLiveData
     val datePlanLiveData: LiveData<Event<DatePlanResponse>> get() = _datePlanLiveData
+    val deletePlanLiveData: LiveData<Event<Int>> get() = _deletePlanLiveData
+    val resignPlanLiveData: LiveData<Event<Int>> get() = _resignPlanLiveData
 
     fun getProjectUser() {
         viewModelScope.launch {
@@ -164,6 +168,24 @@ class ChatViewModel : ViewModel() {
             val response = chatRepository.getDatePlan(access_token, projectId, date)
             if(response.isSuccessful){
                 _datePlanLiveData.postValue(Event(response.body()!!))
+            }
+        }
+    }
+
+    fun deletePlan(planId: String){
+        viewModelScope.launch {
+            val response = chatRepository.deletePlan(access_token, planId)
+            if(response.isSuccessful){
+                _deletePlanLiveData.postValue(Event(response.code()))
+            }
+        }
+    }
+
+    fun resignPlan(planId: String, chatRoomId: String){
+        viewModelScope.launch {
+            val response = chatRepository.resignPlan(access_token, chatRoomId, planId)
+            if(response.isSuccessful){
+                _resignPlanLiveData.postValue(Event(response.code()))
             }
         }
     }

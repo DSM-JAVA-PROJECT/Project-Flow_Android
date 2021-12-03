@@ -91,4 +91,16 @@ class ChatRepositoryImpl : ChatRepository, SafeApiRequest() {
     ): Response<DatePlanResponse> {
         return safeApiCall { ApiProvider.getScheduleAPI().getDatePlan(header, project_id, date) }
     }
+
+    override suspend fun deletePlan(header: String, planId: String): Response<Unit> {
+        return safeApiCall { ApiProvider.getChatAPI().deletePlan(header, planId) }
+    }
+
+    override suspend fun resignPlan(
+        header: String,
+        chatRoomId: String,
+        planId: String,
+    ): Response<Unit> {
+        return safeApiCall { ApiProvider.getChatAPI().resignPlan(header, chatRoomId, planId) }
+    }
 }
