@@ -26,6 +26,10 @@ class OningProjectRVAdapter(
                 "${item.startDate} ~ ${item.endDate}"
             binding.vm = viewModel
             binding.notifyChange()
+            binding.userProjectCv.setOnClickListener {
+                viewModel.getPlanId.value = item.planId
+                viewModel.planclickFinish.value = item
+            }
         }
     }
 
@@ -34,11 +38,12 @@ class OningProjectRVAdapter(
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OningProjectRVAdapter.ProjectViewHolder {
         val binding =
             UserProjectOningItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ProjectViewHolder(binding)
     }
+
 
     override fun getItemCount(): Int {
         return projectList.size

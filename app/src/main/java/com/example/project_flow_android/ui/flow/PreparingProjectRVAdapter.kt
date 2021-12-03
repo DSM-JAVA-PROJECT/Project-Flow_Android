@@ -4,14 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project_flow_android.databinding.UserProjectPlanItemBinding
-import com.example.project_flow_android.feature.GetMainInfoDetailResponse
-import com.example.project_flow_android.feature.GetMainInfoResponse
 import com.example.project_flow_android.feature.GetProjectScheduleDetailResponse
-import com.example.project_flow_android.feature.Projects
 import com.example.project_flow_android.viewmodel.flow.FlowViewModel
 
 class PreparingProjectRVAdapter(
-    private val viewModel: FlowViewModel
+    private val viewModel: FlowViewModel,
 ) :
     RecyclerView.Adapter<PreparingProjectRVAdapter.ProjectViewHolder>() {
 
@@ -26,6 +23,10 @@ class PreparingProjectRVAdapter(
                 "${item.startDate} ~ ${item.endDate}"
             binding.vm = viewModel
             binding.notifyChange()
+            binding.userProjectCv.setOnClickListener {
+                viewModel.getPlanId.value = item.planId
+                viewModel.planclickFinish.value = item
+            }
         }
     }
 
@@ -35,7 +36,8 @@ class PreparingProjectRVAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
-        val binding = UserProjectPlanItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding =
+            UserProjectPlanItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ProjectViewHolder(binding)
     }
 

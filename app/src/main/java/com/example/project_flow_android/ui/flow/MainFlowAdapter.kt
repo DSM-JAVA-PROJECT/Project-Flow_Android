@@ -24,15 +24,6 @@ class MainFlowAdapter(private val viewModel: FlowViewModel) :
     private val oningProjectRVAdapter = OningProjectRVAdapter(viewModel)
     private val finishProjectRVAdapter = FinishProjectRVAdapter(viewModel)
 
-    interface ItemClickListener {
-        fun onClick(view: View, position: Int,projectId : String)
-    }
-    private lateinit var itemClickListner: ItemClickListener
-
-    fun setItemClickListener(itemClickListener: ItemClickListener) {
-        this.itemClickListner = itemClickListener
-    }
-
     inner class MainFlowViewHolder(private val binding: ItemFlowViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -73,6 +64,11 @@ class MainFlowAdapter(private val viewModel: FlowViewModel) :
             finishProjectRVAdapter.setItem(item.after)
 
             binding.notifyChange()
+
+            binding.button.setOnClickListener{
+                viewModel.getProjectId.value = item.id
+                viewModel.clickFinish.value = item
+            }
         }
     }
 
@@ -89,10 +85,6 @@ class MainFlowAdapter(private val viewModel: FlowViewModel) :
     override fun onBindViewHolder(holder: MainFlowViewHolder, position: Int) {
         holder.bind(userProjectList[position])
 
-        holder.itemView.setOnClickListener{
-            itemClickListner.onClick(it,position,userProjectList[position].id)
-               //viewmodel의 projectId랑 연동
-        }
     }
 
     override fun getItemCount(): Int {
