@@ -20,19 +20,19 @@
         <activity android:name=".ui.flow.AddProjectActivity" />
         <activity android:name=".ui.sign.FinishSignActivity" />
         <activity android:name=".ui.sign.CertificationActivity" />
-        <activity android:name=".ui.sign.EditPasswordActivity"/>
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name=".ui.sign.EditPasswordActivity" />
+        <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.sign.DashBoardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.sign.DashBoardActivity"/>
         <activity android:name=".ui.chat.ChatActivity" />
         <activity android:name=".ui.sign.RegisterActivity" />
         <activity android:name=".ui.sign.LoginActivity" />
-        <activity android:name=".ui.chat.ChatCreateActivity"/>
+        <activity android:name=".ui.chat.ChatCreateActivity" />
     </application>
 
 </manifest>
