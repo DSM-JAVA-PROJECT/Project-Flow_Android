@@ -21,7 +21,7 @@ class ChangePasswordDialog(override val vm: ChangePasswordViewModel) :
             }
 
             successChange.observe(viewLifecycleOwner, {
-                //Toast.makeText(requireContext(),"비밀번호 변경 성공",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),"비밀번호 변경 성공",Toast.LENGTH_SHORT).show()
                 dismiss()
             })
         }

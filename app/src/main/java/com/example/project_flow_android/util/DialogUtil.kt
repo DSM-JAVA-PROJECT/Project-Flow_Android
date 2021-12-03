@@ -29,6 +29,12 @@ class DialogUtil(private val activity: Activity) {
         return bottom
     }
 
+    fun showScheduleBottomSheet() : BottomSheetDialog{
+        val bottom = BottomSheetDialog(activity)
+        bottom.setContentView(R.layout.dialog_closing_plan)
+        return bottom
+    }
+
     fun cookieBarBuilder(
         title: Int,
         message: String?,

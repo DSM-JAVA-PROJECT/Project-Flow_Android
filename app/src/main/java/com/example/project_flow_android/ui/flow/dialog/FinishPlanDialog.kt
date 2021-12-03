@@ -1,27 +1,24 @@
 package com.example.project_flow_android.ui.flow.dialog
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseDialog
-import com.example.project_flow_android.databinding.DialogChangepasswordBinding
+import com.example.project_flow_android.databinding.DialogClosingPlanBinding
 import com.example.project_flow_android.databinding.DialogFinishProjectBinding
+import com.example.project_flow_android.databinding.UserProjectOningItemBinding
 import com.example.project_flow_android.viewmodel.flow.FlowViewModel
+import kotlinx.android.synthetic.main.dialog_finish_project.*
 
-class FinishProjectDialog(override val vm: FlowViewModel) :
-    BaseDialog<DialogFinishProjectBinding>(R.layout.dialog_finish_project) {
+class FinishPlanDialog(override val vm: FlowViewModel) :
+    BaseDialog<DialogClosingPlanBinding>(R.layout.dialog_closing_plan) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.run {
-            textView12.text = vm?.clickFinish?.value?.name
-            cancleTv.setOnClickListener {
-                vm?.finishProject()
-                dismiss()
-            }
-            confirmTv.setOnClickListener {
+            inputScheduleContentTv.text = vm?.planclickFinish?.value?.name
+            closingScheduleBtn.setOnClickListener {
+                vm?.finishPlan()
                 dismiss()
             }
         }
