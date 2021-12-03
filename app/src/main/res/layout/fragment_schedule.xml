@@ -39,10 +39,7 @@
         app:currentDayTextColor="@color/color_flow"
         app:firstDayOfTheWeek="sunday"
         app:orientation="horizontal"
-        app:selectedDayBackgroundColor="@color/color_calendar_current"
-        app:selectedDayBackgroundEndColor="@color/color_flow"
-        app:selectedDayBackgroundStartColor="@color/color_flow"
-        app:selectionType="multiple"
+        app:mcv_selectionColor="@color/color_calendar_current"
         app:weekendDayTextColor="@color/color_chat_red" />
 
     <TextView
