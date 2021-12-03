@@ -58,6 +58,7 @@ class ChatFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         chatViewModel.getChatList(socket.getChatRoomId(), getPage(), SIZE)
+        chatViewModel.getPin(socket.getChatRoomId())
         getChatListMore()
         socket.chatReceive()
         chatViewModel.messageListLiveData.observe(viewLifecycleOwner, {
@@ -70,6 +71,12 @@ class ChatFragment : Fragment() {
                 chatViewModel.messageListLiveData.value!!.oldChatMessageResponses.addAll(0, it.oldChatMessageResponses)
             }
         })
+        chatViewModel.pinLiveData.observe(viewLifecycleOwner, {
+            it?.let {
+                pin_layout.visibility = View.VISIBLE
+                pin_message_tv.text = it.content
+            }
+        })
 
         val keyboardUtil = KeyboardUtil(requireContext())
         val dialogUtil = DialogUtil(requireActivity())
@@ -80,22 +87,20 @@ class ChatFragment : Fragment() {
         chat_rv.layoutManager = layoutManager
 
         socket.receiveLiveData.observe(viewLifecycleOwner, { it ->
-            it.getContentIfNotHandled().let {
+            it.getContentIfNotHandled()?.let {
                 chatViewModel.messageListLiveData.value!!.oldChatMessageResponses.add(it!!)
                 adapterInit(chatViewModel.messageListLiveData.value!!)
-
             }
         })
-        socket.readerLiveData.observe(viewLifecycleOwner, {
-            Log.i("ReadLiveData Value", socket.readerLiveData.value!!.toString())
-            Log.i("readLiveData", ".")
-
-            val data = chatViewModel.messageListLiveData.value!!
+        socket.pinLiveData.observe(viewLifecycleOwner, { it ->
+            it.getContentIfNotHandled()?.let {
+                pin_layout.visibility = View.VISIBLE
+                pin_message_tv.text = it.content
+            }
         })
         socket.errorLiveData.observe(viewLifecycleOwner, {
             errorHandler(socket.errorLiveData.value!!.peekContent())
         })
-
         chat_title_tv.text = socket.getRoomName()
         chat_more_iv.setOnClickListener {
             if (view_more.visibility == View.VISIBLE)
@@ -156,6 +161,16 @@ class ChatFragment : Fragment() {
         }
         chat_prev_btn.setOnClickListener {
             requireActivity().finish()
+        }
+        pin_delete_ib.setOnClickListener{
+            dialogUtil.cookieBarBuilder(
+                R.string.pin_message_remove,
+                pin_message_tv.text.toString(),
+                null,
+                R.color.color_flow
+            )
+            socket.pinRemove()
+            pin_layout.visibility = View.GONE
         }
     }
 

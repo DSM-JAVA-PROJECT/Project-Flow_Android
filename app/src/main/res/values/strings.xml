@@ -55,6 +55,9 @@
     <string name="leave_room_title">채팅방 탈퇴에 성공했습니다.</string>
     <string name="invite_user_title">유저가 초대되었습니다.</string>
     <string name="pin_message">메시지 고정</string>
+    <string name="pin_message_remove">메시지 고정을 취소했습니다.</string>
+    <string name="delete_plan">일정 삭제</string>
+    <string name="resign_plan">일정 제외</string>
 
     <string name="start_project">프로젝트 관리는</string>
     <string name="start_project_se">프로젝트 플로우에서</string>
@@ -134,4 +137,5 @@
     <string name="finished_schedule">마감하기</string>
     <string name="explain_finish_project">일정에 참여한 인원이 모두 마감해야 일정이 완료됩니다.</string>
     <string name="my_git">나의 깃허브 정보</string>
+    <string name="schedule_title">일정</string>
 </resources>

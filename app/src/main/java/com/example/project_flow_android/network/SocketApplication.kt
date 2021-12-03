@@ -1,6 +1,7 @@
 package com.example.project_flow_android.network
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.project_flow_android.data.model.sign.chat.ChatErrorResponse
 import com.example.project_flow_android.data.model.sign.chat.ChatMessageResponse
@@ -41,10 +42,12 @@ class SocketApplication {
     private val _errorLiveData : MutableLiveData<Event<Int>> = MutableLiveData()
     private val _readerLiveData : MutableLiveData<Event<ReJoinResponse>> = MutableLiveData()
     private val _pinLiveData : MutableLiveData<Event<PinResponse>> = MutableLiveData()
-    val receiveLiveData = _receiveLiveData
-    val errorLiveData = _errorLiveData
-    val readerLiveData = _readerLiveData
-    val pinLiveData = _pinLiveData
+    val receiveLiveData : LiveData<Event<ChatMessageResponse.ChatReceiveResponse>>
+        get() = _receiveLiveData
+    val errorLiveData : LiveData<Event<Int>>
+        get() = _errorLiveData
+    val pinLiveData : LiveData<Event<PinResponse>>
+        get() = _pinLiveData
 
     fun connect(){
         Thread {
@@ -93,6 +96,12 @@ class SocketApplication {
         data.put("chatId", chatId)
         data.put("chatRoomId", chatRoomId)
         socket.emit("pin", data)
+    }
+
+    fun pinRemove(){
+        val data = JSONObject()
+        data.put("chatRoomId", chatRoomId)
+        socket.emit("pin.remove", data)
     }
 
     fun chatReceive(){

@@ -13,7 +13,6 @@ import com.example.project_flow_android.ui.chat.InviteRVAdapter
 import com.example.project_flow_android.util.DialogUtil
 import com.example.project_flow_android.viewmodel.chat.ChatViewModel
 import kotlinx.android.synthetic.main.chat_create_user_item.view.*
-import kotlinx.android.synthetic.main.fragment_chat_create.*
 import kotlinx.android.synthetic.main.fragment_invite.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

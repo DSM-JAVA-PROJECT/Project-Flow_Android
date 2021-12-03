@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.project_flow_android.R
 import com.example.project_flow_android.network.SocketApplication
 import com.example.project_flow_android.ui.chat.ChatActivity
+import com.example.project_flow_android.ui.chat.ChatCreateActivity
 import com.example.project_flow_android.ui.chat.RoomRVAdapter
 import com.example.project_flow_android.viewmodel.chat.ChatViewModel
 import kotlinx.android.synthetic.main.fragment_chat_list.*
@@ -30,6 +31,7 @@ class ChatListFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        swipeRefresh()
         chatViewModel.getRoomList()
         val layoutManager = LinearLayoutManager(requireContext())
         chat_list_rv.layoutManager = layoutManager
@@ -47,7 +49,8 @@ class ChatListFragment: Fragment() {
         })
 
         chat_list_add_iv.setOnClickListener{
-            (activity as ChatActivity).replace(ChatCreateFragment())
+            val intent = Intent(requireContext(), ChatCreateActivity::class.java)
+            requireActivity().startActivity(intent)
         }
     }
 
@@ -59,5 +62,12 @@ class ChatListFragment: Fragment() {
             socket.setChatImage(data.chatRoomImage)
         val intent = Intent(requireActivity(), ChatActivity::class.java)
         requireActivity().startActivity(intent)
+    }
+
+    private fun swipeRefresh() {
+        swipe_refresh.setOnRefreshListener {
+            chatViewModel.getRoomList()
+            swipe_refresh.isRefreshing = false
+        }
     }
 }

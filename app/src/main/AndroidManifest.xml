@@ -32,6 +32,7 @@
         <activity android:name=".ui.chat.ChatActivity" />
         <activity android:name=".ui.sign.RegisterActivity" />
         <activity android:name=".ui.sign.LoginActivity" />
+        <activity android:name=".ui.chat.ChatCreateActivity"/>
     </application>
 
 </manifest>

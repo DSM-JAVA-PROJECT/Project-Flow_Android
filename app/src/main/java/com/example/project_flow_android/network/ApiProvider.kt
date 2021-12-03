@@ -16,9 +16,11 @@ object ApiProvider {
     private const val WRITE_TIME_OUT: Long = 15
     private const val READ_TIME_OUT: Long = 15
     private var chatRetrofitBuilder: Retrofit
+    private var scheduleRetrofit: Retrofit
     private var retrofirBuilder: Retrofit
     private var gitRetrofitBuilder : Retrofit
     private var chatApi: ChatApi
+    private var scheduleApi: ChatApi
     private var Api: ProjectFlowAPI
     private var gitApi: GitAPI
 
@@ -68,6 +70,14 @@ object ApiProvider {
             .build()
 
         chatApi = chatRetrofitBuilder.create(ChatApi::class.java)
+
+        scheduleRetrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+
+        scheduleApi = scheduleRetrofit.create(ChatApi::class.java)
     }
 
 
@@ -83,6 +93,7 @@ object ApiProvider {
 
 
     fun getChatAPI() = chatApi
+    fun getScheduleAPI() = scheduleApi
     fun getAPI() = Api
     fun getGitAPI() = gitApi
 

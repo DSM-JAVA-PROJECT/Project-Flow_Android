@@ -2,7 +2,6 @@ package com.example.project_flow_android.network
 
 import com.example.project_flow_android.data.model.sign.chat.*
 import okhttp3.MultipartBody
-import org.json.JSONObject
 import retrofit2.Response
 import com.example.project_flow_android.data.chat.ProjectMemberResponse
 import com.example.project_flow_android.data.chat.RoomListResponse
@@ -66,4 +65,38 @@ interface ChatApi {
         @Path("projectId") projectId: String,
         @Path("chatRoomId") chatRoomId: String
     ) : Response<NonParticipateResponse>
+
+    @GET("/pin/{chatRoomId}")
+    suspend fun getPin(
+        @Header("Authorization") header: String,
+        @Path("chatRoomId") chatRoomId: String
+    ) : Response<GetPinResponse>
+
+    @GET("/plan/calendar")
+    suspend fun getMonthPlan(
+        @Header("Authorization") header: String,
+        @Query("id") project_id: String,
+        @Query("year") year: String,
+        @Query("month") month: String
+    ) : Response<MonthPlanResponse>
+
+    @GET("/plan/detail/")
+    suspend fun getDatePlan(
+        @Header("Authorization") header: String,
+        @Query("id") project_id: String,
+        @Query("date") date: String
+    ) : Response<DatePlanResponse>
+
+    @DELETE("/plan/{planId}")
+    suspend fun deletePlan(
+        @Header("Authorization") header: String,
+        @Path("planId") planId: String
+    ) : Response<Unit>
+
+    @DELETE("/plan/resign/{chatRoomId}/{planId}")
+    suspend fun resignPlan(
+        @Header("Authorization") header: String,
+        @Path("chatRoomId") chatRoomId: String,
+        @Path("planId") planId: String
+    ) : Response<Unit>
 }

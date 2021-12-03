@@ -186,7 +186,6 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
         val view = v
         fun bind(item: ChatMessageResponse.ChatReceiveResponse) {
             view.chat_mine_content_tv.text = item.message
-            view.chat_mine_cnt_tv.text = item.readerList.size.toString()
             dateFormat(item.createdAt, view.chat_mine_time_tv)
 
             itemView.setOnLongClickListener(View.OnLongClickListener {
@@ -205,7 +204,6 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
         fun bind(item: ChatMessageResponse.ChatReceiveResponse) {
             view.chat_other_name_tv.text = item.senderName
             view.chat_other_content_tv.text = item.message
-            view.chat_other_cnt_tv.text = item.readerList.size.toString()
             imageLoad(view.chat_other_profile_iv, item.senderImage)
             dateFormat(item.createdAt, view.chat_other_time_tv)
 
@@ -259,7 +257,6 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
         fun bind(item: ChatMessageResponse.ChatReceiveResponse) {
             view.join_plan_item_other_content_tv.text = item.planName
             view.join_plan_item_other_date_tv.text = "${item.startDate} ~ ${item.endDate}"
-            view.join_plan_item_other_cnt_tv.text = item.readerList.size.toString()
             dateFormat(item.createdAt, view.join_plan_item_other_time_tv)
             imageLoad(view.join_chat_other_profile_iv, item.senderImage)
 
@@ -277,7 +274,6 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
         fun bind(item: ChatMessageResponse.ChatReceiveResponse) {
             view.resign_plan_item_mine_content_tv.text = item.planName
             view.resign_plan_item_mine_date_tv.text = "${item.startDate} ~ ${item.endDate}"
-            view.resign_plan_item_mine_cnt_tv.text = item.readerList.size.toString()
             dateFormat(item.createdAt, view.resign_plan_item_mine_time_tv)
 
             val position = absoluteAdapterPosition
@@ -294,7 +290,6 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
         fun bind(item: ChatMessageResponse.ChatReceiveResponse) {
             view.resign_plan_item_other_content_tv.text = item.planName
             view.resign_plan_item_other_date_tv.text = "${item.startDate} ~ ${item.endDate}"
-            view.resign_plan_item_other_cnt_tv.text = item.readerList.size.toString()
             dateFormat(item.createdAt, view.resign_plan_item_other_time_tv)
             imageLoad(view.resign_chat_other_profile_iv, item.senderImage)
 

@@ -3,10 +3,12 @@ package com.example.project_flow_android.util
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
+import android.util.Log
 import android.widget.EditText
 import com.example.project_flow_android.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.aviran.cookiebar2.CookieBar
+import java.text.SimpleDateFormat
 import java.util.*
 
 class DialogUtil(private val activity: Activity) {
@@ -18,7 +20,11 @@ class DialogUtil(private val activity: Activity) {
 
         val datePicker = DatePickerDialog(activity, R.style.DatePickerStyle,
             { view, year, month, dayOfMonth ->
-                editText.setText("${year}년 ${month+1}월 ${dayOfMonth}일")
+                if(dayOfMonth < 10){
+                    editText.setText("${year}년 ${month+1}월 0${dayOfMonth}일")
+                } else {
+                    editText.setText("${year}년 ${month+1}월 ${dayOfMonth}일")
+                }
             }, year, month, day)
         datePicker.show()
     }
