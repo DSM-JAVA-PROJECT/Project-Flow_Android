@@ -104,7 +104,6 @@ class ChatFragment : Fragment() {
         socket.errorLiveData.observe(viewLifecycleOwner, {
             errorHandler(socket.errorLiveData.value!!.peekContent())
         })
-
         chat_title_tv.text = socket.getRoomName()
         chat_more_iv.setOnClickListener {
             if (view_more.visibility == View.VISIBLE)
@@ -167,10 +166,15 @@ class ChatFragment : Fragment() {
             requireActivity().finish()
         }
         pin_delete_ib.setOnClickListener{
+            dialogUtil.cookieBarBuilder(
+                R.string.pin_message_remove,
+                pin_message_tv.text.toString(),
+                null,
+                R.color.color_flow
+            )
+            socket.pinRemove()
             pin_layout.visibility = View.GONE
-
         }
-
     }
 
     override fun onStop() {

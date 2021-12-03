@@ -46,8 +46,6 @@ class SocketApplication {
         get() = _receiveLiveData
     val errorLiveData : LiveData<Event<Int>>
         get() = _errorLiveData
-    val readerLiveData : LiveData<Event<ReJoinResponse>>
-        get() = _readerLiveData
     val pinLiveData : LiveData<Event<PinResponse>>
         get() = _pinLiveData
 
@@ -98,6 +96,12 @@ class SocketApplication {
         data.put("chatId", chatId)
         data.put("chatRoomId", chatRoomId)
         socket.emit("pin", data)
+    }
+
+    fun pinRemove(){
+        val data = JSONObject()
+        data.put("chatRoomId", chatRoomId)
+        socket.emit("pin.remove", data)
     }
 
     fun chatReceive(){
