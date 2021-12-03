@@ -19,9 +19,9 @@ class FlowApiImpl {
 
 
     fun addProject(
-        token: String, request: AddProjectRequest,file : File
+        token: String, request: AddProjectRequest, file: File,
     ): @NonNull Single<Response<GetProjectsId>> =
-        providerFlowApi().addProject(token, request,file.toMultipartPart())
+        providerFlowApi().addProject(token, request, file.toMultipartPart())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
@@ -29,7 +29,7 @@ class FlowApiImpl {
         token: String,
         ProjectId: String,
     ): @NonNull Single<Response<Void>> =
-        providerFlowApi().finishProject(token,ProjectId)
+        providerFlowApi().finishProject(token, ProjectId)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
@@ -40,8 +40,12 @@ class FlowApiImpl {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
-    fun finishPlan(token: String,ProjectId: String,PlanId : String): @NonNull Single<Response<Void>> =
-        providerFlowApi().finishPlan(token,ProjectId,PlanId)
+    fun finishPlan(
+        token: String,
+        ProjectId: String,
+        PlanId: String,
+    ): @NonNull Single<Response<Void>> =
+        providerFlowApi().finishPlan(token, ProjectId, PlanId)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
@@ -54,7 +58,18 @@ class FlowApiImpl {
         file: File,
         emails: Array<String>,
     ): @NonNull Single<Response<Void>> =
-        providerFlowApi().addProjectQuery(token,projectName,explanation,startDate,endDate,file.toMultipartPart(),emails)
+        providerFlowApi().addProjectQuery(token,
+            projectName,
+            explanation,
+            startDate,
+            endDate,
+            file.toMultipartPart(),
+            emails)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+
+    fun gitOauth(): @NonNull Single<Response<GitToken>> =
+        providerFlowApi().gitOauth()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 

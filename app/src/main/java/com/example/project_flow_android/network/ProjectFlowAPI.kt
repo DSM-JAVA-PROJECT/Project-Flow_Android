@@ -74,7 +74,8 @@ interface ProjectFlowAPI {
         @Query("emails") emails : Array<String>
     ): Single<Response<Void>>
 
-
+    @GET("/auth/oauth")
+    fun gitOauth() : Single<Response< GitToken>>
 
 
 }
