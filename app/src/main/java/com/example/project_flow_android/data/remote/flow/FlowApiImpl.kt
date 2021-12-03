@@ -17,16 +17,13 @@ class FlowApiImpl {
     private fun providerFlowApi(): ProjectFlowAPI = ApiProvider.RetroFitBuilder.create(
         ProjectFlowAPI::class.java)
 
-    @FormUrlEncoded
-    @Multipart
+
     fun addProject(
         token: String, request: AddProjectRequest,file : File
     ): @NonNull Single<Response<GetProjectsId>> =
         providerFlowApi().addProject(token, request,file.toMultipartPart())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-
-
 
     fun finishProject(
         token: String,
@@ -36,19 +33,28 @@ class FlowApiImpl {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
-    fun deleteProject(
-        token: String,
-        ProjectId: String,
-    ): @NonNull Single<Response<Void>> =
-        providerFlowApi().deleteProject(token,ProjectId)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-
-
     fun getMainInfo(
         token: String,
     ): @NonNull Single<Response<GetMainInfoResponse>> =
         providerFlowApi().getMainInfo(token)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+
+    fun finishPlan(token: String,ProjectId: String,PlanId : String): @NonNull Single<Response<Void>> =
+        providerFlowApi().finishPlan(token,ProjectId,PlanId)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+
+    fun addProjectQuery(
+        token: String,
+        projectName: String,
+        explanation: String,
+        startDate: String,
+        endDate: String,
+        file: File,
+        emails: Array<String>,
+    ): @NonNull Single<Response<Void>> =
+        providerFlowApi().addProjectQuery(token,projectName,explanation,startDate,endDate,file.toMultipartPart(),emails)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
