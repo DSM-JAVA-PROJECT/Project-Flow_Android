@@ -4,23 +4,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.data.chat.ProjectMemberResponse
 import com.example.project_flow_android.data.chat.RoomListResponse
 import com.example.project_flow_android.data.model.sign.chat.*
 import com.example.project_flow_android.data.remote.chat.ChatRepositoryImpl
+import com.example.project_flow_android.di.ProjectFlowApplication
 import com.example.project_flow_android.util.Event
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import org.json.JSONObject
 
 class ChatViewModel : ViewModel() {
-    private val access_token =
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2Mzc2NTAyODgsImlkIjoiNjE5YzhmNjk4ZDZlMjY3MzRiNTExY2M5IiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.kZkCt0TiXeWjT-zPwnDOENmLA3WB_NQg7yd4zAo2R1Q"
-    //private val access_token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzgxNzcwNzYsImV4cCI6MTYzODI2MzQ3NiwiaWQiOiI2MTljOTQzMzhkNmUyNjczNGI1MTFjY2QiLCJlbWFpbCI6InduZHVmMDQwNV9AbmF2ZXIuY29tIn0.ovevh3CFd9N7p1hK028bLnPdCPb45jJne7SL651XCu8"
-    private val sub_access =
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2Mzc2NTAzMDQsImlkIjoiNjE5YzhmNWU4ZDZlMjY3MzRiNTExY2M4IiwiZW1haWwiOiJhYmgwOTIwb25lQG5hdmVyLmNvbSJ9.chufW3OWC_lhzHeFQUDOjJA2b_Kx_01ls6_wgi0Etow"
-    private var projectId = "61a4d2e7b9d4a60b9a6a7ebc"
-    //private var projectId = "61a4ecffb9d4a60b9a6a7ebe"
+
+    private val prefs = SharedPreferenceStorage(ProjectFlowApplication.context)
+    private val access_token = prefs.getInfo("access_token")
+    private var projectId = prefs.getProjectId("projectId")
 
     private val chatRepository = ChatRepositoryImpl()
     private val _chatLiveData: MutableLiveData<ProjectMemberResponse> = MutableLiveData()

@@ -34,7 +34,7 @@ class ChatFragment : Fragment() {
     private val photoSelect =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == Activity.RESULT_OK) {
-                Glide.with(requireContext()).load(it.data?.data).into(test_iv)
+                socket.sendImage(it.data?.data.toString())
             }
         }
 

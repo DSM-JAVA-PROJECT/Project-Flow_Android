@@ -3,10 +3,12 @@ package com.example.project_flow_android.network
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.data.model.sign.chat.ChatErrorResponse
 import com.example.project_flow_android.data.model.sign.chat.ChatMessageResponse
 import com.example.project_flow_android.data.model.sign.chat.PinResponse
 import com.example.project_flow_android.data.model.sign.chat.ReJoinResponse
+import com.example.project_flow_android.di.ProjectFlowApplication
 import com.example.project_flow_android.util.Event
 import com.google.gson.Gson
 import io.socket.client.IO
@@ -18,7 +20,6 @@ import org.json.JSONObject
 import kotlin.collections.ArrayList
 
 class SocketApplication {
-
     companion object{
         private var socketApplication : SocketApplication? = null
         fun getSocket() : SocketApplication {
@@ -28,14 +29,11 @@ class SocketApplication {
             return socketApplication!!
         }
     }
+    private val prefs = SharedPreferenceStorage(ProjectFlowApplication.context)
     private val url = "http://3.80.121.3:8081"
-    private val access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2Mzc2NTAyODgsImlkIjoiNjE5YzhmNjk4ZDZlMjY3MzRiNTExY2M5IiwiZW1haWwiOiJhYmgwOTIwb25lQGdtYWlsLmNvbSJ9.kZkCt0TiXeWjT-zPwnDOENmLA3WB_NQg7yd4zAo2R1Q"
-    //private val access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2MzgxNzcwNzYsImV4cCI6MTYzODI2MzQ3NiwiaWQiOiI2MTljOTQzMzhkNmUyNjczNGI1MTFjY2QiLCJlbWFpbCI6InduZHVmMDQwNV9AbmF2ZXIuY29tIn0.ovevh3CFd9N7p1hK028bLnPdCPb45jJne7SL651XCu8"
-    private val sub_access = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzZXJ2ZXIiLCJpYXQiOjE2Mzc2NTAzMDQsImlkIjoiNjE5YzhmNWU4ZDZlMjY3MzRiNTExY2M4IiwiZW1haWwiOiJhYmgwOTIwb25lQG5hdmVyLmNvbSJ9.chufW3OWC_lhzHeFQUDOjJA2b_Kx_01ls6_wgi0Etow"
     private lateinit var socket : Socket
     private var chatRoomId = ""
-    private var projectId = "61a4d2e7b9d4a60b9a6a7ebc"
-    //private var projectId = "61a4ecffb9d4a60b9a6a7ebe"
+    private var projectId = prefs.getProjectId("projectId")
     private var chatImage = ""
     private var roomName = ""
     private val _receiveLiveData : MutableLiveData<Event<ChatMessageResponse.ChatReceiveResponse>> = MutableLiveData()
@@ -52,6 +50,7 @@ class SocketApplication {
     fun connect(){
         Thread {
             try {
+                val access_token = prefs.getNotBearerInfo("access_token")
                 val options = IO.Options()
                 options.transports = arrayOf(WebSocket.NAME)
                 options.query = "Authorization=$access_token"
@@ -87,8 +86,14 @@ class SocketApplication {
         val data = JSONObject()
         data.put("message", message)
         data.put("chatRoomId", chatRoomId)
-        socket.emit("chatroom.rejoin", data)
         socket.emit("message", data)
+    }
+
+    fun sendImage(image: String){
+        val data = JSONObject()
+        data.put("imageUrl", image)
+        data.put("chatRoomId", chatRoomId)
+        socket.emit("message.image", data)
     }
 
     fun pin(chatId: String){
@@ -105,7 +110,8 @@ class SocketApplication {
     }
 
     fun chatReceive(){
-        socket.on("message", onMassage)
+        socket.on("message", onMessage)
+        socket.on("message.image", onImageMessage)
         socket.on("pin", onPin)
         socket.on("plan.create", onAddPlan)
         socket.on("plan.join", onJoinPlan)
@@ -187,8 +193,15 @@ class SocketApplication {
 
     fun getRoomName() = roomName
 
-    private val onMassage = Emitter.Listener { args ->
+    private val onMessage = Emitter.Listener { args ->
         Log.i("Message payload", args[0].toString())
+        val json = args[0].toString()
+        val message = Gson().fromJson(json, ChatMessageResponse.ChatReceiveResponse::class.java)
+        _receiveLiveData.postValue(Event(message))
+    }
+
+    private val onImageMessage = Emitter.Listener { args ->
+        Log.i("Image message payload", args[0].toString())
         val json = args[0].toString()
         val message = Gson().fromJson(json, ChatMessageResponse.ChatReceiveResponse::class.java)
         _receiveLiveData.postValue(Event(message))
