@@ -52,6 +52,7 @@ class ChatCreateActivity : AppCompatActivity() {
             runOnUiThread {
                 val handler = Handler(Looper.getMainLooper())
                 handler.postDelayed({
+                    chatViewModel.getRoomList()
                     finish()
                 }, 2000)
             }

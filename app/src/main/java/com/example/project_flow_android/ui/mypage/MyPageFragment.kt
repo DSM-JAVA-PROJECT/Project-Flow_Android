@@ -61,6 +61,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
             if (it.resultCode == Activity.RESULT_OK) {
                 val data = it.data?.data!!.path
                 val uri = it.data?.data!!
+                Glide.with(requireContext()).load(uri).into(profile_img)
                 fileUpload(data!!, uri)
             }
         }
