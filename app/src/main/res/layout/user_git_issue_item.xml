@@ -1,93 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <data>
-        <variable
-            name="vm"
-            type="com.example.project_flow_android.viewmodel.mypage.MyPageViewModel" />
-
-        <variable
-            name="issue_number"
-            type="String" />
-
-        <variable
-            name="issue_title"
-            type="String" />
-
-        <variable
-            name="issue_made"
-            type="String" />
-
-
-    </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        app:cardElevation="0dp"
-        android:layout_height="100dp">
+        app:cardElevation="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="20dp"
+        android:layout_height="80dp">
 
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/git_num"
+            android:layout_width="50dp"
             android:layout_height="50dp"
+            android:textColor="@color/red"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:orientation="vertical">
+            android:layout_marginStart="35dp"
+            android:elevation="10dp"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nanumgothic_bold"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="100dp">
 
             <TextView
-                android:id="@+id/contect_date"
+                android:id="@+id/git_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView24"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.483" />
+                android:text="프로젝트 플로우"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/nanumgothic_regular" />
 
             <TextView
-                android:id="@+id/textView24"
+                android:id="@+id/git_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{issue_number}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline35"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.483" />
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/nanumgothic_regular"
+                android:text="2021.03.24 ~ 2021.05.01"
+                android:textColor="@color/blue_main"
+                android:textSize="12sp" />
 
-            <TextView
-                android:id="@+id/textView25"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{issue_title}"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="@+id/guideline34"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline34"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="82dp" />
-
-            <TextView
-                android:id="@+id/textView26"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{issue_made}"
-                app:layout_constraintStart_toStartOf="@+id/guideline34"
-                app:layout_constraintTop_toBottomOf="@+id/textView25" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline35"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="10dp" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 </layout>
