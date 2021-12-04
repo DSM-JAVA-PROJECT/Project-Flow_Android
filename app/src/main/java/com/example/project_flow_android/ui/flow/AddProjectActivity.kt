@@ -40,7 +40,7 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding>(R.layout.acti
                 getImage()
             }
             binding.goProjectImg.setOnClickListener {
-                //TODO 뒤로가기 코드
+                finish()
             }
         }
     }

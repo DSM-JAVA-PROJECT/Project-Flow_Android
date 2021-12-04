@@ -16,6 +16,7 @@ class LoginViewModel(
     val userPassword = MutableLiveData<String>()
     val accessToken = MutableLiveData<String>()
 
+
     private val _changeComment = MutableLiveData<String>()
     val changeComment: LiveData<String> get() = _changeComment
 
@@ -36,6 +37,16 @@ class LoginViewModel(
         }, {
             _changeComment.value = "로그인 실패하였습니다"
         })
+    }
+
+    fun doOauth(){
+        loginApiImpl.doOauthLogin().subscribe({ it ->
+            if(it.isSuccessful){
+                accessToken.value = it.body()!!.githubToken
+            }
+
+        })
+
     }
 }
 

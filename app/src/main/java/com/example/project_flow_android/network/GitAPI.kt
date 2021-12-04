@@ -8,7 +8,7 @@ import retrofit2.http.Header
 
 interface GitAPI {
 
-    @GET("https://api.github.com/{}")
+    @GET("https://api.github.com/")
 
     fun getGitInfo(
         @Header("Authorization") token: String

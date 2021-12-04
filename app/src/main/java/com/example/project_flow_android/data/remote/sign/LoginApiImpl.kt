@@ -17,4 +17,8 @@ class LoginApiImpl {
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
 
+    fun doOauthLogin() :@NonNull Single<Response<GitToken>> = providerSignApi().gitOauth()
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+
 }

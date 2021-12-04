@@ -35,5 +35,8 @@ class LoginOauthActivity : BaseActivity<ActivityLoginOauthBinding>(R.layout.acti
         val webView = findViewById<WebView>(R.id.web_view)
         webView.webViewClient = WebViewClient()
         webView.loadUrl("http://18.210.203.222:8080/auth/oauth")
+        lazy {
+            vm.doOauth()
+        }
     }
 }

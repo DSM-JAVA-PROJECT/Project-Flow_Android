@@ -74,7 +74,7 @@ interface ProjectFlowAPI {
     ): Single<Response<Void>>
 
     @GET("/auth/oauth")
-    fun gitOauth() : Single<Response< GitToken>>
+    fun gitOauth() : Single<Response<GitToken>>
 
 
 }
