@@ -56,6 +56,7 @@ class AddProjectViewModel(
             numArray)
             .subscribe({
                 if (it.isSuccessful) {
+                    _successAddProject.value = true
                     it
                 } else {
                     it

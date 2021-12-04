@@ -59,7 +59,7 @@ class MyPageViewModel(
         val token = sharedPreferenceStorage.getInfo("access_token")
         myPageApiImpl.changeImage(token,file).subscribe({ response ->
             if (response.isSuccessful) {
-                _successImage.value!!
+                _successImage.value = true
             } else {
             }
         }, {

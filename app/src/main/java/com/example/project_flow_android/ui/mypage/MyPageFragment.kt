@@ -117,9 +117,10 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
                 projectAdapter.setItem(it.projects)
             })
             successImage.observe(viewLifecycleOwner, {
-                getUserInfo()
+                if(successImage.value == true){
+                    getUserInfo()
+                }
             })
-
             getUserInfo()
             getProjectInfo()
         }

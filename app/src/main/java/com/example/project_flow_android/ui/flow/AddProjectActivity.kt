@@ -33,15 +33,17 @@ class AddProjectActivity : BaseActivity<ActivityAddProjectBinding>(R.layout.acti
     private fun observeEvent() {
         vm.run {
             successAddProject.observe(this@AddProjectActivity, {
-                val intent = Intent(this@AddProjectActivity, FlowFragment::class.java)
-                startActivity(intent)
-            })
-            binding.getImg.setOnClickListener {
-                getImage()
+                if (successAddProject.value == true) {
+                    val intent = Intent(this@AddProjectActivity, FlowFragment::class.java)
+                    startActivity(intent)
             }
-            binding.goProjectImg.setOnClickListener {
-                //TODO 뒤로가기 코드
-            }
+        })
+        binding.getImg.setOnClickListener {
+            getImage()
+        }
+        binding.goProjectImg.setOnClickListener {
+           //TODO
         }
     }
+}
 }
