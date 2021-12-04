@@ -72,4 +72,22 @@ class FlowApiImpl {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
+    fun addProjectPart(
+        token: String, projectName: String,
+        explanation: String,
+        startDate: String,
+        endDate: String,
+        file: File,
+        emails: Array<String>,
+    ): @NonNull Single<Response<GetProjectsId>> =
+        providerFlowApi().addProjectPart(token,
+            projectName,
+            explanation,
+            startDate,
+            endDate,
+            file.toMultipartPart(),
+            emails)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+
 }

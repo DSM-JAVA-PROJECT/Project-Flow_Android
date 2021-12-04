@@ -1,5 +1,6 @@
 package com.example.project_flow_android.network
 
+import com.example.project_flow_android.data.model.sign.chat.FileResponse
 import com.example.project_flow_android.feature.*
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
@@ -75,6 +76,31 @@ interface ProjectFlowAPI {
 
     @GET("/auth/oauth")
     fun gitOauth() : Single<Response<GitToken>>
+
+    @Multipart
+    @POST("/project")
+    fun addProjectPart(
+        @Header("Authorization") token: String,
+        @Part("projectName") projectName: String,
+        @Part("explanation") explanation:String,
+        @Part("startDate") startDate : String,
+        @Part("endDate") endDate : String,
+        @Part("file") file: MultipartBody.Part,
+        @Part("emails") emails : Array<String>
+    ) : Single<Response<GetProjectsId>>
+
+    @Multipart
+    @POST("/project")
+    suspend fun addProjectSuspend(
+        @Header("Authorization") header: String,
+        @Part("projectName") projectName: String,
+        @Part("explanation") explanation:String,
+        @Part("startDate") startDate : String,
+        @Part("endDate") endDate : String,
+        @Part("file") file: MultipartBody.Part,
+        @Part("emails") emails : Array<String>
+    ) : Response<GetProjectsId>
+
 
 
 }
