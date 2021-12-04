@@ -20,8 +20,14 @@ class ChangePasswordDialog :
             binding.cancleTv.setOnClickListener {
                 dismiss()
             }
+            binding.confirmTv.setOnClickListener {
+                changePassword()
+            }
             successChange.observe(viewLifecycleOwner, {
-                //dismiss()
+                if(successChange.value == true){
+                    Toast.makeText(requireContext(),"비밀번호 변경에 성공하였습니다",Toast.LENGTH_SHORT).show()
+                    dismiss()
+                }
             })
         }
     }
