@@ -43,4 +43,20 @@ class SharedPreferenceStorage(private val context: Context) {
         if (pref == null) pref = context.getSharedPreferences("content", Context.MODE_PRIVATE)
         pref!!.edit().clear().apply()
     }
+
+    fun getProjectId(content: String?) : String{
+        if (pref == null) pref = context.getSharedPreferences("content", Context.MODE_PRIVATE)
+        return if (content == "projectId") {
+            pref!!.getString(content, "").toString()
+        } else
+            pref!!.getString(content, "").toString()
+            //TODO else에 뭐 넣어야 하는지 
+    }
+
+    fun saveProjectId(projectId: String, content: String){
+        if (pref == null) pref = context.getSharedPreferences("content", Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = pref!!.edit()
+        editor.putString(content, projectId)
+        editor.apply()
+    }
 }
