@@ -10,8 +10,8 @@
     <item
         android:id="@+id/menu_calendar_it"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_calendar_today_24"
-        android:title="@string/menu_calendar"
+        android:icon="@drawable/git_logo"
+        android:title="Git"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_chat_it"
