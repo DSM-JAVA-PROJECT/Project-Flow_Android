@@ -46,11 +46,7 @@ class SharedPreferenceStorage(private val context: Context) {
 
     fun getProjectId(content: String?) : String{
         if (pref == null) pref = context.getSharedPreferences("content", Context.MODE_PRIVATE)
-        return if (content == "projectId") {
-            pref!!.getString(content, "").toString()
-        } else
-            pref!!.getString(content, "").toString()
-            //TODO else에 뭐 넣어야 하는지 
+        return pref!!.getString(content, "").toString()
     }
 
     fun saveProjectId(projectId: String, content: String){
