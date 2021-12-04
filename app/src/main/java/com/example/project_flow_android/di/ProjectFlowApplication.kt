@@ -1,6 +1,7 @@
 package com.example.project_flow_android.di
 
 import android.app.Application
+import android.content.Context
 import com.example.project_flow_android.di.module.*
 
 import org.koin.android.ext.koin.androidContext
@@ -27,5 +28,10 @@ class ProjectFlowApplication : Application() {
                 )
             )
         }
+        context = applicationContext
+    }
+    companion object{
+        lateinit var context: Context
+            private set
     }
 }
