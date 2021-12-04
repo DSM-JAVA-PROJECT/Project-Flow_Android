@@ -1,24 +1,12 @@
 package com.example.project_flow_android.viewmodel.flow
 
-import android.net.Uri
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.project_flow_android.data.SharedPreferenceStorage
-import com.example.project_flow_android.data.model.sign.chat.FileResponse
 import com.example.project_flow_android.data.remote.flow.FlowApiImpl
 import com.example.project_flow_android.feature.AddProjectRequest
-import com.example.project_flow_android.network.ApiProvider
-import com.example.project_flow_android.ui.chat.ChatActivity
-import com.example.project_flow_android.ui.chat.fragment.ChatListFragment
-import com.example.project_flow_android.ui.main.MainActivity
-import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.io.File
-import java.lang.Exception
 
 class AddProjectViewModel(
     private val flowApiImpl: FlowApiImpl,
@@ -46,22 +34,24 @@ class AddProjectViewModel(
         val splitArray: List<String> = member.split(",")
         val numArray = splitArray.toTypedArray()
 
-        flowApiImpl.addProjectQuery(
+        flowApiImpl.addProject(
             token,
-            projectName.value!!,
-            projectExplanation.value!!,
-            startDate.value!!,
-            endDate.value!!,
-            File(imagePath),
-            numArray)
+            AddProjectRequest(projectName.value!!,
+                projectExplanation.value!!,
+                startDate.value!!,
+                endDate.value!!,
+                File(imagePath),
+                numArray)
+        )
             .subscribe({
                 if (it.isSuccessful) {
                     _successAddProject.value = true
-                    it
+
                 } else {
-                    it
+
                 }
             }, {
+
                 it.message
             })
     }

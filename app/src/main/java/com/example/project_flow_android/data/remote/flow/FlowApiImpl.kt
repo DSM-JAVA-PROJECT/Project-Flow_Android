@@ -8,6 +8,9 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.Multipart
@@ -19,10 +22,25 @@ class FlowApiImpl {
 
     fun addProject(
         token: String, request: AddProjectRequest
-    ): @NonNull Single<Response<GetProjectsId>> =
-        providerFlowApi().addProject(token, request)
+    ): @NonNull Single<Response<GetProjectsId>> {
+
+        val requestBody = HashMap<String, RequestBody>()
+        val type = "text/plain".toMediaTypeOrNull()
+        requestBody["projectName"] = RequestBody.create(type, request.projectName)
+        requestBody["explanation"] = RequestBody.create(type,request.explanation)
+        requestBody["startDate"] = RequestBody.create(type,request.startDate)
+        requestBody["endDate"] = RequestBody.create(type,request.endDate)
+        requestBody["emails"] = RequestBody.create(type,request.emails.toString())
+
+        return providerFlowApi().addProjectQuery(
+            token,
+            file = request.file.toMultipartPart(),
+            requestBody
+        )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
+    }
+
 
     fun finishProject(
         token: String,
@@ -48,24 +66,6 @@ class FlowApiImpl {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
-    fun addProjectQuery(
-        token: String,
-        projectName: String,
-        explanation: String,
-        startDate: String,
-        endDate: String,
-        file: File,
-        emails: Array<String>,
-    ): @NonNull Single<Response<Void>> =
-        providerFlowApi().addProjectQuery(token,
-            projectName,
-            explanation,
-            startDate,
-            endDate,
-            file.toMultipartPart(),
-            emails)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
 
     fun gitOauth(): @NonNull Single<Response<GitToken>> =
         providerFlowApi().gitOauth()

@@ -4,6 +4,7 @@ import com.example.project_flow_android.feature.*
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 import java.io.File
@@ -39,7 +40,8 @@ interface ProjectFlowAPI {
     @POST("/project")
     fun addProject(
         @Header("Authorization") token: String,
-        @Body request: AddProjectRequest
+        @Body request: AddProjectRequest,
+        @Part("file") file: MultipartBody.Part
     ): Single<Response<GetProjectsId>>
 
     @PATCH("/project/close/{id}")
@@ -61,17 +63,14 @@ interface ProjectFlowAPI {
         @Path("plan_id") PlanId: String,
     ): Single<Response<Void>>
 
+
     @Multipart
     @POST("/project")
     fun addProjectQuery(
         @Header("Authorization") token: String,
-        @Query("projectName") projectName: String,
-        @Query("explanation") explanation:String,
-        @Query("startDate") startDate : String,
-        @Query("endDate") endDate : String,
-        @Part("file") file: MultipartBody.Part,
-        @Query("emails") emails : Array<String>
-    ): Single<Response<Void>>
+        @Part file: MultipartBody.Part,
+        @PartMap data: HashMap<String, RequestBody>
+    ): Single<Response<GetProjectsId>>
 
     @GET("/auth/oauth")
     fun gitOauth() : Single<Response< GitToken>>
