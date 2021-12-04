@@ -10,7 +10,8 @@ import com.example.project_flow_android.viewmodel.certification.CertificationVie
 import com.example.project_flow_android.viewmodel.certification.CertificationViewModelFactory
 import org.koin.android.ext.android.inject
 
-class CertificationActivity : BaseActivity<ActivityEmailVerifyBinding>(R.layout.activity_email_verify){
+class CertificationActivity :
+    BaseActivity<ActivityEmailVerifyBinding>(R.layout.activity_email_verify) {
 
     private val vmFactory by inject<CertificationViewModelFactory>()
     override val vm: CertificationViewModel by lazy {
@@ -23,7 +24,11 @@ class CertificationActivity : BaseActivity<ActivityEmailVerifyBinding>(R.layout.
 
         successfulCertification()
         vm.run {
-            secondPostCertificationCode.observe(this@CertificationActivity,{
+            secondPostCertificationCode.observe(this@CertificationActivity, {
+                binding.comment3Tv.text = changeComment3.value
+            })
+            postCertification()
+            firstPostCertificationCode.observe(this@CertificationActivity, {
                 binding.comment3Tv.text = changeComment3.value
             })
 
@@ -33,8 +38,8 @@ class CertificationActivity : BaseActivity<ActivityEmailVerifyBinding>(R.layout.
 
     private fun successfulCertification() {
         vm.run {
-            successfulCertification.observe(this@CertificationActivity,{
-                if(it) {
+            successfulCertification.observe(this@CertificationActivity, {
+                if (it) {
                     val intent = Intent(this@CertificationActivity, FinishSignActivity::class.java)
                     startActivity(intent)
                 }
@@ -42,13 +47,4 @@ class CertificationActivity : BaseActivity<ActivityEmailVerifyBinding>(R.layout.
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        vm.run {
-            postCertification()
-            firstPostCertificationCode.observe(this@CertificationActivity, {
-                binding.comment3Tv.text = changeComment3.value
-            })
-        }
-    }
 }
