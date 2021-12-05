@@ -20,28 +20,6 @@ class FlowApiImpl {
     private fun providerFlowApi(): ProjectFlowAPI = ApiProvider.RetroFitBuilder.create(
         ProjectFlowAPI::class.java)
 
-    fun addProject(
-        token: String, request: AddProjectRequest
-    ): @NonNull Single<Response<GetProjectsId>> {
-
-        val requestBody = HashMap<String, RequestBody>()
-        val type = "text/plain".toMediaTypeOrNull()
-        requestBody["projectName"] = RequestBody.create(type, request.projectName)
-        requestBody["explanation"] = RequestBody.create(type,request.explanation)
-        requestBody["startDate"] = RequestBody.create(type,request.startDate)
-        requestBody["endDate"] = RequestBody.create(type,request.endDate)
-        requestBody["emails"] = RequestBody.create(type,request.emails.toString())
-
-        return providerFlowApi().addProjectQuery(
-            token,
-            file = request.file.toMultipartPart(),
-            requestBody
-        )
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-    }
-
-
     fun finishProject(
         token: String,
         ProjectId: String,
@@ -72,4 +50,22 @@ class FlowApiImpl {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
+    fun addProject2(
+        token: String,
+        request: AddProjectRequest,
+    ): @NonNull Single<Response<GetProjectsId>> =
+        providerFlowApi().addProject2(token, request)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+
+
+    fun postImage(file: File): @NonNull Single<Response<image>> =
+        providerFlowApi().postImage(file.toMultipartPart())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+
+    fun changePostImage(token: String,file: File): @NonNull Single<Response<Void>> =
+        providerFlowApi().changeProfileImage(token,file.toMultipartPart())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
 }

@@ -37,8 +37,8 @@ class MyPageApiImpl {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
-    fun changeImage(token: String,file : MultipartBody.Part): @NonNull Single<Response<Void>> =
-        providerMypageApi().changeProfileImage(token, file)
+    fun changeImage(token: String,file : File): @NonNull Single<Response<Void>> =
+        providerMypageApi().changeProfileImage(token, file.toMultipartPart())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
