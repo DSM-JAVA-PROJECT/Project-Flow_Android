@@ -33,7 +33,6 @@ class SocketApplication {
     private val url = "http://3.80.121.3:8081"
     private lateinit var socket : Socket
     private var chatRoomId = ""
-    private var projectId = prefs.getProjectId("projectId")
     private var chatImage = ""
     private var roomName = ""
     private val _receiveLiveData : MutableLiveData<Event<ChatMessageResponse.ChatReceiveResponse>> = MutableLiveData()
@@ -77,6 +76,7 @@ class SocketApplication {
         Log.d("Socket Connected - CreateRoom", socket.connected().toString())
         val data = JSONObject()
         val list = JSONArray(users)
+        var projectId = prefs.getProjectId("projectId")
         data.put("userIds", list)
         data.put("projectId", projectId)
         socket.emit("chatroom.create", data)
@@ -173,10 +173,6 @@ class SocketApplication {
         this.chatRoomId = chatRoomId
     }
 
-    fun setProjectId(projectId: String){
-        this.projectId = projectId
-    }
-
     fun setChatImage(chatImage: String){
         this.chatImage = chatImage
     }
@@ -184,8 +180,6 @@ class SocketApplication {
     fun setRoomName(roomName: String){
         this.roomName = roomName
     }
-
-    fun getProjectId() = projectId
 
     fun getChatRoomId() = chatRoomId
 

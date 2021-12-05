@@ -13,13 +13,11 @@ import com.example.project_flow_android.di.ProjectFlowApplication
 import com.example.project_flow_android.util.Event
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
-import org.json.JSONObject
 
 class ChatViewModel : ViewModel() {
 
     private val prefs = SharedPreferenceStorage(ProjectFlowApplication.context)
     private val access_token = prefs.getInfo("access_token")
-    private var projectId = prefs.getProjectId("projectId")
 
     private val chatRepository = ChatRepositoryImpl()
     private val _chatLiveData: MutableLiveData<ProjectMemberResponse> = MutableLiveData()
@@ -53,6 +51,7 @@ class ChatViewModel : ViewModel() {
 
     fun getProjectUser() {
         viewModelScope.launch {
+            val projectId = prefs.getProjectId("projectId")
             val response = chatRepository.getProjectUser(access_token, projectId)
             if (response.isSuccessful) {
                 if (response.code() == 200) {
@@ -64,6 +63,7 @@ class ChatViewModel : ViewModel() {
 
     fun getRoomList() {
         viewModelScope.launch {
+            val projectId = prefs.getProjectId("projectId")
             val response = chatRepository.getRoomList(access_token, projectId)
             if (response.isSuccessful) {
                 if (response.code() == 200) {
@@ -137,6 +137,7 @@ class ChatViewModel : ViewModel() {
 
     fun getNonParticipate(chatRoomId: String) {
         viewModelScope.launch {
+            val projectId = prefs.getProjectId("projectId")
             val response = chatRepository.getNonParticipate(access_token, projectId, chatRoomId)
             if(response.isSuccessful) {
                 _participateLiveData.postValue(response.body())
@@ -155,6 +156,7 @@ class ChatViewModel : ViewModel() {
 
     fun getMonthPlan(year: String, month: String){
         viewModelScope.launch {
+            val projectId = prefs.getProjectId("projectId")
             val response = chatRepository.getMonthPlan(access_token, projectId, year, month)
             if(response.isSuccessful) {
                 _monthPlanLiveData.postValue(Event(response.body()!!))
@@ -164,6 +166,7 @@ class ChatViewModel : ViewModel() {
 
     fun getDatePlan(date: String){
         viewModelScope.launch {
+            val projectId = prefs.getProjectId("projectId")
             val response = chatRepository.getDatePlan(access_token, projectId, date)
             if(response.isSuccessful){
                 _datePlanLiveData.postValue(Event(response.body()!!))
@@ -180,18 +183,12 @@ class ChatViewModel : ViewModel() {
         }
     }
 
-    fun resignPlan(planId: String, chatRoomId: String){
+    fun resignPlan(planId: String, chatRoomId: String) {
         viewModelScope.launch {
             val response = chatRepository.resignPlan(access_token, chatRoomId, planId)
-            if(response.isSuccessful){
+            if (response.isSuccessful) {
                 _resignPlanLiveData.postValue(Event(response.code()))
             }
         }
     }
-
-    fun setProjectId(projectId: String) {
-        this.projectId = projectId
-    }
-
-    fun getProjectId() = projectId
 }
