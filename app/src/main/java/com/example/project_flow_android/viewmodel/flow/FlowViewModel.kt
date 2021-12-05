@@ -96,7 +96,6 @@ class FlowViewModel(
             if (it.isSuccessful) {
                 _getMainInfo.value = it.body()
                 _projectId.value = it.body().toString()
-                val projectsId = sharedPreferenceStorage.getInfo("projectId")
                 if (it.body()!!.projects.size != 0) {
                     _fullProject.value = true
                 }
