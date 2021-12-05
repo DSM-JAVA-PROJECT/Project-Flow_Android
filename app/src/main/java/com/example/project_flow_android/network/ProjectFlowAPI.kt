@@ -42,11 +42,6 @@ interface ProjectFlowAPI {
         @Path("id") projectId: String,
     ): Single<Response<Void>>
 
-    @PATCH("/auth/image")
-    fun changeProfileImage(
-        @Header("Authorization") token: String,
-        @Body file: MultipartBody.Part,
-    ): Single<Response<Void>>
 
     @PATCH("/plan/close?project={projectId}&plan={planId}")
     fun finishPlan(
@@ -60,15 +55,6 @@ interface ProjectFlowAPI {
     fun gitOauth() : Single<Response< GitToken>>
 
 
-    @Multipart
-    @POST("/project")
-    fun addProjectQuery(
-        @Header("Authorization") token: String,
-        @Part image: MultipartBody.Part,
-        @PartMap request: HashMap<String, RequestBody>
-    ): Single<Response<GetProjectsId>>
-
-
     @POST("/project/body")
     fun addProject2(
         @Header("Authorization") token: String,
@@ -76,10 +62,22 @@ interface ProjectFlowAPI {
     ): Single<Response<GetProjectsId>>
 
     @Multipart
-    @POST("/project/Image")
+    @POST("/project/image")
     fun postImage(
         @Part file : MultipartBody.Part
     ) : Single<Response<image>>
+
+    @Multipart
+    @POST("/auth/image")
+    fun changeUrl(
+        @Part file : MultipartBody.Part
+    ) : Single<Response<image>>
+
+    @PATCH("/auth/image")
+    fun changeProfileImage(
+        @Header("Authorization") token: String,
+        @Body request : GetImage,
+    ): Single<Response<Void>>
 
 
 
