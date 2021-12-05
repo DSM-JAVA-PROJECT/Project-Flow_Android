@@ -28,32 +28,48 @@ class AddProjectViewModel(
 
     lateinit var imagePath: String
 
-    fun addProject() {
+    val responseImage = MutableLiveData<String>()
 
+
+    fun getImage2() {
+        flowApiImpl.postImage(
+            File(imagePath)
+        ).subscribe({
+            if (it.isSuccessful) {
+                responseImage.value = it.body()!!.image
+            } else {
+                it
+            }
+
+        }, {
+            it
+        })
+    }
+
+
+    fun addProject() {
         val member: String = projectMember.value!!
         val splitArray: List<String> = member.split(",")
         val numArray = splitArray.toTypedArray()
 
-        flowApiImpl.addProject(
+        flowApiImpl.addProject2(
             token,
             AddProjectRequest(projectName.value!!,
                 projectExplanation.value!!,
                 startDate.value!!,
                 endDate.value!!,
-                File(imagePath),
-                numArray)
-        )
-            .subscribe({
-                if (it.isSuccessful) {
-                    _successAddProject.value = true
+                responseImage.value!!,
+                numArray)).subscribe({
+            if (it.isSuccessful) {
+                _successAddProject.value = true
+                sharedPreferenceStorage.saveInfo("projectId",it.body()!!.projectId)
+                it
+            } else {
+                it
+            }
 
-                } else {
-
-                }
-            }, {
-
-                it.message
-            })
+        }, {
+            it
+        })
     }
-
 }

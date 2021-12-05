@@ -24,7 +24,6 @@ class LoginOauthActivity : BaseActivity<ActivityLoginOauthBinding>(R.layout.acti
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_oauth)
-
         getOauth()
 
     }
