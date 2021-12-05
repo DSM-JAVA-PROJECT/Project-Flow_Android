@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.databinding.ItemFlowViewBinding
+import com.example.project_flow_android.di.ProjectFlowApplication
 import com.example.project_flow_android.feature.GetMainInfoResponse
 import com.example.project_flow_android.feature.GetProjectsId
 import com.example.project_flow_android.util.HorizontalItemDecorator
@@ -23,6 +24,7 @@ class MainFlowAdapter(private val viewModel: FlowViewModel) :
     private val preparingProjectRVAdapter = PreparingProjectRVAdapter(viewModel)
     private val oningProjectRVAdapter = OningProjectRVAdapter(viewModel)
     private val finishProjectRVAdapter = FinishProjectRVAdapter(viewModel)
+    private val prefs = SharedPreferenceStorage(ProjectFlowApplication.context)
 
     inner class MainFlowViewHolder(private val binding: ItemFlowViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -31,6 +33,8 @@ class MainFlowAdapter(private val viewModel: FlowViewModel) :
             val current = LocalDateTime.now()
             val formatter = DateTimeFormatter.ofPattern("MM월 dd일")
             val formatted = current.format(formatter)
+
+            prefs.saveProjectId(item.id, "projectId")
 
             binding.today = formatted
             binding.projectLastDate = item.remainingDays
@@ -85,7 +89,6 @@ class MainFlowAdapter(private val viewModel: FlowViewModel) :
 
     override fun onBindViewHolder(holder: MainFlowViewHolder, position: Int) {
         holder.bind(userProjectList[position])
-
     }
 
     override fun getItemCount(): Int {
