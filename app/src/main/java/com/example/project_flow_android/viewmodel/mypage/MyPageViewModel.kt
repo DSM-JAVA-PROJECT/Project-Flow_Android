@@ -17,8 +17,6 @@ class MyPageViewModel(
     val userName = MutableLiveData<String>()
     val profileImage = MutableLiveData<File>()
 
-    lateinit var imagePath: String
-
     private val _clearAll = MutableLiveData<Boolean>()
     val clearAll: LiveData<Boolean> get() = _clearAll
 
@@ -39,9 +37,10 @@ class MyPageViewModel(
     private val _getUserImage = MutableLiveData<String>()
     val getUserImage : LiveData<String> get() = _getUserImage
 
+    lateinit var imagePath: String
+    val token = sharedPreferenceStorage.getInfo("access_token")
 
     fun getUserInfo() {
-        val token = sharedPreferenceStorage.getInfo("access_token")
         myPageApiImpl.getUserInfo(token).subscribe({ response ->
             if (response.isSuccessful) {
                 _successGet.value = true
@@ -55,9 +54,8 @@ class MyPageViewModel(
         })
     }
 
-    fun postProfileImage(file: MultipartBody.Part) {
-        val token = sharedPreferenceStorage.getInfo("access_token")
-        myPageApiImpl.changeImage(token,file).subscribe({ response ->
+    fun postProfileImage() {
+        myPageApiImpl.changeImage(token, File(imagePath)).subscribe({ response ->
             if (response.isSuccessful) {
                 _successImage.value = true
             } else {
@@ -67,7 +65,6 @@ class MyPageViewModel(
     }
 
     fun getProjectInfo() {
-        val token = sharedPreferenceStorage.getInfo("access_token")
         myPageApiImpl.getUserInfo(token).subscribe({ response ->
             if (response.isSuccessful) {
                 _projects.value = response.body()
