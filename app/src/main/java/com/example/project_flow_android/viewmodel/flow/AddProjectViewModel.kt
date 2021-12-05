@@ -27,9 +27,7 @@ class AddProjectViewModel(
     val successAddProject: LiveData<Boolean> get() = _successAddProject
 
     lateinit var imagePath: String
-
     val responseImage = MutableLiveData<String>()
-
 
     fun getImage2() {
         flowApiImpl.postImage(
@@ -51,7 +49,6 @@ class AddProjectViewModel(
         val member: String = projectMember.value!!
         val splitArray: List<String> = member.split(",")
         val numArray = splitArray.toTypedArray()
-
         flowApiImpl.addProject2(
             token,
             AddProjectRequest(projectName.value!!,
@@ -62,7 +59,7 @@ class AddProjectViewModel(
                 numArray)).subscribe({
             if (it.isSuccessful) {
                 _successAddProject.value = true
-                sharedPreferenceStorage.saveInfo("projectId",it.body()!!.projectId)
+                sharedPreferenceStorage.saveInfo( it.body()!!.projectId,"projectId")
                 it
             } else {
                 it
