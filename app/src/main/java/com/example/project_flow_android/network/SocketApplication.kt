@@ -89,7 +89,7 @@ class SocketApplication {
         socket.emit("message", data)
     }
 
-    fun sendImage(image: String){
+    fun  sendImage(image: String){
         val data = JSONObject()
         data.put("imageUrl", image)
         data.put("chatRoomId", chatRoomId)
