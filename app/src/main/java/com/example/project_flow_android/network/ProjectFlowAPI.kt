@@ -36,14 +36,6 @@ interface ProjectFlowAPI {
     @GET("/main")
     fun getMainInfo(@Header("Authorization") token: String): Single<Response<GetMainInfoResponse>>
 
-    @Multipart
-    @POST("/project")
-    fun addProject(
-        @Header("Authorization") token: String,
-        @Body request: AddProjectRequest,
-        @Part("file") file: MultipartBody.Part
-    ): Single<Response<GetProjectsId>>
-
     @PATCH("/project/close/{id}")
     fun finishProject(
         @Header("Authorization") token: String,
@@ -64,16 +56,32 @@ interface ProjectFlowAPI {
     ): Single<Response<Void>>
 
 
+    @GET("/auth/oauth")
+    fun gitOauth() : Single<Response< GitToken>>
+
+
     @Multipart
     @POST("/project")
     fun addProjectQuery(
         @Header("Authorization") token: String,
-        @Part file: MultipartBody.Part,
-        @PartMap data: HashMap<String, RequestBody>
+        @Part image: MultipartBody.Part,
+        @PartMap request: HashMap<String, RequestBody>
     ): Single<Response<GetProjectsId>>
 
-    @GET("/auth/oauth")
-    fun gitOauth() : Single<Response< GitToken>>
+
+    @POST("/project/body")
+    fun addProject2(
+        @Header("Authorization") token: String,
+        @Body request: AddProjectRequest
+    ): Single<Response<GetProjectsId>>
+
+    @Multipart
+    @POST("/project/Image")
+    fun postImage(
+        @Part file : MultipartBody.Part
+    ) : Single<Response<image>>
+
+
 
 
 }
