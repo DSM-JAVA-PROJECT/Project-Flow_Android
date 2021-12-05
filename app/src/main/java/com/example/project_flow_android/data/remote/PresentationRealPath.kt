@@ -27,5 +27,5 @@ fun Uri.toRealPath(context: Context): String {
 
 fun File.toMultipartPart(): MultipartBody.Part {
     val fileBody = this.asRequestBody("image/jpeg".toMediaTypeOrNull())
-    return MultipartBody.Part.createFormData("images", this.path, fileBody)
+    return MultipartBody.Part.createFormData("file", this.name, fileBody)
 }
