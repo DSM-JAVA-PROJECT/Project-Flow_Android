@@ -7,10 +7,11 @@ import com.example.project_flow_android.R
 import com.example.project_flow_android.base.BaseFragment
 import com.example.project_flow_android.data.remote.toRealPath
 import com.example.project_flow_android.databinding.FragmentMyPageBinding
+import com.example.project_flow_android.ui.main.MainActivity
 import com.example.project_flow_android.ui.mypage.dialog.ChangePasswordDialog
 import com.example.project_flow_android.ui.mypage.dialog.LogoutDialog
 import com.example.project_flow_android.viewmodel.mypage.MyPageViewModel
-import gun0912.tedimagepicker.builder.TedRxImagePicker
+import gun0912.tedimagepicker.builder.TedImagePicker
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
@@ -41,14 +42,13 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
     }
 
     private fun getImage() {
-        TedRxImagePicker.with(requireActivity())
-            .start()
-            .subscribe({ uri ->
-                val imagePath = uri.toRealPath(requireActivity())
+        val context = requireContext()
+        TedImagePicker.with(context)
+            .start { uri ->
+                val imagePath = uri.toRealPath(context)
                 vm.imagePath = imagePath
-                binding.profileImg.setImageURI(uri)
                 vm.postProfileImage()
-            }, Throwable::printStackTrace)
+            }
     }
 
 
@@ -86,7 +86,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
                 projectAdapter.setItem(it.projects)
             })
             successImage.observe(viewLifecycleOwner, {
-                if(successImage.value == true){
+                if (successImage.value == true) {
                     getUserInfo()
                 }
             })
