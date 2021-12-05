@@ -137,6 +137,11 @@ class ChatRVAdapter(private val items: ChatMessageResponse, private val activity
                     .inflate(R.layout.mine_image_item, parent, false)
                 MineImageViewHolder(inflateView)
             }
+            OTHER_PICTURE -> {
+                val inflateView = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.other_image_item, parent, false)
+                OtherImageViewHolder(inflateView)
+            }
             else -> throw RuntimeException("알 수 없는 viewType")
         }
     }
