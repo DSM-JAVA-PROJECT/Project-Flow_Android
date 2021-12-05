@@ -76,7 +76,7 @@ interface ProjectFlowAPI {
     ): Single<Response<GetProjectsId>>
 
     @Multipart
-    @POST("/project/Image")
+    @POST("/project/image")
     fun postImage(
         @Part file : MultipartBody.Part
     ) : Single<Response<image>>
