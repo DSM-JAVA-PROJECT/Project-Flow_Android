@@ -59,10 +59,10 @@ class ChatFragment : Fragment() {
 
         chatViewModel.getChatList(socket.getChatRoomId(), getPage(), SIZE)
         chatViewModel.getPin(socket.getChatRoomId())
+        socket.rejoin()
         getChatListMore()
         socket.chatReceive()
         chatViewModel.messageListLiveData.observe(viewLifecycleOwner, {
-            socket.rejoin()
             Log.i("MessageLiveData", ".")
             if(!isLoading){
                 adapterInit(chatViewModel.messageListLiveData.value!!)
