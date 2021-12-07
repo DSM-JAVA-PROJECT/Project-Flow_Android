@@ -37,7 +37,7 @@ object BaseBindingAdapter {
         Glide.with(imageView.context)
             .load(resource)
             .placeholder(circularProgressDrawable)
-            .error(R.drawable.ic_baseline_account_circle_24)
+            .error(R.drawable.ic_baseline_person_24)
             .into(imageView)
     }
 }
