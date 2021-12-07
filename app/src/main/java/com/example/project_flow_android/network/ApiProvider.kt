@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object ApiProvider {
-    private const val BASE_URL: String = "http://172.20.10.7:8080"
+    private const val BASE_URL: String = "http://18.210.203.222:8080"
     private const val BASE_URL_CHAT = "http://3.80.121.3:8080"
     private const val BASE_GIT = "https://api.github.com"
     private const val CONNECT_TIME_OUT: Long = 15
