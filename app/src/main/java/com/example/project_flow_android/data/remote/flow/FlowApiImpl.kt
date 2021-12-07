@@ -63,9 +63,4 @@ class FlowApiImpl {
         providerFlowApi().postImage(file.toMultipartPart())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-
-    fun changePostImage(token: String,file: File): @NonNull Single<Response<Void>> =
-        providerFlowApi().changeProfileImage(token,file.toMultipartPart())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
 }
