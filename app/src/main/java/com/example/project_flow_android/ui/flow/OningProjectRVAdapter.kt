@@ -3,8 +3,10 @@ package com.example.project_flow_android.ui.flow
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.project_flow_android.data.SharedPreferenceStorage
 import com.example.project_flow_android.databinding.UserProjectOningItemBinding
 import com.example.project_flow_android.databinding.UserProjectPlanItemBinding
+import com.example.project_flow_android.di.ProjectFlowApplication
 import com.example.project_flow_android.feature.GetMainInfoDetailResponse
 import com.example.project_flow_android.feature.GetMainInfoResponse
 import com.example.project_flow_android.feature.GetProjectScheduleDetailResponse
@@ -16,6 +18,7 @@ class OningProjectRVAdapter(
 ) :
     RecyclerView.Adapter<OningProjectRVAdapter.ProjectViewHolder>() {
     private var projectList = ArrayList<GetProjectScheduleDetailResponse>()
+    private val prefs = SharedPreferenceStorage(ProjectFlowApplication.context)
 
     lateinit var id: String
 
@@ -29,9 +32,10 @@ class OningProjectRVAdapter(
             binding.vm = viewModel
             binding.notifyChange()
             binding.userProjectCv.setOnClickListener {
-                viewModel.getProjectIdForPlan.value = id
-                viewModel.getPlanId.value = item.planId
+                viewModel.getProjectIdForPlan.value = item.planId
+                prefs.savePlanId(item.planId,"planId")
                 viewModel.planclickFinish.value = item
+                viewModel.planItemContent.value = item.name
             }
         }
     }

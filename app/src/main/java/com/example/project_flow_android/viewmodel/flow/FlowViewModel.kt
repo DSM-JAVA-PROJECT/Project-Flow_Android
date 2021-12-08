@@ -28,6 +28,7 @@ class FlowViewModel(
     val clickFinish = SingleLiveEvent<GetMainInfoResponse.GetMainInfoDetailResponse>()
     val planclickFinish = SingleLiveEvent<GetProjectScheduleDetailResponse>()
     val getPlanId = MutableLiveData<String>()
+    val planItemContent = MutableLiveData<String>()
 
     private val _projectId = MutableLiveData<String>()
     val projectId: LiveData<String> get() = _projectId
@@ -55,7 +56,10 @@ class FlowViewModel(
 
     val token by lazy {
         sharedPreferenceStorage.getInfo("access_token")
+
     }
+    val projectNumber = sharedPreferenceStorage.getProjectId("projectId")
+    val planNumber = sharedPreferenceStorage.getPlanId("planId")
 
     fun getMainUserInfo() {
         myPageApiImpl.getUserInfo(token).subscribe({ response ->
@@ -70,7 +74,7 @@ class FlowViewModel(
     }
 
     fun finishProject() {
-        flowApiImpl.finishProject(token, getProjectId.value!!).subscribe ({ response ->
+        flowApiImpl.finishProject(token, getProjectId.value!!).subscribe({ response ->
             if (response.isSuccessful) {
                 _successRemove.value = true
             }
@@ -80,12 +84,12 @@ class FlowViewModel(
     }
 
 
-    fun finishPlan(){
-        flowApiImpl.finishPlan(token,getProjectId.value!!,getPlanId.value!!).subscribe({ it ->
-            if(it.isSuccessful){
+    fun finishPlan() {
+        flowApiImpl.finishPlan(token, projectNumber, planNumber).subscribe({
+            if (it.isSuccessful) {
                 _successPlanRemove.value = true
             }
-        },{
+        }, {
             it
         })
     }

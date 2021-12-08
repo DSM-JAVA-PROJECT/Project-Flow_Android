@@ -17,16 +17,16 @@ class FinishPlanDialog(override val vm: FlowViewModel) :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.run {
-            inputScheduleContentTv.text = vm?.planclickFinish?.value?.name
+            inputScheduleContentTv.text = vm?.planItemContent?.value!!
             closingScheduleBtn.setOnClickListener {
                 vm?.finishPlan()
                 dismiss()
             }
-
-            //TODO 일정 지우기가 성공하면
-            vm?.successPlanRemove?.observe(viewLifecycleOwner,{
-                dismiss()
-//                Toast.makeText(requireActivity(),"ddd",Toast.LENGTH_SHORT).show()
+            vm?.successPlanRemove?.observe(viewLifecycleOwner, {
+                if (vm?.successPlanRemove?.value == true) {
+                    Toast.makeText(requireActivity(), "일정 마감이 완료되었습니다", Toast.LENGTH_SHORT).show()
+                    dismiss()
+                }
             })
         }
     }
