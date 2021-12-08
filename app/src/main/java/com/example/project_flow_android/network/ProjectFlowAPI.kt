@@ -42,12 +42,6 @@ interface ProjectFlowAPI {
         @Path("id") projectId: String,
     ): Single<Response<Void>>
 
-    @PATCH("/auth/image")
-    fun changeProfileImage(
-        @Header("Authorization") token: String,
-        @Body file: MultipartBody.Part,
-    ): Single<Response<Void>>
-
     @PATCH("/plan/close?project={projectId}&plan={planId}")
     fun finishPlan(
         @Header("Authorization") token: String,
@@ -69,17 +63,37 @@ interface ProjectFlowAPI {
     ): Single<Response<GetProjectsId>>
 
 
+    //이미지 최종 전송
     @POST("/project/body")
     fun addProject2(
         @Header("Authorization") token: String,
         @Body request: AddProjectRequest
     ): Single<Response<GetProjectsId>>
 
+
+    //이미지 변환을 위한
     @Multipart
     @POST("/project/image")
     fun postImage(
         @Part file : MultipartBody.Part
     ) : Single<Response<image>>
+
+
+    //이미지 수정
+    @PATCH("/auth/image")
+    fun patchImage(
+        @Header("Authorization") token: String,
+        @Body request : String
+    ): Single<Response<Void>>
+
+
+    //이미지 수정
+    @Multipart
+    @POST("/auth/image")
+    fun postProfileImage(
+        @Part file : MultipartBody.Part
+    ): Single<Response<image>>
+
 
 
 

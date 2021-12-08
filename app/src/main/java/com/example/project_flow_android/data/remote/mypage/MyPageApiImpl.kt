@@ -4,6 +4,7 @@ import com.example.project_flow_android.data.remote.toMultipartPart
 import com.example.project_flow_android.feature.GetGitProjectIssue
 import com.example.project_flow_android.feature.GetUserInfoResponse
 import com.example.project_flow_android.feature.NewPasswordRequest
+import com.example.project_flow_android.feature.image
 import com.example.project_flow_android.network.ApiProvider
 import com.example.project_flow_android.network.GitAPI
 import com.example.project_flow_android.network.ProjectFlowAPI
@@ -20,7 +21,7 @@ class MyPageApiImpl {
     private fun providerMypageApi(): ProjectFlowAPI = ApiProvider.RetroFitBuilder.create(
         ProjectFlowAPI::class.java)
 
-    private fun providerGitApi() : GitAPI = ApiProvider.GitRetroFitBuilder.create(
+    private fun providerGitApi(): GitAPI = ApiProvider.GitRetroFitBuilder.create(
         GitAPI::class.java
     )
 
@@ -37,14 +38,19 @@ class MyPageApiImpl {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
-    fun changeImage(token: String,file : File): @NonNull Single<Response<Void>> =
-        providerMypageApi().changeProfileImage(token, file.toMultipartPart())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
 
-    fun getGitInfo(token : String): @NonNull Single<Response<GetGitProjectIssue>> =
+    fun getGitInfo(token: String): @NonNull Single<Response<GetGitProjectIssue>> =
         providerGitApi().getGitInfo(token)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
+    fun patchImage( token: String,request: String): @NonNull Single<Response<Void>> =
+        providerMypageApi().patchImage( token,request)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+
+    fun postProfileImage(file: File): @NonNull Single<Response<image>> =
+        providerMypageApi().postImage(file.toMultipartPart())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
 }
