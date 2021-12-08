@@ -42,8 +42,8 @@ class MainFlowAdapter(private val viewModel: FlowViewModel) :
             binding.projectImage = item.logoImage
             binding.progressBar.setProgress(item.personalProgress.toInt())
             binding.progressBar2.setProgress(item.projectProgress.toInt())
-            binding.personalProgress = "${item.personalProgress}%"
-            binding.teamProgress = "${item.projectProgress}%"
+            binding.personalProgress = "${item.personalProgress.toInt()}%"
+            binding.teamProgress = "${item.projectProgress.toInt()}%"
             binding.userName = viewModel.getUserName.value
             binding.vm = viewModel
 
@@ -70,7 +70,6 @@ class MainFlowAdapter(private val viewModel: FlowViewModel) :
             binding.notifyChange()
 
             binding.button.setOnClickListener{
-                viewModel.getProjectIdForPlan.value = item.id
                 viewModel.getProjectId.value = item.id
                 viewModel.clickFinish.value = item
             }
