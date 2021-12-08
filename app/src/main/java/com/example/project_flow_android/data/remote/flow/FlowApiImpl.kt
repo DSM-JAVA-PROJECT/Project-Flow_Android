@@ -37,10 +37,10 @@ class FlowApiImpl {
 
     fun finishPlan(
         token: String,
-        ProjectId: String,
+        projectId: String,
         PlanId: String,
     ): @NonNull Single<Response<Void>> =
-        providerFlowApi().finishPlan(token, ProjectId, PlanId)
+        providerFlowApi().finishPlan(token, projectId, PlanId)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 

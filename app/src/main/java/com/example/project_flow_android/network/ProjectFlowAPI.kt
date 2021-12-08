@@ -42,11 +42,11 @@ interface ProjectFlowAPI {
         @Path("id") projectId: String,
     ): Single<Response<Void>>
 
-    @PATCH("/plan/close?project={projectId}&plan={planId}")
+    @PATCH("/plan/close/")
     fun finishPlan(
         @Header("Authorization") token: String,
-        @Part("projectId") projectId : String,
-        @Path("plan_id") PlanId: String,
+        @Query("project") projectId : String,
+        @Query("plan") PlanId: String,
     ): Single<Response<Void>>
 
 
