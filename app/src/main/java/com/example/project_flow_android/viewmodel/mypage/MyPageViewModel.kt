@@ -35,10 +35,11 @@ class MyPageViewModel(
     val successImage: LiveData<Boolean> get() = _successImage
 
     private val _getUserImage = MutableLiveData<String>()
-    val getUserImage : LiveData<String> get() = _getUserImage
+    val getUserImage: LiveData<String> get() = _getUserImage
 
     lateinit var imagePath: String
     val token = sharedPreferenceStorage.getInfo("access_token")
+    val responseImage = MutableLiveData<String>()
 
     fun getUserInfo() {
         myPageApiImpl.getUserInfo(token).subscribe({ response ->
@@ -54,8 +55,21 @@ class MyPageViewModel(
         })
     }
 
+    fun firstImagePost() {
+        myPageApiImpl.postProfileImage(File(imagePath)).subscribe({ response ->
+            if (response.isSuccessful) {
+                responseImage.value = response.body()!!.image
+            } else {
+                response
+            }
+
+        }, {
+            it
+        })
+    }
+
     fun postProfileImage() {
-        myPageApiImpl.changeImage(token, File(imagePath)).subscribe({ response ->
+        myPageApiImpl.patchImage(token, responseImage.value!!).subscribe({ response ->
             if (response.isSuccessful) {
                 _successImage.value = true
             } else {

@@ -47,10 +47,10 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
             .start { uri ->
                 val imagePath = uri.toRealPath(context)
                 vm.imagePath = imagePath
+                vm.firstImagePost()
                 vm.postProfileImage()
             }
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -90,6 +90,9 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
                     getUserInfo()
                 }
             })
+            binding.profileImg.setOnClickListener {
+                getImage()
+            }
             getProjectInfo()
         }
     }
