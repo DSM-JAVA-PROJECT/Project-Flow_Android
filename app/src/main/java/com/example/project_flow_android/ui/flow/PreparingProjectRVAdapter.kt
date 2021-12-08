@@ -25,10 +25,6 @@ class PreparingProjectRVAdapter(
                 "${item.startDate} ~ ${item.endDate}"
             binding.vm = viewModel
             binding.notifyChange()
-            binding.userProjectCv.setOnClickListener {
-                viewModel.getPlanId.value = item.planId
-                viewModel.planclickFinish.value = item
-            }
         }
     }
 
