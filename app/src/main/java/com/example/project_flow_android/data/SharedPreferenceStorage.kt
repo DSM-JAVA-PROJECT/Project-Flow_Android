@@ -55,4 +55,16 @@ class SharedPreferenceStorage(private val context: Context) {
         editor.putString(content, projectId)
         editor.apply()
     }
+
+    fun getPlanId(content: String?) : String{
+        if (pref == null) pref = context.getSharedPreferences("content", Context.MODE_PRIVATE)
+        return pref!!.getString(content, "").toString()
+    }
+
+    fun savePlanId(planId: String, content: String){
+        if (pref == null) pref = context.getSharedPreferences("content", Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = pref!!.edit()
+        editor.putString(content, planId)
+        editor.apply()
+    }
 }
